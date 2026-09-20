@@ -4,31 +4,34 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "vinext dev --port 3000",
+    "build": "vinext build",
+    "start": "vinext start",
     "typecheck": "tsc --noEmit",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist .vinext"
   },
   "dependencies": {
     "@base-ui-components/react": "^1.0.0-alpha.5",
     "@resume-ai/config": "workspace:*",
     "@resume-ai/types": "workspace:*",
     "@tailwindcss/vite": "^4.0.9",
+    "@vitejs/plugin-rsc": "^0.5.35",
     "clsx": "^2.1.1",
     "lucide-react": "^1.16.0",
+    "next": "^16.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.2",
-    "tailwindcss": "^4.0.9"
+    "tailwindcss": "^4.0.9",
+    "vinext": "1.0.0-beta.10"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.2",
-    "vite": "^6.2.0",
-    "rimraf": "^6.0.1"
+    "vite": "^8.3.0"
   }
 }

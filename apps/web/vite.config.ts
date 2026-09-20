@@ -1,9 +1,9 @@
 import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react";
+import vinext from "vinext";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [vinext(), tailwindcss()],
   server: {
     port: 3000,
     proxy: {
