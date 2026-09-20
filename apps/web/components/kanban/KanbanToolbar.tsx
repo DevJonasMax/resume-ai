@@ -1,3 +1,5 @@
+"use client";
+
 import { Plus, Search } from "lucide-react";
 import { useKanban } from "./KanbanContext.js";
 

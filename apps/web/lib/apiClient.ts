@@ -49,6 +49,8 @@ export const apiClient = {
   async analyzeJob(id: string) {
     const res = await fetch(`${API_BASE}/jobs/${id}/analyze`, {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({}),
     });
     return res.json() as Promise<{ requirements: JobRequirements; job: Job }>;
   },
@@ -56,6 +58,8 @@ export const apiClient = {
   async generateResume(id: string) {
     const res = await fetch(`${API_BASE}/jobs/${id}/resume/generate`, {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({}),
     });
     return res.json() as Promise<{ version: ResumeVersion; job: Job }>;
   },
@@ -69,12 +73,67 @@ export const apiClient = {
     return res.json() as Promise<{ run: AgentRun }>;
   },
 
-  async resumeAgentRun(runId: string, userInput?: string) {
-    const res = await fetch(`${API_BASE}/agent-runs/${runId}/resume`, {
+  async resumeAgentRun(id: string, userInput?: string) {
+    const res = await fetch(`${API_BASE}/agent-runs/${id}/resume`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userInput }),
     });
     return res.json() as Promise<{ run: AgentRun }>;
+  },
+
+  async getCandidates() {
+    const res = await fetch(`${API_BASE}/candidates`);
+    return res.json() as Promise<{ candidates: CandidateProfile[] }>;
+  },
+
+  async activateCandidate(id: string) {
+    const res = await fetch(`${API_BASE}/candidates/${id}/activate`, {
+      method: "PUT",
+    });
+    return res.json() as Promise<{ candidate: CandidateProfile }>;
+  },
+
+  async deleteCandidate(id: string) {
+    const res = await fetch(`${API_BASE}/candidates/${id}`, {
+      method: "DELETE",
+    });
+    return res.json() as Promise<{ success: boolean }>;
+  },
+
+  async createCandidate(data: Partial<CandidateProfile> & { makeActive?: boolean }) {
+    const res = await fetch(`${API_BASE}/candidates`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    return res.json() as Promise<{ candidate: CandidateProfile }>;
+  },
+
+  async importCandidate(data: { text?: string; pdfBase64?: string; makeActive?: boolean }) {
+    const res = await fetch(`${API_BASE}/candidates/import`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    return res.json() as Promise<{ candidate: CandidateProfile }>;
+  },
+
+  async refineResume(resumeId: string, instructions?: string) {
+    const res = await fetch(`${API_BASE}/resumes/${resumeId}/refine`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ instructions }),
+    });
+    return res.json() as Promise<{ version: ResumeVersion }>;
+  },
+
+  async saveResumeLatex(resumeId: string, latex: string) {
+    const res = await fetch(`${API_BASE}/resumes/${resumeId}/latex`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ latex }),
+    });
+    return res.json() as Promise<{ version: ResumeVersion }>;
   },
 };

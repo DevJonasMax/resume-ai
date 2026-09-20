@@ -54,7 +54,7 @@ export class ResumeTailoringService {
   /**
    * Generates a tailored LaTeX resume version aligned with job requirements while strictly grounded in candidate truth.
    */
-  public async generateTailoredResume(jobId: string): Promise<ResumeVersion> {
+  public async generateTailoredResume(jobId: string, candidateId?: string): Promise<ResumeVersion> {
     const job = await this.jobRepo.findById(jobId);
     if (!job) {
       throw new Error(`Job not found with id: ${jobId}`);
@@ -65,9 +65,12 @@ export class ResumeTailoringService {
       throw new Error(`Job requirements have not been analyzed yet for job: ${jobId}`);
     }
 
-    const candidate = await this.candidateRepo.getActiveProfile();
+    const candidate = candidateId
+      ? await this.candidateRepo.getProfileById(candidateId)
+      : await this.candidateRepo.getActiveProfile();
+
     if (!candidate) {
-      throw new Error("No active candidate profile found in database");
+      throw new Error("No candidate profile found to tailor resume against");
     }
 
     const existingVersions = await this.resumeRepo.findByJobId(jobId);
@@ -122,5 +125,89 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems ex
     await this.jobRepo.updateStatus(jobId, "resume_ready");
 
     return version;
+  }
+
+  /**
+   * Refines an existing resume version with the AI Agent according to specific user instructions or deeper ATS optimization.
+   */
+  public async refineResumeWithAgent(resumeId: string, instructions?: string): Promise<ResumeVersion> {
+    const existing = await this.resumeRepo.findById(resumeId);
+    if (!existing) {
+      throw new Error(`Resume version not found with id: ${resumeId}`);
+    }
+
+    const job = await this.jobRepo.findById(existing.jobId);
+    if (!job) {
+      throw new Error(`Job not found with id: ${existing.jobId}`);
+    }
+
+    const requirements = await this.jobRepo.getRequirements(existing.jobId);
+    const candidate = await this.candidateRepo.getActiveProfile();
+    if (!candidate) {
+      throw new Error("No active candidate profile found in database");
+    }
+
+    const existingVersions = await this.resumeRepo.findByJobId(existing.jobId);
+    const nextVersionNumber = existingVersions.length + 1;
+
+    const userInstructionsText = instructions && instructions.trim().length > 0
+      ? `USER DIRECTIVES FOR THIS ITERATION:\n${instructions.trim()}`
+      : "Focus on maximizing ATS keyword precision and quantifiable impact metrics.";
+
+    const prompt = `You are an elite AI technical recruiter and resume tailoring agent.
+Review the current resume LaTeX source and improve its alignment with the target job requirements.
+
+${userInstructionsText}
+
+TARGET JOB:
+Title: ${job.title}
+Company: ${job.company}
+Key Skills Needed: ${requirements ? requirements.skills.map((s) => s.name).join(", ") : "Standard industry competencies"}
+Responsibilities: ${requirements ? requirements.responsibilities.join("; ") : "Execute high-quality technical deliverables"}
+
+EXISTING TAILORED CONTENT:
+Summary: ${existing.tailoredSummary}
+Experiences: ${JSON.stringify(existing.tailoredExperience, null, 2)}
+
+Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems with clear rationalizations for each improvement.`;
+
+    const tailored = await this.ai.generateStructured({
+      schema: TailoringOutputSchema,
+      prompt,
+      systemPrompt:
+        "You are an AI resume refinement agent. Elevate terminology, emphasize required tools, and produce clear rationales without altering underlying facts.",
+    });
+
+    const latexSource = this.latexEngine.renderDocument({
+      candidate,
+      summary: tailored.tailoredSummary,
+      experiences: tailored.tailoredExperience,
+    });
+
+    const now = new Date().toISOString();
+    const refinedVersion: ResumeVersion = {
+      id: `res-${existing.jobId}-v${nextVersionNumber}`,
+      jobId: existing.jobId,
+      versionNumber: nextVersionNumber,
+      latexSource,
+      diffItems: tailored.diffItems as ResumeDiffItem[],
+      tailoredSummary: tailored.tailoredSummary,
+      tailoredExperience: tailored.tailoredExperience,
+      createdAt: now,
+    };
+
+    await this.resumeRepo.saveVersion(refinedVersion);
+    return refinedVersion;
+  }
+
+  /**
+   * Updates the raw LaTeX source of a resume version following manual user edits in the Resume Studio.
+   */
+  public async updateCustomLatex(resumeId: string, customLatex: string): Promise<ResumeVersion> {
+    const updated = await this.resumeRepo.updateLatexSource(resumeId, customLatex);
+    if (!updated) {
+      throw new Error(`Resume version not found with id: ${resumeId}`);
+    }
+    return updated;
   }
 }

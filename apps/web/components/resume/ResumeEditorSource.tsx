@@ -1,9 +1,11 @@
-import { Check, Copy, Save } from "lucide-react";
+"use client";
+
+import { Check, Copy, Save, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { useResumeEditor } from "./ResumeEditorContext.js";
 
 export function ResumeEditorSource() {
-  const { editedLatex, onLatexChange, onSaveLatex, isSaving } = useResumeEditor();
+  const { editedLatex, onLatexChange, onSaveLatex, isSaving, onRefineWithAgent, isRefining } = useResumeEditor();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -14,11 +16,23 @@ export function ResumeEditorSource() {
 
   return (
     <div className="flex flex-col gap-3 max-w-4xl mx-auto w-full">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="text-xs font-mono text-zinc-400">LaTeX Source (.tex)</span>
+          <span className="text-[11px] text-zinc-500 font-mono">
+            {editedLatex.split("\n").length} lines
+          </span>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => onRefineWithAgent()}
+            disabled={isRefining}
+            className="flex items-center gap-1.5 px-3 py-1 bg-purple-950/50 hover:bg-purple-900/60 text-purple-300 rounded text-xs font-semibold border border-purple-700/50 transition-colors cursor-pointer disabled:opacity-50"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+            <span>{isRefining ? "Refining..." : "Agent Refine"}</span>
+          </button>
           <button
             type="button"
             onClick={handleCopy}

@@ -1,3 +1,5 @@
+"use client";
+
 import { ResumeEditorProvider, type ResumeEditorProviderProps } from "./ResumeEditorContext.js";
 
 export interface ResumeEditorRootProps extends ResumeEditorProviderProps {

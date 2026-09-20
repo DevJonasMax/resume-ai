@@ -1,3 +1,5 @@
+"use client";
+
 import { KanbanProvider, type KanbanProviderProps } from "./KanbanContext.js";
 
 export interface KanbanRootProps extends KanbanProviderProps {

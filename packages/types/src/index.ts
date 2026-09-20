@@ -122,6 +122,7 @@ export const CandidateProfileSchema = z.object({
   experiences: z.array(ExperienceItemSchema),
   skills: z.record(z.array(z.string())),
   education: z.array(EducationItemSchema),
+  isActive: z.boolean().optional(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });

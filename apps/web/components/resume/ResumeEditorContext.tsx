@@ -13,10 +13,12 @@ export interface ResumeEditorContextValue {
   editedLatex: string;
   isSaving: boolean;
   isRegenerating: boolean;
+  isRefining: boolean;
   onTabChange: (tab: ResumeEditorTab) => void;
   onLatexChange: (latex: string) => void;
   onSaveLatex: () => Promise<void>;
   onRegenerate: () => Promise<void>;
+  onRefineWithAgent: (instructions?: string) => Promise<void>;
 }
 
 const ResumeEditorContext = createContext<ResumeEditorContextValue | null>(null);
@@ -27,6 +29,7 @@ export interface ResumeEditorProviderProps {
   resume: ResumeVersion;
   candidate: CandidateProfile | null;
   onRegenerate: () => Promise<void>;
+  onRefineWithAgent?: (instructions?: string) => Promise<void>;
   onSaveCustomLatex?: (latex: string) => Promise<void>;
 }
 
@@ -36,12 +39,18 @@ export function ResumeEditorProvider({
   resume,
   candidate,
   onRegenerate,
+  onRefineWithAgent,
   onSaveCustomLatex,
 }: ResumeEditorProviderProps) {
   const [activeTab, setActiveTab] = useState<ResumeEditorTab>("visual");
   const [editedLatex, setEditedLatex] = useState<string>(resume.latexSource);
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [isRegenerating, setIsRegenerating] = useState<boolean>(false);
+  const [isRefining, setIsRefining] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    setEditedLatex(resume.latexSource);
+  }, [resume.id, resume.latexSource]);
 
   const handleSave = async () => {
     if (!onSaveCustomLatex) return;
@@ -62,6 +71,16 @@ export function ResumeEditorProvider({
     }
   };
 
+  const handleRefine = async (instructions?: string) => {
+    if (!onRefineWithAgent) return;
+    setIsRefining(true);
+    try {
+      await onRefineWithAgent(instructions);
+    } finally {
+      setIsRefining(false);
+    }
+  };
+
   const value = useMemo<ResumeEditorContextValue>(
     () => ({
       job,
@@ -71,10 +90,12 @@ export function ResumeEditorProvider({
       editedLatex,
       isSaving,
       isRegenerating,
+      isRefining,
       onTabChange: setActiveTab,
       onLatexChange: setEditedLatex,
       onSaveLatex: handleSave,
       onRegenerate: handleRegenerate,
+      onRefineWithAgent: handleRefine,
     }),
     [
       job,
@@ -84,6 +105,7 @@ export function ResumeEditorProvider({
       editedLatex,
       isSaving,
       isRegenerating,
+      isRefining,
     ]
   );
 
@@ -97,7 +119,41 @@ export function ResumeEditorProvider({
 export function useResumeEditor(): ResumeEditorContextValue {
   const context = useContext(ResumeEditorContext);
   if (!context) {
-    throw new Error("useResumeEditor must be used within a ResumeEditorProvider");
+    return {
+      job: {
+        id: "",
+        title: "",
+        company: "",
+        url: "",
+        location: "",
+        source: "manual",
+        description: "",
+        status: "discovered",
+        createdAt: "",
+        updatedAt: "",
+      },
+      resume: {
+        id: "",
+        jobId: "",
+        createdAt: "",
+        versionNumber: 1,
+        latexSource: "",
+        diffItems: [],
+        tailoredSummary: "",
+        tailoredExperience: [],
+      },
+      candidate: null,
+      activeTab: "visual",
+      editedLatex: "",
+      isSaving: false,
+      isRegenerating: false,
+      isRefining: false,
+      onTabChange: () => {},
+      onLatexChange: () => {},
+      onSaveLatex: async () => {},
+      onRegenerate: async () => {},
+      onRefineWithAgent: async () => {},
+    };
   }
   return context;
 }

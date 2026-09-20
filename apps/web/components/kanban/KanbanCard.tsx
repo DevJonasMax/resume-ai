@@ -1,3 +1,5 @@
+"use client";
+
 import type { Job } from "@resume-ai/types";
 import { Bot, Building2, FileText, MapPin, Sparkles } from "lucide-react";
 import { useKanban } from "./KanbanContext.js";

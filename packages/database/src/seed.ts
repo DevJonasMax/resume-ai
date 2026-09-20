@@ -89,6 +89,7 @@ export async function seedDatabase(): Promise<void> {
         endDate: "Dec 2012",
       },
     ],
+    isActive: true,
     createdAt: now,
     updatedAt: now,
   };

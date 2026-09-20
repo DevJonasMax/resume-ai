@@ -1,3 +1,5 @@
+"use client";
+
 import { Bot, X } from "lucide-react";
 import { AgentMonitorProvider, type AgentMonitorProviderProps } from "./AgentMonitorContext.js";
 

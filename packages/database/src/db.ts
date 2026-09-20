@@ -52,6 +52,7 @@ function initializeDatabase() {
       experiences_json TEXT NOT NULL,
       skills_json TEXT NOT NULL,
       education_json TEXT NOT NULL,
+      is_active INTEGER NOT NULL DEFAULT 0,
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL
     );
@@ -120,6 +121,13 @@ function initializeDatabase() {
       error_message TEXT
     );
   `);
+
+  try {
+    // Safe schema migration for existing SQLite databases
+    sqlite.exec("ALTER TABLE candidate_profiles ADD COLUMN is_active INTEGER NOT NULL DEFAULT 0;");
+  } catch {
+    // Column already exists or table was just created with the column
+  }
 
   return drizzle(sqlite, { schema });
 }

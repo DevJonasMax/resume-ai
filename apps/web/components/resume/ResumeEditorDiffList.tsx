@@ -1,3 +1,5 @@
+"use client";
+
 import { CheckCircle2, Sparkles } from "lucide-react";
 import { useResumeEditor } from "./ResumeEditorContext.js";
 

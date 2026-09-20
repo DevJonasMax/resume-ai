@@ -73,7 +73,17 @@ export function KanbanProvider({
 export function useKanban(): KanbanContextValue {
   const context = useContext(KanbanContext);
   if (!context) {
-    throw new Error("useKanban must be used within a KanbanProvider");
+    return {
+      jobs: [],
+      selectedJobId: null,
+      searchQuery: "",
+      onSelectJob: () => {},
+      onMoveJob: async () => {},
+      onAnalyzeJob: () => {},
+      onOpenResume: () => {},
+      onApplyJob: () => {},
+      onSearchChange: () => {},
+    };
   }
   return context;
 }

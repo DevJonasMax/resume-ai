@@ -11,8 +11,8 @@ import {
   seedDatabase,
 } from "@resume-ai/database";
 import { JobAnalysisService } from "@resume-ai/jobs";
-import { ResumeTailoringService } from "@resume-ai/resume";
-import type { Job, JobStatus } from "@resume-ai/types";
+import { CandidateParserService, ResumeTailoringService } from "@resume-ai/resume";
+import type { CandidateProfile, Job, JobStatus } from "@resume-ai/types";
 import Fastify from "fastify";
 
 const server = Fastify({
@@ -33,6 +33,7 @@ const candidateRepo = new CandidateRepository();
 
 const analysisService = new JobAnalysisService(jobRepo, candidateRepo);
 const tailoringService = new ResumeTailoringService(jobRepo, candidateRepo, resumeRepo);
+const candidateParser = new CandidateParserService();
 const agentRunner = new ApplicationAgentRunner(undefined, undefined, jobRepo, candidateRepo, resumeRepo, runRepo);
 const lifecycle = new ApplicationLifecycleManager(jobRepo, appRepo);
 
@@ -55,11 +56,115 @@ server.get("/api/health", async () => {
 });
 
 /**
- * Candidate profile endpoint.
+ * List all candidate profiles.
+ */
+server.get("/api/candidates", async () => {
+  const candidates = await candidateRepo.getAllProfiles();
+  return { candidates };
+});
+
+/**
+ * Get active candidate profile.
  */
 server.get("/api/candidate", async () => {
   const candidate = await candidateRepo.getActiveProfile();
   return { candidate };
+});
+
+/**
+ * Activate a candidate profile.
+ */
+server.put("/api/candidates/:id/activate", async (request, reply) => {
+  const { id } = request.params as { id: string };
+  const activated = await candidateRepo.setActiveProfile(id);
+  if (!activated) {
+    return reply.status(404).send({ error: "Candidate profile not found" });
+  }
+  return { candidate: activated };
+});
+
+/**
+ * Delete a candidate profile.
+ */
+server.delete("/api/candidates/:id", async (request, reply) => {
+  const { id } = request.params as { id: string };
+  await candidateRepo.deleteProfile(id);
+  return { success: true };
+});
+
+/**
+ * Manually create a candidate profile.
+ */
+server.post("/api/candidates", async (request, reply) => {
+  const body = request.body as Partial<CandidateProfile> & { makeActive?: boolean };
+  if (!body.fullName || !body.email) {
+    return reply.status(400).send({ error: "Missing required fields: fullName, email" });
+  }
+
+  const now = new Date().toISOString();
+  const newCandidate: CandidateProfile = {
+    id: `candidate-${Date.now()}`,
+    fullName: body.fullName,
+    email: body.email,
+    phone: body.phone || "",
+    location: body.location || "Remote",
+    summary: body.summary || "",
+    skills: body.skills || { "Core Skills": [] },
+    experiences: body.experiences || [],
+    education: body.education || [],
+    isActive: body.makeActive ?? true,
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  await candidateRepo.save(newCandidate);
+  if (body.makeActive ?? true) {
+    await candidateRepo.setActiveProfile(newCandidate.id);
+  }
+
+  return reply.status(201).send({ candidate: newCandidate });
+});
+
+/**
+ * Import and parse candidate profile from text or PDF buffer.
+ */
+server.post("/api/candidates/import", async (request, reply) => {
+  const body = request.body as {
+    text?: string;
+    pdfBase64?: string;
+    makeActive?: boolean;
+  };
+
+  try {
+    let parsedData;
+    if (body.pdfBase64) {
+      const buffer = Buffer.from(body.pdfBase64, "base64");
+      parsedData = await candidateParser.parseFromPdf(buffer);
+    } else if (body.text && body.text.trim().length > 0) {
+      parsedData = await candidateParser.parseFromText(body.text);
+    } else {
+      return reply.status(400).send({ error: "Either text or pdfBase64 must be provided for import" });
+    }
+
+    const now = new Date().toISOString();
+    const candidate: CandidateProfile = {
+      id: `candidate-${Date.now()}`,
+      ...parsedData,
+      isActive: body.makeActive ?? true,
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    await candidateRepo.save(candidate);
+    if (body.makeActive ?? true) {
+      await candidateRepo.setActiveProfile(candidate.id);
+    }
+
+    return reply.status(201).send({ candidate });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    return reply.status(500).send({ error: message });
+  }
 });
 
 /**
@@ -167,6 +272,10 @@ server.post("/api/jobs/:id/analyze", async (request, reply) => {
 server.post("/api/jobs/:id/resume/generate", async (request, reply) => {
   const { id } = request.params as { id: string };
   try {
+    const existingReqs = await jobRepo.getRequirements(id);
+    if (!existingReqs) {
+      await analysisService.analyzeJob(id);
+    }
     const version = await tailoringService.generateTailoredResume(id);
     const updatedJob = await jobRepo.findById(id);
     return { version, job: updatedJob };
@@ -186,6 +295,40 @@ server.get("/api/jobs/:id/resume/latest", async (request, reply) => {
     return reply.status(404).send({ error: "No tailored resume found for this job" });
   }
   return { resume };
+});
+
+/**
+ * Refine an existing resume version with the AI Agent.
+ */
+server.post("/api/resumes/:id/refine", async (request, reply) => {
+  const { id } = request.params as { id: string };
+  const body = (request.body as { instructions?: string }) || {};
+  try {
+    const version = await tailoringService.refineResumeWithAgent(id, body.instructions);
+    return { version };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    return reply.status(500).send({ error: message });
+  }
+});
+
+/**
+ * Save manual edits to the LaTeX source code of a resume version.
+ */
+server.put("/api/resumes/:id/latex", async (request, reply) => {
+  const { id } = request.params as { id: string };
+  const body = request.body as { latex: string };
+  if (!body.latex) {
+    return reply.status(400).send({ error: "Missing required field: latex" });
+  }
+
+  try {
+    const version = await tailoringService.updateCustomLatex(id, body.latex);
+    return { version };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    return reply.status(500).send({ error: message });
+  }
 });
 
 /**

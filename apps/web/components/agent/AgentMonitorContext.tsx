@@ -60,7 +60,13 @@ export function AgentMonitorProvider({
 export function useAgentMonitor(): AgentMonitorContextValue {
   const context = useContext(AgentMonitorContext);
   if (!context) {
-    throw new Error("useAgentMonitor must be used within an AgentMonitorProvider");
+    return {
+      run: null,
+      isRunning: false,
+      isResuming: false,
+      onClose: () => {},
+      onResume: async () => {},
+    };
   }
   return context;
 }

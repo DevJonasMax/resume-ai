@@ -13,6 +13,7 @@ export const candidateProfilesTable = sqliteTable("candidate_profiles", {
   experiencesJson: text("experiences_json").notNull(),
   skillsJson: text("skills_json").notNull(),
   educationJson: text("education_json").notNull(),
+  isActive: integer("is_active", { mode: "boolean" }).notNull().default(false),
   createdAt: text("created_at").notNull(),
   updatedAt: text("updated_at").notNull(),
 });

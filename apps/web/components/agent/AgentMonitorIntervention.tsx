@@ -1,3 +1,5 @@
+"use client";
+
 import { AlertTriangle, Play } from "lucide-react";
 import { useState } from "react";
 import { useAgentMonitor } from "./AgentMonitorContext.js";

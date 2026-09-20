@@ -60,10 +60,11 @@ graph TD
 - Implement `packages/applications` with lifecycle state machine and verification safeguards.
 
 ### Phase 4: Consumer Applications (API, Web, CLI)
-- Implement `apps/api` with Fastify REST endpoints and SSE real-time telemetry.
-- Implement `apps/cli` with interactive wizard and direct subcommands.
-- Implement `apps/web` with Vinext, Tailwind CSS 4, Base UI, Kanban board, and Prism-style resume editor.
+- Implement `apps/api` with Fastify REST endpoints, multi-candidate routes, and SSE real-time telemetry.
+- Implement `apps/cli` with interactive wizard and direct scriptable subcommands.
+- Implement `apps/web` with Vinext, Tailwind CSS 4, Base UI, Kanban board, multi-candidate profile manager, and Resume Studio with live view switching, PDF export, and Agent refinement.
 
-### Phase 5: Verification, Testing & Polish
-- Full test suite execution across unit, integration, and contract tests.
-- Comprehensive end-to-end walkthrough and documentation updates.
+### Phase 5: Verification, Hardening & Automated Testing
+- End-to-end interactive manual validation across Web UI and CLI application flows (Completed).
+- Automated test suites (`TSK-009`: Unit, Integration, and E2E browser tests) planned for post-MVP hardening.
+- Comprehensive documentation updates and task audits (Completed).

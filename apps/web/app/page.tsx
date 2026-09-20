@@ -35,6 +35,7 @@ export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState<MainNavTab>("kanban");
   const [jobs, setJobs] = useState<Job[]>([]);
   const [candidate, setCandidate] = useState<CandidateProfile | null>(null);
+  const [candidates, setCandidates] = useState<CandidateProfile[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -56,12 +57,14 @@ export default function DashboardPage() {
   const loadData = async () => {
     setIsLoading(true);
     try {
-      const [jobsRes, candidateRes] = await Promise.all([
+      const [jobsRes, candidateRes, candidatesRes] = await Promise.all([
         apiClient.getJobs(),
         apiClient.getCandidate(),
+        apiClient.getCandidates(),
       ]);
       setJobs(jobsRes.jobs || []);
       setCandidate(candidateRes.candidate || null);
+      setCandidates(candidatesRes.candidates || []);
     } catch {
       // API fallback
     } finally {
@@ -161,6 +164,22 @@ export default function DashboardPage() {
     const generated = await apiClient.generateResume(studioJob.id);
     setStudioResume(generated.version);
     setJobs((prev) => prev.map((j) => (j.id === studioJob.id ? generated.job : j)));
+  };
+
+  const handleRefineResume = async (instructions?: string) => {
+    if (!studioResume) return;
+    const res = await apiClient.refineResume(studioResume.id, instructions);
+    setStudioResume(res.version);
+  };
+
+  const handleSaveCustomLatex = async (latex: string) => {
+    if (!studioResume) return;
+    const res = await apiClient.saveResumeLatex(studioResume.id, latex);
+    setStudioResume(res.version);
+  };
+
+  const handleSelectCandidate = (selected: CandidateProfile) => {
+    setCandidate(selected);
   };
 
   const handleApplyJob = async (job: Job) => {
@@ -345,11 +364,11 @@ export default function DashboardPage() {
               resume={studioResume}
               candidate={candidate}
               onRegenerate={handleRegenerateResume}
+              onRefineWithAgent={handleRefineResume}
+              onSaveCustomLatex={handleSaveCustomLatex}
             >
               <ResumeEditor.Toolbar />
-              <div className="mt-2">
-                <ResumeEditor.Viewer />
-              </div>
+              <ResumeEditor.Content />
             </ResumeEditor.Root>
           ) : (
             <div className="glass-panel rounded-2xl p-12 text-center flex flex-col items-center gap-3">
@@ -370,7 +389,12 @@ export default function DashboardPage() {
         )}
 
         {activeTab === "candidate" && (
-          <CandidateProfileView candidate={candidate} />
+          <CandidateProfileView
+            candidate={candidate}
+            candidates={candidates}
+            onSelectCandidate={handleSelectCandidate}
+            onRefresh={loadData}
+          />
         )}
       </main>
 

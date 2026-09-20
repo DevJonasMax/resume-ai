@@ -20,3 +20,8 @@ Implement the modern AI productivity web application using Vinext (Vite + Next.j
 - [x] TSK-002.7: Implement Prism-inspired AI LaTeX Resume Editor with side-by-side structured editing and raw LaTeX source
 - [x] TSK-002.8: Implement Agent Execution Monitor with live SSE streaming and screenshot previews
 - [x] TSK-002.9: Implement Human-in-the-Loop intervention modal for user guidance and approval
+- [x] TSK-002.10: Fix Resume Studio tab switching (`visual`, `diffs`, `latex`) via compound `ResumeEditor.Content`
+- [x] TSK-002.11: Implement client-side PDF resume export via `html2pdf.js` with print stylesheet
+- [x] TSK-002.12: Implement Multi-Candidate Profile view with profile switching, deletion, and active status
+- [x] TSK-002.13: Implement Candidate Import Modal supporting PDF file upload, text paste, and manual forms
+- [x] TSK-002.14: Implement interactive Agent Refine drawer for on-demand LaTeX resume prompt optimization

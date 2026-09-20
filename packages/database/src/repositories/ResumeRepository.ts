@@ -56,6 +56,38 @@ export class ResumeRepository {
     };
   }
 
+  public async findById(id: string): Promise<ResumeVersion | null> {
+    const record = this.db
+      .select()
+      .from(resumeVersionsTable)
+      .where(eq(resumeVersionsTable.id, id))
+      .limit(1)
+      .get();
+
+    if (!record) return null;
+
+    return {
+      id: record.id,
+      jobId: record.jobId,
+      versionNumber: record.versionNumber,
+      latexSource: record.latexSource,
+      diffItems: JSON.parse(record.diffItemsJson),
+      tailoredSummary: record.tailoredSummary,
+      tailoredExperience: JSON.parse(record.tailoredExperienceJson),
+      createdAt: record.createdAt,
+    };
+  }
+
+  public async updateLatexSource(id: string, latexSource: string): Promise<ResumeVersion | null> {
+    this.db
+      .update(resumeVersionsTable)
+      .set({ latexSource })
+      .where(eq(resumeVersionsTable.id, id))
+      .run();
+
+    return this.findById(id);
+  }
+
   public async saveVersion(version: ResumeVersion): Promise<ResumeVersion> {
     this.db
       .insert(resumeVersionsTable)

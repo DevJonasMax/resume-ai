@@ -1,3 +1,5 @@
+"use client";
+
 import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import { useResumeEditor } from "./ResumeEditorContext.js";
 
@@ -13,7 +15,10 @@ export function ResumeEditorViewer() {
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-700/60 rounded-xl p-8 max-w-4xl mx-auto shadow-2xl text-zinc-100 flex flex-col gap-6 font-sans">
+    <div
+      id="resume-document-sheet"
+      className="bg-zinc-900 border border-zinc-700/60 rounded-xl p-8 max-w-4xl mx-auto shadow-2xl text-zinc-100 flex flex-col gap-6 font-sans print:bg-white print:text-zinc-900 print:border-none print:shadow-none print:max-w-none print:p-0"
+    >
       {/* Header matching resume-example-01.tex */}
       <div className="flex flex-col items-center text-center pb-6 border-b border-zinc-700/80">
         <h1 className="text-2xl font-bold tracking-tight text-white uppercase mb-2">

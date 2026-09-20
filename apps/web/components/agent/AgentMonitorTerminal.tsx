@@ -1,3 +1,5 @@
+"use client";
+
 import { CheckCircle2, Clock, Terminal, XCircle } from "lucide-react";
 import { useAgentMonitor } from "./AgentMonitorContext.js";
 
