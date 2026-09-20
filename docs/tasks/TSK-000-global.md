@@ -8,16 +8,16 @@ Master implementation roadmap for the **AI Job Application Agent** monorepo. Thi
 
 ## Task Index
 
-- [ ] [TSK-001: API Application](file:///D:/projetos/resume-ai/docs/tasks/TSK-001-api.md)
+- [x] [TSK-001: API Application](file:///D:/projetos/resume-ai/docs/tasks/TSK-001-api.md)
 - [ ] [TSK-002: Web Application](file:///D:/projetos/resume-ai/docs/tasks/TSK-002-web.md)
-- [ ] [TSK-003: CLI Application](file:///D:/projetos/resume-ai/docs/tasks/TSK-003-cli.md)
-- [ ] [TSK-004: AI Provider Abstraction](file:///D:/projetos/resume-ai/docs/tasks/TSK-004-ai.md)
-- [ ] [TSK-005: Resume & LaTeX Domain](file:///D:/projetos/resume-ai/docs/tasks/TSK-005-resume.md)
-- [ ] [TSK-006: Browser Automation Layer](file:///D:/projetos/resume-ai/docs/tasks/TSK-006-browser.md)
-- [ ] [TSK-007: Jev Decision Integration](file:///D:/projetos/resume-ai/docs/tasks/TSK-007-jev.md)
-- [ ] [TSK-008: Database & Persistence](file:///D:/projetos/resume-ai/docs/tasks/TSK-008-database.md)
+- [x] [TSK-003: CLI Application](file:///D:/projetos/resume-ai/docs/tasks/TSK-003-cli.md)
+- [x] [TSK-004: AI Provider Abstraction](file:///D:/projetos/resume-ai/docs/tasks/TSK-004-ai.md)
+- [x] [TSK-005: Resume & LaTeX Domain](file:///D:/projetos/resume-ai/docs/tasks/TSK-005-resume.md)
+- [x] [TSK-006: Browser Automation Layer](file:///D:/projetos/resume-ai/docs/tasks/TSK-006-browser.md)
+- [x] [TSK-007: Jev Decision Integration](file:///D:/projetos/resume-ai/docs/tasks/TSK-007-jev.md)
+- [x] [TSK-008: Database & Persistence](file:///D:/projetos/resume-ai/docs/tasks/TSK-008-database.md)
 - [ ] [TSK-009: Testing Infrastructure](file:///D:/projetos/resume-ai/docs/tasks/TSK-009-testing.md)
-- [ ] [TSK-010: Documentation & Guides](file:///D:/projetos/resume-ai/docs/tasks/TSK-010-documentation.md)
+- [x] [TSK-010: Documentation & Guides](file:///D:/projetos/resume-ai/docs/tasks/TSK-010-documentation.md)
 
 ---
 

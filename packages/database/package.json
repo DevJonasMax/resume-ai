@@ -1,0 +1,36 @@
+{
+  "name": "@resume-ai/database",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "seed": "tsx src/seed.ts"
+  },
+  "dependencies": {
+    "@resume-ai/config": "workspace:*",
+    "@resume-ai/types": "workspace:*",
+    "better-sqlite3": "^11.8.1",
+    "drizzle-orm": "^0.39.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "drizzle-kit": "^0.30.5",
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "rimraf": "^6.0.1"
+  }
+}

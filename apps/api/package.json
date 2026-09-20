@@ -1,0 +1,30 @@
+{
+  "name": "@resume-ai/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup src/index.ts --format esm",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.2",
+    "@resume-ai/applications": "workspace:*",
+    "@resume-ai/browser": "workspace:*",
+    "@resume-ai/config": "workspace:*",
+    "@resume-ai/database": "workspace:*",
+    "@resume-ai/jobs": "workspace:*",
+    "@resume-ai/resume": "workspace:*",
+    "@resume-ai/types": "workspace:*",
+    "fastify": "^5.2.1"
+  },
+  "devDependencies": {
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "rimraf": "^6.0.1"
+  }
+}
