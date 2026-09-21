@@ -1,0 +1,11 @@
+\ProvidesFile{ts1cmr.fd}[2023/04/13 v2.5m Standard LaTeX font definitions]
+\DeclareFontFamily{TS1}{cmr}{\hyphenchar\font\m@ne}
+\DeclareFontShape{TS1}{cmr}{m}{n}{<-> cmr10}{}
+\DeclareFontShape{TS1}{cmr}{m}{sl}{<-> cmsl10}{}
+\DeclareFontShape{TS1}{cmr}{m}{it}{<-> cmti10}{}
+\DeclareFontShape{TS1}{cmr}{bx}{n}{<-> cmbx10}{}
+\DeclareFontShape{TS1}{cmr}{b}{n}{<-> cmr10}{}
+\DeclareFontShape{TS1}{cmr}{bx}{it}{<-> cmti10}{}
+\DeclareFontShape{TS1}{cmr}{bx}{sl}{<-> cmsl10}{}
+\DeclareFontShape{TS1}{cmr}{m}{ui}{<-> cmr10}{}
+\endinput

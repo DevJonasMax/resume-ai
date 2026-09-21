@@ -1,0 +1,1448 @@
+%%
+%% This is file `memoize.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% memoize.dtx  (with options: `mmz,plain')
+%% 
+%% This file is a part of Memoize, a TeX package for externalization of
+%% graphics and memoization of compilation results in general, available at
+%% https://ctan.org/pkg/memoize and https://github.com/sasozivanovic/memoize.
+%%
+%% Copyright (c) 2020- Saso Zivanovic <saso.zivanovic@guest.arnes.si>
+%%                     (Sa\v{s}o \v{Z}ivanovi\'{c})
+%%
+%% This work may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.3c of this license or (at
+%% your option) any later version.  The latest version of this license is in
+%% https://www.latex-project.org/lppl.txt and version 1.3c or later is part of
+%% all distributions of LaTeX version 2008 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% The Current Maintainer of this work is Saso Zivanovic.
+%%
+%% The files belonging to this work and covered by LPPL are listed in
+%% (<texmf>/doc/generic/memoize/)FILES.
+% Package memoize 2024/01/21 v1.1.2
+\input miniltx
+\def\PackageWarning#1#2{{%
+    \newlinechar`\^^J\def\MessageBreak{^^J\space\space#1: }%
+    \message{#1: #2}}}
+\def\newtoks{\alloc@5\toks\toksdef\@cclvi}
+\def\newwrite{\alloc@7\write\chardef\sixt@@n}
+\input etoolbox-generic
+\ifdefined\luatexversion
+  \directlua{memoize = {}}
+\fi
+\input pdftexcmds.sty
+\ifdef\pdftexversion{%
+}{%
+  \def\pdfhorigin{1true in}%
+  \def\pdfvorigin{1true in}%
+  \ifdef\XeTeXversion{%
+    \let\quitvmode\leavevmode
+  }{%
+    \ifdef\luatexversion{%
+      \let\pdfpagewidth\pagewidth
+      \let\pdfpageheight\pageheight
+      \def\pdfmajorversion{\pdfvariable majorversion}%
+      \def\pdfminorversion{\pdfvariable minorversion}%
+    }{%
+      \PackageError{memoize}{Support for this TeX engine is not implemented}{}%
+    }%
+  }%
+}
+\def\mmz@regular@shipout{%
+  \global\advance\mmzRegularPages1\relax
+  \mmz@primitive@shipout
+}
+\edef\mmz@temp{\string\shipout}%
+\edef\mmz@tempa{\meaning\shipout}%
+\ifx\mmz@temp\mmz@tempa
+  \let\mmz@primitive@shipout\shipout
+  \let\shipout\mmz@regular@shipout
+\else
+  \PackageError{memoize}{Cannot grab \string\shipout, it is already redefined}{}%
+\fi
+\input advice
+\def\ifmmz@loadstatus#1{%
+  \ifnum#1=0\csname mmz@loadstatus\endcsname\relax
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+}
+\ifmmz@loadstatus{3}{%
+  \PackageError{memoize}{Cannot load the package, as "nomemoize" is already
+    loaded. Memoization will NOT be in effect}{Packages "memoize" and
+    "nomemoize" are mutually exclusive, please load either one or the other.}%
+    \endinput
+}{}%
+\ifmmz@loadstatus{2}{%
+  \PackageError{memoize}{Cannot load the package, as "memoizable" is already
+    loaded}{Package "memoizable" is loaded by packages which support
+    memoization.  Memoize must be loaded before all such packages.  The
+    compilation log can help you figure out which package loaded "memoizable";
+    please move
+    "\string\input memoize"
+    before the
+    "\string\input"
+    of that package.}%
+  \endinput
+}{}%
+\ifmmz@loadstatus{1}{\endinput}{}%
+\def\mmz@loadstatus{1}%
+\def\filetotoks#1#2{%
+  \immediate\mmz@openin0{#2}%
+  #1={}%
+  \loop
+  \unless\ifeof0
+    \read0 to \totoks@temp
+    \expandafter\toksapp\expandafter#1\expandafter{\totoks@temp}%
+  \repeat
+  \immediate\closein0
+}
+\let\mmz@openin\openin
+\let\mmz@openout\openout
+\newif\ifmmz@temp
+\newtoks\mmz@temptoks
+\newbox\mmz@box
+\newwrite\mmz@out
+\def\mmzset#1{\pgfqkeys{/mmz}{#1}\ignorespaces}
+\def\nommzkeys#1{}
+\newif\ifmemoize
+\mmzset{%
+  enable/.style={begindocument/.append code=\memoizetrue},
+  disable/.style={begindocument/.append code=\memoizefalse},
+  begindocument/.append style={
+    enable/.code=\memoizetrue,
+    disable/.code=\memoizefalse,
+  },
+  enable,
+  options/.style={#1},
+}
+\def\mmz@mode@normal{0}
+\def\mmz@mode@readonly{1}
+\def\mmz@mode@recompile{2}
+\let\mmz@mode\mmz@mode@normal
+\mmzset{%
+  normal/.code={\let\mmz@mode\mmz@mode@normal},
+  readonly/.code={\let\mmz@mode\mmz@mode@readonly},
+  recompile/.code={\let\mmz@mode\mmz@mode@recompile},
+}
+\mmzset{%
+  prefix/.code={\mmz@parse@prefix{#1}},
+}
+\begingroup
+\catcode`\/=12
+\gdef\mmz@parse@prefix#1{%
+  \edef\mmz@prefix{\detokenize\expandafter{\expanded{#1}}}%
+  \def\mmz@prefix@dir{}%
+  \def\mmz@prefix@name{}%
+  \expandafter\mmz@parse@prefix@i\mmz@prefix/\mmz@eov
+}
+\gdef\mmz@parse@prefix@i#1/#2{%
+  \ifx\mmzeov#2%
+    \def\mmz@prefix@name{#1}%
+  \else
+    \appto\mmz@prefix@dir{#1/}%
+    \expandafter\mmz@parse@prefix@i\expandafter#2%
+  \fi
+}
+\endgroup
+\mmzset{%
+  begindocument/.append style={
+    prefix/.append code=\mmz@maybe@mkmemodir\mmz@record@prefix,
+  },
+  begindocument/.append code=\mmz@maybe@mkmemodir,
+}
+\mmzset{
+  mkdir/.is if=mmz@mkdir,
+  mkdir command/.store in=\mmz@mkdir@command,
+  mkdir command={},
+}
+\newif\ifmmz@mkdir
+\mmz@mkdirtrue
+\def\mmz@maybe@mkmemodir{%
+  \ifmmz@mkdir
+    \ifdefempty\mmz@mkdir@command{}{%
+      \ifdefempty\mmz@prefix@dir{}{%
+        \mmz@remove@quotes{\mmz@prefix@dir}\mmz@temp
+        \pdf@system{\mmz@mkdir@command\space"\mmz@temp"}%
+      }%
+    }%
+  \fi
+}
+\mmzset{%
+  memo dir/.style={prefix={#1.memo.dir/}},
+  memo dir/.default=\jobname,
+  no memo dir/.style={prefix={#1.}},
+  no memo dir/.default=\jobname,
+  no memo dir,
+}
+\def\mmz@remove@quotes#1#2{%
+  \def\mmz@remove@quotes@end{\let#2\mmz@temp}%
+  \def\mmz@temp{}%
+  \expanded{%
+    \noexpand\mmz@remove@quotes@i
+      \detokenize\expandafter{\expanded{#1}}%
+      "\noexpand\mmz@eov
+  }%
+}
+\def\mmz@remove@quotes@i{%
+  \CollectArgumentsRaw
+    {\collargsBraceCollectedfalse
+      \collargsNoDelimiterstrue
+      \collargsAppendPostwrap{{##1}}%
+    }%
+    {u"u\mmz@eov}%
+    \mmz@remove@quotes@ii
+}
+\def\mmz@remove@quotes@ii#1#2{%
+  \appto\mmz@temp{#1}%
+  \ifx&#2&%
+    \mmz@remove@quotes@end
+    \expandafter\@gobble
+  \else
+    \expandafter\@firstofone
+  \fi
+  {\mmz@remove@quotes@i#2\mmz@eov}%
+}
+\newif\ifmmz@ignorespaces
+\mmzset{
+  ignore spaces/.is if=mmz@ignorespaces,
+}
+\newif\ifmmz@verbatim
+\def\mmzRawCollectorOptions{}
+\mmzset{
+  verbatim/.code={%
+    \def\mmzRawCollectorOptions{\collargsVerbatim}%
+    \mmz@verbatimtrue
+  },
+  verb/.code={%
+    \def\mmzRawCollectorOptions{\collargsVerb}%
+    \mmz@verbatimtrue
+  },
+  no verbatim/.code={%
+    \def\mmzRawCollectorOptions{\collargsNoVerbatim}%
+    \mmz@verbatimfalse
+  },
+}
+\protected\def\mmz{\futurelet\mmz@temp\mmz@i}
+\def\mmz@i{%
+  \begingroup
+  \ifx\mmz@temp[%]
+    \def\mmz@verbatim@fix{}%
+    \expandafter\mmz@ii
+  \else
+    \def\mmz@verbatim@fix{\noexpand\collargsFixFromNoVerbatim}%
+    \expandafter\mmz@iii
+  \fi
+}
+\def\mmz@ii[#1]{%
+  \mmzset{#1}%
+  \mmz@iii
+}
+\def\mmz@iii{%
+  \ifmmz@verbatim
+    \expandafter\mmz@do@verbatim
+  \else
+    \expandafter\mmz@do
+  \fi
+}
+\long\def\mmz@do#1{%
+  \Memoize{#1}{#1}%
+}%
+\def\mmz@do@verbatim#1{%
+  \expanded{%
+    \noexpand\CollectArgumentsRaw{%
+      \noexpand\collargsCaller{\noexpand\mmz}%
+      \expandonce\mmzRawCollectorOptions
+      \mmz@verbatim@fix
+    }%
+  }{+m}\mmz@do
+}
+\def\memoize{%
+  \begingroup
+  \futurelet\mmz@temp\mmz@env@i
+}
+\def\mmz@env@i{%
+  \ifx\mmz@temp[%]
+    \def\mmz@verbatim@fix{}%
+    \expandafter\mmz@env@ii
+  \else
+    \def\mmz@verbatim@fix{\noexpand\collargsFixFromNoVerbatim}%
+    \expandafter\mmz@env@iii
+  \fi
+}
+\def\mmz@env@ii[#1]{%
+  \mmzset{#1}%
+  \mmz@env@iii
+}
+\def\mmz@env@iii{%
+  \long\edef\mmz@do##1{%
+    \noexpand\Memoize{##1}{##1\unskip}%
+  }%
+  \expanded{%
+    \noexpand\CollectArgumentsRaw{%
+      \noexpand\collargsCaller{memoize}%
+      \expandonce\mmzRawCollectorOptions
+      \ifmmz@verbatim\mmz@verbatim@fix\fi
+    }%
+  }{&&{\collargsAppendPostwrap{}}!t{ }+b{memoize}}{\mmz@do}%
+}%
+\protected\def\nommz#1#{%
+  \afterassignment\nommz@i
+  \let\mmz@temp
+}
+\def\nommz@i{%
+  \bgroup
+  \memoizefalse
+}
+\def\nomemoize{%
+  \begingroup
+  \memoizefalse
+  \futurelet\mmz@temp\nommz@env@i
+}
+\def\nommz@env@i{%
+  \ifx\mmz@temp[%]
+    \expandafter\nommz@env@ii
+  \fi
+}
+\def\nommz@env@ii[#1]{%
+  \ignorespaces
+}
+\def\endnomemoize{%
+  \endgroup
+  \unskip
+}
+\newif\ifmemoizing
+\newif\ifinmemoize
+\def\mmz@maybe@scantokens{%
+  \ifmmz@verbatim
+    \expandafter\mmz@scantokens
+  \else
+    \expandafter\@firstofone
+  \fi
+}
+\long\def\mmz@scantokens#1{%
+  \expanded{%
+    \newlinechar=13
+    \unexpanded{\scantokens{#1\endinput}}%
+    \newlinechar=\the\newlinechar
+  }%
+}
+\newtoks\mmz@mdfive@source
+\newtoks\mmz@exec@source
+\let\Memoize\@secondoftwo
+\long\def\Memoize#1#2{%
+  \mmz@mdfive@source{#1}%
+  \expandafter\expandafter\expandafter\expandafter
+  \expandafter\expandafter\expandafter
+  \mmz@exec@source
+  \expandafter\expandafter\expandafter\expandafter
+  \expandafter\expandafter\expandafter
+  {%
+    \mmz@maybe@scantokens{#2}%
+  }%
+  \mmz@trace@Memoize
+  \let\mmz@action\mmz@compile
+  \ifmemoizing
+  \else
+    \ifmemoize
+      \xdef\mmz@code@mdfivesum{\pdf@mdfivesum{\the\mmz@mdfive@source}}%
+      \mmz@trace@code@mdfive
+      \ifnum\mmz@mode=\mmz@mode@recompile\relax
+        \ifnum\pdf@draftmode=0
+          \let\mmz@action\mmz@memoize
+        \fi
+      \else
+        \mmz@process@cmemo
+        \ifmmzUnmemoizable
+          \mmz@trace@cmemo@unmemoizable
+        \else
+          \ifmmz@abort
+            \mmz@trace@process@cmemo@fail
+            \ifnum\mmz@mode=\mmz@mode@readonly\relax
+            \else
+              \ifnum\pdf@draftmode=0
+                \let\mmz@action\mmz@memoize
+              \fi
+            \fi
+          \else
+            \mmz@trace@process@cmemo@ok
+            \let\mmz@action\mmz@process@ccmemo
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+  \mmz@action
+}
+\def\mmz@compile{%
+  \mmz@trace@compile
+  \expanded{%
+    \endgroup
+    \noexpand\inmemoizetrue
+    \the\mmz@exec@source
+    \ifinmemoize\noexpand\inmemoizetrue\else\noexpand\inmemoizefalse\fi
+  }%
+}
+\ifdefined\luatexversion
+  \directlua{%
+    luatexbase.add_to_callback(
+      "show_error_message",
+      function()
+        memoize.abort = true
+        texio.write_nl(status.lasterrorstring)
+      end,
+      "Abort memoization on error"
+    )
+  }%
+  \def\mmz@lua@atbeginmemoization{%
+    \directlua{memoize.abort = false}%
+  }%
+  \def\mmz@lua@atendmemoization{%
+    \directlua{%
+      if memoize.abort then
+        tex.print("\noexpand\\mmzAbort")
+      end
+    }%
+  }%
+\else
+  \let\mmz@lua@atbeginmemoization\relax
+  \let\mmz@lua@atendmemoization\relax
+\fi
+\def\mmz@memoize{%
+  \mmz@trace@memoize
+  \memoizingtrue
+  \inmemoizetrue
+  \edef\memoizinggrouplevel{\the\currentgrouplevel}%
+  \global\mmz@abortfalse
+  \global\mmzUnmemoizablefalse
+  \global\mmz@seq 0
+  \global\setbox\mmz@tbe@box\vbox{}%
+  \global\mmz@ccmemo@resources{}%
+  \global\mmzCMemo{}%
+  \global\mmzCCMemo{}%
+  \global\mmzContextExtra{}%
+  \gdef\mmzAtEndMemoizationExtra{}%
+  \gdef\mmzAfterMemoizationExtra{}%
+  \mmz@lua@atbeginmemoization
+  \mmzAtBeginMemoization
+  \mmzDriver{\the\mmz@exec@source}%
+  \mmzAtEndMemoization
+  \mmzAtEndMemoizationExtra
+  \mmz@lua@atendmemoization
+  \ifmmzUnmemoizable
+    \global\mmzContextExtra{}%
+    \gtoksapp\mmzCMemo{\global\mmzUnmemoizabletrue}%
+    \mmz@write@cmemo
+    \mmz@trace@endmemoize@unmemoizable
+    \PackageInfo{memoize}{Marking this code as unmemoizable}%
+  \else
+    \ifmmz@abort
+      \mmz@trace@endmemoize@aborted
+      \PackageInfo{memoize}{Memoization was aborted}%
+      \mmz@compute@context@mdfivesum
+      \mmz@write@cmemo
+    \else
+      \mmz@compute@context@mdfivesum
+      \mmz@write@cmemo
+      \mmz@write@ccmemo
+      \mmz@shipout@externs
+      \mmz@trace@endmemoize@ok
+    \fi
+  \fi
+  \expandafter\endgroup
+  \expandafter\let
+    \expandafter\mmzIncludeExtern\expandafter\mmz@include@extern@from@tbe@box
+  \mmzAfterMemoization
+  \mmzAfterMemoizationExtra
+}
+\def\memoizinggrouplevel{-1}%
+\def\mmzAbort{\global\mmz@aborttrue}
+\newif\ifmmz@abort
+\def\mmzUnmemoizable{\global\mmzUnmemoizabletrue}
+\newif\ifmmzUnmemoizable
+\def\mmzAtBeginMemoization{}
+\def\mmzAtEndMemoization{}
+\def\mmzAfterMemoization{}
+\mmzset{
+  at begin memoization/.code={%
+    \ifmemoizing
+      \expandafter\@firstofone
+    \else
+      \expandafter\appto\expandafter\mmzAtBeginMemoization
+    \fi
+    {#1}%
+  },
+  at end memoization/.code={%
+    \ifmemoizing
+      \expandafter\gappto\expandafter\mmzAtEndMemoizationExtra
+    \else
+      \expandafter\appto\expandafter\mmzAtEndMemoization
+    \fi
+    {#1}%
+  },
+  after memoization/.code={%
+    \ifmemoizing
+      \expandafter\gappto\expandafter\mmzAfterMemoizationExtra
+    \else
+      \expandafter\appto\expandafter\mmzAfterMemoization
+    \fi
+    {#1}%
+  },
+}
+\mmzset{
+  driver/.store in=\mmzDriver,
+  driver=\mmzSingleExternDriver,
+}
+\newif\ifmmzkeepexterns
+\long\def\mmzSingleExternDriver#1{%
+  \xtoksapp\mmzCCMemo{\mmz@maybe@quitvmode}%
+  \setbox\mmz@box\mmz@capture{#1}%
+  \mmzExternalizeBox\mmz@box\mmz@temptoks
+  \xtoksapp\mmzCCMemo{\the\mmz@temptoks}%
+  \mmz@maybe@quitvmode\box\mmz@box
+}
+\mmzset{
+  capture/.is choice,
+  capture/hbox/.code={%
+    \let\mmz@capture\hbox
+    \def\mmz@maybe@quitvmode{\noexpand\quitvmode}%
+  },
+  capture/vbox/.code={%
+    \let\mmz@capture\vbox
+    \def\mmz@maybe@quitvmode{}%
+  },
+  capture=hbox,
+}
+\mmzset{
+  auto/integrated driver/.style={
+    after setup={\expandafter\newif\csname ifmmz@memoizing#1\endcsname},
+    driver/.expand once={%
+      \csname mmz@memoizing#1true\endcsname
+      \@firstofone
+    }%
+  },
+}
+\newcommand\IfMemoizing[2][\mmz@Ifmemoizing@nogrouplevel]{%>\fi
+\csname ifmmz@memoizing#2\endcsname%>\if
+  \ifnum\currentgrouplevel=\the\numexpr\memoizinggrouplevel+#1\relax\relax
+    \expandafter\expandafter\expandafter\@firstoftwo
+  \else
+    \expandafter\expandafter\expandafter\@secondoftwo
+  \fi
+\else
+  \expandafter\@secondoftwo
+\fi
+}
+\def\mmz@Ifmemoizing@nogrouplevel{0\relax\relax\fi\iftrue}
+\def\mmz@trace#1{\advice@typeout{[tracing memoize] #1}}
+\def\mmz@trace@context{\mmz@trace{\space\space
+    Context: "\expandonce{\mmz@context@key}" --> \mmz@context@mdfivesum}}
+\def\mmz@trace@Memoize@on{%
+  \mmz@trace{%
+    Entering \noexpand\Memoize (%
+    \ifmemoize enabled\else disabled\fi,
+    \ifnum\mmz@mode=\mmz@mode@recompile recompile\fi
+    \ifnum\mmz@mode=\mmz@mode@readonly readonly\fi
+    \ifnum\mmz@mode=\mmz@mode@normal normal\fi
+    \space mode) on line \the\inputlineno
+  }%
+  \mmz@trace{\space\space Code: \the\mmz@mdfive@source}%
+}
+\def\mmz@trace@code@mdfive@on{\mmz@trace{\space\space
+    Code md5sum: \mmz@code@mdfivesum}}
+\def\mmz@trace@compile@on{\mmz@trace{\space\space Compiling}}
+\def\mmz@trace@memoize@on{\mmz@trace{\space\space Memoizing}}
+\def\mmz@trace@endmemoize@ok@on{\mmz@trace{\space\space
+    Memoization completed}}%
+\def\mmz@trace@endmemoize@aborted@on{\mmz@trace{\space\space
+    Memoization was aborted}}
+\def\mmz@trace@endmemoize@unmemoizable@on{\mmz@trace{\space\space
+    Marking this code as unmemoizable}}
+\def\mmz@trace@process@cmemo@on{\mmz@trace{\space\space
+    Attempting to utilize c-memo \mmz@cmemo@path}}
+\def\mmz@trace@process@no@cmemo@on{\mmz@trace{\space\space
+    C-memo does not exist}}
+\def\mmz@trace@process@cmemo@ok@on{\mmz@trace{\space\space
+    C-memo was processed successfully}\mmz@trace@context}
+\def\mmz@trace@process@cmemo@fail@on{\mmz@trace{\space\space
+    C-memo input failed}}
+\def\mmz@trace@cmemo@unmemoizable@on{\mmz@trace{\space\space
+    This code was marked as unmemoizable}}
+\def\mmz@trace@process@ccmemo@on{\mmz@trace{\space\space
+    Attempting to utilize cc-memo \mmz@ccmemo@path\space
+    (\ifmmz@direct@ccmemo@input\else in\fi direct input)}}
+\def\mmz@trace@resource@on#1{\mmz@trace{\space\space
+    Extern file does not exist: #1}}
+\def\mmz@trace@process@ccmemo@ok@on{%
+  \mmz@trace{\space\space Utilization successful}}
+\def\mmz@trace@process@no@ccmemo@on{%
+  \mmz@trace{\space\space CC-memo does not exist}}
+\def\mmz@trace@process@ccmemo@fail@on{%
+  \mmz@trace{\space\space Cc-memo input failed}}
+\mmzset{%
+  trace/.is choice,
+  trace/.default=true,
+  trace/true/.code=\mmzTracingOn,
+  trace/false/.code=\mmzTracingOff,
+}
+\def\mmzTracingOn{%
+  \let\mmz@trace@Memoize\mmz@trace@Memoize@on
+  \let\mmz@trace@code@mdfive\mmz@trace@code@mdfive@on
+  \let\mmz@trace@compile\mmz@trace@compile@on
+  \let\mmz@trace@memoize\mmz@trace@memoize@on
+  \let\mmz@trace@process@cmemo\mmz@trace@process@cmemo@on
+  \let\mmz@trace@endmemoize@ok\mmz@trace@endmemoize@ok@on
+  \let\mmz@trace@endmemoize@unmemoizable\mmz@trace@endmemoize@unmemoizable@on
+  \let\mmz@trace@endmemoize@aborted\mmz@trace@endmemoize@aborted@on
+  \let\mmz@trace@process@cmemo\mmz@trace@process@cmemo@on
+  \let\mmz@trace@process@cmemo@ok\mmz@trace@process@cmemo@ok@on
+  \let\mmz@trace@process@no@cmemo\mmz@trace@process@no@cmemo@on
+  \let\mmz@trace@process@cmemo@fail\mmz@trace@process@cmemo@fail@on
+  \let\mmz@trace@cmemo@unmemoizable\mmz@trace@cmemo@unmemoizable@on
+  \let\mmz@trace@process@ccmemo\mmz@trace@process@ccmemo@on
+  \let\mmz@trace@resource\mmz@trace@resource@on
+  \let\mmz@trace@process@ccmemo@ok\mmz@trace@process@ccmemo@ok@on
+  \let\mmz@trace@process@no@ccmemo\mmz@trace@process@no@ccmemo@on
+  \let\mmz@trace@process@ccmemo@fail\mmz@trace@process@ccmemo@fail@on
+}
+\def\mmzTracingOff{%
+  \let\mmz@trace@Memoize\relax
+  \let\mmz@trace@code@mdfive\relax
+  \let\mmz@trace@compile\relax
+  \let\mmz@trace@memoize\relax
+  \let\mmz@trace@process@cmemo\relax
+  \let\mmz@trace@endmemoize@ok\relax
+  \let\mmz@trace@endmemoize@unmemoizable\relax
+  \let\mmz@trace@endmemoize@aborted\relax
+  \let\mmz@trace@process@cmemo\relax
+  \let\mmz@trace@process@cmemo@ok\relax
+  \let\mmz@trace@process@no@cmemo\relax
+  \let\mmz@trace@process@cmemo@fail\relax
+  \let\mmz@trace@cmemo@unmemoizable\relax
+  \let\mmz@trace@process@ccmemo\relax
+  \let\mmz@trace@resource\@gobble
+  \let\mmz@trace@process@ccmemo@ok\relax
+  \let\mmz@trace@process@no@ccmemo\relax
+  \let\mmz@trace@process@ccmemo@fail\relax
+}
+\mmzTracingOff
+\newtoks\mmzContext
+\newtoks\mmzContextExtra
+\mmzset{%
+  context/.code={%
+    \ifmemoizing
+      \expandafter\gtoksapp\expandafter\mmzContextExtra
+    \else
+      \expandafter\toksapp\expandafter\mmzContext
+    \fi
+    {#1,}%
+  },
+  clear context/.code={%
+    \ifmemoizing
+      \expandafter\global\expandafter\mmzContextExtra
+    \else
+      \expandafter\mmzContext
+    \fi
+    {}%
+  },
+  clear context/.value forbidden,
+  meaning to context/.code={\forcsvlist\mmz@mtoc{#1}},
+  csname meaning to context/.code={\mmz@mtoc@csname{#1}},
+  key meaning to context/.code={%
+    \forcsvlist\mmz@mtoc\mmz@mtoc@keycmd{#1}},
+  key value to context/.code={\forcsvlist\mmz@mtoc@key{#1}},
+  /handlers/.meaning to context/.code={\expanded{%
+      \noexpand\mmz@mtoc@csname{pgfk@\pgfkeyscurrentpath/.@cmd}}},
+  /handlers/.value to context/.code={%
+    \expanded{\noexpand\mmz@mtoc@csname{pgfk@\pgfkeyscurrentpath}}},
+}
+\def\mmz@mtoc#1{%
+  \collargs@cs@cases{#1}%
+    {\mmz@mtoc@cmd{#1}}%
+    {\mmz@mtoc@error@notcsorenv{#1}}%
+    {%
+      \mmz@mtoc@csname{%
+        #1}%
+      \mmz@mtoc@csname{%
+        end%
+        #1}%
+    }%
+}
+\def\mmz@mtoc@cmd#1{%
+  \begingroup
+  \escapechar=-1
+  \expandafter\endgroup
+  \expandafter\mmz@mtoc@csname\expandafter{\string#1}%
+}
+\def\mmz@mtoc@csname#1{%
+  \pgfkeysvalueof{/mmz/context/.@cmd}%
+  \detokenize{#1}={\expandafter\meaning\csname#1\endcsname}%
+  \pgfeov
+}
+\def\mmz@mtoc@key#1{\mmz@mtoc@csname{pgfk@#1}}
+\def\mmz@mtoc@keycmd#1{\mmz@mtoc@csname{pgfk@#1/.@cmd}}
+\def\mmz@mtoc@error@notcsorenv#1{%
+  \PackageError{memoize}{'\detokenize{#1}' passed to key 'meaning to context'
+    is neither a command nor an environment}{}%
+}
+\def\mmz@cmemo@path{\mmz@prefix\mmz@code@mdfivesum.memo}
+\newtoks\mmzCMemo
+\mmzset{%
+  include source in cmemo/.is if=mmz@include@source,
+}
+\newif\ifmmz@include@source
+\mmz@include@sourcetrue
+\def\mmz@write@cmemo{%
+  \immediate\mmz@openout\mmz@out{\mmz@cmemo@path}%
+  \immediate\write\mmz@out{\noexpand\mmzMemo}%
+  \immediate\write\mmz@out{%
+    \global\mmzContextExtra{\the\mmzContextExtra}\collargs@percentchar
+  }%
+  \immediate\write\mmz@out{\the\mmzCMemo\collargs@percentchar}%
+  \ifmmz@include@source
+    \immediate\write\mmz@out{\noexpand\mmzSource}%
+    \immediate\write\mmz@out{\the\mmz@mdfive@source}%
+  \fi
+  \immediate\closeout\mmz@out
+  \pgfkeysalso{/mmz/record/new cmemo={\mmz@cmemo@path}}%
+}
+\let\mmzSource\endinput
+\def\mmz@process@cmemo{%
+  \mmz@trace@process@cmemo
+  \global\mmz@aborttrue
+  \global\mmzUnmemoizablefalse
+  \def\mmzMemo{\global\mmz@abortfalse}%
+  \global\mmzContextExtra{}%
+  \IfFileExists{\mmz@cmemo@path}{%
+    \input{\mmz@cmemo@path}%
+    \pgfkeysalso{/mmz/record/used cmemo={\mmz@cmemo@path}}%
+  }{%
+    \mmz@trace@process@no@cmemo
+  }%
+  \mmz@compute@context@mdfivesum
+}
+\def\mmz@compute@context@mdfivesum{%
+  \xdef\mmz@context@key{\the\mmzContext\the\mmzContextExtra}%
+  \begingroup
+  \begingroup
+  \def\width{\string\width}%
+  \def\height{\string\height}%
+  \def\depth{\string\depth}%
+  \edef\mmz@paddings{\mmz@paddings}%
+  \expandafter\endgroup
+  \expandafter\def\expandafter\mmz@paddings\expandafter{\mmz@paddings}%
+  \xdef
+  \mmz@context@key{\mmz@context@key}%
+  \endgroup
+  \xdef\mmz@context@mdfivesum{\pdf@mdfivesum{\expandonce\mmz@context@key}}%
+}
+\def\mmz@ccmemo@path{%
+  \mmz@prefix\mmz@code@mdfivesum-\mmz@context@mdfivesum.memo}
+\newtoks\mmzCCMemo
+\newif\ifmmz@include@context
+\mmzset{%
+  include context in ccmemo/.is if=mmz@include@context,
+}
+\newif\ifmmz@direct@ccmemo@input
+\mmzset{%
+  direct ccmemo input/.is if=mmz@direct@ccmemo@input,
+}
+\def\mmz@write@ccmemo{%
+  \immediate\mmz@openout\mmz@out{\mmz@ccmemo@path}%
+  \begingroup
+  \the\mmz@ccmemo@resources
+  \endgroup
+  \immediate\write\mmz@out{\noexpand\mmzMemo}%
+  \immediate\write\mmz@out{\the\mmzCCMemo\collargs@percentchar}%
+  \ifmmz@include@context
+    \immediate\write\mmz@out{\noexpand\mmzThisContext}%
+    \immediate\write\mmz@out{\expandonce{\mmz@context@key}}%
+  \fi
+  \immediate\write\mmz@out{\noexpand\mmzEndMemo}%
+  \immediate\closeout\mmz@out
+  \pgfkeysalso{/mmz/record/new ccmemo={\mmz@ccmemo@path}}%
+}
+\def\mmz@ccmemo@append@resource#1{%
+  \mmz@seq=#1\relax
+  \immediate\write\mmz@out{%
+    \string\mmzResource{\mmz@extern@name}\collargs@percentchar}%
+}
+\def\mmzResource#1{%
+  \ifnum0\pdf@filesize{\mmz@prefix@dir#1}=0
+    \ifmmz@direct@ccmemo@input
+      \let\mmzMemo\endinput
+    \else
+      \long\def\mmzMemo##1\mmzEndMemo\par{}%
+    \fi
+    \mmz@trace@resource{#1}%
+  \fi
+}
+\def\mmz@process@ccmemo{%
+  \mmz@trace@process@ccmemo
+  \global\mmz@aborttrue
+  \def\mmzMemo{%
+    \endgroup
+    \global\mmz@abortfalse
+    \let\mmzIncludeExtern\mmz@include@extern
+  }%
+  \xdef\mmzEndMemo{%
+    \ifmmz@direct@ccmemo@input
+      \noexpand\endinput
+    \else
+      \unexpanded{%
+        \def\mmz@temp\par{}%
+        \mmz@temp
+      }%
+    \fi
+  }%
+  \xdef\mmzThisContext{%
+    \ifmmz@direct@ccmemo@input
+      \noexpand\endinput
+    \else
+      \unexpanded{%
+        \long\def\mmz@temp##1\mmzEndMemo\par{}%
+        \mmz@temp
+      }%
+    \fi
+  }%
+  \IfFileExists{\mmz@ccmemo@path}{%
+    \ifmmz@direct@ccmemo@input
+      \input{\mmz@ccmemo@path}%
+    \else
+      \filetotoks\toks@{\mmz@ccmemo@path}%
+      \the\toks@
+    \fi
+    \pgfkeysalso{/mmz/record/used ccmemo={\mmz@ccmemo@path}}%
+  }{%
+    \mmz@trace@process@no@ccmemo
+  }%
+  \ifmmz@abort
+    \mmz@trace@process@ccmemo@fail
+    \ifnum\mmz@mode=\mmz@mode@readonly\relax
+      \expandafter\expandafter\expandafter\mmz@compile
+    \else
+      \expandafter\expandafter\expandafter\mmz@memoize
+    \fi
+  \else
+    \mmz@trace@process@ccmemo@ok
+  \fi
+}
+\newcount\mmz@seq
+\def\mmz@extern@basename{%
+  \mmz@prefix@name\mmz@code@mdfivesum-\mmz@context@mdfivesum
+  \ifnum\mmz@seq>0 -\the\mmz@seq\fi
+}
+\def\mmz@extern@name{\mmz@extern@basename.pdf}
+\def\mmz@extern@basepath{\mmz@prefix@dir\mmz@extern@basename}
+\def\mmz@extern@path{\mmz@extern@basepath.pdf}
+\mmzset{
+  padding left/.store in=\mmz@padding@left,
+  padding right/.store in=\mmz@padding@right,
+  padding top/.store in=\mmz@padding@top,
+  padding bottom/.store in=\mmz@padding@bottom,
+  padding/.style={
+    padding left=#1, padding right=#1,
+    padding top=#1, padding bottom=#1
+  },
+  padding=1in,
+  padding to context/.style={
+    context={padding=(\mmz@paddings)},
+  },
+  padding to context,
+}
+\def\mmz@paddings{%
+  \mmz@padding@left,\mmz@padding@bottom,\mmz@padding@right,\mmz@padding@top
+}
+\def\mmzExternalizeBox#1#2{%
+  \begingroup
+  \def\width{\wd#1 }%
+  \def\height{\ht#1 }%
+  \def\depth{\dp#1 }%
+  \xdef\mmz@global@temp{%
+    \noexpand\mmzIncludeExtern
+      {\the\mmz@seq}%
+      \ifhbox#1\noexpand\hbox\else\noexpand\vbox\fi
+      {\the\wd#1}%
+      {\the\ht#1}%
+      {\the\dp#1}%
+      {\the\dimexpr\mmz@padding@left}%
+      {\the\dimexpr\mmz@padding@bottom}%
+      {\the\dimexpr\mmz@padding@right}%
+      {\the\dimexpr\mmz@padding@top}%
+  }%
+  \global\setbox\mmz@tbe@box\vbox{\copy#1\unvbox\mmz@tbe@box}%
+  \xtoksapp\mmz@ccmemo@resources{%
+    \noexpand\mmz@ccmemo@append@resource{\the\mmz@seq}%
+  }%
+  \global\advance\mmz@seq1
+  \endgroup
+  #2\expandafter{\mmz@global@temp}%
+}
+\newtoks\mmz@ccmemo@resources
+\newbox\mmz@tbe@box
+\def\mmz@shipout@externs{%
+  \global\mmz@seq 0
+  \setbox\mmz@box\vbox{%
+    \def\width{\wd\mmz@box}%
+    \def\height{\ht\mmz@box}%
+    \def\depth{\dp\mmz@box}%
+    \vskip1pt
+    \ifmmzkeepexterns\expandafter\unvcopy\else\expandafter\unvbox\fi\mmz@tbe@box
+    \@whilesw\ifdim0pt=\lastskip\fi{%
+      \setbox\mmz@box\lastbox
+      \mmz@shipout@extern
+    }%
+  }%
+}
+\def\mmz@shipout@extern{%
+  \edef\expectedwidth{\the\dimexpr
+    (\mmz@padding@left) + \wd\mmz@box + (\mmz@padding@right)}%
+  \edef\expectedheight{\the\dimexpr
+    (\mmz@padding@top) + \ht\mmz@box + \dp\mmz@box + (\mmz@padding@bottom)}%
+  \begingroup
+  \ifnum\mag=1000
+  \else
+    \mmz@shipout@mag
+  \fi
+  \pdfpagewidth\dimexpr
+    (\mmz@padding@left) + \wd\mmz@box + (\mmz@padding@right)\relax
+  \pdfpageheight\dimexpr
+    (\mmz@padding@top) + \ht\mmz@box + \dp\mmz@box+ (\mmz@padding@bottom)\relax
+  \hoffset\dimexpr\mmz@padding@left - \pdfhorigin\relax
+  \voffset\dimexpr\mmz@padding@top - \pdfvorigin\relax
+  \pdf@primitive\shipout\box\mmz@box
+  \endgroup
+  \global\advance\mmzExternPages1
+  \edef\externbasepath{\mmz@extern@basepath}%
+  \edef\pagenumber{%
+    \the\numexpr\mmzRegularPages
+    +\mmzExternPages+\mmzExtraPages
+  }%
+  \mmzset{record/new extern/.expanded=\mmz@extern@path}%
+  \global\advance\mmz@seq1
+}
+\def\mmz@shipout@mag{%
+  \setbox\mmz@box\hbox{%
+    \pdfliteral{q \mmz@inverse@mag\space 0 0 \mmz@inverse@mag\space 0 0 cm}%
+    \copy\mmz@box\relax
+    \pdfliteral{Q}%
+  }%
+  \dimen0=\dimexpr\mmz@padding@left\relax
+  \edef\mmz@padding@left{\the\dimexpr\mmz@inverse@mag\dimen0}%
+  \dimen0=\dimexpr\mmz@padding@bottom\relax
+  \edef\mmz@padding@bottom{\the\dimexpr\mmz@inverse@mag\dimen0}%
+  \dimen0=\dimexpr\mmz@padding@right\relax
+  \edef\mmz@padding@right{\the\dimexpr\mmz@inverse@mag\dimen0}%
+  \dimen0=\dimexpr\mmz@padding@top\relax
+  \edef\mmz@padding@top{\the\dimexpr\mmz@inverse@mag\dimen0}%
+  \wd\mmz@box=\mmz@inverse@mag\wd\mmz@box\relax
+  \ht\mmz@box=\mmz@inverse@mag\ht\mmz@box\relax
+  \dp\mmz@box=\mmz@inverse@mag\dp\mmz@box\relax
+}
+{\catcode`\p=12\catcode`\t=12\gdef\mmz@Pgf@geT#1pt{#1}}
+\mmzset{begindocument/.append code={%
+    \edef\mmz@inverse@mag{\expandafter\mmz@Pgf@geT\the\dimexpr 1000pt/\mag}%
+  }}
+\newcount\mmzRegularPages
+\newcount\mmzExternPages
+\mmzset{
+  enddocument/afterlastpage/.append code={%
+    \ifnum\mmzExternPages>0
+      \PackageWarning{memoize}{The compilation produced \the\mmzExternPages\space
+        new extern\ifnum\mmzExternPages>1 s\fi}%
+    \fi
+  },
+}
+\newcount\mmzExtraPages
+\def\mmz@include@extern#1#2#3#4#5#6#7#8#9{%
+  \mmz@seq=#1\relax
+  \setbox\mmz@box=#2{%
+    \setbox0=\hbox{%
+      \lower\dimexpr #5+#7\relax\hbox{%
+        \hskip -#6\relax
+        \setbox0=\hbox{%
+          \mmz@insertpdfpage{\mmz@extern@path}{1}%
+        }%
+        \unhbox0
+      }%
+    }%
+    \wd0 \dimexpr\wd0-#8\relax
+    \ht0 \dimexpr\ht0-#9\relax
+    \dp0 #5\relax
+    \box0
+  }%
+  \mmz@tempfalse
+  \mmz@if@roughly@equal{\mmz@tolerance}{#3}{\wd\mmz@box}{%
+    \mmz@if@roughly@equal{\mmz@tolerance}{#4}{\ht\mmz@box}{%
+      \mmz@temptrue
+    }{}}{}%
+  \ifmmz@temp
+  \else
+    \mmz@use@memo@warning{\mmz@extern@path}{#3}{#4}{#5}%
+  \fi
+  \wd\mmz@box=#3\relax
+  \ht\mmz@box=#4\relax
+  \box\mmz@box
+  \pgfkeysalso{/mmz/record/used extern={\mmz@extern@path}}%
+}
+\def\mmz@use@memo@warning#1#2#3#4{%
+  \PackageWarning{memoize}{Unexpected size of extern "#1";
+    expected #2\space x \the\dimexpr #3+#4\relax,
+    got \the\wd\mmz@box\space x \the\dimexpr\the\ht\mmz@box+\the\dp\mmz@box\relax}%
+}
+\ifdef\luatexversion{%
+  \def\mmz@insertpdfpage#1#2{% #1 = filename, #2 = page number
+    \saveimageresource page #2 mediabox {#1}%
+    \useimageresource\lastsavedimageresourceindex
+  }%
+}{%
+  \ifdef\XeTeXversion{%
+    \def\mmz@insertpdfpage#1#2{%
+      \XeTeXpdffile #1 page #2 media
+    }%
+  }{% pdfLaTeX
+    \def\mmz@insertpdfpage#1#2{%
+      \pdfximage page #2 mediabox {#1}%
+      \pdfrefximage\pdflastximage
+    }%
+  }%
+}
+\def\mmz@include@extern@from@tbe@box#1#2#3#4#5#6#7#8#9{%
+  \setbox0\vbox{%
+    \@tempcnta#1\relax
+    \vskip1pt
+    \unvcopy\mmz@tbe@box
+    \@whilenum\@tempcnta>0\do{%
+      \setbox0\lastbox
+      \advance\@tempcnta-1\relax
+    }%
+    \global\setbox1\lastbox
+    \@whilesw\ifdim0pt=\lastskip\fi{%
+      \setbox0\lastbox
+    }%
+    \box\mmz@box
+  }%
+  \box1
+}
+\def\mmzvalueof#1{\pgfkeysvalueof{/mmz/#1}}
+\mmzset{
+  extract/.estore in=\mmz@extraction@method,
+  extract/.value required,
+  begindocument/.append style={extract/.code=\mmz@preamble@only@error},
+  extract/perl/.code={%
+    \mmz@clear@extraction@log
+    \pdf@system{%
+      \mmzvalueof{perl extraction command}\space
+      \mmzvalueof{perl extraction options}%
+    }%
+    \mmz@check@extraction@log{perl}%
+    \def\mmz@mkdir@command{\mmzvalueof{perl extraction command} --mkdir}%
+  },
+  perl extraction command/.initial=memoize-extract.pl,
+  perl extraction options/.initial={\space
+    -F plain
+    \jobname\space
+  },
+  extract=perl,
+  extract/python/.code={%
+    \mmz@clear@extraction@log
+    \pdf@system{%
+      \mmzvalueof{python extraction command}\space
+      \mmzvalueof{python extraction options}%
+    }%
+    \mmz@check@extraction@log{python}%
+    \def\mmz@mkdir@command{\mmzvalueof{python extraction command} --mkdir}%
+  },
+  python extraction command/.initial=memoize-extract.py,
+  python extraction options/.initial={\space
+    -F plain
+    \jobname\space
+  },
+}
+\def\mmz@preamble@only@error{%
+  \PackageError{memoize}{%
+    Ignoring the invocation of "\pgfkeyscurrentkey".
+    This key may only be executed in the preamble}{}%
+}
+\def\mmz@clear@extraction@log{%
+  \begingroup
+  \immediate\mmz@openout0{\jobname.mmz.log}%
+  \immediate\closeout0
+  \endgroup
+}
+\def\mmz@check@extraction@log#1{%
+  \begingroup \def\extractionmethod{#1}%
+  \mmz@tempfalse \let\mmz@orig@endinput\endinput
+  \def\endinput{\mmz@temptrue\mmz@orig@endinput}%
+  \@input{\jobname.mmz.log}%
+  \ifmmz@temp \else \mmz@extraction@error \fi \endgroup }
+\def\mmz@extraction@error{%
+  \PackageError{memoize}{Extraction of externs from document
+    "\jobname.pdf" using method "\extractionmethod" was
+    unsuccessful}{The extraction script "\mmzvalueof{\extractionmethod\space
+      extraction command}" wasn't executed or didn't finish execution
+    properly.}}
+\mmzset{
+  record/.style={%
+    record/begin/.append style={
+      /mmz/record/#1/begin/.try,
+      /mmz/record/#1/prefix/.try/.expanded=\mmz@prefix,
+    },
+    record/prefix/.append style={/mmz/record/#1/prefix/.try={##1}},
+    record/new extern/.append style={/mmz/record/#1/new extern/.try={##1}},
+    record/used extern/.append style={/mmz/record/#1/used extern/.try={##1}},
+    record/new cmemo/.append style={/mmz/record/#1/new cmemo/.try={##1}},
+    record/new ccmemo/.append style={/mmz/record/#1/new ccmemo/.try={##1}},
+    record/used cmemo/.append style={/mmz/record/#1/used cmemo/.try={##1}},
+    record/used ccmemo/.append style={/mmz/record/#1/used ccmemo/.try={##1}},
+    record/end/.append style={/mmz/record/#1/end/.try},
+  },
+}
+\mmzset{
+  no record/.style={%
+    record/begin/.style={record/begin/.style={}},
+    record/prefix/.code={\aftergroup\mmz@record@prefix},
+    record/new extern/.code={},
+    record/used extern/.code={},
+    record/new cmemo/.code={},
+    record/new ccmemo/.code={},
+    record/used cmemo/.code={},
+    record/used ccmemo/.code={},
+    record/end/.style={record/end/.code={}},
+  }
+}
+\def\mmz@record@prefix{%
+  \mmzset{/mmz/record/prefix/.expanded=\mmz@prefix}%
+}
+\mmzset{
+  no record,
+  record=mmz,
+  begindocument/.append style={record/begin},
+  enddocument/afterlastpage/.append style={record/end},
+}
+\mmzset{
+  record/mmz/begin/.code={%
+    \newwrite\mmz@mmzout
+    \immediate\mmz@openout\mmz@mmzout{\jobname.mmz}%
+  },
+  record/mmz/prefix/.code={%
+    \immediate\write\mmz@mmzout{\noexpand\mmzPrefix{#1}}%
+  },
+  record/mmz/new extern/.code={%
+    \immediate\write\mmz@mmzout{%
+      \noexpand\mmzNewExtern{#1}{\pagenumber}{\expectedwidth}{\expectedheight}%
+    }%
+  },
+  record/mmz/new cmemo/.code={%
+    \immediate\write\mmz@mmzout{\noexpand\mmzNewCMemo{#1}}%
+  },
+  record/mmz/new ccmemo/.code={%
+    \immediate\write\mmz@mmzout{\noexpand\mmzNewCCMemo{#1}}%
+  },
+  record/mmz/used extern/.code={%
+    \immediate\write\mmz@mmzout{\noexpand\mmzUsedExtern{#1}}%
+  },
+  record/mmz/used cmemo/.code={%
+    \immediate\write\mmz@mmzout{\noexpand\mmzUsedCMemo{#1}}%
+  },
+  record/mmz/used ccmemo/.code={%
+    \immediate\write\mmz@mmzout{\noexpand\mmzUsedCCMemo{#1}}%
+  },
+  record/mmz/end/.code={%
+    \immediate\write\mmz@mmzout{\noexpand\endinput}%
+    \immediate\closeout\mmz@mmzout
+  },
+  sh/.store in=\mmz@shname,
+  sh=memoize-extract.\jobname.sh,
+  bat/.store in=\mmz@batname,
+  bat=memoize-extract.\jobname.bat,
+  record/sh/begin/.code={%
+    \newwrite\mmz@shout
+    \immediate\mmz@openout\mmz@shout{\mmz@shname}%
+  },
+  record/sh/new extern/.code={%
+    \begingroup
+    \immediate\write\mmz@shout{\mmz@tex@extraction@systemcall}%
+    \endgroup
+  },
+  record/sh/end/.code={%
+    \immediate\closeout\mmz@shout
+  },
+  record/bat/begin/.code={%
+    \newwrite\mmz@batout
+    \immediate\mmz@openout\mmz@batout{\mmz@batname}%
+  },
+  record/bat/new extern/.code={%
+    \begingroup
+    \immediate\write\mmz@batout{\mmz@tex@extraction@systemcall}%
+    \endgroup
+  },
+  record/bat/end/.code={%
+    \immediate\closeout\mmz@batout
+  },
+  makefile/.store in=\mmz@makefilename,
+  makefile=memoize-extract.\jobname.makefile,
+}
+\begingroup
+\catcode`\^^I=12
+\gdef\mmz@makefile@recipe@prefix{^^I}%
+\endgroup
+\mmzset{
+  record/makefile/begin/.code={%
+    \newwrite\mmz@makefileout
+    \newtoks\mmz@makefile@externs
+    \immediate\mmz@openout\mmz@makefileout{\mmz@makefilename}%
+    \immediate\write\mmz@makefileout{.DEFAULT_GOAL = externs}%
+    \immediate\write\mmz@makefileout{.PHONY: externs}%
+  },
+  record/makefile/new extern/.code={%
+    \immediate\write\mmz@makefileout{#1:}%
+    \begingroup
+    \immediate\write\mmz@makefileout{%
+      \mmz@makefile@recipe@prefix\mmz@tex@extraction@systemcall}%
+    \endgroup
+    \xtoksapp\mmz@makefile@externs{#1\space}%
+  },
+  record/makefile/end/.code={%
+    \immediate\write\mmz@makefileout{externs: \the\mmz@makefile@externs}%
+    \immediate\closeout\mmz@makefileout
+  },
+}
+\mmzset{
+  extract/tex/.code={%
+    \begingroup
+    \@input{\jobname.mmz}%
+    \endgroup
+  },
+}
+\def\mmzUsedCMemo#1{}
+\def\mmzUsedCCMemo#1{}
+\def\mmzUsedExtern#1{}
+\def\mmzNewCMemo#1{}
+\def\mmzNewCCMemo#1{}
+\def\mmzPrefix#1{}
+\def\mmzNewExtern#1{%
+  \mmz@new@extern@i#1\mmz@temp
+}
+\def\mmz@new@extern@i#1.pdf\mmz@temp#2#3#4{%
+  \begingroup
+  \def\externbasepath{#1}%
+  \def\pagenumber{#2}%
+  \def\expectedwidth{#3}%
+  \def\expectedheight{#4}%
+  \mmz@clear@extraction@log
+  \pdf@system{\mmz@tex@extraction@systemcall}%
+  \let\mmz@extraction@error\mmz@pageextraction@error
+  \mmz@check@extraction@log{tex}%
+  \endgroup
+}
+\def\mmz@pageextraction@error{%
+  \PackageError{memoize}{Extraction of extern page \pagenumber\space from
+    document "jobname.pdf" using method "\extractionmethod" was
+    unsuccessful.}{Check the log file to see if the extraction script was
+    executed at all, and if it finished successfully.  You might also want to
+    inspect "\externbasepath.log", the log file of the embedded TeX compilation
+    which ran the extraction script}}
+\def\mmz@tex@extraction@systemcall{%
+  \mmzvalueof{tex extraction command}\space
+  \mmzvalueof{tex extraction options}\space
+  "\mmzvalueof{tex extraction script}"%
+}
+\mmzset{
+  tex extraction command/.initial=pdftex,
+  tex extraction options/.initial={%
+    -halt-on-error
+    -interaction=batchmode
+    -jobname "\externbasepath"
+  },
+  tex extraction script/.initial={%
+    \def\noexpand\fromdocument{\jobname.pdf}%
+    \def\noexpand\pagenumber{\pagenumber}%
+    \def\noexpand\expectedwidth{\expectedwidth}%
+    \def\noexpand\expectedheight{\expectedheight}%
+    \def\noexpand\logfile{\jobname.mmz.log}%
+    \unexpanded{%
+      \def\warningtemplate{%
+        \warning{memoize: \warningtext}%
+      }}%
+    \ifdef\XeTeXversion{}{%
+      \def\noexpand\mmzpdfmajorversion{\the\pdfmajorversion}%
+      \def\noexpand\mmzpdfminorversion{\the\pdfminorversion}%
+    }%
+    \noexpand\input memoize-extract-one
+  },
+}
+\def\mmz@tolerance{0.01pt}
+\def\mmz@if@roughly@equal#1#2#3{%
+  \dimen0=\dimexpr#2-#3\relax
+  \ifdim\dimen0<0pt
+    \dimen0=-\dimen0\relax
+  \fi
+  \ifdim\dimen0>#1\relax
+    \expandafter\@secondoftwo
+  \else
+    \expandafter\@firstoftwo
+  \fi
+}%
+\mmzset{
+  .install advice={setup key=auto, activation=deferred},
+  begindocument/before/.append style={activation=immediate},
+}
+\newif\ifmmz@manual
+\mmzset{
+  manual/.is if=mmz@manual,
+  begindocument/end/.append code={%
+    \ifmmz@manual
+    \else
+      \pgfkeysalso{activate deferred,activate deferred/.code={}}%
+    \fi
+  },
+  auto/.cd,
+  run if memoization is possible/.style={
+    run conditions=\mmz@auto@rc@if@memoization@possible
+  },
+  run if memoizing/.style={run conditions=\mmz@auto@rc@if@memoizing},
+  apply options/.style={
+    bailout handler=\mmz@auto@bailout,
+    outer handler=\mmz@auto@outer,
+  },
+  memoize/.style={
+    run if memoization is possible,
+    apply options,
+    inner handler=\mmz@auto@memoize
+  },
+  noop/.style={inner handler=\mmz@auto@noop},
+  nomemoize/.style={noop, options=disable},
+  replicate/.style={run if memoizing, inner handler=\mmz@auto@replicate},
+  to context/.style={run if memoizing, outer handler=\mmz@auto@tocontext},
+}
+\mmzset{
+  auto/abort/.style={run conditions=\mmzAbort},
+}
+\mmzset{
+  auto/unmemoizable/.style={run conditions=\mmzUnmemoizable},
+}
+\ifdef\luatexversion{%
+  \mmzset{auto=\savepos{abort}}
+}{%
+  \mmzset{
+    auto=\pdfsavepos{abort},
+    auto=\errmessage{abort},
+  }
+}
+\def\mmz@auto@rc@if@memoization@possible{%
+  \ifmemoize
+    \ifinmemoize
+    \else
+      \AdviceRuntrue
+    \fi
+  \fi
+}
+\def\mmz@auto@rc@if@memoizing{%
+  \ifmemoizing\AdviceRuntrue\fi
+}
+\def\mmznext#1{\gdef\mmz@next{#1}\ignorespaces}
+\mmznext{}%
+\def\mmz@auto@outer{%
+  \begingroup
+  \mmzAutoInit
+  \AdviceCollector
+}
+\def\mmz@auto@bailout{%
+  \mmznext{}%
+}
+\def\mmzAutoInit{%
+  \ifdefempty\AdviceOptions{}{\expandafter\mmzset\expandafter{\AdviceOptions}}%
+  \ifdefempty\mmz@next{}{\expandafter\mmzset\expandafter{\mmz@next}\mmznext{}}%
+  \eappto\AdviceRawCollectorOptions{\expandonce\mmzRawCollectorOptions}%
+}
+\long\def\mmz@auto@memoize#1{%
+  \expanded{%
+    \noexpand\Memoize
+      {\expandonce\AdviceReplaced\unexpanded{#1}}%
+      {\expandonce\AdviceOriginal\unexpanded{#1}}%
+    \ifmmz@ignorespaces\ignorespaces\fi
+  }%
+}
+\long\def\mmz@auto@noop#1{%
+  \expandafter\mmz@maybe@scantokens\expandafter{\AdviceOriginal#1}%
+  \expandafter\endgroup
+  \ifmmz@ignorespaces\ignorespaces\fi
+}
+\def\mmz@auto@replicate#1{%
+  \begingroup
+  \let\mmz@auto@replicate@expansion\unexpanded
+  \expandafter\pgfqkeys\expanded{{/mmz/auto/replicate}{\AdviceOptions}}%
+  \expanded{%
+    \endgroup
+    \noexpand\gtoksapp\noexpand\mmzCCMemo{%
+      \expandonce\AdviceReplaced\mmz@auto@replicate@expansion{#1}}%
+    \expandonce\AdviceOriginal\unexpanded{#1}%
+  }%
+}
+\pgfqkeys{/mmz/auto/replicate}{
+  expanded/.code={\let\mmz@auto@replicate@expansion\@firstofone},
+}
+\def\mmz@auto@tocontext{%
+  \expanded{%
+    \noexpand\pgfkeysvalueof{/mmz/context/.@cmd}%
+    original "\AdviceNamespace" csname "\AdviceCsname"={%
+      \noexpand\expanded{%
+        \noexpand\noexpand\noexpand\meaning
+        \noexpand\AdviceCsnameGetOriginal{\AdviceNamespace}{\AdviceCsname}%
+      }%
+    }%
+  }%
+  \pgfeov
+  \AdviceOriginal
+}
+\mmzset{
+  begindocument/before/.append code={%
+    \ifdefined\tikz
+      \input advice-tikz.code.tex
+    \fi
+    \mmzset{%
+      auto/memoize tikz/.style={
+        memoize,
+        at begin memoization=\edef\mmz@pgfpictureid{%
+          \the\pgf@picture@serial@count
+        },
+        at end memoization=\xtoksapp\mmzCCMemo{%
+          \unexpanded{%
+            \global\expandafter\advance\csname pgf@picture@serial@count\endcsname
+          }%
+          \the\numexpr\pgf@picture@serial@count-\mmz@pgfpictureid\relax\relax
+        },
+      },
+      auto=\tikz{memoize tikz, collector=\AdviceCollectTikZArguments},
+      auto={tikzpicture}{memoize tikz},
+    }%
+  },
+}
+\mmzset{
+  begin document/.style={begindocument/before, begindocument, begindocument/end},
+  end document/.style={enddocument/afterlastpage},
+}
+\InputIfFileExists{memoize.cfg}{}{}
+\mmzset{
+  extract/.is choice,
+  extract/.default=\mmz@extraction@method,
+  extract/.append style={
+    extract/.code={\PackageError{memoize}{Key "extract" was invoked twice.}{In
+        principle, externs should be extracted only once.  If you really want
+        to extract again, execute "extract/<method>".}},
+  },
+}
+\ifnum\pdf@draftmode=1
+  \PackageWarning{memoize}{No externalization will be performed in the draft mode}%
+\fi
+\resetatcatcode
+\endinput
+%%
+%% End of file `memoize.tex'.

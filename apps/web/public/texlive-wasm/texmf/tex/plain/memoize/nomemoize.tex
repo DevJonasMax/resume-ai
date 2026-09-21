@@ -1,0 +1,111 @@
+%%
+%% This is file `nomemoize.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% memoize.dtx  (with options: `nommz,plain')
+%% 
+%% This file is a part of Memoize, a TeX package for externalization of
+%% graphics and memoization of compilation results in general, available at
+%% https://ctan.org/pkg/memoize and https://github.com/sasozivanovic/memoize.
+%%
+%% Copyright (c) 2020- Saso Zivanovic <saso.zivanovic@guest.arnes.si>
+%%                     (Sa\v{s}o \v{Z}ivanovi\'{c})
+%%
+%% This work may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.3c of this license or (at
+%% your option) any later version.  The latest version of this license is in
+%% https://www.latex-project.org/lppl.txt and version 1.3c or later is part of
+%% all distributions of LaTeX version 2008 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% The Current Maintainer of this work is Saso Zivanovic.
+%%
+%% The files belonging to this work and covered by LPPL are listed in
+%% (<texmf>/doc/generic/memoize/)FILES.
+\input miniltx
+\input pgfkeys
+\def\ifmmz@loadstatus#1{%
+  \ifnum#1=0\csname mmz@loadstatus\endcsname\relax
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+}
+\ifmmz@loadstatus{1}{%
+  \PackageError{nomemoize}{Cannot load the package, as "memoize" is already
+    loaded; memoization will remain in effect}{Packages "memoize" and
+    "nomemoize" are mutually exclusive, please load either one or the other.}%
+  \endinput }{}%
+\ifmmz@loadstatus{2}{%
+  \PackageError{nomemoize}{Cannot load the package, as "memoizable" is already
+    loaded}{Package "memoizable" is loaded by packages which support
+    memoization.  (No)Memoize must be loaded before all such packages.  The
+    compilation log can help you figure out which package loaded
+    "memoizable"; please move
+    "\string\input memoize"
+    before the
+    "\string\input"
+    of that package.}%
+  \endinput
+}{}%
+\ifmmz@loadstatus{3}{\endinput}{}%
+\def\mmz@loadstatus{3}%
+\def\mmzset#1{\ignorespaces}
+\def\nommzkeys{\pgfqkeys{/mmz}}
+\pgfqkeys{/mmz}{.unknown/.code={\pgfkeysdef{\pgfkeyscurrentkey}{}}}
+\newif\ifmemoize
+\protected\def\nommz#1#{%
+  \afterassignment\nommz@i
+  \let\mmz@temp
+}
+\def\nommz@i{%
+  \bgroup
+  \memoizefalse
+}
+\let\mmz\nommz
+\def\nomemoize{%
+  \begingroup
+  \memoizefalse
+  \futurelet\mmz@temp\nommz@env@i
+}
+\def\nommz@env@i{%
+  \ifx\mmz@temp[%]
+    \expandafter\nommz@env@ii
+  \fi
+}
+\def\nommz@env@ii[#1]{%
+  \ignorespaces
+}
+\def\endnomemoize{%
+  \endgroup
+  \unskip
+}
+\let\memoize\nomemoize
+\let\endmemoize\endnomemoize
+\newif\ifmemoizing
+\newif\ifinmemoize
+\def\mmznext#1{\ignorespaces}
+\InputIfFileExists{memoize.cfg}{}{}
+\pgfkeys{%
+  /handlers/.meaning to context/.code={},
+  /handlers/.value to context/.code={},
+}
+\let\mmzAbort\relax
+\let\mmzUnmemoizable\relax
+\newcommand\IfMemoizing[2][]{\@secondoftwo}
+\let\mmzNoRef\@gobble
+\let\mmzForceNoRef\@gobble
+\newtoks\mmzContext
+\newtoks\mmzContextExtra
+\newtoks\mmzCMemo
+\newtoks\mmzCCMemo
+\newcount\mmzExternPages
+\newcount\mmzExtraPages
+\let\mmzTracingOn\relax
+\let\mmzTracingOff\relax
+\resetatcatcode
+\endinput
+%%
+%% End of file `nomemoize.tex'.

@@ -1,0 +1,126 @@
+%%
+%% This is file `memoize-extract-one.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% memoize.dtx  (with options: `extract-one')
+%% 
+%% This file is a part of Memoize, a TeX package for externalization of
+%% graphics and memoization of compilation results in general, available at
+%% https://ctan.org/pkg/memoize and https://github.com/sasozivanovic/memoize.
+%%
+%% Copyright (c) 2020- Saso Zivanovic <saso.zivanovic@guest.arnes.si>
+%%                     (Sa\v{s}o \v{Z}ivanovi\'{c})
+%%
+%% This work may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.3c of this license or (at
+%% your option) any later version.  The latest version of this license is in
+%% https://www.latex-project.org/lppl.txt and version 1.3c or later is part of
+%% all distributions of LaTeX version 2008 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% The Current Maintainer of this work is Saso Zivanovic.
+%%
+%% The files belonging to this work and covered by LPPL are listed in
+%% (<texmf>/doc/generic/memoize/)FILES.
+\catcode`\@11\relax
+\def\@firstoftwo#1#2{#1}
+\def\@secondoftwo#1#2{#2}
+\ifdefined\XeTeXversion
+\else
+  \ifdefined\luatexversion
+    \def\pdfmajorversion{\pdfvariable majorversion}%
+    \def\pdfminorversion{\pdfvariable minorversion}%
+  \fi
+  \ifdefined\mmzpdfmajorversion
+    \pdfmajorversion\mmzpdfmajorversion\relax
+  \fi
+  \ifdefined\mmzpdfminorversion
+    \pdfminorversion\mmzpdfminorversion\relax
+  \fi
+\fi
+\newwrite\extractionlog
+\ifdefined\logfile
+  \immediate\openout\extractionlog{\logfile}%
+  \def\doublewarning#1{%
+    \message{#1}%
+    \def\warningtext{#1}%
+    \immediate\write\extractionlog{%
+      \ifdefined\warningtemplate\warningtemplate\else\warningtext\fi
+    }%
+  }%
+\else
+  \let\doublewarning\message
+\fi
+\newif\ifforce
+\ifdefined\force
+  \csname force\force\endcsname
+\fi
+\def\mmz@tolerance{0.01pt}
+\def\mmz@if@roughly@equal#1#2#3{%
+  \dimen0=\dimexpr#2-#3\relax
+  \ifdim\dimen0<0pt
+    \dimen0=-\dimen0\relax
+  \fi
+  \ifdim\dimen0>#1\relax
+    \expandafter\@secondoftwo
+  \else
+    \expandafter\@firstoftwo
+  \fi
+}%
+\ifdefined\XeTeXversion
+  \setbox0=\hbox{\XeTeXpdffile \fromdocument\space page \pagenumber media}%
+\else
+  \ifdefined\luatexversion
+    \saveimageresource page \pagenumber mediabox {\fromdocument}%
+    \setbox0=\hbox{\useimageresource\lastsavedimageresourceindex}%
+  \else
+    \pdfximage page \pagenumber mediabox {\fromdocument}%
+    \setbox0=\hbox{\pdfrefximage\pdflastximage}%
+  \fi
+\fi
+\newif\ifbaddimensions
+\ifdefined\expectedwidth
+  \ifdefined\expectedheight
+    \mmz@if@roughly@equal{\mmz@tolerance}{\wd0}{\expectedwidth}{%
+      \mmz@if@roughly@equal{\mmz@tolerance}{\ht0}{\expectedheight}%
+        {}%
+        {\baddimensionstrue}%
+    }{\baddimensionstrue}%
+  \fi
+\fi
+\ifdefined\luatexversion
+  \let\pdfpagewidth\pagewidth
+  \let\pdfpageheight\pageheight
+  \def\pdfhorigin{\pdfvariable horigin}%
+  \def\pdfvorigin{\pdfvariable vorigin}%
+\fi
+\def\do@shipout{%
+  \pdfpagewidth=\wd0
+  \pdfpageheight=\ht0
+  \ifdefined\XeTeXversion
+    \hoffset -1 true in
+    \voffset -1 true in
+  \else
+    \pdfhorigin=0pt
+    \pdfvorigin=0pt
+  \fi
+  \shipout\box0
+}
+\ifbaddimensions
+  \doublewarning{I refuse to extract page \pagenumber\space from
+    "\fromdocument", because its size (\the\wd0 \space x \the\ht0) is not
+    what I expected (\expectedwidth\space x \expectedheight)}%
+  \ifforce\do@shipout\fi
+\else
+  \do@shipout
+\fi
+\ifdefined\logfile
+  \immediate\write\extractionlog{\noexpand\endinput}%
+  \immediate\closeout\extractionlog
+\fi
+\bye
+\endinput
+%%
+%% End of file `memoize-extract-one.tex'.

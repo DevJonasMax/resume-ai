@@ -1,8 +1,9 @@
 "use client";
 
 import type { CandidateProfile, Job, ResumeVersion } from "@resume-ai/types";
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { apiClient } from "@/lib/apiClient";
+import { compileLatexToPdf } from "@/lib/latexCompiler";
 
 export type SplitMode = "split" | "latex" | "preview";
 export type ZoomMode = "fit-width" | "fit-page" | "custom";
@@ -35,6 +36,13 @@ export interface ResumeStudioContextValue {
   isSaving: boolean;
   setEditedLatex: (latex: string) => void;
   saveLatex: () => Promise<void>;
+
+  // Real PDF Compilation state
+  pdfBlobUrl: string | null;
+  pdfBlob: Blob | null;
+  isCompilingPdf: boolean;
+  compileError: string | null;
+  compileLatex: (source?: string) => Promise<void>;
 
   // Diff Inspector state
   isDiffDrawerOpen: boolean;
@@ -71,7 +79,11 @@ export interface ResumeStudioContextValue {
   onSelectCandidate?: (candidate: CandidateProfile) => void;
 }
 
-const ResumeStudioContext = createContext<ResumeStudioContextValue | null>(null);
+const g = globalThis as unknown as {
+  __resume_studio_context?: React.Context<ResumeStudioContextValue | null>;
+};
+export const ResumeStudioContext = (g.__resume_studio_context ??=
+  createContext<ResumeStudioContextValue | null>(null));
 
 export interface ResumeStudioProviderProps {
   children: React.ReactNode;
@@ -111,6 +123,15 @@ export function ResumeStudioProvider({
   const [isRefining, setIsRefining] = useState<boolean>(false);
   const [isExportingPdf, setIsExportingPdf] = useState<boolean>(false);
 
+  // PDF compilation state
+  const [pdfBlobUrl, setPdfBlobUrl] = useState<string | null>(null);
+  const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
+  const [isCompilingPdf, setIsCompilingPdf] = useState<boolean>(false);
+  const [compileError, setCompileError] = useState<string | null>(null);
+
+  const prevBlobUrlRef = useRef<string | null>(null);
+  const compileIdRef = useRef<number>(0);
+
   const [isDiffDrawerOpen, setIsDiffDrawerOpen] = useState<boolean>(false);
   const [activeDiffKey, setActiveDiffKey] = useState<string | null>(null);
   const [filterSection, setFilterSection] = useState<string>("all");
@@ -134,6 +155,62 @@ export function ResumeStudioProvider({
 
   const isLatexDirty = editedLatex !== currentResume.latexSource;
 
+  const compileLatex = useCallback(async (source?: string) => {
+    const latexToCompile = source ?? editedLatex;
+    if (!latexToCompile || !latexToCompile.trim()) return;
+
+    const compileId = ++compileIdRef.current;
+    setIsCompilingPdf(true);
+    setCompileError(null);
+
+    try {
+      const result = await compileLatexToPdf(latexToCompile);
+
+      if (compileId !== compileIdRef.current) {
+        URL.revokeObjectURL(result.pdfUrl);
+        return;
+      }
+
+      if (prevBlobUrlRef.current) {
+        URL.revokeObjectURL(prevBlobUrlRef.current);
+      }
+      prevBlobUrlRef.current = result.pdfUrl;
+
+      setPdfBlobUrl(result.pdfUrl);
+      setPdfBlob(result.pdfBlob);
+      setCompileError(null);
+    } catch (err: unknown) {
+      if (compileId !== compileIdRef.current) {
+        return;
+      }
+      const message = err instanceof Error ? err.message : String(err);
+      setCompileError(message);
+    } finally {
+      if (compileId === compileIdRef.current) {
+        setIsCompilingPdf(false);
+      }
+    }
+  }, [editedLatex]);
+
+  // Debounced compilation when editedLatex changes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      compileLatex(editedLatex);
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, [editedLatex, compileLatex]);
+
+  // Revoke object URL on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (prevBlobUrlRef.current) {
+        URL.revokeObjectURL(prevBlobUrlRef.current);
+        prevBlobUrlRef.current = null;
+      }
+    };
+  }, []);
+
   const saveLatex = async () => {
     setIsSaving(true);
     try {
@@ -143,6 +220,7 @@ export function ResumeStudioProvider({
         const res = await apiClient.saveResumeLatex(currentResume.id, editedLatex);
         setCurrentResume(res.version);
       }
+      await compileLatex(editedLatex);
     } finally {
       setIsSaving(false);
     }
@@ -204,34 +282,31 @@ export function ResumeStudioProvider({
   const exportPdf = async () => {
     setIsExportingPdf(true);
     try {
-      const element = document.getElementById("resume-document-sheet");
-      if (!element) {
-        window.print();
-        return;
-      }
+      let downloadUrl = pdfBlobUrl;
 
-      const html2pdfModule = await import("html2pdf.js");
-      const html2pdf = html2pdfModule.default || html2pdfModule;
+      if (!downloadUrl) {
+        const result = await compileLatexToPdf(editedLatex);
+        if (prevBlobUrlRef.current) {
+          URL.revokeObjectURL(prevBlobUrlRef.current);
+        }
+        prevBlobUrlRef.current = result.pdfUrl;
+        setPdfBlobUrl(result.pdfUrl);
+        setPdfBlob(result.pdfBlob);
+        downloadUrl = result.pdfUrl;
+      }
 
       const companySlug = job.company.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       const filename = `resume-${companySlug}-v${currentResume.versionNumber}.pdf`;
 
-      const options = {
-        margin: [8, 8, 8, 8],
-        filename,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      };
-
-      await (html2pdf as unknown as () => {
-        set: (opt: unknown) => { from: (el: HTMLElement) => { save: () => Promise<void> } };
-      })()
-        .set(options)
-        .from(element)
-        .save();
-    } catch {
-      window.print();
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      setCompileError(message);
     } finally {
       setIsExportingPdf(false);
     }
@@ -264,6 +339,11 @@ export function ResumeStudioProvider({
       isSaving,
       setEditedLatex,
       saveLatex,
+      pdfBlobUrl,
+      pdfBlob,
+      isCompilingPdf,
+      compileError,
+      compileLatex,
       isDiffDrawerOpen,
       openDiffDrawer: () => setIsDiffDrawerOpen(true),
       closeDiffDrawer: () => setIsDiffDrawerOpen(false),
@@ -299,6 +379,11 @@ export function ResumeStudioProvider({
       editedLatex,
       isLatexDirty,
       isSaving,
+      pdfBlobUrl,
+      pdfBlob,
+      isCompilingPdf,
+      compileError,
+      compileLatex,
       isDiffDrawerOpen,
       activeDiffKey,
       filterSection,

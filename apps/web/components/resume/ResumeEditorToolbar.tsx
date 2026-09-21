@@ -12,6 +12,8 @@ import {
 import { type ReactNode, useState } from "react";
 import { type ResumeEditorTab, useResumeEditor } from "./ResumeEditorContext.js";
 
+import { compileLatexToPdf } from "@/lib/latexCompiler";
+
 export function ResumeEditorToolbar() {
   const {
     resume,
@@ -31,32 +33,18 @@ export function ResumeEditorToolbar() {
   const handleDownloadPdf = async () => {
     setIsDownloadingPdf(true);
     try {
-      const element = document.getElementById("resume-document-sheet");
-      if (!element) {
-        window.print();
-        return;
-      }
-
-      const html2pdfModule = await import("html2pdf.js");
-      const html2pdf = html2pdfModule.default || html2pdfModule;
-
+      const { pdfBlob } = await compileLatexToPdf(resume.latexSource);
+      const url = URL.createObjectURL(pdfBlob);
       const companySlug = job.company.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       const filename = `resume-${companySlug}-v${resume.versionNumber}.pdf`;
 
-      const options = {
-        margin: [10, 10, 10, 10],
-        filename,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      };
-
-      await (html2pdf as unknown as () => {
-        set: (opt: unknown) => { from: (el: HTMLElement) => { save: () => Promise<void> } };
-      })()
-        .set(options)
-        .from(element)
-        .save();
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     } catch {
       window.print();
     } finally {

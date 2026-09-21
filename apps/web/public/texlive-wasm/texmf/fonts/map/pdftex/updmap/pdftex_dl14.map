@@ -1,0 +1,2404 @@
+% /var/lib/texmf/fonts/map/pdftex/updmap/pdftex_dl14.map:
+% maintained by updmap[-sys] (multi).
+% Don't change this file directly. Use updmap[-sys] instead.
+% See the updmap documentation.
+% A log of the run that created this file is available here:
+% /var/lib/texmf/web2c/updmap.log
+% ps2pk35.map
+cob NimbusMonL-Bold " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ucrb8a.pfb
+cobo NimbusMonL-BoldObli " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ucrbo8a.pfb
+com NimbusMonL-Regu " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ucrr8a.pfb
+coo NimbusMonL-ReguObli " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ucrro8a.pfb
+hv NimbusSanL-Regu " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvr8a.pfb
+hvb NimbusSanL-Bold " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvb8a.pfb
+hvbo NimbusSanL-BoldItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvbo8a.pfb
+hvo NimbusSanL-ReguItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvro8a.pfb
+pagd8g URWGothicL-Demi " groffencoding ReEncodeFont " <groff.enc <uagd8a.pfb
+pagd8r URWGothicL-Demi " TeXBase1Encoding ReEncodeFont " <8r.enc <uagd8a.pfb
+pagd8y URWGothicL-Demi " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uagd8a.pfb
+pagd8z URWGothicL-Demi " XL2encoding ReEncodeFont " <xl2.enc <uagd8a.pfb
+pagdo8g URWGothicL-DemiObli " groffencoding ReEncodeFont " <groff.enc <uagdo8a.pfb
+pagdo8r URWGothicL-DemiObli " TeXBase1Encoding ReEncodeFont " <8r.enc <uagdo8a.pfb
+pagdo8y URWGothicL-DemiObli " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uagdo8a.pfb
+pagdo8z URWGothicL-DemiObli " XL2encoding ReEncodeFont " <xl2.enc <uagdo8a.pfb
+pagk8g URWGothicL-Book " groffencoding ReEncodeFont " <groff.enc <uagk8a.pfb
+pagk8r URWGothicL-Book " TeXBase1Encoding ReEncodeFont " <8r.enc <uagk8a.pfb
+pagk8y URWGothicL-Book " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uagk8a.pfb
+pagk8z URWGothicL-Book " XL2encoding ReEncodeFont " <xl2.enc <uagk8a.pfb
+pagko8g URWGothicL-BookObli " groffencoding ReEncodeFont " <groff.enc <uagko8a.pfb
+pagko8r URWGothicL-BookObli " TeXBase1Encoding ReEncodeFont " <8r.enc <uagko8a.pfb
+pagko8y URWGothicL-BookObli " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uagko8a.pfb
+pagko8z URWGothicL-BookObli " XL2encoding ReEncodeFont " <xl2.enc <uagko8a.pfb
+pbkd8g URWBookmanL-DemiBold " groffencoding ReEncodeFont " <groff.enc <ubkd8a.pfb
+pbkd8r URWBookmanL-DemiBold " TeXBase1Encoding ReEncodeFont " <8r.enc <ubkd8a.pfb
+pbkd8y URWBookmanL-DemiBold " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ubkd8a.pfb
+pbkd8z URWBookmanL-DemiBold " XL2encoding ReEncodeFont " <xl2.enc <ubkd8a.pfb
+pbkdi8g URWBookmanL-DemiBoldItal " groffencoding ReEncodeFont " <groff.enc <ubkdi8a.pfb
+pbkdi8r URWBookmanL-DemiBoldItal " TeXBase1Encoding ReEncodeFont " <8r.enc <ubkdi8a.pfb
+pbkdi8y URWBookmanL-DemiBoldItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ubkdi8a.pfb
+pbkdi8z URWBookmanL-DemiBoldItal " XL2encoding ReEncodeFont " <xl2.enc <ubkdi8a.pfb
+pbkdo8r URWBookmanL-DemiBold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <ubkd8a.pfb
+pbkdo8y URWBookmanL-DemiBold " .167 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ubkd8a.pfb
+pbkl8g URWBookmanL-Ligh " groffencoding ReEncodeFont " <groff.enc <ubkl8a.pfb
+pbkl8r URWBookmanL-Ligh " TeXBase1Encoding ReEncodeFont " <8r.enc <ubkl8a.pfb
+pbkl8y URWBookmanL-Ligh " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ubkl8a.pfb
+pbkl8z URWBookmanL-Ligh " XL2encoding ReEncodeFont " <xl2.enc <ubkl8a.pfb
+pbkli8g URWBookmanL-LighItal " groffencoding ReEncodeFont " <groff.enc <ubkli8a.pfb
+pbkli8r URWBookmanL-LighItal " TeXBase1Encoding ReEncodeFont " <8r.enc <ubkli8a.pfb
+pbkli8y URWBookmanL-LighItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ubkli8a.pfb
+pbkli8z URWBookmanL-LighItal " XL2encoding ReEncodeFont " <xl2.enc <ubkli8a.pfb
+pbklo8r URWBookmanL-Ligh " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <ubkl8a.pfb
+pbklo8y URWBookmanL-Ligh " .167 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ubkl8a.pfb
+pcrb8g NimbusMonL-Bold " groffencoding ReEncodeFont " <groff.enc <ucrb8a.pfb
+pcrb8r NimbusMonL-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <ucrb8a.pfb
+pcrb8u NimbusMonL-Bold " XT2encoding ReEncodeFont " <xt2.enc <ucrb8a.pfb
+pcrb8y NimbusMonL-Bold " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ucrb8a.pfb
+pcrbo8g NimbusMonL-BoldObli " groffencoding ReEncodeFont " <groff.enc <ucrbo8a.pfb
+pcrbo8r NimbusMonL-BoldObli " TeXBase1Encoding ReEncodeFont " <8r.enc <ucrbo8a.pfb
+pcrbo8u NimbusMonL-BoldObli " XT2encoding ReEncodeFont " <xt2.enc <ucrbo8a.pfb
+pcrbo8y NimbusMonL-BoldObli " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ucrbo8a.pfb
+pcrr8g NimbusMonL-Regu " groffencoding ReEncodeFont " <groff.enc <ucrr8a.pfb
+pcrr8r NimbusMonL-Regu " TeXBase1Encoding ReEncodeFont " <8r.enc <ucrr8a.pfb
+pcrr8rn NimbusMonL-Regu " .85 ExtendFont TeXBase1Encoding ReEncodeFont " <8r.enc <ucrr8a.pfb
+pcrr8u NimbusMonL-Regu " XT2encoding ReEncodeFont " <xt2.enc <ucrr8a.pfb
+pcrr8y NimbusMonL-Regu " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ucrr8a.pfb
+pcrro8g NimbusMonL-ReguObli " groffencoding ReEncodeFont " <groff.enc <ucrro8a.pfb
+pcrro8r NimbusMonL-ReguObli " TeXBase1Encoding ReEncodeFont " <8r.enc <ucrro8a.pfb
+pcrro8u NimbusMonL-ReguObli " XT2encoding ReEncodeFont " <xt2.enc <ucrro8a.pfb
+pcrro8y NimbusMonL-ReguObli " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <ucrro8a.pfb
+phvb8g NimbusSanL-Bold " groffencoding ReEncodeFont " <groff.enc <uhvb8a.pfb
+phvb8r NimbusSanL-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvb8a.pfb
+phvb8rn NimbusSanL-BoldCond " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvb8ac.pfb
+phvb8y NimbusSanL-Bold " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvb8a.pfb
+phvb8yn NimbusSanL-BoldCond " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvb8ac.pfb
+phvb8z NimbusSanL-Bold " XL2encoding ReEncodeFont " <xl2.enc <uhvb8a.pfb
+phvbn8g NimbusSanL-BoldCond " groffencoding ReEncodeFont " <groff.enc <uhvb8ac.pfb
+phvbn8z NimbusSanL-BoldCond " XL2encoding ReEncodeFont " <xl2.enc <uhvb8ac.pfb
+phvbo8g NimbusSanL-BoldItal " groffencoding ReEncodeFont " <groff.enc <uhvbo8a.pfb
+phvbo8r NimbusSanL-BoldItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvbo8a.pfb
+phvbo8rn NimbusSanL-BoldCondItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvbo8ac.pfb
+phvbo8y NimbusSanL-BoldItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvbo8a.pfb
+phvbo8yn NimbusSanL-BoldCondItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvbo8ac.pfb
+phvbo8z NimbusSanL-BoldItal " XL2encoding ReEncodeFont " <xl2.enc <uhvbo8a.pfb
+phvbon8g NimbusSanL-BoldCondItal " groffencoding ReEncodeFont " <groff.enc <uhvbo8ac.pfb
+phvbon8z NimbusSanL-BoldCondItal " XL2encoding ReEncodeFont " <xl2.enc <uhvbo8ac.pfb
+phvr8g NimbusSanL-Regu " groffencoding ReEncodeFont " <groff.enc <uhvr8a.pfb
+phvr8r NimbusSanL-Regu " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvr8a.pfb
+phvr8rn NimbusSanL-ReguCond " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvr8ac.pfb
+phvr8y NimbusSanL-Regu " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvr8a.pfb
+phvr8yn NimbusSanL-ReguCond " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvr8ac.pfb
+phvr8z NimbusSanL-Regu " XL2encoding ReEncodeFont " <xl2.enc <uhvr8a.pfb
+phvrn8g NimbusSanL-ReguCond " groffencoding ReEncodeFont " <groff.enc <uhvr8ac.pfb
+phvrn8z NimbusSanL-ReguCond " XL2encoding ReEncodeFont " <xl2.enc <uhvr8ac.pfb
+phvro8g NimbusSanL-ReguItal " groffencoding ReEncodeFont " <groff.enc <uhvro8a.pfb
+phvro8r NimbusSanL-ReguItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvro8a.pfb
+phvro8rn NimbusSanL-ReguCondItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvro8ac.pfb
+phvro8y NimbusSanL-ReguItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvro8a.pfb
+phvro8yn NimbusSanL-ReguCondItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uhvro8ac.pfb
+phvro8z NimbusSanL-ReguItal " XL2encoding ReEncodeFont " <xl2.enc <uhvro8a.pfb
+phvron8g NimbusSanL-ReguCondItal " groffencoding ReEncodeFont " <groff.enc <uhvro8ac.pfb
+phvron8z NimbusSanL-ReguCondItal " XL2encoding ReEncodeFont " <xl2.enc <uhvro8ac.pfb
+pncb8g CenturySchL-Bold " groffencoding ReEncodeFont " <groff.enc <uncb8a.pfb
+pncb8r CenturySchL-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <uncb8a.pfb
+pncb8y CenturySchL-Bold " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uncb8a.pfb
+pncb8z CenturySchL-Bold " XL2encoding ReEncodeFont " <xl2.enc <uncb8a.pfb
+pncbi8g CenturySchL-BoldItal " groffencoding ReEncodeFont " <groff.enc <uncbi8a.pfb
+pncbi8r CenturySchL-BoldItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uncbi8a.pfb
+pncbi8y CenturySchL-BoldItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uncbi8a.pfb
+pncbi8z CenturySchL-BoldItal " XL2encoding ReEncodeFont " <xl2.enc <uncbi8a.pfb
+pncbo8r CenturySchL-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uncb8a.pfb
+pncbo8y CenturySchL-Bold " .167 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uncb8a.pfb
+pncr8g CenturySchL-Roma " groffencoding ReEncodeFont " <groff.enc <uncr8a.pfb
+pncr8r CenturySchL-Roma " TeXBase1Encoding ReEncodeFont " <8r.enc <uncr8a.pfb
+pncr8y CenturySchL-Roma " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uncr8a.pfb
+pncr8z CenturySchL-Roma " XL2encoding ReEncodeFont " <xl2.enc <uncr8a.pfb
+pncri8g CenturySchL-Ital " groffencoding ReEncodeFont " <groff.enc <uncri8a.pfb
+pncri8r CenturySchL-Ital " TeXBase1Encoding ReEncodeFont " <8r.enc <uncri8a.pfb
+pncri8y CenturySchL-Ital " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uncri8a.pfb
+pncri8z CenturySchL-Ital " XL2encoding ReEncodeFont " <xl2.enc <uncri8a.pfb
+pncro8r CenturySchL-Roma " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uncr8a.pfb
+pncro8y CenturySchL-Roma " .167 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uncr8a.pfb
+pplb8g URWPalladioL-Bold " groffencoding ReEncodeFont " <groff.enc <uplb8a.pfb
+pplb8r URWPalladioL-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <uplb8a.pfb
+pplb8y URWPalladioL-Bold " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uplb8a.pfb
+pplb8z URWPalladioL-Bold " XL2encoding ReEncodeFont " <xl2.enc <uplb8a.pfb
+pplbi8g URWPalladioL-BoldItal " groffencoding ReEncodeFont " <groff.enc <uplbi8a.pfb
+pplbi8r URWPalladioL-BoldItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uplbi8a.pfb
+pplbi8y URWPalladioL-BoldItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uplbi8a.pfb
+pplbi8z URWPalladioL-BoldItal " XL2encoding ReEncodeFont " <xl2.enc <uplbi8a.pfb
+pplbo8r URWPalladioL-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplb8a.pfb
+pplbo8y URWPalladioL-Bold " .167 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uplb8a.pfb
+pplbu8r URWPalladioL-BoldItal " -.1763 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplbi8a.pfb
+pplbu8y URWPalladioL-BoldItal " -.1763 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uplbi8a.pfb
+pplr8g URWPalladioL-Roma " groffencoding ReEncodeFont " <groff.enc <uplr8a.pfb
+pplr8r URWPalladioL-Roma " TeXBase1Encoding ReEncodeFont " <8r.enc <uplr8a.pfb
+pplr8rn URWPalladioL-Roma " .82 ExtendFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplr8a.pfb
+pplr8y URWPalladioL-Roma " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uplr8a.pfb
+pplr8yn URWPalladioL-Roma " .82 ExtendFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uplr8a.pfb
+pplr8z URWPalladioL-Roma " XL2encoding ReEncodeFont " <xl2.enc <uplr8a.pfb
+pplri8g URWPalladioL-Ital " groffencoding ReEncodeFont " <groff.enc <uplri8a.pfb
+pplri8r URWPalladioL-Ital " TeXBase1Encoding ReEncodeFont " <8r.enc <uplri8a.pfb
+pplri8y URWPalladioL-Ital " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uplri8a.pfb
+pplri8z URWPalladioL-Ital " XL2encoding ReEncodeFont " <xl2.enc <uplri8a.pfb
+pplro8r URWPalladioL-Roma " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplr8a.pfb
+pplro8y URWPalladioL-Roma " .167 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uplr8a.pfb
+pplrr8re URWPalladioL-Roma " 1.2 ExtendFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplr8a.pfb
+pplrr8ye URWPalladioL-Roma " 1.2 ExtendFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uplr8a.pfb
+pplru8r URWPalladioL-Ital " -.1763 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplri8a.pfb
+pplru8y URWPalladioL-Ital " -.1763 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uplri8a.pfb
+psyr StandardSymL <usyr.pfb
+psyrgo StandardSymL <usyr.pfb
+psyro StandardSymL " .167 SlantFont " <usyr.pfb
+ptmb8g NimbusRomNo9L-Medi " groffencoding ReEncodeFont " <groff.enc <utmb8a.pfb
+ptmb8r NimbusRomNo9L-Medi " TeXBase1Encoding ReEncodeFont " <8r.enc <utmb8a.pfb
+ptmb8y NimbusRomNo9L-Medi " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmb8a.pfb
+ptmb8z NimbusRomNo9L-Medi " XL2encoding ReEncodeFont " <xl2.enc <utmb8a.pfb
+ptmbi8g NimbusRomNo9L-MediItal " groffencoding ReEncodeFont " <groff.enc <utmbi8a.pfb
+ptmbi8r NimbusRomNo9L-MediItal " TeXBase1Encoding ReEncodeFont " <8r.enc <utmbi8a.pfb
+ptmbi8y NimbusRomNo9L-MediItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmbi8a.pfb
+ptmbi8z NimbusRomNo9L-MediItal " XL2encoding ReEncodeFont " <xl2.enc <utmbi8a.pfb
+ptmbo8r NimbusRomNo9L-Medi " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmb8a.pfb
+ptmbo8y NimbusRomNo9L-Medi " .167 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmb8a.pfb
+ptmr8g NimbusRomNo9L-Regu " groffencoding ReEncodeFont " <groff.enc <utmr8a.pfb
+ptmr8r NimbusRomNo9L-Regu " TeXBase1Encoding ReEncodeFont " <8r.enc <utmr8a.pfb
+ptmr8rn NimbusRomNo9L-Regu " .82 ExtendFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmr8a.pfb
+ptmr8y NimbusRomNo9L-Regu " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmr8a.pfb
+ptmr8yn NimbusRomNo9L-Regu " .82 ExtendFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmr8a.pfb
+ptmr8z NimbusRomNo9L-Regu " XL2encoding ReEncodeFont " <xl2.enc <utmr8a.pfb
+ptmri8g NimbusRomNo9L-ReguItal " groffencoding ReEncodeFont " <groff.enc <utmri8a.pfb
+ptmri8r NimbusRomNo9L-ReguItal " TeXBase1Encoding ReEncodeFont " <8r.enc <utmri8a.pfb
+ptmri8y NimbusRomNo9L-ReguItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmri8a.pfb
+ptmri8z NimbusRomNo9L-ReguItal " XL2encoding ReEncodeFont " <xl2.enc <utmri8a.pfb
+ptmro8r NimbusRomNo9L-Regu " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmr8a.pfb
+ptmro8y NimbusRomNo9L-Regu " .167 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmr8a.pfb
+ptmrr8re NimbusRomNo9L-Regu " 1.2 ExtendFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmr8a.pfb
+ptmrr8ye NimbusRomNo9L-Regu " 1.2 ExtendFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmr8a.pfb
+pzcmi8g URWChanceryL-MediItal " groffEncoding ReEncodeFont " <groff.enc <uzcmi8a.pfb
+pzcmi8r URWChanceryL-MediItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uzcmi8a.pfb
+pzcmi8y URWChanceryL-MediItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <uzcmi8a.pfb
+pzcmi8z URWChanceryL-MediItal " XL2encoding ReEncodeFont " <xl2.enc <uzcmi8a.pfb
+pzdr Dingbats <uzdr.pfb
+rpagd URWGothicL-Demi " StandardEncoding ReEncodeFont " <8a.enc <uagd8a.pfb
+rpagdo URWGothicL-DemiObli " StandardEncoding ReEncodeFont " <8a.enc <uagdo8a.pfb
+rpagk URWGothicL-Book " StandardEncoding ReEncodeFont " <8a.enc <uagk8a.pfb
+rpagko URWGothicL-BookObli " StandardEncoding ReEncodeFont " <8a.enc <uagko8a.pfb
+rpbkd URWBookmanL-DemiBold " StandardEncoding ReEncodeFont " <8a.enc <ubkd8a.pfb
+rpbkdi URWBookmanL-DemiBoldItal " StandardEncoding ReEncodeFont " <8a.enc <ubkdi8a.pfb
+rpbkl URWBookmanL-Ligh " StandardEncoding ReEncodeFont " <8a.enc <ubkl8a.pfb
+rpbkli URWBookmanL-LighItal " StandardEncoding ReEncodeFont " <8a.enc <ubkli8a.pfb
+rpcrb NimbusMonL-Bold " StandardEncoding ReEncodeFont " <8a.enc <ucrb8a.pfb
+rpcrbo NimbusMonL-BoldObli " StandardEncoding ReEncodeFont " <8a.enc <ucrbo8a.pfb
+rpcrr NimbusMonL-Regu " StandardEncoding ReEncodeFont " <8a.enc <ucrr8a.pfb
+rpcrro NimbusMonL-ReguObli " StandardEncoding ReEncodeFont " <8a.enc <ucrro8a.pfb
+rphvb NimbusSanL-Bold " StandardEncoding ReEncodeFont " <8a.enc <uhvb8a.pfb
+rphvbo NimbusSanL-BoldItal " StandardEncoding ReEncodeFont " <8a.enc <uhvbo8a.pfb
+rphvbon NimbusSanL-BoldItal " .82 ExtendFont StandardEncoding ReEncodeFont " <8a.enc <uhvbo8a.pfb
+rphvbrn NimbusSanL-Bold " .82 ExtendFont StandardEncoding ReEncodeFont " <8a.enc <uhvb8a.pfb
+rphvr NimbusSanL-Regu " StandardEncoding ReEncodeFont " <8a.enc <uhvr8a.pfb
+rphvro NimbusSanL-ReguItal " StandardEncoding ReEncodeFont " <8a.enc <uhvro8a.pfb
+rphvron NimbusSanL-ReguItal " .82 ExtendFont StandardEncoding ReEncodeFont " <8a.enc <uhvro8a.pfb
+rphvrrn NimbusSanL-Regu " .82 ExtendFont StandardEncoding ReEncodeFont " <8a.enc <uhvr8a.pfb
+rpncb CenturySchL-Bold " StandardEncoding ReEncodeFont " <8a.enc <uncb8a.pfb
+rpncbi CenturySchL-BoldItal " StandardEncoding ReEncodeFont " <8a.enc <uncbi8a.pfb
+rpncr CenturySchL-Roma " StandardEncoding ReEncodeFont " <8a.enc <uncr8a.pfb
+rpncri CenturySchL-Ital " StandardEncoding ReEncodeFont " <8a.enc <uncri8a.pfb
+rpplb URWPalladioL-Bold " StandardEncoding ReEncodeFont " <8a.enc <uplb8a.pfb
+rpplbi URWPalladioL-BoldItal " StandardEncoding ReEncodeFont " <8a.enc <uplbi8a.pfb
+rpplbu URWPalladioL-BoldItal " -.1763 SlantFont StandardEncoding ReEncodeFont " <8a.enc <uplbi8a.pfb
+rpplr URWPalladioL-Roma " StandardEncoding ReEncodeFont " <8a.enc <uplr8a.pfb
+rpplri URWPalladioL-Ital " StandardEncoding ReEncodeFont " <8a.enc <uplri8a.pfb
+rpplro URWPalladioL-Roma " .167 SlantFont StandardEncoding ReEncodeFont " <8a.enc <uplr8a.pfb
+rpplrre URWPalladioL-Roma " 1.2 ExtendFont StandardEncoding ReEncodeFont " <8a.enc <uplr8a.pfb
+rpplrrn URWPalladioL-Roma " .82 ExtendFont StandardEncoding ReEncodeFont " <8a.enc <uplr8a.pfb
+rpplru URWPalladioL-Ital " -.1763 SlantFont StandardEncoding ReEncodeFont " <8a.enc <uplri8a.pfb
+rpsyr StandardSymL <usyr.pfb
+rpsyro StandardSymL " .167 SlantFont " <usyr.pfb
+rptmb NimbusRomNo9L-Medi " StandardEncoding ReEncodeFont " <8a.enc <utmb8a.pfb
+rptmbi NimbusRomNo9L-MediItal " StandardEncoding ReEncodeFont " <8a.enc <utmbi8a.pfb
+rptmbo NimbusRomNo9L-Medi " .167 SlantFont StandardEncoding ReEncodeFont " <8a.enc <utmb8a.pfb
+rptmr NimbusRomNo9L-Regu " StandardEncoding ReEncodeFont " <8a.enc <utmr8a.pfb
+rptmri NimbusRomNo9L-ReguItal " StandardEncoding ReEncodeFont " <8a.enc <utmri8a.pfb
+rptmro NimbusRomNo9L-Regu " .167 SlantFont StandardEncoding ReEncodeFont " <8a.enc <utmr8a.pfb
+rptmrre NimbusRomNo9L-Regu " 1.2 ExtendFont StandardEncoding ReEncodeFont " <8a.enc <utmr8a.pfb
+rptmrrn NimbusRomNo9L-Regu " .82 ExtendFont StandardEncoding ReEncodeFont " <8a.enc <utmr8a.pfb
+rpxpplb URWPalladioL-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <uplb8a.pfb
+rpxpplbi URWPalladioL-BoldItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uplbi8a.pfb
+rpxpplbo URWPalladioL-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplb8a.pfb
+rpxpplr URWPalladioL-Roma " TeXBase1Encoding ReEncodeFont " <8r.enc <uplr8a.pfb
+rpxpplri URWPalladioL-Ital " TeXBase1Encoding ReEncodeFont " <8r.enc <uplri8a.pfb
+rpxpplro URWPalladioL-Roma " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplr8a.pfb
+rpzcmi URWChanceryL-MediItal " StandardEncoding ReEncodeFont " <8a.enc <uzcmi8a.pfb
+rpzdr Dingbats <uzdr.pfb
+rtxphvb NimbusSanL-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvb8a.pfb
+rtxphvbo NimbusSanL-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uhvb8a.pfb
+rtxphvr NimbusSanL-Regu " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvr8a.pfb
+rtxphvro NimbusSanL-Regu " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uhvr8a.pfb
+rtxptmb NimbusRomNo9L-Medi " TeXBase1Encoding ReEncodeFont " <8r.enc <utmb8a.pfb
+rtxptmbi NimbusRomNo9L-MediItal " TeXBase1Encoding ReEncodeFont " <8r.enc <utmbi8a.pfb
+rtxptmbo NimbusRomNo9L-Medi " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmb8a.pfb
+rtxptmr NimbusRomNo9L-Regu " TeXBase1Encoding ReEncodeFont " <8r.enc <utmr8a.pfb
+rtxptmri NimbusRomNo9L-ReguItal " TeXBase1Encoding ReEncodeFont " <8r.enc <utmri8a.pfb
+rtxptmro NimbusRomNo9L-Regu " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmr8a.pfb
+sy StandardSymL <usyr.pfb
+tib NimbusRomNo9L-Medi " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmb8a.pfb
+tibi NimbusRomNo9L-MediItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmbi8a.pfb
+tibo NimbusRomNo9L-Medi " .167 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmb8a.pfb
+tii NimbusRomNo9L-ReguItal " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmri8a.pfb
+tio NimbusRomNo9L-Regu " .167 SlantFont TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmr8a.pfb
+tir NimbusRomNo9L-Regu " TeXnANSIEncoding ReEncodeFont " <texnansi.enc <utmr8a.pfb
+tmbi108r NimbusRomNo9L-MediItal " TeXBase1Encoding ReEncodeFont " <8r.enc <utmbi8a.pfb
+tmbo108r NimbusRomNo9L-Medi " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmb8a.pfb
+tmbu108r NimbusRomNo9L-MediItal " -.277 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmbi8a.pfb
+tmrb108r NimbusRomNo9L-Medi " TeXBase1Encoding ReEncodeFont " <8r.enc <utmb8a.pfb
+tmri108r NimbusRomNo9L-ReguItal " TeXBase1Encoding ReEncodeFont " <8r.enc <utmri8a.pfb
+tmrm108r NimbusRomNo9L-Regu " TeXBase1Encoding ReEncodeFont " <8r.enc <utmr8a.pfb
+tmro108r NimbusRomNo9L-Regu " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmr8a.pfb
+tmui108r NimbusRomNo9L-ReguItal " -.277 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmri8a.pfb
+zd Dingbats <uzdr.pfb
+zpzdr-reversed ZapfDingbats
+% cbgreek-full.map
+glic0700 glic0700 <glic0700.pfb
+glic0800 glic0800 <glic0800.pfb
+glic1000 glic1000 <glic1000.pfb
+glic1200 glic1200 <glic1200.pfb
+glic1382 glic1382 <glic1382.pfb
+glic1659 glic1659 <glic1659.pfb
+glic1991 glic1991 <glic1991.pfb
+glic2389 glic2389 <glic2389.pfb
+glic2866 glic2866 <glic2866.pfb
+glic3440 glic3440 <glic3440.pfb
+glic4128 glic4128 <glic4128.pfb
+glii0700 glii0700 <glii0700.pfb
+glii0800 glii0800 <glii0800.pfb
+glii1000 glii1000 <glii1000.pfb
+glii1200 glii1200 <glii1200.pfb
+glii1382 glii1382 <glii1382.pfb
+glii1659 glii1659 <glii1659.pfb
+glii1991 glii1991 <glii1991.pfb
+glii2389 glii2389 <glii2389.pfb
+glii2866 glii2866 <glii2866.pfb
+glii3440 glii3440 <glii3440.pfb
+glii4128 glii4128 <glii4128.pfb
+glin0700 glin0700 <glin0700.pfb
+glin0800 glin0800 <glin0800.pfb
+glin1000 glin1000 <glin1000.pfb
+glin1200 glin1200 <glin1200.pfb
+glin1382 glin1382 <glin1382.pfb
+glin1659 glin1659 <glin1659.pfb
+glin1991 glin1991 <glin1991.pfb
+glin2389 glin2389 <glin2389.pfb
+glin2866 glin2866 <glin2866.pfb
+glin3440 glin3440 <glin3440.pfb
+glin4128 glin4128 <glin4128.pfb
+glio0700 glio0700 <glio0700.pfb
+glio0800 glio0800 <glio0800.pfb
+glio1000 glio1000 <glio1000.pfb
+glio1200 glio1200 <glio1200.pfb
+glio1382 glio1382 <glio1382.pfb
+glio1659 glio1659 <glio1659.pfb
+glio1991 glio1991 <glio1991.pfb
+glio2389 glio2389 <glio2389.pfb
+glio2866 glio2866 <glio2866.pfb
+glio3440 glio3440 <glio3440.pfb
+glio4128 glio4128 <glio4128.pfb
+gliu0700 gliu0700 <gliu0700.pfb
+gliu0800 gliu0800 <gliu0800.pfb
+gliu1000 gliu1000 <gliu1000.pfb
+gliu1200 gliu1200 <gliu1200.pfb
+gliu1382 gliu1382 <gliu1382.pfb
+gliu1659 gliu1659 <gliu1659.pfb
+gliu1991 gliu1991 <gliu1991.pfb
+gliu2389 gliu2389 <gliu2389.pfb
+gliu2866 gliu2866 <gliu2866.pfb
+gliu3440 gliu3440 <gliu3440.pfb
+gliu4128 gliu4128 <gliu4128.pfb
+gljc0700 gljc0700 <gljc0700.pfb
+gljc0800 gljc0800 <gljc0800.pfb
+gljc1000 gljc1000 <gljc1000.pfb
+gljc1200 gljc1200 <gljc1200.pfb
+gljc1382 gljc1382 <gljc1382.pfb
+gljc1659 gljc1659 <gljc1659.pfb
+gljc1991 gljc1991 <gljc1991.pfb
+gljc2389 gljc2389 <gljc2389.pfb
+gljc2866 gljc2866 <gljc2866.pfb
+gljc3440 gljc3440 <gljc3440.pfb
+gljc4128 gljc4128 <gljc4128.pfb
+gljn0700 gljn0700 <gljn0700.pfb
+gljn0800 gljn0800 <gljn0800.pfb
+gljn1000 gljn1000 <gljn1000.pfb
+gljn1200 gljn1200 <gljn1200.pfb
+gljn1382 gljn1382 <gljn1382.pfb
+gljn1659 gljn1659 <gljn1659.pfb
+gljn1991 gljn1991 <gljn1991.pfb
+gljn2389 gljn2389 <gljn2389.pfb
+gljn2866 gljn2866 <gljn2866.pfb
+gljn3440 gljn3440 <gljn3440.pfb
+gljn4128 gljn4128 <gljn4128.pfb
+gljo0700 gljo0700 <gljo0700.pfb
+gljo0800 gljo0800 <gljo0800.pfb
+gljo1000 gljo1000 <gljo1000.pfb
+gljo1200 gljo1200 <gljo1200.pfb
+gljo1382 gljo1382 <gljo1382.pfb
+gljo1659 gljo1659 <gljo1659.pfb
+gljo1991 gljo1991 <gljo1991.pfb
+gljo2389 gljo2389 <gljo2389.pfb
+gljo2866 gljo2866 <gljo2866.pfb
+gljo3440 gljo3440 <gljo3440.pfb
+gljo4128 gljo4128 <gljo4128.pfb
+glmc0700 glmc0700 <glmc0700.pfb
+glmc0800 glmc0800 <glmc0800.pfb
+glmc1000 glmc1000 <glmc1000.pfb
+glmc1200 glmc1200 <glmc1200.pfb
+glmc1382 glmc1382 <glmc1382.pfb
+glmc1659 glmc1659 <glmc1659.pfb
+glmc1991 glmc1991 <glmc1991.pfb
+glmc2389 glmc2389 <glmc2389.pfb
+glmc2866 glmc2866 <glmc2866.pfb
+glmc3440 glmc3440 <glmc3440.pfb
+glmc4128 glmc4128 <glmc4128.pfb
+glmi0700 glmi0700 <glmi0700.pfb
+glmi0800 glmi0800 <glmi0800.pfb
+glmi1000 glmi1000 <glmi1000.pfb
+glmi1200 glmi1200 <glmi1200.pfb
+glmi1382 glmi1382 <glmi1382.pfb
+glmi1659 glmi1659 <glmi1659.pfb
+glmi1991 glmi1991 <glmi1991.pfb
+glmi2389 glmi2389 <glmi2389.pfb
+glmi2866 glmi2866 <glmi2866.pfb
+glmi3440 glmi3440 <glmi3440.pfb
+glmi4128 glmi4128 <glmi4128.pfb
+glmn0700 glmn0700 <glmn0700.pfb
+glmn0800 glmn0800 <glmn0800.pfb
+glmn1000 glmn1000 <glmn1000.pfb
+glmn1200 glmn1200 <glmn1200.pfb
+glmn1382 glmn1382 <glmn1382.pfb
+glmn1659 glmn1659 <glmn1659.pfb
+glmn1991 glmn1991 <glmn1991.pfb
+glmn2389 glmn2389 <glmn2389.pfb
+glmn2866 glmn2866 <glmn2866.pfb
+glmn3440 glmn3440 <glmn3440.pfb
+glmn4128 glmn4128 <glmn4128.pfb
+glmo0700 glmo0700 <glmo0700.pfb
+glmo0800 glmo0800 <glmo0800.pfb
+glmo1000 glmo1000 <glmo1000.pfb
+glmo1200 glmo1200 <glmo1200.pfb
+glmo1382 glmo1382 <glmo1382.pfb
+glmo1659 glmo1659 <glmo1659.pfb
+glmo1991 glmo1991 <glmo1991.pfb
+glmo2389 glmo2389 <glmo2389.pfb
+glmo2866 glmo2866 <glmo2866.pfb
+glmo3440 glmo3440 <glmo3440.pfb
+glmo4128 glmo4128 <glmo4128.pfb
+glmu0700 glmu0700 <glmu0700.pfb
+glmu0800 glmu0800 <glmu0800.pfb
+glmu1000 glmu1000 <glmu1000.pfb
+glmu1200 glmu1200 <glmu1200.pfb
+glmu1382 glmu1382 <glmu1382.pfb
+glmu1659 glmu1659 <glmu1659.pfb
+glmu1991 glmu1991 <glmu1991.pfb
+glmu2389 glmu2389 <glmu2389.pfb
+glmu2866 glmu2866 <glmu2866.pfb
+glmu3440 glmu3440 <glmu3440.pfb
+glmu4128 glmu4128 <glmu4128.pfb
+gltc0700 gltc0700 <gltc0700.pfb
+gltc0800 gltc0800 <gltc0800.pfb
+gltc1000 gltc1000 <gltc1000.pfb
+gltc1200 gltc1200 <gltc1200.pfb
+gltc1382 gltc1382 <gltc1382.pfb
+gltc1659 gltc1659 <gltc1659.pfb
+gltc1991 gltc1991 <gltc1991.pfb
+gltc2389 gltc2389 <gltc2389.pfb
+gltc2866 gltc2866 <gltc2866.pfb
+gltc3440 gltc3440 <gltc3440.pfb
+gltc4128 gltc4128 <gltc4128.pfb
+gltn0700 gltn0700 <gltn0700.pfb
+gltn0800 gltn0800 <gltn0800.pfb
+gltn1000 gltn1000 <gltn1000.pfb
+gltn1200 gltn1200 <gltn1200.pfb
+gltn1382 gltn1382 <gltn1382.pfb
+gltn1659 gltn1659 <gltn1659.pfb
+gltn1991 gltn1991 <gltn1991.pfb
+gltn2389 gltn2389 <gltn2389.pfb
+gltn2866 gltn2866 <gltn2866.pfb
+gltn3440 gltn3440 <gltn3440.pfb
+gltn4128 gltn4128 <gltn4128.pfb
+glto0700 glto0700 <glto0700.pfb
+glto0800 glto0800 <glto0800.pfb
+glto1000 glto1000 <glto1000.pfb
+glto1200 glto1200 <glto1200.pfb
+glto1382 glto1382 <glto1382.pfb
+glto1659 glto1659 <glto1659.pfb
+glto1991 glto1991 <glto1991.pfb
+glto2389 glto2389 <glto2389.pfb
+glto2866 glto2866 <glto2866.pfb
+glto3440 glto3440 <glto3440.pfb
+glto4128 glto4128 <glto4128.pfb
+glwc0700 glwc0700 <glwc0700.pfb
+glwc0800 glwc0800 <glwc0800.pfb
+glwc1000 glwc1000 <glwc1000.pfb
+glwc1200 glwc1200 <glwc1200.pfb
+glwc1382 glwc1382 <glwc1382.pfb
+glwc1659 glwc1659 <glwc1659.pfb
+glwc1991 glwc1991 <glwc1991.pfb
+glwc2389 glwc2389 <glwc2389.pfb
+glwc2866 glwc2866 <glwc2866.pfb
+glwc3440 glwc3440 <glwc3440.pfb
+glwc4128 glwc4128 <glwc4128.pfb
+glwi0700 glwi0700 <glwi0700.pfb
+glwi0800 glwi0800 <glwi0800.pfb
+glwi1000 glwi1000 <glwi1000.pfb
+glwi1200 glwi1200 <glwi1200.pfb
+glwi1382 glwi1382 <glwi1382.pfb
+glwi1659 glwi1659 <glwi1659.pfb
+glwi1991 glwi1991 <glwi1991.pfb
+glwi2389 glwi2389 <glwi2389.pfb
+glwi2866 glwi2866 <glwi2866.pfb
+glwi3440 glwi3440 <glwi3440.pfb
+glwi4128 glwi4128 <glwi4128.pfb
+glwn0700 glwn0700 <glwn0700.pfb
+glwn0800 glwn0800 <glwn0800.pfb
+glwn1000 glwn1000 <glwn1000.pfb
+glwn1200 glwn1200 <glwn1200.pfb
+glwn1382 glwn1382 <glwn1382.pfb
+glwn1659 glwn1659 <glwn1659.pfb
+glwn1991 glwn1991 <glwn1991.pfb
+glwn2389 glwn2389 <glwn2389.pfb
+glwn2866 glwn2866 <glwn2866.pfb
+glwn3440 glwn3440 <glwn3440.pfb
+glwn4128 glwn4128 <glwn4128.pfb
+glwo0700 glwo0700 <glwo0700.pfb
+glwo0800 glwo0800 <glwo0800.pfb
+glwo1000 glwo1000 <glwo1000.pfb
+glwo1200 glwo1200 <glwo1200.pfb
+glwo1382 glwo1382 <glwo1382.pfb
+glwo1659 glwo1659 <glwo1659.pfb
+glwo1991 glwo1991 <glwo1991.pfb
+glwo2389 glwo2389 <glwo2389.pfb
+glwo2866 glwo2866 <glwo2866.pfb
+glwo3440 glwo3440 <glwo3440.pfb
+glwo4128 glwo4128 <glwo4128.pfb
+glwu0700 glwu0700 <glwu0700.pfb
+glwu0800 glwu0800 <glwu0800.pfb
+glwu1000 glwu1000 <glwu1000.pfb
+glwu1200 glwu1200 <glwu1200.pfb
+glwu1382 glwu1382 <glwu1382.pfb
+glwu1659 glwu1659 <glwu1659.pfb
+glwu1991 glwu1991 <glwu1991.pfb
+glwu2389 glwu2389 <glwu2389.pfb
+glwu2866 glwu2866 <glwu2866.pfb
+glwu3440 glwu3440 <glwu3440.pfb
+glwu4128 glwu4128 <glwu4128.pfb
+glxc0700 glxc0700 <glxc0700.pfb
+glxc0800 glxc0800 <glxc0800.pfb
+glxc1000 glxc1000 <glxc1000.pfb
+glxc1200 glxc1200 <glxc1200.pfb
+glxc1382 glxc1382 <glxc1382.pfb
+glxc1659 glxc1659 <glxc1659.pfb
+glxc1991 glxc1991 <glxc1991.pfb
+glxc2389 glxc2389 <glxc2389.pfb
+glxc2866 glxc2866 <glxc2866.pfb
+glxc3440 glxc3440 <glxc3440.pfb
+glxc4128 glxc4128 <glxc4128.pfb
+glxi0700 glxi0700 <glxi0700.pfb
+glxi0800 glxi0800 <glxi0800.pfb
+glxi1000 glxi1000 <glxi1000.pfb
+glxi1200 glxi1200 <glxi1200.pfb
+glxi1382 glxi1382 <glxi1382.pfb
+glxi1659 glxi1659 <glxi1659.pfb
+glxi1991 glxi1991 <glxi1991.pfb
+glxi2389 glxi2389 <glxi2389.pfb
+glxi2866 glxi2866 <glxi2866.pfb
+glxi3440 glxi3440 <glxi3440.pfb
+glxi4128 glxi4128 <glxi4128.pfb
+glxn0700 glxn0700 <glxn0700.pfb
+glxn0800 glxn0800 <glxn0800.pfb
+glxn1000 glxn1000 <glxn1000.pfb
+glxn1200 glxn1200 <glxn1200.pfb
+glxn1382 glxn1382 <glxn1382.pfb
+glxn1659 glxn1659 <glxn1659.pfb
+glxn1991 glxn1991 <glxn1991.pfb
+glxn2389 glxn2389 <glxn2389.pfb
+glxn2866 glxn2866 <glxn2866.pfb
+glxn3440 glxn3440 <glxn3440.pfb
+glxn4128 glxn4128 <glxn4128.pfb
+glxo0700 glxo0700 <glxo0700.pfb
+glxo0800 glxo0800 <glxo0800.pfb
+glxo1000 glxo1000 <glxo1000.pfb
+glxo1200 glxo1200 <glxo1200.pfb
+glxo1382 glxo1382 <glxo1382.pfb
+glxo1659 glxo1659 <glxo1659.pfb
+glxo1991 glxo1991 <glxo1991.pfb
+glxo2389 glxo2389 <glxo2389.pfb
+glxo2866 glxo2866 <glxo2866.pfb
+glxo3440 glxo3440 <glxo3440.pfb
+glxo4128 glxo4128 <glxo4128.pfb
+glxu0700 glxu0700 <glxu0700.pfb
+glxu0800 glxu0800 <glxu0800.pfb
+glxu1000 glxu1000 <glxu1000.pfb
+glxu1200 glxu1200 <glxu1200.pfb
+glxu1382 glxu1382 <glxu1382.pfb
+glxu1659 glxu1659 <glxu1659.pfb
+glxu1991 glxu1991 <glxu1991.pfb
+glxu2389 glxu2389 <glxu2389.pfb
+glxu2866 glxu2866 <glxu2866.pfb
+glxu3440 glxu3440 <glxu3440.pfb
+glxu4128 glxu4128 <glxu4128.pfb
+gmmn0500 gmmn0500 <gmmn0500.pfb
+gmmn0600 gmmn0600 <gmmn0600.pfb
+gmmn0700 gmmn0700 <gmmn0700.pfb
+gmmn0800 gmmn0800 <gmmn0800.pfb
+gmmn0900 gmmn0900 <gmmn0900.pfb
+gmmn1000 gmmn1000 <gmmn1000.pfb
+gmmn1095 gmmn1095 <gmmn1095.pfb
+gmmn1200 gmmn1200 <gmmn1200.pfb
+gmmn1440 gmmn1440 <gmmn1440.pfb
+gmmn1728 gmmn1728 <gmmn1728.pfb
+gmmn2074 gmmn2074 <gmmn2074.pfb
+gmmn2488 gmmn2488 <gmmn2488.pfb
+gmmn2986 gmmn2986 <gmmn2986.pfb
+gmmn3583 gmmn3583 <gmmn3583.pfb
+gmmo0500 gmmo0500 <gmmo0500.pfb
+gmmo0600 gmmo0600 <gmmo0600.pfb
+gmmo0700 gmmo0700 <gmmo0700.pfb
+gmmo0800 gmmo0800 <gmmo0800.pfb
+gmmo0900 gmmo0900 <gmmo0900.pfb
+gmmo1000 gmmo1000 <gmmo1000.pfb
+gmmo1095 gmmo1095 <gmmo1095.pfb
+gmmo1200 gmmo1200 <gmmo1200.pfb
+gmmo1440 gmmo1440 <gmmo1440.pfb
+gmmo1728 gmmo1728 <gmmo1728.pfb
+gmmo2074 gmmo2074 <gmmo2074.pfb
+gmmo2488 gmmo2488 <gmmo2488.pfb
+gmmo2986 gmmo2986 <gmmo2986.pfb
+gmmo3583 gmmo3583 <gmmo3583.pfb
+gmtr0500 gmtr0500 <gmtr0500.pfb
+gmtr0600 gmtr0600 <gmtr0600.pfb
+gmtr0700 gmtr0700 <gmtr0700.pfb
+gmtr0800 gmtr0800 <gmtr0800.pfb
+gmtr0900 gmtr0900 <gmtr0900.pfb
+gmtr1000 gmtr1000 <gmtr1000.pfb
+gmtr1095 gmtr1095 <gmtr1095.pfb
+gmtr1200 gmtr1200 <gmtr1200.pfb
+gmtr1440 gmtr1440 <gmtr1440.pfb
+gmtr1728 gmtr1728 <gmtr1728.pfb
+gmtr2074 gmtr2074 <gmtr2074.pfb
+gmtr2488 gmtr2488 <gmtr2488.pfb
+gmtr2986 gmtr2986 <gmtr2986.pfb
+gmtr3583 gmtr3583 <gmtr3583.pfb
+gmxn0500 gmxn0500 <gmxn0500.pfb
+gmxn0600 gmxn0600 <gmxn0600.pfb
+gmxn0700 gmxn0700 <gmxn0700.pfb
+gmxn0800 gmxn0800 <gmxn0800.pfb
+gmxn0900 gmxn0900 <gmxn0900.pfb
+gmxn1000 gmxn1000 <gmxn1000.pfb
+gmxn1095 gmxn1095 <gmxn1095.pfb
+gmxn1200 gmxn1200 <gmxn1200.pfb
+gmxn1440 gmxn1440 <gmxn1440.pfb
+gmxn1728 gmxn1728 <gmxn1728.pfb
+gmxn2074 gmxn2074 <gmxn2074.pfb
+gmxn2488 gmxn2488 <gmxn2488.pfb
+gmxn2986 gmxn2986 <gmxn2986.pfb
+gmxn3583 gmxn3583 <gmxn3583.pfb
+gmxo0500 gmxo0500 <gmxo0500.pfb
+gmxo0600 gmxo0600 <gmxo0600.pfb
+gmxo0700 gmxo0700 <gmxo0700.pfb
+gmxo0800 gmxo0800 <gmxo0800.pfb
+gmxo0900 gmxo0900 <gmxo0900.pfb
+gmxo1000 gmxo1000 <gmxo1000.pfb
+gmxo1095 gmxo1095 <gmxo1095.pfb
+gmxo1200 gmxo1200 <gmxo1200.pfb
+gmxo1440 gmxo1440 <gmxo1440.pfb
+gmxo1728 gmxo1728 <gmxo1728.pfb
+gmxo2074 gmxo2074 <gmxo2074.pfb
+gmxo2488 gmxo2488 <gmxo2488.pfb
+gmxo2986 gmxo2986 <gmxo2986.pfb
+gmxo3583 gmxo3583 <gmxo3583.pfb
+gomc0500 gomc0500 <gomc0500.pfb
+gomc0600 gomc0600 <gomc0600.pfb
+gomc0700 gomc0700 <gomc0700.pfb
+gomc0800 gomc0800 <gomc0800.pfb
+gomc0900 gomc0900 <gomc0900.pfb
+gomc1000 gomc1000 <gomc1000.pfb
+gomc1095 gomc1095 <gomc1095.pfb
+gomc1200 gomc1200 <gomc1200.pfb
+gomc1440 gomc1440 <gomc1440.pfb
+gomc1728 gomc1728 <gomc1728.pfb
+gomc2074 gomc2074 <gomc2074.pfb
+gomc2488 gomc2488 <gomc2488.pfb
+gomc2986 gomc2986 <gomc2986.pfb
+gomc3583 gomc3583 <gomc3583.pfb
+gomi0500 gomi0500 <gomi0500.pfb
+gomi0600 gomi0600 <gomi0600.pfb
+gomi0700 gomi0700 <gomi0700.pfb
+gomi0800 gomi0800 <gomi0800.pfb
+gomi0900 gomi0900 <gomi0900.pfb
+gomi1000 gomi1000 <gomi1000.pfb
+gomi1095 gomi1095 <gomi1095.pfb
+gomi1200 gomi1200 <gomi1200.pfb
+gomi1440 gomi1440 <gomi1440.pfb
+gomi1728 gomi1728 <gomi1728.pfb
+gomi2074 gomi2074 <gomi2074.pfb
+gomi2488 gomi2488 <gomi2488.pfb
+gomi2986 gomi2986 <gomi2986.pfb
+gomi3583 gomi3583 <gomi3583.pfb
+gomn0500 gomn0500 <gomn0500.pfb
+gomn0600 gomn0600 <gomn0600.pfb
+gomn0700 gomn0700 <gomn0700.pfb
+gomn0800 gomn0800 <gomn0800.pfb
+gomn0900 gomn0900 <gomn0900.pfb
+gomn1000 gomn1000 <gomn1000.pfb
+gomn1095 gomn1095 <gomn1095.pfb
+gomn1200 gomn1200 <gomn1200.pfb
+gomn1440 gomn1440 <gomn1440.pfb
+gomn1728 gomn1728 <gomn1728.pfb
+gomn2074 gomn2074 <gomn2074.pfb
+gomn2488 gomn2488 <gomn2488.pfb
+gomn2986 gomn2986 <gomn2986.pfb
+gomn3583 gomn3583 <gomn3583.pfb
+gomo0500 gomo0500 <gomo0500.pfb
+gomo0600 gomo0600 <gomo0600.pfb
+gomo0700 gomo0700 <gomo0700.pfb
+gomo0800 gomo0800 <gomo0800.pfb
+gomo0900 gomo0900 <gomo0900.pfb
+gomo1000 gomo1000 <gomo1000.pfb
+gomo1095 gomo1095 <gomo1095.pfb
+gomo1200 gomo1200 <gomo1200.pfb
+gomo1440 gomo1440 <gomo1440.pfb
+gomo1728 gomo1728 <gomo1728.pfb
+gomo2074 gomo2074 <gomo2074.pfb
+gomo2488 gomo2488 <gomo2488.pfb
+gomo2986 gomo2986 <gomo2986.pfb
+gomo3583 gomo3583 <gomo3583.pfb
+gomu0500 gomu0500 <gomu0500.pfb
+gomu0600 gomu0600 <gomu0600.pfb
+gomu0700 gomu0700 <gomu0700.pfb
+gomu0800 gomu0800 <gomu0800.pfb
+gomu0900 gomu0900 <gomu0900.pfb
+gomu1000 gomu1000 <gomu1000.pfb
+gomu1095 gomu1095 <gomu1095.pfb
+gomu1200 gomu1200 <gomu1200.pfb
+gomu1440 gomu1440 <gomu1440.pfb
+gomu1728 gomu1728 <gomu1728.pfb
+gomu2074 gomu2074 <gomu2074.pfb
+gomu2488 gomu2488 <gomu2488.pfb
+gomu2986 gomu2986 <gomu2986.pfb
+gomu3583 gomu3583 <gomu3583.pfb
+goxc0500 goxc0500 <goxc0500.pfb
+goxc0600 goxc0600 <goxc0600.pfb
+goxc0700 goxc0700 <goxc0700.pfb
+goxc0800 goxc0800 <goxc0800.pfb
+goxc0900 goxc0900 <goxc0900.pfb
+goxc1000 goxc1000 <goxc1000.pfb
+goxc1095 goxc1095 <goxc1095.pfb
+goxc1200 goxc1200 <goxc1200.pfb
+goxc1440 goxc1440 <goxc1440.pfb
+goxc1728 goxc1728 <goxc1728.pfb
+goxc2074 goxc2074 <goxc2074.pfb
+goxc2488 goxc2488 <goxc2488.pfb
+goxc2986 goxc2986 <goxc2986.pfb
+goxc3583 goxc3583 <goxc3583.pfb
+goxi0500 goxi0500 <goxi0500.pfb
+goxi0600 goxi0600 <goxi0600.pfb
+goxi0700 goxi0700 <goxi0700.pfb
+goxi0800 goxi0800 <goxi0800.pfb
+goxi0900 goxi0900 <goxi0900.pfb
+goxi1000 goxi1000 <goxi1000.pfb
+goxi1095 goxi1095 <goxi1095.pfb
+goxi1200 goxi1200 <goxi1200.pfb
+goxi1440 goxi1440 <goxi1440.pfb
+goxi1728 goxi1728 <goxi1728.pfb
+goxi2074 goxi2074 <goxi2074.pfb
+goxi2488 goxi2488 <goxi2488.pfb
+goxi2986 goxi2986 <goxi2986.pfb
+goxi3583 goxi3583 <goxi3583.pfb
+goxn0500 goxn0500 <goxn0500.pfb
+goxn0600 goxn0600 <goxn0600.pfb
+goxn0700 goxn0700 <goxn0700.pfb
+goxn0800 goxn0800 <goxn0800.pfb
+goxn0900 goxn0900 <goxn0900.pfb
+goxn1000 goxn1000 <goxn1000.pfb
+goxn1095 goxn1095 <goxn1095.pfb
+goxn1200 goxn1200 <goxn1200.pfb
+goxn1440 goxn1440 <goxn1440.pfb
+goxn1728 goxn1728 <goxn1728.pfb
+goxn2074 goxn2074 <goxn2074.pfb
+goxn2488 goxn2488 <goxn2488.pfb
+goxn2986 goxn2986 <goxn2986.pfb
+goxn3583 goxn3583 <goxn3583.pfb
+goxo0500 goxo0500 <goxo0500.pfb
+goxo0600 goxo0600 <goxo0600.pfb
+goxo0700 goxo0700 <goxo0700.pfb
+goxo0800 goxo0800 <goxo0800.pfb
+goxo0900 goxo0900 <goxo0900.pfb
+goxo1000 goxo1000 <goxo1000.pfb
+goxo1095 goxo1095 <goxo1095.pfb
+goxo1200 goxo1200 <goxo1200.pfb
+goxo1440 goxo1440 <goxo1440.pfb
+goxo1728 goxo1728 <goxo1728.pfb
+goxo2074 goxo2074 <goxo2074.pfb
+goxo2488 goxo2488 <goxo2488.pfb
+goxo2986 goxo2986 <goxo2986.pfb
+goxo3583 goxo3583 <goxo3583.pfb
+goxu0500 goxu0500 <goxu0500.pfb
+goxu0600 goxu0600 <goxu0600.pfb
+goxu0700 goxu0700 <goxu0700.pfb
+goxu0800 goxu0800 <goxu0800.pfb
+goxu0900 goxu0900 <goxu0900.pfb
+goxu1000 goxu1000 <goxu1000.pfb
+goxu1095 goxu1095 <goxu1095.pfb
+goxu1200 goxu1200 <goxu1200.pfb
+goxu1440 goxu1440 <goxu1440.pfb
+goxu1728 goxu1728 <goxu1728.pfb
+goxu2074 goxu2074 <goxu2074.pfb
+goxu2488 goxu2488 <goxu2488.pfb
+goxu2986 goxu2986 <goxu2986.pfb
+goxu3583 goxu3583 <goxu3583.pfb
+grbl0500 grbl0500 <grbl0500.pfb
+grbl0600 grbl0600 <grbl0600.pfb
+grbl0700 grbl0700 <grbl0700.pfb
+grbl0800 grbl0800 <grbl0800.pfb
+grbl0900 grbl0900 <grbl0900.pfb
+grbl1000 grbl1000 <grbl1000.pfb
+grbl1095 grbl1095 <grbl1095.pfb
+grbl1200 grbl1200 <grbl1200.pfb
+grbl1440 grbl1440 <grbl1440.pfb
+grbl1728 grbl1728 <grbl1728.pfb
+grbl2074 grbl2074 <grbl2074.pfb
+grbl2488 grbl2488 <grbl2488.pfb
+grbl2986 grbl2986 <grbl2986.pfb
+grbl3583 grbl3583 <grbl3583.pfb
+grmc0500 grmc0500 <grmc0500.pfb
+grmc0600 grmc0600 <grmc0600.pfb
+grmc0700 grmc0700 <grmc0700.pfb
+grmc0800 grmc0800 <grmc0800.pfb
+grmc0900 grmc0900 <grmc0900.pfb
+grmc1000 grmc1000 <grmc1000.pfb
+grmc1095 grmc1095 <grmc1095.pfb
+grmc1200 grmc1200 <grmc1200.pfb
+grmc1440 grmc1440 <grmc1440.pfb
+grmc1728 grmc1728 <grmc1728.pfb
+grmc2074 grmc2074 <grmc2074.pfb
+grmc2488 grmc2488 <grmc2488.pfb
+grmc2986 grmc2986 <grmc2986.pfb
+grmc3583 grmc3583 <grmc3583.pfb
+grmi0500 grmi0500 <grmi0500.pfb
+grmi0600 grmi0600 <grmi0600.pfb
+grmi0700 grmi0700 <grmi0700.pfb
+grmi0800 grmi0800 <grmi0800.pfb
+grmi0900 grmi0900 <grmi0900.pfb
+grmi1000 grmi1000 <grmi1000.pfb
+grmi1095 grmi1095 <grmi1095.pfb
+grmi1200 grmi1200 <grmi1200.pfb
+grmi1440 grmi1440 <grmi1440.pfb
+grmi1728 grmi1728 <grmi1728.pfb
+grmi2074 grmi2074 <grmi2074.pfb
+grmi2488 grmi2488 <grmi2488.pfb
+grmi2986 grmi2986 <grmi2986.pfb
+grmi3583 grmi3583 <grmi3583.pfb
+grml0500 grml0500 <grml0500.pfb
+grml0600 grml0600 <grml0600.pfb
+grml0700 grml0700 <grml0700.pfb
+grml0800 grml0800 <grml0800.pfb
+grml0900 grml0900 <grml0900.pfb
+grml1000 grml1000 <grml1000.pfb
+grml1095 grml1095 <grml1095.pfb
+grml1200 grml1200 <grml1200.pfb
+grml1440 grml1440 <grml1440.pfb
+grml1728 grml1728 <grml1728.pfb
+grml2074 grml2074 <grml2074.pfb
+grml2488 grml2488 <grml2488.pfb
+grml2986 grml2986 <grml2986.pfb
+grml3583 grml3583 <grml3583.pfb
+grmn0500 grmn0500 <grmn0500.pfb
+grmn0600 grmn0600 <grmn0600.pfb
+grmn0700 grmn0700 <grmn0700.pfb
+grmn0800 grmn0800 <grmn0800.pfb
+grmn0900 grmn0900 <grmn0900.pfb
+grmn1000 grmn1000 <grmn1000.pfb
+grmn1095 grmn1095 <grmn1095.pfb
+grmn1200 grmn1200 <grmn1200.pfb
+grmn1440 grmn1440 <grmn1440.pfb
+grmn1728 grmn1728 <grmn1728.pfb
+grmn2074 grmn2074 <grmn2074.pfb
+grmn2488 grmn2488 <grmn2488.pfb
+grmn2986 grmn2986 <grmn2986.pfb
+grmn3583 grmn3583 <grmn3583.pfb
+grmo0500 grmo0500 <grmo0500.pfb
+grmo0600 grmo0600 <grmo0600.pfb
+grmo0700 grmo0700 <grmo0700.pfb
+grmo0800 grmo0800 <grmo0800.pfb
+grmo0900 grmo0900 <grmo0900.pfb
+grmo1000 grmo1000 <grmo1000.pfb
+grmo1095 grmo1095 <grmo1095.pfb
+grmo1200 grmo1200 <grmo1200.pfb
+grmo1440 grmo1440 <grmo1440.pfb
+grmo1728 grmo1728 <grmo1728.pfb
+grmo2074 grmo2074 <grmo2074.pfb
+grmo2488 grmo2488 <grmo2488.pfb
+grmo2986 grmo2986 <grmo2986.pfb
+grmo3583 grmo3583 <grmo3583.pfb
+grmu0500 grmu0500 <grmu0500.pfb
+grmu0600 grmu0600 <grmu0600.pfb
+grmu0700 grmu0700 <grmu0700.pfb
+grmu0800 grmu0800 <grmu0800.pfb
+grmu0900 grmu0900 <grmu0900.pfb
+grmu1000 grmu1000 <grmu1000.pfb
+grmu1095 grmu1095 <grmu1095.pfb
+grmu1200 grmu1200 <grmu1200.pfb
+grmu1440 grmu1440 <grmu1440.pfb
+grmu1728 grmu1728 <grmu1728.pfb
+grmu2074 grmu2074 <grmu2074.pfb
+grmu2488 grmu2488 <grmu2488.pfb
+grmu2986 grmu2986 <grmu2986.pfb
+grmu3583 grmu3583 <grmu3583.pfb
+grxc0500 grxc0500 <grxc0500.pfb
+grxc0600 grxc0600 <grxc0600.pfb
+grxc0700 grxc0700 <grxc0700.pfb
+grxc0800 grxc0800 <grxc0800.pfb
+grxc0900 grxc0900 <grxc0900.pfb
+grxc1000 grxc1000 <grxc1000.pfb
+grxc1095 grxc1095 <grxc1095.pfb
+grxc1200 grxc1200 <grxc1200.pfb
+grxc1440 grxc1440 <grxc1440.pfb
+grxc1728 grxc1728 <grxc1728.pfb
+grxc2074 grxc2074 <grxc2074.pfb
+grxc2488 grxc2488 <grxc2488.pfb
+grxc2986 grxc2986 <grxc2986.pfb
+grxc3583 grxc3583 <grxc3583.pfb
+grxi0500 grxi0500 <grxi0500.pfb
+grxi0600 grxi0600 <grxi0600.pfb
+grxi0700 grxi0700 <grxi0700.pfb
+grxi0800 grxi0800 <grxi0800.pfb
+grxi0900 grxi0900 <grxi0900.pfb
+grxi1000 grxi1000 <grxi1000.pfb
+grxi1095 grxi1095 <grxi1095.pfb
+grxi1200 grxi1200 <grxi1200.pfb
+grxi1440 grxi1440 <grxi1440.pfb
+grxi1728 grxi1728 <grxi1728.pfb
+grxi2074 grxi2074 <grxi2074.pfb
+grxi2488 grxi2488 <grxi2488.pfb
+grxi2986 grxi2986 <grxi2986.pfb
+grxi3583 grxi3583 <grxi3583.pfb
+grxl0500 grxl0500 <grxl0500.pfb
+grxl0600 grxl0600 <grxl0600.pfb
+grxl0700 grxl0700 <grxl0700.pfb
+grxl0800 grxl0800 <grxl0800.pfb
+grxl0900 grxl0900 <grxl0900.pfb
+grxl1000 grxl1000 <grxl1000.pfb
+grxl1095 grxl1095 <grxl1095.pfb
+grxl1200 grxl1200 <grxl1200.pfb
+grxl1440 grxl1440 <grxl1440.pfb
+grxl1728 grxl1728 <grxl1728.pfb
+grxl2074 grxl2074 <grxl2074.pfb
+grxl2488 grxl2488 <grxl2488.pfb
+grxl2986 grxl2986 <grxl2986.pfb
+grxl3583 grxl3583 <grxl3583.pfb
+grxn0500 grxn0500 <grxn0500.pfb
+grxn0600 grxn0600 <grxn0600.pfb
+grxn0700 grxn0700 <grxn0700.pfb
+grxn0800 grxn0800 <grxn0800.pfb
+grxn0900 grxn0900 <grxn0900.pfb
+grxn1000 grxn1000 <grxn1000.pfb
+grxn1095 grxn1095 <grxn1095.pfb
+grxn1200 grxn1200 <grxn1200.pfb
+grxn1440 grxn1440 <grxn1440.pfb
+grxn1728 grxn1728 <grxn1728.pfb
+grxn2074 grxn2074 <grxn2074.pfb
+grxn2488 grxn2488 <grxn2488.pfb
+grxn2986 grxn2986 <grxn2986.pfb
+grxn3583 grxn3583 <grxn3583.pfb
+grxo0500 grxo0500 <grxo0500.pfb
+grxo0600 grxo0600 <grxo0600.pfb
+grxo0700 grxo0700 <grxo0700.pfb
+grxo0800 grxo0800 <grxo0800.pfb
+grxo0900 grxo0900 <grxo0900.pfb
+grxo1000 grxo1000 <grxo1000.pfb
+grxo1095 grxo1095 <grxo1095.pfb
+grxo1200 grxo1200 <grxo1200.pfb
+grxo1440 grxo1440 <grxo1440.pfb
+grxo1728 grxo1728 <grxo1728.pfb
+grxo2074 grxo2074 <grxo2074.pfb
+grxo2488 grxo2488 <grxo2488.pfb
+grxo2986 grxo2986 <grxo2986.pfb
+grxo3583 grxo3583 <grxo3583.pfb
+grxu0500 grxu0500 <grxu0500.pfb
+grxu0600 grxu0600 <grxu0600.pfb
+grxu0700 grxu0700 <grxu0700.pfb
+grxu0800 grxu0800 <grxu0800.pfb
+grxu0900 grxu0900 <grxu0900.pfb
+grxu1000 grxu1000 <grxu1000.pfb
+grxu1095 grxu1095 <grxu1095.pfb
+grxu1200 grxu1200 <grxu1200.pfb
+grxu1440 grxu1440 <grxu1440.pfb
+grxu1728 grxu1728 <grxu1728.pfb
+grxu2074 grxu2074 <grxu2074.pfb
+grxu2488 grxu2488 <grxu2488.pfb
+grxu2986 grxu2986 <grxu2986.pfb
+grxu3583 grxu3583 <grxu3583.pfb
+gsma0500 gsma0500 <gsma0500.pfb
+gsma0600 gsma0600 <gsma0600.pfb
+gsma0700 gsma0700 <gsma0700.pfb
+gsma0800 gsma0800 <gsma0800.pfb
+gsma0900 gsma0900 <gsma0900.pfb
+gsma1000 gsma1000 <gsma1000.pfb
+gsma1095 gsma1095 <gsma1095.pfb
+gsma1200 gsma1200 <gsma1200.pfb
+gsma1440 gsma1440 <gsma1440.pfb
+gsma1728 gsma1728 <gsma1728.pfb
+gsma2074 gsma2074 <gsma2074.pfb
+gsma2488 gsma2488 <gsma2488.pfb
+gsma2986 gsma2986 <gsma2986.pfb
+gsma3583 gsma3583 <gsma3583.pfb
+gsmc0500 gsmc0500 <gsmc0500.pfb
+gsmc0600 gsmc0600 <gsmc0600.pfb
+gsmc0700 gsmc0700 <gsmc0700.pfb
+gsmc0800 gsmc0800 <gsmc0800.pfb
+gsmc0900 gsmc0900 <gsmc0900.pfb
+gsmc1000 gsmc1000 <gsmc1000.pfb
+gsmc1095 gsmc1095 <gsmc1095.pfb
+gsmc1200 gsmc1200 <gsmc1200.pfb
+gsmc1440 gsmc1440 <gsmc1440.pfb
+gsmc1728 gsmc1728 <gsmc1728.pfb
+gsmc2074 gsmc2074 <gsmc2074.pfb
+gsmc2488 gsmc2488 <gsmc2488.pfb
+gsmc2986 gsmc2986 <gsmc2986.pfb
+gsmc3583 gsmc3583 <gsmc3583.pfb
+gsme0500 gsme0500 <gsme0500.pfb
+gsme0600 gsme0600 <gsme0600.pfb
+gsme0700 gsme0700 <gsme0700.pfb
+gsme0800 gsme0800 <gsme0800.pfb
+gsme0900 gsme0900 <gsme0900.pfb
+gsme1000 gsme1000 <gsme1000.pfb
+gsme1095 gsme1095 <gsme1095.pfb
+gsme1200 gsme1200 <gsme1200.pfb
+gsme1440 gsme1440 <gsme1440.pfb
+gsme1728 gsme1728 <gsme1728.pfb
+gsme2074 gsme2074 <gsme2074.pfb
+gsme2488 gsme2488 <gsme2488.pfb
+gsme2986 gsme2986 <gsme2986.pfb
+gsme3583 gsme3583 <gsme3583.pfb
+gsmi0500 gsmi0500 <gsmi0500.pfb
+gsmi0600 gsmi0600 <gsmi0600.pfb
+gsmi0700 gsmi0700 <gsmi0700.pfb
+gsmi0800 gsmi0800 <gsmi0800.pfb
+gsmi0900 gsmi0900 <gsmi0900.pfb
+gsmi1000 gsmi1000 <gsmi1000.pfb
+gsmi1095 gsmi1095 <gsmi1095.pfb
+gsmi1200 gsmi1200 <gsmi1200.pfb
+gsmi1440 gsmi1440 <gsmi1440.pfb
+gsmi1728 gsmi1728 <gsmi1728.pfb
+gsmi2074 gsmi2074 <gsmi2074.pfb
+gsmi2488 gsmi2488 <gsmi2488.pfb
+gsmi2986 gsmi2986 <gsmi2986.pfb
+gsmi3583 gsmi3583 <gsmi3583.pfb
+gsmn0500 gsmn0500 <gsmn0500.pfb
+gsmn0600 gsmn0600 <gsmn0600.pfb
+gsmn0700 gsmn0700 <gsmn0700.pfb
+gsmn0800 gsmn0800 <gsmn0800.pfb
+gsmn0900 gsmn0900 <gsmn0900.pfb
+gsmn1000 gsmn1000 <gsmn1000.pfb
+gsmn1095 gsmn1095 <gsmn1095.pfb
+gsmn1200 gsmn1200 <gsmn1200.pfb
+gsmn1440 gsmn1440 <gsmn1440.pfb
+gsmn1728 gsmn1728 <gsmn1728.pfb
+gsmn2074 gsmn2074 <gsmn2074.pfb
+gsmn2488 gsmn2488 <gsmn2488.pfb
+gsmn2986 gsmn2986 <gsmn2986.pfb
+gsmn3583 gsmn3583 <gsmn3583.pfb
+gsmo0500 gsmo0500 <gsmo0500.pfb
+gsmo0600 gsmo0600 <gsmo0600.pfb
+gsmo0700 gsmo0700 <gsmo0700.pfb
+gsmo0800 gsmo0800 <gsmo0800.pfb
+gsmo0900 gsmo0900 <gsmo0900.pfb
+gsmo1000 gsmo1000 <gsmo1000.pfb
+gsmo1095 gsmo1095 <gsmo1095.pfb
+gsmo1200 gsmo1200 <gsmo1200.pfb
+gsmo1440 gsmo1440 <gsmo1440.pfb
+gsmo1728 gsmo1728 <gsmo1728.pfb
+gsmo2074 gsmo2074 <gsmo2074.pfb
+gsmo2488 gsmo2488 <gsmo2488.pfb
+gsmo2986 gsmo2986 <gsmo2986.pfb
+gsmo3583 gsmo3583 <gsmo3583.pfb
+gsmu0500 gsmu0500 <gsmu0500.pfb
+gsmu0600 gsmu0600 <gsmu0600.pfb
+gsmu0700 gsmu0700 <gsmu0700.pfb
+gsmu0800 gsmu0800 <gsmu0800.pfb
+gsmu0900 gsmu0900 <gsmu0900.pfb
+gsmu1000 gsmu1000 <gsmu1000.pfb
+gsmu1095 gsmu1095 <gsmu1095.pfb
+gsmu1200 gsmu1200 <gsmu1200.pfb
+gsmu1440 gsmu1440 <gsmu1440.pfb
+gsmu1728 gsmu1728 <gsmu1728.pfb
+gsmu2074 gsmu2074 <gsmu2074.pfb
+gsmu2488 gsmu2488 <gsmu2488.pfb
+gsmu2986 gsmu2986 <gsmu2986.pfb
+gsmu3583 gsmu3583 <gsmu3583.pfb
+gsxa0500 gsxa0500 <gsxa0500.pfb
+gsxa0600 gsxa0600 <gsxa0600.pfb
+gsxa0700 gsxa0700 <gsxa0700.pfb
+gsxa0800 gsxa0800 <gsxa0800.pfb
+gsxa0900 gsxa0900 <gsxa0900.pfb
+gsxa1000 gsxa1000 <gsxa1000.pfb
+gsxa1095 gsxa1095 <gsxa1095.pfb
+gsxa1200 gsxa1200 <gsxa1200.pfb
+gsxa1440 gsxa1440 <gsxa1440.pfb
+gsxa1728 gsxa1728 <gsxa1728.pfb
+gsxa2074 gsxa2074 <gsxa2074.pfb
+gsxa2488 gsxa2488 <gsxa2488.pfb
+gsxa2986 gsxa2986 <gsxa2986.pfb
+gsxa3583 gsxa3583 <gsxa3583.pfb
+gsxc0500 gsxc0500 <gsxc0500.pfb
+gsxc0600 gsxc0600 <gsxc0600.pfb
+gsxc0700 gsxc0700 <gsxc0700.pfb
+gsxc0800 gsxc0800 <gsxc0800.pfb
+gsxc0900 gsxc0900 <gsxc0900.pfb
+gsxc1000 gsxc1000 <gsxc1000.pfb
+gsxc1095 gsxc1095 <gsxc1095.pfb
+gsxc1200 gsxc1200 <gsxc1200.pfb
+gsxc1440 gsxc1440 <gsxc1440.pfb
+gsxc1728 gsxc1728 <gsxc1728.pfb
+gsxc2074 gsxc2074 <gsxc2074.pfb
+gsxc2488 gsxc2488 <gsxc2488.pfb
+gsxc2986 gsxc2986 <gsxc2986.pfb
+gsxc3583 gsxc3583 <gsxc3583.pfb
+gsxe0500 gsxe0500 <gsxe0500.pfb
+gsxe0600 gsxe0600 <gsxe0600.pfb
+gsxe0700 gsxe0700 <gsxe0700.pfb
+gsxe0800 gsxe0800 <gsxe0800.pfb
+gsxe0900 gsxe0900 <gsxe0900.pfb
+gsxe1000 gsxe1000 <gsxe1000.pfb
+gsxe1095 gsxe1095 <gsxe1095.pfb
+gsxe1200 gsxe1200 <gsxe1200.pfb
+gsxe1440 gsxe1440 <gsxe1440.pfb
+gsxe1728 gsxe1728 <gsxe1728.pfb
+gsxe2074 gsxe2074 <gsxe2074.pfb
+gsxe2488 gsxe2488 <gsxe2488.pfb
+gsxe2986 gsxe2986 <gsxe2986.pfb
+gsxe3583 gsxe3583 <gsxe3583.pfb
+gsxi0500 gsxi0500 <gsxi0500.pfb
+gsxi0600 gsxi0600 <gsxi0600.pfb
+gsxi0700 gsxi0700 <gsxi0700.pfb
+gsxi0800 gsxi0800 <gsxi0800.pfb
+gsxi0900 gsxi0900 <gsxi0900.pfb
+gsxi1000 gsxi1000 <gsxi1000.pfb
+gsxi1095 gsxi1095 <gsxi1095.pfb
+gsxi1200 gsxi1200 <gsxi1200.pfb
+gsxi1440 gsxi1440 <gsxi1440.pfb
+gsxi1728 gsxi1728 <gsxi1728.pfb
+gsxi2074 gsxi2074 <gsxi2074.pfb
+gsxi2488 gsxi2488 <gsxi2488.pfb
+gsxi2986 gsxi2986 <gsxi2986.pfb
+gsxi3583 gsxi3583 <gsxi3583.pfb
+gsxn0500 gsxn0500 <gsxn0500.pfb
+gsxn0600 gsxn0600 <gsxn0600.pfb
+gsxn0700 gsxn0700 <gsxn0700.pfb
+gsxn0800 gsxn0800 <gsxn0800.pfb
+gsxn0900 gsxn0900 <gsxn0900.pfb
+gsxn1000 gsxn1000 <gsxn1000.pfb
+gsxn1095 gsxn1095 <gsxn1095.pfb
+gsxn1200 gsxn1200 <gsxn1200.pfb
+gsxn1440 gsxn1440 <gsxn1440.pfb
+gsxn1728 gsxn1728 <gsxn1728.pfb
+gsxn2074 gsxn2074 <gsxn2074.pfb
+gsxn2488 gsxn2488 <gsxn2488.pfb
+gsxn2986 gsxn2986 <gsxn2986.pfb
+gsxn3583 gsxn3583 <gsxn3583.pfb
+gsxo0500 gsxo0500 <gsxo0500.pfb
+gsxo0600 gsxo0600 <gsxo0600.pfb
+gsxo0700 gsxo0700 <gsxo0700.pfb
+gsxo0800 gsxo0800 <gsxo0800.pfb
+gsxo0900 gsxo0900 <gsxo0900.pfb
+gsxo1000 gsxo1000 <gsxo1000.pfb
+gsxo1095 gsxo1095 <gsxo1095.pfb
+gsxo1200 gsxo1200 <gsxo1200.pfb
+gsxo1440 gsxo1440 <gsxo1440.pfb
+gsxo1728 gsxo1728 <gsxo1728.pfb
+gsxo2074 gsxo2074 <gsxo2074.pfb
+gsxo2488 gsxo2488 <gsxo2488.pfb
+gsxo2986 gsxo2986 <gsxo2986.pfb
+gsxo3583 gsxo3583 <gsxo3583.pfb
+gsxu0500 gsxu0500 <gsxu0500.pfb
+gsxu0600 gsxu0600 <gsxu0600.pfb
+gsxu0700 gsxu0700 <gsxu0700.pfb
+gsxu0800 gsxu0800 <gsxu0800.pfb
+gsxu0900 gsxu0900 <gsxu0900.pfb
+gsxu1000 gsxu1000 <gsxu1000.pfb
+gsxu1095 gsxu1095 <gsxu1095.pfb
+gsxu1200 gsxu1200 <gsxu1200.pfb
+gsxu1440 gsxu1440 <gsxu1440.pfb
+gsxu1728 gsxu1728 <gsxu1728.pfb
+gsxu2074 gsxu2074 <gsxu2074.pfb
+gsxu2488 gsxu2488 <gsxu2488.pfb
+gsxu2986 gsxu2986 <gsxu2986.pfb
+gsxu3583 gsxu3583 <gsxu3583.pfb
+gttc0500 gttc0500 <gttc0500.pfb
+gttc0600 gttc0600 <gttc0600.pfb
+gttc0700 gttc0700 <gttc0700.pfb
+gttc0800 gttc0800 <gttc0800.pfb
+gttc0900 gttc0900 <gttc0900.pfb
+gttc1000 gttc1000 <gttc1000.pfb
+gttc1095 gttc1095 <gttc1095.pfb
+gttc1200 gttc1200 <gttc1200.pfb
+gttc1440 gttc1440 <gttc1440.pfb
+gttc1728 gttc1728 <gttc1728.pfb
+gttc2074 gttc2074 <gttc2074.pfb
+gttc2488 gttc2488 <gttc2488.pfb
+gttc2986 gttc2986 <gttc2986.pfb
+gttc3583 gttc3583 <gttc3583.pfb
+gtti0500 gtti0500 <gtti0500.pfb
+gtti0600 gtti0600 <gtti0600.pfb
+gtti0700 gtti0700 <gtti0700.pfb
+gtti0800 gtti0800 <gtti0800.pfb
+gtti0900 gtti0900 <gtti0900.pfb
+gtti1000 gtti1000 <gtti1000.pfb
+gtti1095 gtti1095 <gtti1095.pfb
+gtti1200 gtti1200 <gtti1200.pfb
+gtti1440 gtti1440 <gtti1440.pfb
+gtti1728 gtti1728 <gtti1728.pfb
+gtti2074 gtti2074 <gtti2074.pfb
+gtti2488 gtti2488 <gtti2488.pfb
+gtti2986 gtti2986 <gtti2986.pfb
+gtti3583 gtti3583 <gtti3583.pfb
+gttn0500 gttn0500 <gttn0500.pfb
+gttn0600 gttn0600 <gttn0600.pfb
+gttn0700 gttn0700 <gttn0700.pfb
+gttn0800 gttn0800 <gttn0800.pfb
+gttn0900 gttn0900 <gttn0900.pfb
+gttn1000 gttn1000 <gttn1000.pfb
+gttn1095 gttn1095 <gttn1095.pfb
+gttn1200 gttn1200 <gttn1200.pfb
+gttn1440 gttn1440 <gttn1440.pfb
+gttn1728 gttn1728 <gttn1728.pfb
+gttn2074 gttn2074 <gttn2074.pfb
+gttn2488 gttn2488 <gttn2488.pfb
+gttn2986 gttn2986 <gttn2986.pfb
+gttn3583 gttn3583 <gttn3583.pfb
+gtto0500 gtto0500 <gtto0500.pfb
+gtto0600 gtto0600 <gtto0600.pfb
+gtto0700 gtto0700 <gtto0700.pfb
+gtto0800 gtto0800 <gtto0800.pfb
+gtto0900 gtto0900 <gtto0900.pfb
+gtto1000 gtto1000 <gtto1000.pfb
+gtto1095 gtto1095 <gtto1095.pfb
+gtto1200 gtto1200 <gtto1200.pfb
+gtto1440 gtto1440 <gtto1440.pfb
+gtto1728 gtto1728 <gtto1728.pfb
+gtto2074 gtto2074 <gtto2074.pfb
+gtto2488 gtto2488 <gtto2488.pfb
+gtto2986 gtto2986 <gtto2986.pfb
+gtto3583 gtto3583 <gtto3583.pfb
+gttu0500 gttu0500 <gttu0500.pfb
+gttu0600 gttu0600 <gttu0600.pfb
+gttu0700 gttu0700 <gttu0700.pfb
+gttu0800 gttu0800 <gttu0800.pfb
+gttu0900 gttu0900 <gttu0900.pfb
+gttu1000 gttu1000 <gttu1000.pfb
+gttu1095 gttu1095 <gttu1095.pfb
+gttu1200 gttu1200 <gttu1200.pfb
+gttu1440 gttu1440 <gttu1440.pfb
+gttu1728 gttu1728 <gttu1728.pfb
+gttu2074 gttu2074 <gttu2074.pfb
+gttu2488 gttu2488 <gttu2488.pfb
+gttu2986 gttu2986 <gttu2986.pfb
+gttu3583 gttu3583 <gttu3583.pfb
+% cm.map
+cmb10 CMB10 <cmb10.pfb
+cmbsy10 CMBSY10 <cmbsy10.pfb
+cmbx10 CMBX10 <cmbx10.pfb
+cmbx12 CMBX12 <cmbx12.pfb
+cmbx5 CMBX5 <cmbx5.pfb
+cmbx6 CMBX6 <cmbx6.pfb
+cmbx7 CMBX7 <cmbx7.pfb
+cmbx8 CMBX8 <cmbx8.pfb
+cmbx9 CMBX9 <cmbx9.pfb
+cmbxsl10 CMBXSL10 <cmbxsl10.pfb
+cmbxti10 CMBXTI10 <cmbxti10.pfb
+cmcsc10 CMCSC10 <cmcsc10.pfb
+cmdunh10 CMDUNH10 <cmdunh10.pfb
+cmex10 CMEX10 <cmex10.pfb
+cmex9 CMEX9 <cmex9.pfb
+cmff10 CMFF10 <cmff10.pfb
+cmfi10 CMFI10 <cmfi10.pfb
+cmfib8 CMFIB8 <cmfib8.pfb
+cminch CMINCH <cminch.pfb
+cmitt10 CMITT10 <cmitt10.pfb
+cmmi10 CMMI10 <cmmi10.pfb
+cmmi12 CMMI12 <cmmi12.pfb
+cmmi5 CMMI5 <cmmi5.pfb
+cmmi6 CMMI6 <cmmi6.pfb
+cmmi7 CMMI7 <cmmi7.pfb
+cmmi8 CMMI8 <cmmi8.pfb
+cmmi9 CMMI9 <cmmi9.pfb
+cmmib10 CMMIB10 <cmmib10.pfb
+cmr10 CMR10 <cmr10.pfb
+cmr12 CMR12 <cmr12.pfb
+cmr17 CMR17 <cmr17.pfb
+cmr5 CMR5 <cmr5.pfb
+cmr6 CMR6 <cmr6.pfb
+cmr7 CMR7 <cmr7.pfb
+cmr8 CMR8 <cmr8.pfb
+cmr9 CMR9 <cmr9.pfb
+cmsl10 CMSL10 <cmsl10.pfb
+cmsl12 CMSL12 <cmsl12.pfb
+cmsl8 CMSL8 <cmsl8.pfb
+cmsl9 CMSL9 <cmsl9.pfb
+cmsltt10 CMSLTT10 <cmsltt10.pfb
+cmss10 CMSS10 <cmss10.pfb
+cmss12 CMSS12 <cmss12.pfb
+cmss17 CMSS17 <cmss17.pfb
+cmss8 CMSS8 <cmss8.pfb
+cmss9 CMSS9 <cmss9.pfb
+cmssbx10 CMSSBX10 <cmssbx10.pfb
+cmssdc10 CMSSDC10 <cmssdc10.pfb
+cmssi10 CMSSI10 <cmssi10.pfb
+cmssi12 CMSSI12 <cmssi12.pfb
+cmssi17 CMSSI17 <cmssi17.pfb
+cmssi8 CMSSI8 <cmssi8.pfb
+cmssi9 CMSSI9 <cmssi9.pfb
+cmssq8 CMSSQ8 <cmssq8.pfb
+cmssqi8 CMSSQI8 <cmssqi8.pfb
+cmsy10 CMSY10 <cmsy10.pfb
+cmsy5 CMSY5 <cmsy5.pfb
+cmsy6 CMSY6 <cmsy6.pfb
+cmsy7 CMSY7 <cmsy7.pfb
+cmsy8 CMSY8 <cmsy8.pfb
+cmsy9 CMSY9 <cmsy9.pfb
+cmtcsc10 CMTCSC10 <cmtcsc10.pfb
+cmtex10 CMTEX10 <cmtex10.pfb
+cmtex8 CMTEX8 <cmtex8.pfb
+cmtex9 CMTEX9 <cmtex9.pfb
+cmti10 CMTI10 <cmti10.pfb
+cmti12 CMTI12 <cmti12.pfb
+cmti7 CMTI7 <cmti7.pfb
+cmti8 CMTI8 <cmti8.pfb
+cmti9 CMTI9 <cmti9.pfb
+cmtt10 CMTT10 <cmtt10.pfb
+cmtt12 CMTT12 <cmtt12.pfb
+cmtt8 CMTT8 <cmtt8.pfb
+cmtt9 CMTT9 <cmtt9.pfb
+cmu10 CMU10 <cmu10.pfb
+cmvtt10 CMVTT10 <cmvtt10.pfb
+% cmextra.map
+cmbsy5 CMBSY5 <cmbsy5.pfb
+cmbsy6 CMBSY6 <cmbsy6.pfb
+cmbsy7 CMBSY7 <cmbsy7.pfb
+cmbsy8 CMBSY8 <cmbsy8.pfb
+cmbsy9 CMBSY9 <cmbsy9.pfb
+cmcsc8 CMCSC8 <cmcsc8.pfb
+cmcsc9 CMCSC9 <cmcsc9.pfb
+cmex7 CMEX7 <cmex7.pfb
+cmex8 CMEX8 <cmex8.pfb
+cmmib5 CMMIB5 <cmmib5.pfb
+cmmib6 CMMIB6 <cmmib6.pfb
+cmmib7 CMMIB7 <cmmib7.pfb
+cmmib8 CMMIB8 <cmmib8.pfb
+cmmib9 CMMIB9 <cmmib9.pfb
+% cmtext-bsr-interpolated.map
+cmbxti12 CMBXTI10 <cmbxti10.pfb
+cmbxti7 CMBXTI10 <cmbxti10.pfb
+cmitt12 CMITT12 <cmitt10.pfb
+cmitt9 CMITT10 <cmitt10.pfb
+cmsl6 CMSL8 <cmsl8.pfb
+cmsltt9 CMSLTT10 <cmsltt10.pfb
+% cyrillic.map
+wncyb10 WNCYB10 <wncyb10.pfb
+wncyb5 WNCYB10 <wncyb10.pfb
+wncyb6 WNCYB10 <wncyb10.pfb
+wncyb7 WNCYB10 <wncyb10.pfb
+wncyb8 WNCYB10 <wncyb10.pfb
+wncyb9 WNCYB10 <wncyb10.pfb
+wncyi10 WNCYI10 <wncyi10.pfb
+wncyi5 WNCYI10 <wncyi10.pfb
+wncyi6 WNCYI10 <wncyi10.pfb
+wncyi7 WNCYI10 <wncyi10.pfb
+wncyi8 WNCYI10 <wncyi10.pfb
+wncyi9 WNCYI10 <wncyi10.pfb
+wncyr10 WNCYR10 <wncyr10.pfb
+wncyr5 WNCYR10 <wncyr10.pfb
+wncyr6 WNCYR10 <wncyr10.pfb
+wncyr7 WNCYR10 <wncyr10.pfb
+wncyr8 WNCYR10 <wncyr10.pfb
+wncyr9 WNCYR10 <wncyr10.pfb
+wncysc10 WNCYSC10 <wncysc10.pfb
+wncyss10 WNCYSS10 <wncyss10.pfb
+wncyss8 WNCYSS10 <wncyss10.pfb
+wncyss9 WNCYSS10 <wncyss10.pfb
+% esint.map
+esint10 esint10 <esint10.pfb
+% eurosym.map
+feybl10 TeX-feybl10 <feybl10.pfb
+feybo10 TeX-feybo10 <feybo10.pfb
+feybr10 TeX-feybr10 <feybr10.pfb
+feyml10 TeX-feyml10 <feyml10.pfb
+feymo10 TeX-feymo10 <feymo10.pfb
+feymr10 TeX-feymr10 <feymr10.pfb
+% iby.map
+fibb84 FIBB84 <fibb84.pfb
+fibo84 IbycusHTG-Regular " .167 SlantFont " <fibr84.pfb
+fibr84 IbycusHTG-Regular <fibr84.pfb
+% latxfont.map
+lasy10 LASY10 <lasy10.pfb
+lasy5 LASY5 <lasy5.pfb
+lasy6 LASY6 <lasy6.pfb
+lasy7 LASY7 <lasy7.pfb
+lasy8 LASY8 <lasy8.pfb
+lasy9 LASY9 <lasy9.pfb
+lasyb10 LASYB10 <lasyb10.pfb
+lcircle10 LCIRCLE10 <lcircle1.pfb
+lcirclew10 LCIRCLEW10 <lcirclew.pfb
+lcmss8 LCMSS8 <lcmss8.pfb
+lcmssb8 LCMSSB8 <lcmssb8.pfb
+lcmssi8 LCMSSI8 <lcmssi8.pfb
+line10 LINE10 <line10.pfb
+linew10 LINEW10 <linew10.pfb
+% manfnt.map
+manfnt manfnt <manfnt.pfb
+% mflogo.map
+logo10 LOGO10 <logo10.pfb
+logo8 LOGO8 <logo8.pfb
+logo9 LOGO9 <logo9.pfb
+logobf10 LOGOBF10 <logobf10.pfb
+logod10 LOGOD10 <logod10.pfb
+logosl10 LOGOSL10 <logosl10.pfb
+logosl8 LOGOSL8 <logosl8.pfb
+logosl9 LOGOSL9 <logosl9.pfb
+% rsfs.map
+rsfs10 rsfs10 <rsfs10.pfb
+rsfs5 rsfs5 <rsfs5.pfb
+rsfs7 rsfs7 <rsfs7.pfb
+% stmaryrd.map
+stmary10 stmary10 <stmary10.pfb
+stmary5 stmary5 <stmary5.pfb
+stmary6 stmary6 <stmary6.pfb
+stmary7 stmary7 <stmary7.pfb
+stmary8 stmary8 <stmary8.pfb
+stmary9 stmary9 <stmary9.pfb
+% symbols.map
+msam10 MSAM10 <msam10.pfb
+msam5 MSAM5 <msam5.pfb
+msam6 MSAM6 <msam6.pfb
+msam7 MSAM7 <msam7.pfb
+msam8 MSAM8 <msam8.pfb
+msam9 MSAM9 <msam9.pfb
+msbm10 MSBM10 <msbm10.pfb
+msbm5 MSBM5 <msbm5.pfb
+msbm6 MSBM6 <msbm6.pfb
+msbm7 MSBM7 <msbm7.pfb
+msbm8 MSBM8 <msbm8.pfb
+msbm9 MSBM9 <msbm9.pfb
+% tipa.map
+tipa10 TeX-tipa10 <tipa10.pfb
+tipa12 TeX-tipa12 <tipa12.pfb
+tipa17 TeX-tipa17 <tipa17.pfb
+tipa8 TeX-tipa8 <tipa8.pfb
+tipa9 TeX-tipa9 <tipa9.pfb
+tipab10 TeX-tipab10 <tipab10.pfb
+tipabs10 TeX-tipabs10 <tipabs10.pfb
+tipabx10 TeX-tipabx10 <tipabx10.pfb
+tipabx12 TeX-tipabx12 <tipabx12.pfb
+tipabx8 TeX-tipabx8 <tipabx8.pfb
+tipabx9 TeX-tipabx9 <tipabx9.pfb
+tipasb10 TeX-tipasb10 <tipasb10.pfb
+tipasi10 TeX-tipasi10 <tipasi10.pfb
+tipasl10 TeX-tipasl10 <tipasl10.pfb
+tipasl12 TeX-tipasl12 <tipasl12.pfb
+tipasl8 TeX-tipasl8 <tipasl8.pfb
+tipasl9 TeX-tipasl9 <tipasl9.pfb
+tipass10 TeX-tipass10 <tipass10.pfb
+tipass12 TeX-tipass12 <tipass12.pfb
+tipass17 TeX-tipass17 <tipass17.pfb
+tipass8 TeX-tipass8 <tipass8.pfb
+tipass9 TeX-tipass9 <tipass9.pfb
+tipats10 TeX-tipats10 <tipats10.pfb
+tipatt10 TeX-tipatt10 <tipatt10.pfb
+tipatt12 TeX-tipatt12 <tipatt12.pfb
+tipatt8 TeX-tipatt8 <tipatt8.pfb
+tipatt9 TeX-tipatt9 <tipatt9.pfb
+tipx10 TeX-tipx10 <tipx10.pfb
+tipx12 TeX-tipx12 <tipx12.pfb
+tipx17 TeX-tipx17 <tipx17.pfb
+tipx8 TeX-tipx8 <tipx8.pfb
+tipx9 TeX-tipx9 <tipx9.pfb
+tipxb10 TeX-tipxb10 <tipxb10.pfb
+tipxbs10 TeX-tipxbs10 <tipxbs10.pfb
+tipxbx10 TeX-tipxbx10 <tipxbx10.pfb
+tipxbx12 TeX-tipxbx12 <tipxbx12.pfb
+tipxbx8 TeX-tipxbx8 <tipxbx8.pfb
+tipxbx9 TeX-tipxbx9 <tipxbx9.pfb
+tipxsb10 TeX-tipxsb10 <tipxsb10.pfb
+tipxsi10 TeX-tipxsi10 <tipxsi10.pfb
+tipxsl10 TeX-tipxsl10 <tipxsl10.pfb
+tipxsl12 TeX-tipxsl12 <tipxsl12.pfb
+tipxsl8 TeX-tipxsl8 <tipxsl8.pfb
+tipxsl9 TeX-tipxsl9 <tipxsl9.pfb
+tipxss10 TeX-tipxss10 <tipxss10.pfb
+tipxss12 TeX-tipxss12 <tipxss12.pfb
+tipxss17 TeX-tipxss17 <tipxss17.pfb
+tipxss8 TeX-tipxss8 <tipxss8.pfb
+tipxss9 TeX-tipxss9 <tipxss9.pfb
+tipxts10 TeX-tipxts10 <tipxts10.pfb
+tipxtt10 TeX-tipxtt10 <tipxtt10.pfb
+tipxtt12 TeX-tipxtt12 <tipxtt12.pfb
+tipxtt8 TeX-tipxtt8 <tipxtt8.pfb
+tipxtt9 TeX-tipxtt9 <tipxtt9.pfb
+xipa10 TeX-xipa10 <xipa10.pfb
+xipab10 TeX-xipab10 <xipab10.pfb
+xipabs10 TeX-xipabs10 <xipabs10.pfb
+xipasb10 TeX-xipasb10 <xipasb10.pfb
+xipasi10 TeX-xipasi10 <xipasi10.pfb
+xipasl10 TeX-xipasl10 <xipasl10.pfb
+xipass10 TeX-xipass10 <xipass10.pfb
+xipx10 TeX-xipx10 <xipx10.pfb
+xipxb10 TeX-xipxb10 <xipxb10.pfb
+xipxbs10 TeX-xipxbs10 <xipxbs10.pfb
+xipxsb10 TeX-xipxsb10 <xipxsb10.pfb
+xipxsi10 TeX-xipxsi10 <xipxsi10.pfb
+xipxsl10 TeX-xipxsl10 <xipxsl10.pfb
+xipxss10 TeX-xipxss10 <xipxss10.pfb
+% wasy.map
+wasy10 wasy10 <wasy10.pfb
+wasy5 wasy5 <wasy5.pfb
+wasy6 wasy6 <wasy6.pfb
+wasy7 wasy7 <wasy7.pfb
+wasy8 wasy8 <wasy8.pfb
+wasy9 wasy9 <wasy9.pfb
+wasyb10 wasyb10 <wasyb10.pfb
+wasysl10 wasysl10 <wasysl10.pfb
+% xypic.map
+xyatip10 XYATIP-Medium <xyatip10.pfb
+xybsql10 XYBSQL-Medium <xybsql10.pfb
+xybtip10 XYBTIP-Medium <xybtip10.pfb
+xycirc10 XYCIRC-Medium <xycirc10.pfb
+xycmat10 XYCMAT-Medium <xycmat10.pfb
+xycmat11 XYCMAT-Medium <xycmat11.pfb
+xycmat12 XYCMAT-Medium <xycmat12.pfb
+xycmbt10 XYCMBT-Medium <xycmbt10.pfb
+xycmbt11 XYCMBT-Medium <xycmbt11.pfb
+xycmbt12 XYCMBT-Medium <xycmbt12.pfb
+xydash10 XYDASH-Medium <xydash10.pfb
+xyeuat10 XYEUAT-Medium <xyeuat10.pfb
+xyeuat11 XYEUAT-Medium <xyeuat11.pfb
+xyeuat12 XYEUAT-Medium <xyeuat12.pfb
+xyeubt10 XYEUBT-Medium <xyeubt10.pfb
+xyeubt11 XYEUBT-Medium <xyeubt11.pfb
+xyeubt12 XYEUBT-Medium <xyeubt12.pfb
+xyluat10 XYLUAT-Medium <xyluat10.pfb
+xyluat11 XYLUAT-Medium <xyluat11.pfb
+xyluat12 XYLUAT-Medium <xyluat12.pfb
+xylubt10 XYLUBT-Medium <xylubt10.pfb
+xylubt11 XYLUBT-Medium <xylubt11.pfb
+xylubt12 XYLUBT-Medium <xylubt12.pfb
+% yhmath.map
+yrcmex10 Yhcmex <yhcmex.pfb
+% charter.map
+bchb8r CharterBT-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <bchb8a.pfb
+bchbi8r CharterBT-BoldItalic " TeXBase1Encoding ReEncodeFont " <8r.enc <bchbi8a.pfb
+bchbo8r CharterBT-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <bchb8a.pfb
+bchr8r CharterBT-Roman " TeXBase1Encoding ReEncodeFont " <8r.enc <bchr8a.pfb
+bchri8r CharterBT-Italic " TeXBase1Encoding ReEncodeFont " <8r.enc <bchri8a.pfb
+bchro8r CharterBT-Roman " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <bchr8a.pfb
+% chemarrow.map
+arrow arrow <arrow.pfb
+% dummy-space.map
+dummy-space <dummy-space.pfb
+% epiolmec.map
+EpiOlmec Epi-Olmec <Epi-Olmec.pfb
+% euler.map
+euex10 EUEX10 <euex10.pfb
+euex7 EUEX7 <euex7.pfb
+euex8 EUEX8 <euex8.pfb
+euex9 EUEX9 <euex9.pfb
+eufb10 EUFB10 <eufb10.pfb
+eufb5 EUFB5 <eufb5.pfb
+eufb6 EUFB7 <eufb7.pfb
+eufb7 EUFB7 <eufb7.pfb
+eufb8 EUFB7 <eufb7.pfb
+eufb9 EUFB10 <eufb10.pfb
+eufm10 EUFM10 <eufm10.pfb
+eufm5 EUFM5 <eufm5.pfb
+eufm6 EUFM7 <eufm7.pfb
+eufm7 EUFM7 <eufm7.pfb
+eufm8 EUFM7 <eufm7.pfb
+eufm9 EUFM10 <eufm10.pfb
+eurb10 EURB10 <eurb10.pfb
+eurb5 EURB5 <eurb5.pfb
+eurb6 EURB7 <eurb7.pfb
+eurb7 EURB7 <eurb7.pfb
+eurb8 EURB7 <eurb7.pfb
+eurb9 EURB10 <eurb10.pfb
+eurm10 EURM10 <eurm10.pfb
+eurm5 EURM5 <eurm5.pfb
+eurm6 EURM7 <eurm7.pfb
+eurm7 EURM7 <eurm7.pfb
+eurm8 EURM7 <eurm7.pfb
+eurm9 EURM10 <eurm10.pfb
+eusb10 EUSB10 <eusb10.pfb
+eusb5 EUSB5 <eusb5.pfb
+eusb6 EUSB7 <eusb7.pfb
+eusb7 EUSB7 <eusb7.pfb
+eusb8 EUSB7 <eusb7.pfb
+eusb9 EUSB10 <eusb10.pfb
+eusm10 EUSM10 <eusm10.pfb
+eusm5 EUSM5 <eusm5.pfb
+eusm6 EUSM7 <eusm7.pfb
+eusm7 EUSM7 <eusm7.pfb
+eusm8 EUSM7 <eusm7.pfb
+eusm9 EUSM10 <eusm10.pfb
+% fpls.map
+pplbij8r TeXPalladioL-BoldItalicOsF " TeXBase1Encoding ReEncodeFont " <8r.enc <fplbij8a.pfb
+pplbj8r TeXPalladioL-BoldOsF " TeXBase1Encoding ReEncodeFont " <8r.enc <fplbj8a.pfb
+pplrc8r TeXPalladioL-SC " TeXBase1Encoding ReEncodeFont " <8r.enc <fplrc8a.pfb
+pplrij8r TeXPalladioL-ItalicOsF " TeXBase1Encoding ReEncodeFont " <8r.enc <fplrij8a.pfb
+% gfsbaskerville.map
+ggfsbaskervillerg6r GFSBaskerville-Regular " gpgfsbaskerville ReEncodeFont " <gpgfsbaskerville.enc <GFSBaskerville-Regular.pfb
+% gfsporson.map
+gporsonrg6r GFSPorson-Regular " porsonel ReEncodeFont " <porsonel.enc <GFSPorson-Regular.pfb
+% kerkis.map
+ek8r Kerkis " kerkisec ReEncodeFont " <kerkisec.enc <Kerkis.pfb
+ekb8r Kerkis-Bold " kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-Bold.pfb
+ekbi8r Kerkis-BoldItalic " kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-BoldItalic.pfb
+ekbo8r Kerkis-Bold " 0.167 SlantFont kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-Bold.pfb
+ekbsc8r Kerkis-BoldSmallCaps " kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-BoldSmallCaps.pfb
+ekbsco8r Kerkis-BoldSmallCaps " 0.167 SlantFont kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-BoldSmallCaps.pfb
+ekbui8r Kerkis-BoldItalic " -0.168 SlantFont kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-BoldItalic.pfb
+ekcal8r Kerkis-Calligraphic " kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-Calligraphic.pfb
+eki8r Kerkis-Italic " kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-Italic.pfb
+eko8r Kerkis " 0.167 SlantFont kerkisec ReEncodeFont " <kerkisec.enc <Kerkis.pfb
+eksb8r Kerkis-SemiBold " kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-SemiBold.pfb
+eksbi8r Kerkis-SemiBold-Italic " kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-SemiBold-Italic.pfb
+eksbo8r Kerkis-SemiBold " 0.167 SlantFont kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-SemiBold.pfb
+eksbui8r Kerkis-SemiBold-Italic " -0.168 SlantFont kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-SemiBoldItalic.pfb
+eksc8r Kerkis-SmallCaps " kerkisecsc ReEncodeFont " <kerkisecsc.enc <Kerkis-SmallCaps.pfb
+eksco8r Kerkis-SmallCaps " 0.167 SlantFont kerkisecsc ReEncodeFont " <kerkisecsc.enc <Kerkis-SmallCaps.pfb
+eksf8a KerkisSans " kerkisec ReEncodeFont " <kerkisec.enc <KerkisSans.pfb
+eksfb8a KerkisSans-Bold " kerkisec ReEncodeFont " <kerkisec.enc <KerkisSans-Bold.pfb
+eksfbi8a KerkisSans-BoldItalic " kerkisec ReEncodeFont " <kerkisec.enc <KerkisSans-BoldItalic.pfb
+eksfi8a KerkisSans-Italic " kerkisec ReEncodeFont " <kerkisec.enc <KerkisSans-Italic.pfb
+eksfsc8a KerkisSans-SmallCaps " kerkisec ReEncodeFont " <kerkisec.enc <KerkisSans-SmallCaps.pfb
+ekui8r Kerkis-Italic " -0.168 SlantFont kerkisec ReEncodeFont " <kerkisec.enc <Kerkis-Italic.pfb
+gk7a Kerkis " gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis.pfb
+gkb7a Kerkis-Bold " gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-Bold.pfb
+gkbi7a Kerkis-BoldItalic " gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-BoldItalic.pfb
+gkbo7a Kerkis-Bold " 0.167 SlantFont gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-Bold.pfb
+gkbsc8r Kerkis-BoldSmallCaps " gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-BoldSmallCaps.pfb
+gkbsco8r Kerkis-BoldSmallCaps " 0.167 SlantFont gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-BoldSmallCaps.pfb
+gkbui7a Kerkis-BoldItalic " -0.168 SlantFont gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-BoldItalic.pfb
+gkcal7a Kerkis-Calligraphic " gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-Calligraphic.pfb
+gki7a Kerkis-Italic " gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-Italic.pfb
+gko7a Kerkis " 0.167 SlantFont gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis.pfb
+gksb7a Kerkis-SemiBold " gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-SemiBold.pfb
+gksbi7a Kerkis-SemiBold-Italic " gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-SemiBold-Italic.pfb
+gksbo7a Kerkis-SemiBold " 0.167 SlantFont gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-SemiBold.pfb
+gksbui7a Kerkis-SemiBold-Italic " -0.168 SlantFont gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-SemiBold-Italic.pfb
+gksc7a Kerkis-SmallCaps " gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-SmallCaps.pfb
+gksco7a Kerkis-SmallCaps " 0.167 SlantFont gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-SmallCaps.pfb
+gksf7a KerkisSans " gpkerkis ReEncodeFont " <gpkerkis.enc <KerkisSans.pfb
+gksfb7a KerkisSans-Bold " gpkerkis ReEncodeFont " <gpkerkis.enc <KerkisSans-Bold.pfb
+gksfbi7a KerkisSans-BoldItalic " gpkerkis ReEncodeFont " <gpkerkis.enc <KerkisSans-BoldItalic.pfb
+gksfi7a KerkisSans-Italic " gpkerkis ReEncodeFont " <gpkerkis.enc <KerkisSans-Italic.pfb
+gksfsc7a KerkisSans-SmallCaps " gpkerkis ReEncodeFont " <gpkerkis.enc <KerkisSans-SmallCaps.pfb
+gkui7a Kerkis-Italic " -0.168 SlantFont gpkerkis ReEncodeFont " <gpkerkis.enc <Kerkis-Italic.pfb
+k8r Kerkis " kerkis ReEncodeFont " <kerkis.enc <Kerkis.pfb
+kb8r Kerkis-Bold " kerkis ReEncodeFont " <kerkis.enc <Kerkis-Bold.pfb
+kbi8r Kerkis-BoldItalic " kerkis ReEncodeFont " <kerkis.enc <Kerkis-BoldItalic.pfb
+kbo8r Kerkis-Bold " 0.167 SlantFont kerkis ReEncodeFont " <kerkis.enc <Kerkis-Bold.pfb
+kbsc8r Kerkis-BoldSmallCaps " kerkis ReEncodeFont " <kerkis.enc <Kerkis-BoldSmallCaps.pfb
+kbsco8r Kerkis-BoldSmallCaps " 0.167 SlantFont kerkis ReEncodeFont " <kerkis.enc <Kerkis-BoldSmallCaps.pfb
+kbui8r Kerkis-BoldItalic " -0.168 SlantFont kerkis ReEncodeFont " <kerkis.enc <Kerkis-BoldItalic.pfb
+kcal8r Kerkis-Calligraphic " kerkis ReEncodeFont " <kerkis.enc <Kerkis-Calligraphic.pfb
+ki8r Kerkis-Italic " kerkis ReEncodeFont " <kerkis.enc <Kerkis-Italic.pfb
+kmath8r Kerkis-Italic " kmath ReEncodeFont " <kmath.enc <Kerkis-Italic.pfb
+ko8r Kerkis " 0.167 SlantFont kerkis ReEncodeFont " <kerkis.enc <Kerkis.pfb
+ksb8r Kerkis-SemiBold " kerkis ReEncodeFont " <kerkis.enc <Kerkis-SemiBold.pfb
+ksbi8r Kerkis-SemiBold-Italic " kerkis ReEncodeFont " <kerkis.enc <Kerkis-SemiBold-Italic.pfb
+ksbo8r Kerkis-SemiBold " 0.167 SlantFont kerkis ReEncodeFont " <kerkis.enc <Kerkis-SemiBold.pfb
+ksbui8r Kerkis-SemiBold-Italic " -0.168 SlantFont kerkis ReEncodeFont " <kerkis.enc <Kerkis-SemiBold-Italic.pfb
+ksc8r Kerkis-SmallCaps " kerkis ReEncodeFont " <kerkis.enc <Kerkis-SmallCaps.pfb
+ksco8r Kerkis-SmallCaps " 0.167 SlantFont kerkis ReEncodeFont " <kerkis.enc <Kerkis-SmallCaps.pfb
+ksf8a KerkisSans " kerkis ReEncodeFont " <kerkis.enc <KerkisSans.pfb
+ksfb8a KerkisSans-Bold " kerkis ReEncodeFont " <kerkis.enc <KerkisSans-Bold.pfb
+ksfbi8a KerkisSans-BoldItalic " kerkis ReEncodeFont " <kerkis.enc <KerkisSans-BoldItalic.pfb
+ksfi8a KerkisSans-Italic " kerkis ReEncodeFont " <kerkis.enc <KerkisSans-Italic.pfb
+ksfsc8a KerkisSans-SmallCaps " kerkis ReEncodeFont " <kerkis.enc <KerkisSans-SmallCaps.pfb
+ktsy8r Ktsy " TeXMathSymbolEncoding ReEncodeFont " <kmsym.enc <ktsy.pfb
+kui8r Kerkis-Italic " -0.168 SlantFont kerkis ReEncodeFont " <kerkis.enc <Kerkis-Italic.pfb
+% knitfont.map
+knitg_sc_in KnittingSymbols-grid-incount-Medium <knitg_sc_in.pfb
+knitg_sc_out KnittingSymbols-grid-outcount-Medium <knitg_sc_out.pfb
+knitgg KnittingSymbols-grid-grid-Medium <knitgg.pfb
+knitgn KnittingSymbols-grid-foreground-Medium <knitgn.pfb
+knitgp KnittingSymbols-grid-purl-Medium <knitgp.pfb
+knitmg KnittingSymbols-mixed-grid-Medium <knitmg.pfb
+knitml KnittingSymbols-mixed-lowered-Medium <knitml.pfb
+knitmn KnittingSymbols-mixed-foreground-Medium <knitmn.pfb
+knitmp KnittingSymbols-mixed-purl-Medium <knitmp.pfb
+knitmr KnittingSymbols-mixed-raised-Medium <knitmr.pfb
+knitn_sc_in KnittingSymbols-nogrid-incount-Medium <knitn_sc_in.pfb
+knitn_sc_out KnittingSymbols-nogrid-outcount-Medium <knitn_sc_out.pfb
+knitnl KnittingSymbols-nogrid-lowered-Medium <knitnl.pfb
+knitnn KnittingSymbols-nogrid-foreground-Medium <knitnn.pfb
+knitnp KnittingSymbols-nogrid-purl-Medium <knitnp.pfb
+knitnr KnittingSymbols-nogrid-raised-Medium <knitnr.pfb
+knitwg KnittingSymbols-wide-grid-Medium <knitwg.pfb
+knitwn KnittingSymbols-wide-foreground-Medium <knitwn.pfb
+knitwp KnittingSymbols-wide-purl-Medium <knitwp.pfb
+% lm.map
+cs-lmb10 LMRomanDemi10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmb10.pfb
+cs-lmbo10 LMRomanDemi10-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmbo10.pfb
+cs-lmbx10 LMRoman10-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmbx10.pfb
+cs-lmbx12 LMRoman12-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmbx12.pfb
+cs-lmbx5 LMRoman5-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmbx5.pfb
+cs-lmbx6 LMRoman6-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmbx6.pfb
+cs-lmbx7 LMRoman7-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmbx7.pfb
+cs-lmbx8 LMRoman8-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmbx8.pfb
+cs-lmbx9 LMRoman9-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmbx9.pfb
+cs-lmbxi10 LMRoman10-BoldItalic " enclmcs ReEncodeFont " <lm-cs.enc <lmbxi10.pfb
+cs-lmbxo10 LMRomanSlant10-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmbxo10.pfb
+cs-lmcsc10 LMRomanCaps10-Regular " enclmcssc ReEncodeFont " <lm-cssc.enc <lmcsc10.pfb
+cs-lmcsco10 LMRomanCaps10-Oblique " enclmcssc ReEncodeFont " <lm-cssc.enc <lmcsco10.pfb
+cs-lmdunh10 LMRomanDunh10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmdunh10.pfb
+cs-lmduno10 LMRomanDunh10-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmduno10.pfb
+cs-lmr10 LMRoman10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmr10.pfb
+cs-lmr12 LMRoman12-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmr12.pfb
+cs-lmr17 LMRoman17-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmr17.pfb
+cs-lmr5 LMRoman5-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmr5.pfb
+cs-lmr6 LMRoman6-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmr6.pfb
+cs-lmr7 LMRoman7-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmr7.pfb
+cs-lmr8 LMRoman8-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmr8.pfb
+cs-lmr9 LMRoman9-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmr9.pfb
+cs-lmri10 LMRoman10-Italic " enclmcs ReEncodeFont " <lm-cs.enc <lmri10.pfb
+cs-lmri12 LMRoman12-Italic " enclmcs ReEncodeFont " <lm-cs.enc <lmri12.pfb
+cs-lmri7 LMRoman7-Italic " enclmcs ReEncodeFont " <lm-cs.enc <lmri7.pfb
+cs-lmri8 LMRoman8-Italic " enclmcs ReEncodeFont " <lm-cs.enc <lmri8.pfb
+cs-lmri9 LMRoman9-Italic " enclmcs ReEncodeFont " <lm-cs.enc <lmri9.pfb
+cs-lmro10 LMRomanSlant10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmro10.pfb
+cs-lmro12 LMRomanSlant12-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmro12.pfb
+cs-lmro17 LMRomanSlant17-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmro17.pfb
+cs-lmro8 LMRomanSlant8-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmro8.pfb
+cs-lmro9 LMRomanSlant9-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmro9.pfb
+cs-lmss10 LMSans10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmss10.pfb
+cs-lmss12 LMSans12-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmss12.pfb
+cs-lmss17 LMSans17-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmss17.pfb
+cs-lmss8 LMSans8-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmss8.pfb
+cs-lmss9 LMSans9-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmss9.pfb
+cs-lmssbo10 LMSans10-BoldOblique " enclmcs ReEncodeFont " <lm-cs.enc <lmssbo10.pfb
+cs-lmssbx10 LMSans10-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmssbx10.pfb
+cs-lmssdc10 LMSansDemiCond10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmssdc10.pfb
+cs-lmssdo10 LMSansDemiCond10-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmssdo10.pfb
+cs-lmsso10 LMSans10-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmsso10.pfb
+cs-lmsso12 LMSans12-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmsso12.pfb
+cs-lmsso17 LMSans17-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmsso17.pfb
+cs-lmsso8 LMSans8-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmsso8.pfb
+cs-lmsso9 LMSans9-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmsso9.pfb
+cs-lmssq8 LMSansQuot8-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmssq8.pfb
+cs-lmssqbo8 LMSansQuot8-BoldOblique " enclmcs ReEncodeFont " <lm-cs.enc <lmssqbo8.pfb
+cs-lmssqbx8 LMSansQuot8-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmssqbx8.pfb
+cs-lmssqo8 LMSansQuot8-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmssqo8.pfb
+cs-lmtcsc10 LMMonoCaps10-Regular " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtcsc10.pfb
+cs-lmtcso10 LMMonoCaps10-Oblique " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtcso10.pfb
+cs-lmtk10 LMMonoLt10-Bold " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtk10.pfb
+cs-lmtko10 LMMonoLt10-BoldOblique " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtko10.pfb
+cs-lmtl10 LMMonoLt10-Regular " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtl10.pfb
+cs-lmtlc10 LMMonoLtCond10-Regular " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtlc10.pfb
+cs-lmtlco10 LMMonoLtCond10-Oblique " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtlco10.pfb
+cs-lmtlo10 LMMonoLt10-Oblique " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtlo10.pfb
+cs-lmtt10 LMMono10-Regular " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtt10.pfb
+cs-lmtt12 LMMono12-Regular " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtt12.pfb
+cs-lmtt8 LMMono8-Regular " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtt8.pfb
+cs-lmtt9 LMMono9-Regular " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtt9.pfb
+cs-lmtti10 LMMono10-Italic " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtti10.pfb
+cs-lmtto10 LMMonoSlant10-Regular " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtto10.pfb
+cs-lmu10 LMRomanUnsl10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmu10.pfb
+cs-lmvtk10 LMMonoPropLt10-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmvtk10.pfb
+cs-lmvtko10 LMMonoPropLt10-BoldOblique " enclmcs ReEncodeFont " <lm-cs.enc <lmvtko10.pfb
+cs-lmvtl10 LMMonoPropLt10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmvtl10.pfb
+cs-lmvtlo10 LMMonoPropLt10-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmvtlo10.pfb
+cs-lmvtt10 LMMonoProp10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmvtt10.pfb
+cs-lmvtto10 LMMonoProp10-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmvtto10.pfb
+ec-lmb10 LMRomanDemi10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmb10.pfb
+ec-lmbo10 LMRomanDemi10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmbo10.pfb
+ec-lmbx10 LMRoman10-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmbx10.pfb
+ec-lmbx12 LMRoman12-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmbx12.pfb
+ec-lmbx5 LMRoman5-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmbx5.pfb
+ec-lmbx6 LMRoman6-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmbx6.pfb
+ec-lmbx7 LMRoman7-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmbx7.pfb
+ec-lmbx8 LMRoman8-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmbx8.pfb
+ec-lmbx9 LMRoman9-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmbx9.pfb
+ec-lmbxi10 LMRoman10-BoldItalic " enclmec ReEncodeFont " <lm-ec.enc <lmbxi10.pfb
+ec-lmbxo10 LMRomanSlant10-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmbxo10.pfb
+ec-lmcsc10 LMRomanCaps10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmcsc10.pfb
+ec-lmcsco10 LMRomanCaps10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmcsco10.pfb
+ec-lmdunh10 LMRomanDunh10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmdunh10.pfb
+ec-lmduno10 LMRomanDunh10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmduno10.pfb
+ec-lmr10 LMRoman10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmr10.pfb
+ec-lmr12 LMRoman12-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmr12.pfb
+ec-lmr17 LMRoman17-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmr17.pfb
+ec-lmr5 LMRoman5-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmr5.pfb
+ec-lmr6 LMRoman6-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmr6.pfb
+ec-lmr7 LMRoman7-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmr7.pfb
+ec-lmr8 LMRoman8-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmr8.pfb
+ec-lmr9 LMRoman9-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmr9.pfb
+ec-lmri10 LMRoman10-Italic " enclmec ReEncodeFont " <lm-ec.enc <lmri10.pfb
+ec-lmri12 LMRoman12-Italic " enclmec ReEncodeFont " <lm-ec.enc <lmri12.pfb
+ec-lmri7 LMRoman7-Italic " enclmec ReEncodeFont " <lm-ec.enc <lmri7.pfb
+ec-lmri8 LMRoman8-Italic " enclmec ReEncodeFont " <lm-ec.enc <lmri8.pfb
+ec-lmri9 LMRoman9-Italic " enclmec ReEncodeFont " <lm-ec.enc <lmri9.pfb
+ec-lmro10 LMRomanSlant10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmro10.pfb
+ec-lmro12 LMRomanSlant12-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmro12.pfb
+ec-lmro17 LMRomanSlant17-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmro17.pfb
+ec-lmro8 LMRomanSlant8-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmro8.pfb
+ec-lmro9 LMRomanSlant9-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmro9.pfb
+ec-lmss10 LMSans10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmss10.pfb
+ec-lmss12 LMSans12-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmss12.pfb
+ec-lmss17 LMSans17-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmss17.pfb
+ec-lmss8 LMSans8-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmss8.pfb
+ec-lmss9 LMSans9-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmss9.pfb
+ec-lmssbo10 LMSans10-BoldOblique " enclmec ReEncodeFont " <lm-ec.enc <lmssbo10.pfb
+ec-lmssbx10 LMSans10-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmssbx10.pfb
+ec-lmssdc10 LMSansDemiCond10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmssdc10.pfb
+ec-lmssdo10 LMSansDemiCond10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmssdo10.pfb
+ec-lmsso10 LMSans10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmsso10.pfb
+ec-lmsso12 LMSans12-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmsso12.pfb
+ec-lmsso17 LMSans17-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmsso17.pfb
+ec-lmsso8 LMSans8-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmsso8.pfb
+ec-lmsso9 LMSans9-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmsso9.pfb
+ec-lmssq8 LMSansQuot8-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmssq8.pfb
+ec-lmssqbo8 LMSansQuot8-BoldOblique " enclmec ReEncodeFont " <lm-ec.enc <lmssqbo8.pfb
+ec-lmssqbx8 LMSansQuot8-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmssqbx8.pfb
+ec-lmssqo8 LMSansQuot8-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmssqo8.pfb
+ec-lmtcsc10 LMMonoCaps10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmtcsc10.pfb
+ec-lmtcso10 LMMonoCaps10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmtcso10.pfb
+ec-lmtk10 LMMonoLt10-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmtk10.pfb
+ec-lmtko10 LMMonoLt10-BoldOblique " enclmec ReEncodeFont " <lm-ec.enc <lmtko10.pfb
+ec-lmtl10 LMMonoLt10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmtl10.pfb
+ec-lmtlc10 LMMonoLtCond10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmtlc10.pfb
+ec-lmtlco10 LMMonoLtCond10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmtlco10.pfb
+ec-lmtlo10 LMMonoLt10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmtlo10.pfb
+ec-lmtt10 LMMono10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmtt10.pfb
+ec-lmtt12 LMMono12-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmtt12.pfb
+ec-lmtt8 LMMono8-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmtt8.pfb
+ec-lmtt9 LMMono9-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmtt9.pfb
+ec-lmtti10 LMMono10-Italic " enclmec ReEncodeFont " <lm-ec.enc <lmtti10.pfb
+ec-lmtto10 LMMonoSlant10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmtto10.pfb
+ec-lmu10 LMRomanUnsl10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmu10.pfb
+ec-lmvtk10 LMMonoPropLt10-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmvtk10.pfb
+ec-lmvtko10 LMMonoPropLt10-BoldOblique " enclmec ReEncodeFont " <lm-ec.enc <lmvtko10.pfb
+ec-lmvtl10 LMMonoPropLt10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmvtl10.pfb
+ec-lmvtlo10 LMMonoPropLt10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmvtlo10.pfb
+ec-lmvtt10 LMMonoProp10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmvtt10.pfb
+ec-lmvtto10 LMMonoProp10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmvtto10.pfb
+l7x-lmb10 LMRomanDemi10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmb10.pfb
+l7x-lmbo10 LMRomanDemi10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmbo10.pfb
+l7x-lmbx10 LMRoman10-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmbx10.pfb
+l7x-lmbx12 LMRoman12-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmbx12.pfb
+l7x-lmbx5 LMRoman5-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmbx5.pfb
+l7x-lmbx6 LMRoman6-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmbx6.pfb
+l7x-lmbx7 LMRoman7-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmbx7.pfb
+l7x-lmbx8 LMRoman8-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmbx8.pfb
+l7x-lmbx9 LMRoman9-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmbx9.pfb
+l7x-lmbxi10 LMRoman10-BoldItalic " enclml7x ReEncodeFont " <lm-l7x.enc <lmbxi10.pfb
+l7x-lmbxo10 LMRomanSlant10-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmbxo10.pfb
+l7x-lmcsc10 LMRomanCaps10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmcsc10.pfb
+l7x-lmcsco10 LMRomanCaps10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmcsco10.pfb
+l7x-lmdunh10 LMRomanDunh10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmdunh10.pfb
+l7x-lmduno10 LMRomanDunh10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmduno10.pfb
+l7x-lmr10 LMRoman10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmr10.pfb
+l7x-lmr12 LMRoman12-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmr12.pfb
+l7x-lmr17 LMRoman17-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmr17.pfb
+l7x-lmr5 LMRoman5-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmr5.pfb
+l7x-lmr6 LMRoman6-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmr6.pfb
+l7x-lmr7 LMRoman7-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmr7.pfb
+l7x-lmr8 LMRoman8-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmr8.pfb
+l7x-lmr9 LMRoman9-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmr9.pfb
+l7x-lmri10 LMRoman10-Italic " enclml7x ReEncodeFont " <lm-l7x.enc <lmri10.pfb
+l7x-lmri12 LMRoman12-Italic " enclml7x ReEncodeFont " <lm-l7x.enc <lmri12.pfb
+l7x-lmri7 LMRoman7-Italic " enclml7x ReEncodeFont " <lm-l7x.enc <lmri7.pfb
+l7x-lmri8 LMRoman8-Italic " enclml7x ReEncodeFont " <lm-l7x.enc <lmri8.pfb
+l7x-lmri9 LMRoman9-Italic " enclml7x ReEncodeFont " <lm-l7x.enc <lmri9.pfb
+l7x-lmro10 LMRomanSlant10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmro10.pfb
+l7x-lmro12 LMRomanSlant12-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmro12.pfb
+l7x-lmro17 LMRomanSlant17-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmro17.pfb
+l7x-lmro8 LMRomanSlant8-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmro8.pfb
+l7x-lmro9 LMRomanSlant9-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmro9.pfb
+l7x-lmss10 LMSans10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmss10.pfb
+l7x-lmss12 LMSans12-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmss12.pfb
+l7x-lmss17 LMSans17-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmss17.pfb
+l7x-lmss8 LMSans8-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmss8.pfb
+l7x-lmss9 LMSans9-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmss9.pfb
+l7x-lmssbo10 LMSans10-BoldOblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmssbo10.pfb
+l7x-lmssbx10 LMSans10-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmssbx10.pfb
+l7x-lmssdc10 LMSansDemiCond10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmssdc10.pfb
+l7x-lmssdo10 LMSansDemiCond10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmssdo10.pfb
+l7x-lmsso10 LMSans10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmsso10.pfb
+l7x-lmsso12 LMSans12-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmsso12.pfb
+l7x-lmsso17 LMSans17-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmsso17.pfb
+l7x-lmsso8 LMSans8-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmsso8.pfb
+l7x-lmsso9 LMSans9-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmsso9.pfb
+l7x-lmssq8 LMSansQuot8-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmssq8.pfb
+l7x-lmssqbo8 LMSansQuot8-BoldOblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmssqbo8.pfb
+l7x-lmssqbx8 LMSansQuot8-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmssqbx8.pfb
+l7x-lmssqo8 LMSansQuot8-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmssqo8.pfb
+l7x-lmtcsc10 LMMonoCaps10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmtcsc10.pfb
+l7x-lmtcso10 LMMonoCaps10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmtcso10.pfb
+l7x-lmtk10 LMMonoLt10-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmtk10.pfb
+l7x-lmtko10 LMMonoLt10-BoldOblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmtko10.pfb
+l7x-lmtl10 LMMonoLt10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmtl10.pfb
+l7x-lmtlc10 LMMonoLtCond10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmtlc10.pfb
+l7x-lmtlco10 LMMonoLtCond10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmtlco10.pfb
+l7x-lmtlo10 LMMonoLt10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmtlo10.pfb
+l7x-lmtt10 LMMono10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmtt10.pfb
+l7x-lmtt12 LMMono12-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmtt12.pfb
+l7x-lmtt8 LMMono8-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmtt8.pfb
+l7x-lmtt9 LMMono9-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmtt9.pfb
+l7x-lmtti10 LMMono10-Italic " enclml7x ReEncodeFont " <lm-l7x.enc <lmtti10.pfb
+l7x-lmtto10 LMMonoSlant10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmtto10.pfb
+l7x-lmu10 LMRomanUnsl10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmu10.pfb
+l7x-lmvtk10 LMMonoPropLt10-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmvtk10.pfb
+l7x-lmvtko10 LMMonoPropLt10-BoldOblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmvtko10.pfb
+l7x-lmvtl10 LMMonoPropLt10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmvtl10.pfb
+l7x-lmvtlo10 LMMonoPropLt10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmvtlo10.pfb
+l7x-lmvtt10 LMMonoProp10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmvtt10.pfb
+l7x-lmvtto10 LMMonoProp10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmvtto10.pfb
+lmbsy10 LMMathSymbols10-Bold " enclmmathsy ReEncodeFont " <lm-mathsy.enc <lmbsy10.pfb
+lmbsy5 LMMathSymbols5-Bold " enclmmathsy ReEncodeFont " <lm-mathsy.enc <lmbsy5.pfb
+lmbsy7 LMMathSymbols7-Bold " enclmmathsy ReEncodeFont " <lm-mathsy.enc <lmbsy7.pfb
+lmex10 LMMathExtension10-Regular " enclmmathex ReEncodeFont " <lm-mathex.enc <lmex10.pfb
+lmmi10 LMMathItalic10-Regular " enclmmathit ReEncodeFont " <lm-mathit.enc <lmmi10.pfb
+lmmi12 LMMathItalic12-Regular " enclmmathit ReEncodeFont " <lm-mathit.enc <lmmi12.pfb
+lmmi5 LMMathItalic5-Regular " enclmmathit ReEncodeFont " <lm-mathit.enc <lmmi5.pfb
+lmmi6 LMMathItalic6-Regular " enclmmathit ReEncodeFont " <lm-mathit.enc <lmmi6.pfb
+lmmi7 LMMathItalic7-Regular " enclmmathit ReEncodeFont " <lm-mathit.enc <lmmi7.pfb
+lmmi8 LMMathItalic8-Regular " enclmmathit ReEncodeFont " <lm-mathit.enc <lmmi8.pfb
+lmmi9 LMMathItalic9-Regular " enclmmathit ReEncodeFont " <lm-mathit.enc <lmmi9.pfb
+lmmib10 LMMathItalic10-Bold " enclmmathit ReEncodeFont " <lm-mathit.enc <lmmib10.pfb
+lmmib5 LMMathItalic5-Bold " enclmmathit ReEncodeFont " <lm-mathit.enc <lmmib5.pfb
+lmmib7 LMMathItalic7-Bold " enclmmathit ReEncodeFont " <lm-mathit.enc <lmmib7.pfb
+lmsy10 LMMathSymbols10-Regular " enclmmathsy ReEncodeFont " <lm-mathsy.enc <lmsy10.pfb
+lmsy5 LMMathSymbols5-Regular " enclmmathsy ReEncodeFont " <lm-mathsy.enc <lmsy5.pfb
+lmsy6 LMMathSymbols6-Regular " enclmmathsy ReEncodeFont " <lm-mathsy.enc <lmsy6.pfb
+lmsy7 LMMathSymbols7-Regular " enclmmathsy ReEncodeFont " <lm-mathsy.enc <lmsy7.pfb
+lmsy8 LMMathSymbols8-Regular " enclmmathsy ReEncodeFont " <lm-mathsy.enc <lmsy8.pfb
+lmsy9 LMMathSymbols9-Regular " enclmmathsy ReEncodeFont " <lm-mathsy.enc <lmsy9.pfb
+qx-lmb10 LMRomanDemi10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmb10.pfb
+qx-lmbo10 LMRomanDemi10-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmbo10.pfb
+qx-lmbx10 LMRoman10-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmbx10.pfb
+qx-lmbx12 LMRoman12-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmbx12.pfb
+qx-lmbx5 LMRoman5-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmbx5.pfb
+qx-lmbx6 LMRoman6-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmbx6.pfb
+qx-lmbx7 LMRoman7-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmbx7.pfb
+qx-lmbx8 LMRoman8-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmbx8.pfb
+qx-lmbx9 LMRoman9-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmbx9.pfb
+qx-lmbxi10 LMRoman10-BoldItalic " enclmqx ReEncodeFont " <lm-qx.enc <lmbxi10.pfb
+qx-lmbxo10 LMRomanSlant10-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmbxo10.pfb
+qx-lmcsc10 LMRomanCaps10-Regular " enclmqxsc ReEncodeFont " <lm-qxsc.enc <lmcsc10.pfb
+qx-lmcsco10 LMRomanCaps10-Oblique " enclmqxsc ReEncodeFont " <lm-qxsc.enc <lmcsco10.pfb
+qx-lmdunh10 LMRomanDunh10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmdunh10.pfb
+qx-lmduno10 LMRomanDunh10-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmduno10.pfb
+qx-lmr10 LMRoman10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmr10.pfb
+qx-lmr12 LMRoman12-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmr12.pfb
+qx-lmr17 LMRoman17-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmr17.pfb
+qx-lmr5 LMRoman5-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmr5.pfb
+qx-lmr6 LMRoman6-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmr6.pfb
+qx-lmr7 LMRoman7-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmr7.pfb
+qx-lmr8 LMRoman8-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmr8.pfb
+qx-lmr9 LMRoman9-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmr9.pfb
+qx-lmri10 LMRoman10-Italic " enclmqx ReEncodeFont " <lm-qx.enc <lmri10.pfb
+qx-lmri12 LMRoman12-Italic " enclmqx ReEncodeFont " <lm-qx.enc <lmri12.pfb
+qx-lmri7 LMRoman7-Italic " enclmqx ReEncodeFont " <lm-qx.enc <lmri7.pfb
+qx-lmri8 LMRoman8-Italic " enclmqx ReEncodeFont " <lm-qx.enc <lmri8.pfb
+qx-lmri9 LMRoman9-Italic " enclmqx ReEncodeFont " <lm-qx.enc <lmri9.pfb
+qx-lmro10 LMRomanSlant10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmro10.pfb
+qx-lmro12 LMRomanSlant12-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmro12.pfb
+qx-lmro17 LMRomanSlant17-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmro17.pfb
+qx-lmro8 LMRomanSlant8-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmro8.pfb
+qx-lmro9 LMRomanSlant9-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmro9.pfb
+qx-lmss10 LMSans10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmss10.pfb
+qx-lmss12 LMSans12-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmss12.pfb
+qx-lmss17 LMSans17-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmss17.pfb
+qx-lmss8 LMSans8-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmss8.pfb
+qx-lmss9 LMSans9-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmss9.pfb
+qx-lmssbo10 LMSans10-BoldOblique " enclmqx ReEncodeFont " <lm-qx.enc <lmssbo10.pfb
+qx-lmssbx10 LMSans10-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmssbx10.pfb
+qx-lmssdc10 LMSansDemiCond10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmssdc10.pfb
+qx-lmssdo10 LMSansDemiCond10-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmssdo10.pfb
+qx-lmsso10 LMSans10-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmsso10.pfb
+qx-lmsso12 LMSans12-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmsso12.pfb
+qx-lmsso17 LMSans17-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmsso17.pfb
+qx-lmsso8 LMSans8-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmsso8.pfb
+qx-lmsso9 LMSans9-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmsso9.pfb
+qx-lmssq8 LMSansQuot8-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmssq8.pfb
+qx-lmssqbo8 LMSansQuot8-BoldOblique " enclmqx ReEncodeFont " <lm-qx.enc <lmssqbo8.pfb
+qx-lmssqbx8 LMSansQuot8-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmssqbx8.pfb
+qx-lmssqo8 LMSansQuot8-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmssqo8.pfb
+qx-lmtcsc10 LMMonoCaps10-Regular " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtcsc10.pfb
+qx-lmtcso10 LMMonoCaps10-Oblique " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtcso10.pfb
+qx-lmtk10 LMMonoLt10-Bold " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtk10.pfb
+qx-lmtko10 LMMonoLt10-BoldOblique " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtko10.pfb
+qx-lmtl10 LMMonoLt10-Regular " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtl10.pfb
+qx-lmtlc10 LMMonoLtCond10-Regular " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtlc10.pfb
+qx-lmtlco10 LMMonoLtCond10-Oblique " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtlco10.pfb
+qx-lmtlo10 LMMonoLt10-Oblique " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtlo10.pfb
+qx-lmtt10 LMMono10-Regular " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtt10.pfb
+qx-lmtt12 LMMono12-Regular " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtt12.pfb
+qx-lmtt8 LMMono8-Regular " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtt8.pfb
+qx-lmtt9 LMMono9-Regular " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtt9.pfb
+qx-lmtti10 LMMono10-Italic " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtti10.pfb
+qx-lmtto10 LMMonoSlant10-Regular " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtto10.pfb
+qx-lmu10 LMRomanUnsl10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmu10.pfb
+qx-lmvtk10 LMMonoPropLt10-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmvtk10.pfb
+qx-lmvtko10 LMMonoPropLt10-BoldOblique " enclmqx ReEncodeFont " <lm-qx.enc <lmvtko10.pfb
+qx-lmvtl10 LMMonoPropLt10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmvtl10.pfb
+qx-lmvtlo10 LMMonoPropLt10-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmvtlo10.pfb
+qx-lmvtt10 LMMonoProp10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmvtt10.pfb
+qx-lmvtto10 LMMonoProp10-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmvtto10.pfb
+rm-lmb10 LMRomanDemi10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmb10.pfb
+rm-lmbo10 LMRomanDemi10-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmbo10.pfb
+rm-lmbx10 LMRoman10-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmbx10.pfb
+rm-lmbx12 LMRoman12-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmbx12.pfb
+rm-lmbx5 LMRoman5-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmbx5.pfb
+rm-lmbx6 LMRoman6-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmbx6.pfb
+rm-lmbx7 LMRoman7-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmbx7.pfb
+rm-lmbx8 LMRoman8-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmbx8.pfb
+rm-lmbx9 LMRoman9-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmbx9.pfb
+rm-lmbxi10 LMRoman10-BoldItalic " enclmrm ReEncodeFont " <lm-rm.enc <lmbxi10.pfb
+rm-lmbxo10 LMRomanSlant10-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmbxo10.pfb
+rm-lmcsc10 LMRomanCaps10-Regular " enclmrmsc ReEncodeFont " <lm-rmsc.enc <lmcsc10.pfb
+rm-lmcsco10 LMRomanCaps10-Oblique " enclmrmsc ReEncodeFont " <lm-rmsc.enc <lmcsco10.pfb
+rm-lmdunh10 LMRomanDunh10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmdunh10.pfb
+rm-lmduno10 LMRomanDunh10-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmduno10.pfb
+rm-lmr10 LMRoman10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmr10.pfb
+rm-lmr12 LMRoman12-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmr12.pfb
+rm-lmr17 LMRoman17-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmr17.pfb
+rm-lmr5 LMRoman5-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmr5.pfb
+rm-lmr6 LMRoman6-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmr6.pfb
+rm-lmr7 LMRoman7-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmr7.pfb
+rm-lmr8 LMRoman8-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmr8.pfb
+rm-lmr9 LMRoman9-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmr9.pfb
+rm-lmri10 LMRoman10-Italic " enclmrm ReEncodeFont " <lm-rm.enc <lmri10.pfb
+rm-lmri12 LMRoman12-Italic " enclmrm ReEncodeFont " <lm-rm.enc <lmri12.pfb
+rm-lmri7 LMRoman7-Italic " enclmrm ReEncodeFont " <lm-rm.enc <lmri7.pfb
+rm-lmri8 LMRoman8-Italic " enclmrm ReEncodeFont " <lm-rm.enc <lmri8.pfb
+rm-lmri9 LMRoman9-Italic " enclmrm ReEncodeFont " <lm-rm.enc <lmri9.pfb
+rm-lmro10 LMRomanSlant10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmro10.pfb
+rm-lmro12 LMRomanSlant12-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmro12.pfb
+rm-lmro17 LMRomanSlant17-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmro17.pfb
+rm-lmro8 LMRomanSlant8-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmro8.pfb
+rm-lmro9 LMRomanSlant9-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmro9.pfb
+rm-lmss10 LMSans10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmss10.pfb
+rm-lmss12 LMSans12-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmss12.pfb
+rm-lmss17 LMSans17-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmss17.pfb
+rm-lmss8 LMSans8-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmss8.pfb
+rm-lmss9 LMSans9-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmss9.pfb
+rm-lmssbo10 LMSans10-BoldOblique " enclmrm ReEncodeFont " <lm-rm.enc <lmssbo10.pfb
+rm-lmssbx10 LMSans10-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmssbx10.pfb
+rm-lmssdc10 LMSansDemiCond10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmssdc10.pfb
+rm-lmssdo10 LMSansDemiCond10-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmssdo10.pfb
+rm-lmsso10 LMSans10-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmsso10.pfb
+rm-lmsso12 LMSans12-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmsso12.pfb
+rm-lmsso17 LMSans17-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmsso17.pfb
+rm-lmsso8 LMSans8-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmsso8.pfb
+rm-lmsso9 LMSans9-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmsso9.pfb
+rm-lmssq8 LMSansQuot8-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmssq8.pfb
+rm-lmssqbo8 LMSansQuot8-BoldOblique " enclmrm ReEncodeFont " <lm-rm.enc <lmssqbo8.pfb
+rm-lmssqbx8 LMSansQuot8-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmssqbx8.pfb
+rm-lmssqo8 LMSansQuot8-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmssqo8.pfb
+rm-lmtcsc10 LMMonoCaps10-Regular " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtcsc10.pfb
+rm-lmtcso10 LMMonoCaps10-Oblique " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtcso10.pfb
+rm-lmtk10 LMMonoLt10-Bold " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtk10.pfb
+rm-lmtko10 LMMonoLt10-BoldOblique " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtko10.pfb
+rm-lmtl10 LMMonoLt10-Regular " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtl10.pfb
+rm-lmtlc10 LMMonoLtCond10-Regular " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtlc10.pfb
+rm-lmtlco10 LMMonoLtCond10-Oblique " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtlco10.pfb
+rm-lmtlo10 LMMonoLt10-Oblique " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtlo10.pfb
+rm-lmtt10 LMMono10-Regular " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtt10.pfb
+rm-lmtt12 LMMono12-Regular " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtt12.pfb
+rm-lmtt8 LMMono8-Regular " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtt8.pfb
+rm-lmtt9 LMMono9-Regular " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtt9.pfb
+rm-lmtti10 LMMono10-Italic " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtti10.pfb
+rm-lmtto10 LMMonoSlant10-Regular " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtto10.pfb
+rm-lmu10 LMRomanUnsl10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmu10.pfb
+rm-lmvtk10 LMMonoPropLt10-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmvtk10.pfb
+rm-lmvtko10 LMMonoPropLt10-BoldOblique " enclmrm ReEncodeFont " <lm-rm.enc <lmvtko10.pfb
+rm-lmvtl10 LMMonoPropLt10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmvtl10.pfb
+rm-lmvtlo10 LMMonoPropLt10-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmvtlo10.pfb
+rm-lmvtt10 LMMonoProp10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmvtt10.pfb
+rm-lmvtto10 LMMonoProp10-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmvtto10.pfb
+t5-lmb10 LMRomanDemi10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmb10.pfb
+t5-lmbo10 LMRomanDemi10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmbo10.pfb
+t5-lmbx10 LMRoman10-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmbx10.pfb
+t5-lmbx12 LMRoman12-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmbx12.pfb
+t5-lmbx5 LMRoman5-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmbx5.pfb
+t5-lmbx6 LMRoman6-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmbx6.pfb
+t5-lmbx7 LMRoman7-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmbx7.pfb
+t5-lmbx8 LMRoman8-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmbx8.pfb
+t5-lmbx9 LMRoman9-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmbx9.pfb
+t5-lmbxi10 LMRoman10-BoldItalic " enclmt5 ReEncodeFont " <lm-t5.enc <lmbxi10.pfb
+t5-lmbxo10 LMRomanSlant10-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmbxo10.pfb
+t5-lmcsc10 LMRomanCaps10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmcsc10.pfb
+t5-lmcsco10 LMRomanCaps10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmcsco10.pfb
+t5-lmdunh10 LMRomanDunh10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmdunh10.pfb
+t5-lmduno10 LMRomanDunh10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmduno10.pfb
+t5-lmr10 LMRoman10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmr10.pfb
+t5-lmr12 LMRoman12-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmr12.pfb
+t5-lmr17 LMRoman17-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmr17.pfb
+t5-lmr5 LMRoman5-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmr5.pfb
+t5-lmr6 LMRoman6-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmr6.pfb
+t5-lmr7 LMRoman7-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmr7.pfb
+t5-lmr8 LMRoman8-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmr8.pfb
+t5-lmr9 LMRoman9-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmr9.pfb
+t5-lmri10 LMRoman10-Italic " enclmt5 ReEncodeFont " <lm-t5.enc <lmri10.pfb
+t5-lmri12 LMRoman12-Italic " enclmt5 ReEncodeFont " <lm-t5.enc <lmri12.pfb
+t5-lmri7 LMRoman7-Italic " enclmt5 ReEncodeFont " <lm-t5.enc <lmri7.pfb
+t5-lmri8 LMRoman8-Italic " enclmt5 ReEncodeFont " <lm-t5.enc <lmri8.pfb
+t5-lmri9 LMRoman9-Italic " enclmt5 ReEncodeFont " <lm-t5.enc <lmri9.pfb
+t5-lmro10 LMRomanSlant10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmro10.pfb
+t5-lmro12 LMRomanSlant12-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmro12.pfb
+t5-lmro17 LMRomanSlant17-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmro17.pfb
+t5-lmro8 LMRomanSlant8-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmro8.pfb
+t5-lmro9 LMRomanSlant9-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmro9.pfb
+t5-lmss10 LMSans10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmss10.pfb
+t5-lmss12 LMSans12-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmss12.pfb
+t5-lmss17 LMSans17-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmss17.pfb
+t5-lmss8 LMSans8-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmss8.pfb
+t5-lmss9 LMSans9-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmss9.pfb
+t5-lmssbo10 LMSans10-BoldOblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmssbo10.pfb
+t5-lmssbx10 LMSans10-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmssbx10.pfb
+t5-lmssdc10 LMSansDemiCond10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmssdc10.pfb
+t5-lmssdo10 LMSansDemiCond10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmssdo10.pfb
+t5-lmsso10 LMSans10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmsso10.pfb
+t5-lmsso12 LMSans12-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmsso12.pfb
+t5-lmsso17 LMSans17-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmsso17.pfb
+t5-lmsso8 LMSans8-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmsso8.pfb
+t5-lmsso9 LMSans9-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmsso9.pfb
+t5-lmssq8 LMSansQuot8-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmssq8.pfb
+t5-lmssqbo8 LMSansQuot8-BoldOblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmssqbo8.pfb
+t5-lmssqbx8 LMSansQuot8-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmssqbx8.pfb
+t5-lmssqo8 LMSansQuot8-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmssqo8.pfb
+t5-lmtcsc10 LMMonoCaps10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmtcsc10.pfb
+t5-lmtcso10 LMMonoCaps10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmtcso10.pfb
+t5-lmtk10 LMMonoLt10-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmtk10.pfb
+t5-lmtko10 LMMonoLt10-BoldOblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmtko10.pfb
+t5-lmtl10 LMMonoLt10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmtl10.pfb
+t5-lmtlc10 LMMonoLtCond10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmtlc10.pfb
+t5-lmtlco10 LMMonoLtCond10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmtlco10.pfb
+t5-lmtlo10 LMMonoLt10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmtlo10.pfb
+t5-lmtt10 LMMono10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmtt10.pfb
+t5-lmtt12 LMMono12-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmtt12.pfb
+t5-lmtt8 LMMono8-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmtt8.pfb
+t5-lmtt9 LMMono9-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmtt9.pfb
+t5-lmtti10 LMMono10-Italic " enclmt5 ReEncodeFont " <lm-t5.enc <lmtti10.pfb
+t5-lmtto10 LMMonoSlant10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmtto10.pfb
+t5-lmu10 LMRomanUnsl10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmu10.pfb
+t5-lmvtk10 LMMonoPropLt10-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmvtk10.pfb
+t5-lmvtko10 LMMonoPropLt10-BoldOblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmvtko10.pfb
+t5-lmvtl10 LMMonoPropLt10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmvtl10.pfb
+t5-lmvtlo10 LMMonoPropLt10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmvtlo10.pfb
+t5-lmvtt10 LMMonoProp10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmvtt10.pfb
+t5-lmvtto10 LMMonoProp10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmvtto10.pfb
+texnansi-lmb10 LMRomanDemi10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmb10.pfb
+texnansi-lmbo10 LMRomanDemi10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbo10.pfb
+texnansi-lmbx10 LMRoman10-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbx10.pfb
+texnansi-lmbx12 LMRoman12-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbx12.pfb
+texnansi-lmbx5 LMRoman5-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbx5.pfb
+texnansi-lmbx6 LMRoman6-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbx6.pfb
+texnansi-lmbx7 LMRoman7-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbx7.pfb
+texnansi-lmbx8 LMRoman8-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbx8.pfb
+texnansi-lmbx9 LMRoman9-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbx9.pfb
+texnansi-lmbxi10 LMRoman10-BoldItalic " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbxi10.pfb
+texnansi-lmbxo10 LMRomanSlant10-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbxo10.pfb
+texnansi-lmcsc10 LMRomanCaps10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmcsc10.pfb
+texnansi-lmcsco10 LMRomanCaps10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmcsco10.pfb
+texnansi-lmdunh10 LMRomanDunh10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmdunh10.pfb
+texnansi-lmduno10 LMRomanDunh10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmduno10.pfb
+texnansi-lmr10 LMRoman10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmr10.pfb
+texnansi-lmr12 LMRoman12-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmr12.pfb
+texnansi-lmr17 LMRoman17-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmr17.pfb
+texnansi-lmr5 LMRoman5-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmr5.pfb
+texnansi-lmr6 LMRoman6-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmr6.pfb
+texnansi-lmr7 LMRoman7-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmr7.pfb
+texnansi-lmr8 LMRoman8-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmr8.pfb
+texnansi-lmr9 LMRoman9-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmr9.pfb
+texnansi-lmri10 LMRoman10-Italic " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmri10.pfb
+texnansi-lmri12 LMRoman12-Italic " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmri12.pfb
+texnansi-lmri7 LMRoman7-Italic " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmri7.pfb
+texnansi-lmri8 LMRoman8-Italic " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmri8.pfb
+texnansi-lmri9 LMRoman9-Italic " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmri9.pfb
+texnansi-lmro10 LMRomanSlant10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmro10.pfb
+texnansi-lmro12 LMRomanSlant12-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmro12.pfb
+texnansi-lmro17 LMRomanSlant17-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmro17.pfb
+texnansi-lmro8 LMRomanSlant8-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmro8.pfb
+texnansi-lmro9 LMRomanSlant9-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmro9.pfb
+texnansi-lmss10 LMSans10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmss10.pfb
+texnansi-lmss12 LMSans12-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmss12.pfb
+texnansi-lmss17 LMSans17-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmss17.pfb
+texnansi-lmss8 LMSans8-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmss8.pfb
+texnansi-lmss9 LMSans9-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmss9.pfb
+texnansi-lmssbo10 LMSans10-BoldOblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmssbo10.pfb
+texnansi-lmssbx10 LMSans10-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmssbx10.pfb
+texnansi-lmssdc10 LMSansDemiCond10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmssdc10.pfb
+texnansi-lmssdo10 LMSansDemiCond10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmssdo10.pfb
+texnansi-lmsso10 LMSans10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmsso10.pfb
+texnansi-lmsso12 LMSans12-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmsso12.pfb
+texnansi-lmsso17 LMSans17-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmsso17.pfb
+texnansi-lmsso8 LMSans8-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmsso8.pfb
+texnansi-lmsso9 LMSans9-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmsso9.pfb
+texnansi-lmssq8 LMSansQuot8-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmssq8.pfb
+texnansi-lmssqbo8 LMSansQuot8-BoldOblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmssqbo8.pfb
+texnansi-lmssqbx8 LMSansQuot8-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmssqbx8.pfb
+texnansi-lmssqo8 LMSansQuot8-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmssqo8.pfb
+texnansi-lmtcsc10 LMMonoCaps10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtcsc10.pfb
+texnansi-lmtcso10 LMMonoCaps10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtcso10.pfb
+texnansi-lmtk10 LMMonoLt10-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtk10.pfb
+texnansi-lmtko10 LMMonoLt10-BoldOblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtko10.pfb
+texnansi-lmtl10 LMMonoLt10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtl10.pfb
+texnansi-lmtlc10 LMMonoLtCond10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtlc10.pfb
+texnansi-lmtlco10 LMMonoLtCond10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtlco10.pfb
+texnansi-lmtlo10 LMMonoLt10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtlo10.pfb
+texnansi-lmtt10 LMMono10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtt10.pfb
+texnansi-lmtt12 LMMono12-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtt12.pfb
+texnansi-lmtt8 LMMono8-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtt8.pfb
+texnansi-lmtt9 LMMono9-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtt9.pfb
+texnansi-lmtti10 LMMono10-Italic " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtti10.pfb
+texnansi-lmtto10 LMMonoSlant10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtto10.pfb
+texnansi-lmu10 LMRomanUnsl10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmu10.pfb
+texnansi-lmvtk10 LMMonoPropLt10-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmvtk10.pfb
+texnansi-lmvtko10 LMMonoPropLt10-BoldOblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmvtko10.pfb
+texnansi-lmvtl10 LMMonoPropLt10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmvtl10.pfb
+texnansi-lmvtlo10 LMMonoPropLt10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmvtlo10.pfb
+texnansi-lmvtt10 LMMonoProp10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmvtt10.pfb
+texnansi-lmvtto10 LMMonoProp10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmvtto10.pfb
+ts1-lmb10 LMRomanDemi10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmb10.pfb
+ts1-lmbo10 LMRomanDemi10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbo10.pfb
+ts1-lmbx10 LMRoman10-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbx10.pfb
+ts1-lmbx12 LMRoman12-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbx12.pfb
+ts1-lmbx5 LMRoman5-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbx5.pfb
+ts1-lmbx6 LMRoman6-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbx6.pfb
+ts1-lmbx7 LMRoman7-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbx7.pfb
+ts1-lmbx8 LMRoman8-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbx8.pfb
+ts1-lmbx9 LMRoman9-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbx9.pfb
+ts1-lmbxi10 LMRoman10-BoldItalic " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbxi10.pfb
+ts1-lmbxo10 LMRomanSlant10-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbxo10.pfb
+ts1-lmcsc10 LMRomanCaps10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmcsc10.pfb
+ts1-lmcsco10 LMRomanCaps10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmcsco10.pfb
+ts1-lmdunh10 LMRomanDunh10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmdunh10.pfb
+ts1-lmduno10 LMRomanDunh10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmduno10.pfb
+ts1-lmr10 LMRoman10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmr10.pfb
+ts1-lmr12 LMRoman12-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmr12.pfb
+ts1-lmr17 LMRoman17-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmr17.pfb
+ts1-lmr5 LMRoman5-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmr5.pfb
+ts1-lmr6 LMRoman6-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmr6.pfb
+ts1-lmr7 LMRoman7-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmr7.pfb
+ts1-lmr8 LMRoman8-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmr8.pfb
+ts1-lmr9 LMRoman9-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmr9.pfb
+ts1-lmri10 LMRoman10-Italic " enclmts1 ReEncodeFont " <lm-ts1.enc <lmri10.pfb
+ts1-lmri12 LMRoman12-Italic " enclmts1 ReEncodeFont " <lm-ts1.enc <lmri12.pfb
+ts1-lmri7 LMRoman7-Italic " enclmts1 ReEncodeFont " <lm-ts1.enc <lmri7.pfb
+ts1-lmri8 LMRoman8-Italic " enclmts1 ReEncodeFont " <lm-ts1.enc <lmri8.pfb
+ts1-lmri9 LMRoman9-Italic " enclmts1 ReEncodeFont " <lm-ts1.enc <lmri9.pfb
+ts1-lmro10 LMRomanSlant10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmro10.pfb
+ts1-lmro12 LMRomanSlant12-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmro12.pfb
+ts1-lmro17 LMRomanSlant17-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmro17.pfb
+ts1-lmro8 LMRomanSlant8-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmro8.pfb
+ts1-lmro9 LMRomanSlant9-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmro9.pfb
+ts1-lmss10 LMSans10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmss10.pfb
+ts1-lmss12 LMSans12-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmss12.pfb
+ts1-lmss17 LMSans17-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmss17.pfb
+ts1-lmss8 LMSans8-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmss8.pfb
+ts1-lmss9 LMSans9-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmss9.pfb
+ts1-lmssbo10 LMSans10-BoldOblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmssbo10.pfb
+ts1-lmssbx10 LMSans10-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmssbx10.pfb
+ts1-lmssdc10 LMSansDemiCond10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmssdc10.pfb
+ts1-lmssdo10 LMSansDemiCond10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmssdo10.pfb
+ts1-lmsso10 LMSans10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmsso10.pfb
+ts1-lmsso12 LMSans12-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmsso12.pfb
+ts1-lmsso17 LMSans17-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmsso17.pfb
+ts1-lmsso8 LMSans8-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmsso8.pfb
+ts1-lmsso9 LMSans9-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmsso9.pfb
+ts1-lmssq8 LMSansQuot8-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmssq8.pfb
+ts1-lmssqbo8 LMSansQuot8-BoldOblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmssqbo8.pfb
+ts1-lmssqbx8 LMSansQuot8-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmssqbx8.pfb
+ts1-lmssqo8 LMSansQuot8-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmssqo8.pfb
+ts1-lmtcsc10 LMMonoCaps10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtcsc10.pfb
+ts1-lmtcso10 LMMonoCaps10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtcso10.pfb
+ts1-lmtk10 LMMonoLt10-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtk10.pfb
+ts1-lmtko10 LMMonoLt10-BoldOblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtko10.pfb
+ts1-lmtl10 LMMonoLt10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtl10.pfb
+ts1-lmtlc10 LMMonoLtCond10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtlc10.pfb
+ts1-lmtlco10 LMMonoLtCond10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtlco10.pfb
+ts1-lmtlo10 LMMonoLt10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtlo10.pfb
+ts1-lmtt10 LMMono10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtt10.pfb
+ts1-lmtt12 LMMono12-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtt12.pfb
+ts1-lmtt8 LMMono8-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtt8.pfb
+ts1-lmtt9 LMMono9-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtt9.pfb
+ts1-lmtti10 LMMono10-Italic " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtti10.pfb
+ts1-lmtto10 LMMonoSlant10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtto10.pfb
+ts1-lmu10 LMRomanUnsl10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmu10.pfb
+ts1-lmvtk10 LMMonoPropLt10-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmvtk10.pfb
+ts1-lmvtko10 LMMonoPropLt10-BoldOblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmvtko10.pfb
+ts1-lmvtl10 LMMonoPropLt10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmvtl10.pfb
+ts1-lmvtlo10 LMMonoPropLt10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmvtlo10.pfb
+ts1-lmvtt10 LMMonoProp10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmvtt10.pfb
+ts1-lmvtto10 LMMonoProp10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmvtto10.pfb
+% marvosym.map
+umvs MarVoSym <marvosym.pfb
+% mathpple.map
+eurbo10 EURB10 " .167 SlantFont " <eurb10.pfb
+eurmo10 EURM10 " .167 SlantFont " <eurm10.pfb
+% pazo.map
+fplmb PazoMath-Bold <fplmb.pfb
+fplmbb PazoMathBlackboardBold <fplmbb.pfb
+fplmbi PazoMath-BoldItalic <fplmbi.pfb
+fplmr PazoMath <fplmr.pfb
+fplmri PazoMath-Italic <fplmri.pfb
+% pxfonts.map
+pxbex Pxbex <pxbex.pfb
+pxbexa Pxbexa <pxbexa.pfb
+pxbmia Pxbmia <pxbmia.pfb
+pxbsy Pxbsy <pxbsy.pfb
+pxbsya Pxbsya <pxbsya.pfb
+pxbsyb Pxbsyb <pxbsyb.pfb
+pxbsyc Pxbsyc <pxbsyc.pfb
+pxex Pxex <pxex.pfb
+pxexa Pxexa <pxexa.pfb
+pxmia Pxmia <pxmia.pfb
+pxsy Pxsy <pxsy.pfb
+pxsya Pxsya <pxsya.pfb
+pxsyb Pxsyb <pxsyb.pfb
+pxsyc Pxsyc <pxsyc.pfb
+rpcxb Rpcxb <rpcxb.pfb
+rpcxbi Rpcxbi <rpcxbi.pfb
+rpcxbsl Rpcxb " .167 SlantFont " <rpcxb.pfb
+rpcxi Rpcxi <rpcxi.pfb
+rpcxr Rpcxr <rpcxr.pfb
+rpcxsl Rpcxr " .167 SlantFont " <rpcxr.pfb
+rpxb Rpxb <rpxb.pfb
+rpxbi Rpxbi <rpxbi.pfb
+rpxbmi Rpxbmi <rpxbmi.pfb
+rpxbsc Rpxbsc <rpxbsc.pfb
+rpxbsl Rpxb " .167 SlantFont " <rpxb.pfb
+rpxi Rpxi <rpxi.pfb
+rpxmi Rpxmi <rpxmi.pfb
+rpxr Rpxr <rpxr.pfb
+rpxsc Rpxsc <rpxsc.pfb
+rpxsl Rpxr " .167 SlantFont " <rpxr.pfb
+% scanpages.map
+scanwipe scanwipe <scanwipe.pfb
+% txfonts.map
+rtcxb rtcxb <rtcxb.pfb
+rtcxbi rtcxbi <rtcxbi.pfb
+rtcxbsl rtcxb " .167 SlantFont " <rtcxb.pfb
+rtcxbss rtcxbss <rtcxbss.pfb
+rtcxbsso rtcxbss " .167 SlantFont " <rtcxbss.pfb
+rtcxi rtcxi <rtcxi.pfb
+rtcxr rtcxr <rtcxr.pfb
+rtcxsl rtcxr " .167 SlantFont " <rtcxr.pfb
+rtcxss rtcxss <rtcxss.pfb
+rtcxsssl rtcxss " .167 SlantFont " <rtcxss.pfb
+rtxb rtxb <rtxb.pfb
+rtxbi rtxbi <rtxbi.pfb
+rtxbmi rtxbmi <rtxbmi.pfb
+rtxbsc rtxbsc <rtxbsc.pfb
+rtxbsl rtxb " .167 SlantFont " <rtxb.pfb
+rtxbss rtxbss <rtxbss.pfb
+rtxbsssc rtxbsssc <rtxbsssc.pfb
+rtxbsssl rtxbss " .167 SlantFont " <rtxbss.pfb
+rtxi rtxi <rtxi.pfb
+rtxmi rtxmi <rtxmi.pfb
+rtxr rtxr <rtxr.pfb
+rtxsc rtxsc <rtxsc.pfb
+rtxsl rtxr " .167 SlantFont " <rtxr.pfb
+rtxss rtxss <rtxss.pfb
+rtxsssc rtxsssc <rtxsssc.pfb
+rtxsssl rtxss " .167 SlantFont " <rtxss.pfb
+t1xbtt t1xbtt <t1xbtt.pfb
+t1xbttsc t1xbttsc <t1xbttsc.pfb
+t1xbttsl t1xbtt " .167 SlantFont " <t1xbtt.pfb
+t1xtt t1xtt <t1xtt.pfb
+t1xttsc t1xttsc <t1xttsc.pfb
+t1xttsl t1xtt " .167 SlantFont " <t1xtt.pfb
+tcxbtt tcxbtt <tcxbtt.pfb
+tcxbttsl tcxbtt " .167 SlantFont " <tcxbtt.pfb
+tcxtt tcxtt <tcxtt.pfb
+tcxttsl tcxtt " .167 SlantFont " <tcxtt.pfb
+txbex txbex <txbex.pfb
+txbexa txbexa <txbexa.pfb
+txbmia txbmia <txbmia.pfb
+txbsy txbsy <txbsy.pfb
+txbsya txbsya <txbsya.pfb
+txbsyb txbsyb <txbsyb.pfb
+txbsyc txbsyc <txbsyc.pfb
+txbtt txbtt <txbtt.pfb
+txbttsc txbttsc <txbttsc.pfb
+txbttsl txbtt " .167 SlantFont " <txbtt.pfb
+txex txex <txex.pfb
+txexa txexa <txexa.pfb
+txmia txmia <txmia.pfb
+txsy txsy <txsy.pfb
+txsya txsya <txsya.pfb
+txsyb txsyb <txsyb.pfb
+txsyc txsyc <txsyc.pfb
+txtt txtt <txtt.pfb
+txttsc txttsc <txttsc.pfb
+txttsl txtt " .167 SlantFont " <txtt.pfb
+% uag.map
+uagb8r URWGothicL-Demi " TeXBase1Encoding ReEncodeFont " <8r.enc <uagb8a.pfb
+uagbi8r URWGothicL-DemiObli " TeXBase1Encoding ReEncodeFont " <8r.enc <uagbi8a.pfb
+uagbo8r URWGothicL-Demi " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uagb8a.pfb
+uagd8r URWGothicL-Demi " TeXBase1Encoding ReEncodeFont " <8r.enc <uagd8a.pfb
+uagdo8r URWGothicL-DemiObli " TeXBase1Encoding ReEncodeFont " <8r.enc <uagdo8a.pfb
+uagk8r URWGothicL-Book " TeXBase1Encoding ReEncodeFont " <8r.enc <uagk8a.pfb
+uagko8r URWGothicL-BookObli " TeXBase1Encoding ReEncodeFont " <8r.enc <uagko8a.pfb
+uagr8r URWGothicL-Book " TeXBase1Encoding ReEncodeFont " <8r.enc <uagr8a.pfb
+uagri8r URWGothicL-BookObli " TeXBase1Encoding ReEncodeFont " <8r.enc <uagri8a.pfb
+uagro8r URWGothicL-Book " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uagr8a.pfb
+% ubk.map
+ubkd8r URWBookmanL-DemiBold " TeXBase1Encoding ReEncodeFont " <8r.enc <ubkd8a.pfb
+ubkdi8r URWBookmanL-DemiBoldItal " TeXBase1Encoding ReEncodeFont " <8r.enc <ubkdi8a.pfb
+ubkdo8r URWBookmanL-DemiBold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <ubkd8a.pfb
+ubkl8r URWBookmanL-Ligh " TeXBase1Encoding ReEncodeFont " <8r.enc <ubkl8a.pfb
+ubkli8r URWBookmanL-LighItal " TeXBase1Encoding ReEncodeFont " <8r.enc <ubkli8a.pfb
+ubklo8r URWBookmanL-Ligh " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <ubkl8a.pfb
+% ucr.map
+ucrb8r NimbusMonL-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <ucrb8a.pfb
+ucrbo8r NimbusMonL-BoldObli " TeXBase1Encoding ReEncodeFont " <8r.enc <ucrbo8a.pfb
+ucrr8r NimbusMonL-Regu " TeXBase1Encoding ReEncodeFont " <8r.enc <ucrr8a.pfb
+ucrro8r NimbusMonL-ReguObli " TeXBase1Encoding ReEncodeFont " <8r.enc <ucrro8a.pfb
+% uhv.map
+uhvb8r NimbusSanL-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvb8a.pfb
+uhvbo8r NimbusSanL-BoldItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvbo8a.pfb
+uhvr8r NimbusSanL-Regu " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvr8a.pfb
+uhvro8r NimbusSanL-ReguItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uhvro8a.pfb
+% unc.map
+uncb8r CenturySchL-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <uncb8a.pfb
+uncbi8r CenturySchL-BoldItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uncbi8a.pfb
+uncbo8r CenturySchL-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uncb8a.pfb
+uncr8r CenturySchL-Roma " TeXBase1Encoding ReEncodeFont " <8r.enc <uncr8a.pfb
+uncri8r CenturySchL-Ital " TeXBase1Encoding ReEncodeFont " <8r.enc <uncri8a.pfb
+uncro8r CenturySchL-Roma " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uncr8a.pfb
+% upl.map
+uplb8r URWPalladioL-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <uplb8a.pfb
+uplbi8r URWPalladioL-BoldItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uplbi8a.pfb
+uplbo8r URWPalladioL-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplb8a.pfb
+uplr8r URWPalladioL-Roma " TeXBase1Encoding ReEncodeFont " <8r.enc <uplr8a.pfb
+uplri8r URWPalladioL-Ital " TeXBase1Encoding ReEncodeFont " <8r.enc <uplri8a.pfb
+uplro8r URWPalladioL-Roma " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplr8a.pfb
+% usy.map
+usyr StandardSymL <usyr.pfb
+% utm.map
+utmb8r NimbusRomNo9L-Medi " TeXBase1Encoding ReEncodeFont " <8r.enc <utmb8a.pfb
+utmbi8r NimbusRomNo9L-MediItal " TeXBase1Encoding ReEncodeFont " <8r.enc <utmbi8a.pfb
+utmbo8r NimbusRomNo9L-Medi " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmb8a.pfb
+utmr8r NimbusRomNo9L-Regu " TeXBase1Encoding ReEncodeFont " <8r.enc <utmr8a.pfb
+utmri8r NimbusRomNo9L-ReguItal " TeXBase1Encoding ReEncodeFont " <8r.enc <utmri8a.pfb
+utmro8r NimbusRomNo9L-Regu " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <utmr8a.pfb
+% utopia.map
+putb8r Utopia-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <putb8a.pfb
+putbi8r Utopia-BoldItalic " TeXBase1Encoding ReEncodeFont " <8r.enc <putbi8a.pfb
+putbo8r Utopia-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <putb8a.pfb
+putr8r Utopia-Regular " TeXBase1Encoding ReEncodeFont " <8r.enc <putr8a.pfb
+putri8r Utopia-Italic " TeXBase1Encoding ReEncodeFont " <8r.enc <putri8a.pfb
+putro8r Utopia-Regular " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <putr8a.pfb
+% uzc.map
+uzcmi8r URWChanceryL-MediItal " TeXBase1Encoding ReEncodeFont " <8r.enc <uzcmi8a.pfb
+% uzd.map
+uzdr Dingbats <uzdr.pfb

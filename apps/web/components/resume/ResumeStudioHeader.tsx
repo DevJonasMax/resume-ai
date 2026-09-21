@@ -15,9 +15,11 @@ import {
 } from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n/index.js";
 import { useResumeStudio } from "./ResumeStudioContext";
 
 export function ResumeStudioHeader() {
+  const { t } = useI18n();
   const {
     job,
     resume,
@@ -64,7 +66,7 @@ export function ResumeStudioHeader() {
             <HugeiconsIcon icon={Building02Icon} size={15} className="text-[#93c5fd]" />
             <div className="flex flex-col">
               <span className="text-[9px] font-semibold text-zinc-500 uppercase tracking-wider">
-                Opportunity
+                {t("resumeStudio.opportunity")}
               </span>
               <select
                 value={job.id}
@@ -73,7 +75,7 @@ export function ResumeStudioHeader() {
               >
                 {allJobs.map((j) => (
                   <option key={j.id} value={j.id} className="bg-[#181b1f] text-zinc-200">
-                    {j.company} — {j.title}
+                    {j.company} : {j.title}
                   </option>
                 ))}
               </select>
@@ -85,7 +87,7 @@ export function ResumeStudioHeader() {
             <HugeiconsIcon icon={UserAccountIcon} size={15} className="text-[#a7f3d0]" />
             <div className="flex flex-col">
               <span className="text-[9px] font-semibold text-zinc-500 uppercase tracking-wider">
-                Candidate Profile
+                {t("resumeStudio.candidateProfile")}
               </span>
               <select
                 value={candidate?.id || ""}
@@ -110,7 +112,9 @@ export function ResumeStudioHeader() {
               {job.status.replace("_", " ")}
             </Badge>
             <span className="text-[11px] font-mono text-zinc-500 hidden sm:inline">
-              {resume.diffItems?.length ?? 0} aligned modifications
+              {t("resumeStudio.alignedModifications", {
+                count: resume.diffItems?.length ?? 0,
+              })}
             </span>
           </div>
         </div>
@@ -125,7 +129,7 @@ export function ResumeStudioHeader() {
             className="gap-1.5 text-xs text-zinc-300 hover:text-white"
           >
             <HugeiconsIcon icon={FilterIcon} size={13} className="text-[#d8b4fe]" />
-            <span>ATS Diffs</span>
+            <span>{t("resumeStudio.atsDiffs")}</span>
             <span className="badge-lavender px-1.5 py-0 rounded text-[10px] font-mono">
               {resume.diffItems?.length ?? 0}
             </span>
@@ -139,7 +143,7 @@ export function ResumeStudioHeader() {
             className="gap-1.5 text-xs font-semibold"
           >
             <HugeiconsIcon icon={AiBrain01Icon} size={14} />
-            <span>Agent Dialogue</span>
+            <span>{t("resumeStudio.agentDialogue")}</span>
           </Button>
         </div>
       </div>
@@ -156,10 +160,10 @@ export function ResumeStudioHeader() {
                 ? "bg-[#20242a] text-white font-semibold shadow-sm"
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
-            title="LaTeX Code Editor Only"
+            title={t("resumeStudio.codeOnlyTitle")}
           >
             <HugeiconsIcon icon={FileCodeIcon} size={13} />
-            <span>Code Only</span>
+            <span>{t("resumeStudio.codeOnly")}</span>
           </button>
 
           <button
@@ -170,10 +174,10 @@ export function ResumeStudioHeader() {
                 ? "bg-[#20242a] text-[#a7f3d0] font-semibold shadow-sm"
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
-            title="50/50 Split Workspace"
+            title={t("resumeStudio.splitViewTitle")}
           >
             <HugeiconsIcon icon={Layout01Icon} size={13} className="text-[#a7f3d0]" />
-            <span>Split 50/50</span>
+            <span>{t("resumeStudio.splitView")}</span>
           </button>
 
           <button
@@ -184,10 +188,10 @@ export function ResumeStudioHeader() {
                 ? "bg-[#20242a] text-white font-semibold shadow-sm"
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
-            title="PDF Document Preview Only"
+            title={t("resumeStudio.previewOnlyTitle")}
           >
             <HugeiconsIcon icon={EyeIcon} size={13} />
-            <span>Preview Only</span>
+            <span>{t("resumeStudio.previewOnly")}</span>
           </button>
         </div>
 
@@ -200,14 +204,14 @@ export function ResumeStudioHeader() {
             onClick={regenerateResume}
             disabled={isRegenerating}
             className="gap-1.5 text-xs"
-            title="Regenerate ATS Resume"
+            title={t("resumeStudio.regenerateTitle")}
           >
             <HugeiconsIcon
               icon={ReloadIcon}
               size={13}
               className={isRegenerating ? "animate-spin text-zinc-400" : "text-zinc-300"}
             />
-            <span className="hidden sm:inline">Regenerate</span>
+            <span className="hidden sm:inline">{t("resumeStudio.regenerate")}</span>
           </Button>
 
           {/* Download Tex Source */}
@@ -215,7 +219,7 @@ export function ResumeStudioHeader() {
             variant="secondary"
             size="icon"
             onClick={downloadTex}
-            title="Download LaTeX Source (.tex)"
+            title={t("resumeStudio.downloadTexTitle")}
           >
             <HugeiconsIcon icon={FileDownloadIcon} size={14} className="text-zinc-300" />
           </Button>
@@ -233,7 +237,11 @@ export function ResumeStudioHeader() {
               size={14}
               className={isExportingPdf ? "animate-bounce" : ""}
             />
-            <span>{isExportingPdf ? "Exporting..." : "Download PDF"}</span>
+            <span>
+              {isExportingPdf
+                ? t("resumeStudio.exportingPdf")
+                : t("resumeStudio.downloadPdf")}
+            </span>
           </Button>
         </div>
       </div>

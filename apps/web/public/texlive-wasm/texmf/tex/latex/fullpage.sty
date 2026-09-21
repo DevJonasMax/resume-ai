@@ -1,0 +1,23 @@
+\ProvidesPackage{fullpage}[1999/02/23 1.1 (PWD)]
+\newlength{\FP@margin}
+\DeclareOption{empty}{\pagestyle{empty}}
+\DeclareOption{plain}{\pagestyle{plain}}
+\DeclareOption{headings}{\pagestyle{headings}}
+\DeclareOption{myheadings}{\pagestyle{myheadings}}
+\DeclareOption{cm}{\setlength{\FP@margin}{1.5cm}}
+\DeclareOption{in}{\setlength{\FP@margin}{1in}}
+\ExecuteOptions{in}
+\ProcessOptions*
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-2\FP@margin}
+\setlength{\oddsidemargin}{\FP@margin}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-\headheight}
+\addtolength{\textheight}{-\headsep}
+\addtolength{\textheight}{-\footskip}
+\addtolength{\textheight}{-2\FP@margin}
+\setlength{\topmargin}{\FP@margin}
+\addtolength{\topmargin}{-1in}
+\endinput

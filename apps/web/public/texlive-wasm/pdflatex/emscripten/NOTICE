@@ -1,0 +1,8 @@
+pdflatex — compiled to WebAssembly from TeX Live sources
+(https://tug.org/texlive/, github.com/TeX-Live/texlive-source).
+
+The binary in this archive is a derived work of TeX Live and retains
+its upstream licenses (predominantly LPPL, GPL family, and
+engine-specific terms). See LICENSE.TL, shipped beside this NOTICE,
+for the full per-component breakdown. The texlive-wasm wrapper
+library and build scripts are MIT-licensed.

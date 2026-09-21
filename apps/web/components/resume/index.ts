@@ -1,3 +1,4 @@
+import { AiChatDock } from "../chat/AiChatDock";
 import { ResumeStudioChatDrawer } from "./ResumeStudioChatDrawer";
 import { ResumeStudioDiffDrawer } from "./ResumeStudioDiffDrawer";
 import { ResumeStudioHeader } from "./ResumeStudioHeader";
@@ -14,11 +15,13 @@ export const ResumeStudio = Object.assign(ResumeStudioRoot, {
   PdfPreview: ResumeStudioPdfPreview,
   DiffDrawer: ResumeStudioDiffDrawer,
   ChatDrawer: ResumeStudioChatDrawer,
+  ChatDock: AiChatDock,
 });
 
 // Alias for backwards-compatibility
 export const ResumeEditor = ResumeStudio;
 
+export * from "../chat/AiChatDock";
 export * from "./ResumeStudioChatDrawer";
 export * from "./ResumeStudioContext";
 export * from "./ResumeStudioDiffDrawer";

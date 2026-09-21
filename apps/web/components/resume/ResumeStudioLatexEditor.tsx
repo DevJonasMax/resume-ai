@@ -49,6 +49,28 @@ export function ResumeStudioLatexEditor() {
     }
   };
 
+  const handleGutterWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (textareaRef.current) {
+      textareaRef.current.scrollTop += e.deltaY;
+    }
+  };
+
+  const handleTextareaKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const newValue =
+        editedLatex.substring(0, start) + "  " + editedLatex.substring(end);
+      setEditedLatex(newValue);
+      requestAnimationFrame(() => {
+        textarea.selectionStart = textarea.selectionEnd = start + 2;
+      });
+    }
+  };
+
   // Keyboard shortcut: Ctrl+S / Cmd+S to save
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -66,7 +88,7 @@ export function ResumeStudioLatexEditor() {
   return (
     <div className="flex flex-col h-full rounded-xl border border-[rgba(255,255,255,0.07)] bg-[#121417] overflow-hidden shadow-lg">
       {/* Editor Column Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-[#181b1f] border-b border-[rgba(255,255,255,0.06)]">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-[#181b1f] border-b border-[rgba(255,255,255,0.06)] shrink-0">
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={FileCodeIcon} size={15} className="text-[#93c5fd]" />
           <span className="text-xs font-mono font-bold text-white tracking-wide">
@@ -133,15 +155,20 @@ export function ResumeStudioLatexEditor() {
       </div>
 
       {/* Editor Body: Line numbers + Textarea */}
-      <div className="relative flex flex-1 h-[680px] overflow-hidden font-mono text-xs bg-[#0c0d0e]">
+      <div className="relative flex flex-1 min-h-0 h-full w-full overflow-hidden font-mono text-xs bg-[#0c0d0e]">
         {/* Line numbers gutter */}
         <div
           ref={lineNumbersRef}
           aria-hidden="true"
-          className="w-12 select-none py-3 pr-3 text-right text-zinc-600 bg-[#0e1012] border-r border-[rgba(255,255,255,0.06)] overflow-hidden shrink-0 leading-relaxed"
+          onWheel={handleGutterWheel}
+          className="w-12 select-none py-3 pr-3 pl-2 text-right text-zinc-500 bg-[#0e1012] border-r border-[rgba(255,255,255,0.06)] overflow-hidden shrink-0"
         >
           {Array.from({ length: lineCount }, (_, i) => (
-            <div key={i + 1} className="h-5 text-[11px]">
+            <div
+              key={i + 1}
+              className="h-6 leading-6 text-[11px] font-mono select-none"
+              style={{ height: "24px", lineHeight: "24px" }}
+            >
               {i + 1}
             </div>
           ))}
@@ -153,16 +180,18 @@ export function ResumeStudioLatexEditor() {
           value={editedLatex}
           onChange={(e) => setEditedLatex(e.target.value)}
           onScroll={handleScroll}
+          onKeyDown={handleTextareaKeyDown}
           spellCheck={false}
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
-          className="flex-1 w-full h-full p-3 bg-transparent text-zinc-200 outline-none resize-none leading-relaxed font-mono text-[12px] whitespace-pre overflow-y-auto selection:bg-[#93c5fd]/20 selection:text-[#93c5fd] focus:outline-none"
+          className="flex-1 min-w-0 h-full w-full p-3 bg-transparent text-zinc-200 outline-none resize-none font-mono text-[12px] whitespace-pre overflow-auto selection:bg-[#93c5fd]/20 selection:text-[#93c5fd] focus:outline-none"
+          style={{ lineHeight: "24px" }}
         />
       </div>
 
       {/* Footer Info bar */}
-      <div className="flex items-center justify-between px-3 py-1.5 bg-[#181b1f] border-t border-[rgba(255,255,255,0.06)] text-[11px] text-zinc-500 font-mono">
+      <div className="flex items-center justify-between px-3 py-1.5 bg-[#181b1f] border-t border-[rgba(255,255,255,0.06)] text-[11px] text-zinc-500 font-mono shrink-0">
         <span className="flex items-center gap-1.5">
           <HugeiconsIcon icon={NoteEditIcon} size={12} className="text-zinc-400" />
           <span>LaTeX 2e • UTF-8</span>
