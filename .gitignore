@@ -27,6 +27,7 @@ pnpm-debug.log*
 *.sqlite
 *.sqlite-journal
 *.sqlite-wal
+*.sqlite-shm
 *.db
 
 # Temporary & cache
