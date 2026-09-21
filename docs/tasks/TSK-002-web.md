@@ -37,3 +37,9 @@ Implement the modern AI productivity web application using Vinext (Vite + Next.j
 - [x] TSK-002.24: Redesign color palette to OpenAI Prism pastel aesthetic (soft sage, lavender, apricot, slate) eliminating AI slop
 - [x] TSK-002.25: Migrate all icons from Lucide to HugeIcons (@hugeicons/react and @hugeicons/core-free-icons)
 - [x] TSK-002.26: Verification, typecheck, build validation, and Server runtime test
+- [x] TSK-002.27: Fix LaTeX Code Editor container sizing, flex layout, and gutter line synchronization
+- [x] TSK-002.28: Real LaTeX compiler integration (WebAssembly `@typeward/texlive-wasm` or compiler pipeline) and PDF blob preview rendering (replacing fake HTML interpretation & html2pdf)
+- [x] TSK-002.29: Smooth-UI AI Chat bottom bar docking station with animated expansion and smooth transition
+- [x] TSK-002.30: Internationalization (intl / i18n) support for `en_US` and `pt_BR` with locale switcher and typed dictionaries
+- [x] TSK-002.31: Debugging and visual verification via `<maestri-canvas-portal name="Web" />`
+- [x] TSK-002.32: Maestro final verification, strict typecheck, and build validation
