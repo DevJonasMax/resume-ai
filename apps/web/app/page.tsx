@@ -39,15 +39,16 @@ const KANBAN_STATUSES: JobStatus[] = [
 ];
 
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState<NavTab>(() => {
+  const [activeTab, setActiveTab] = useState<NavTab>("resume");
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("resume_ai_active_tab") as NavTab | null;
-      if (saved && ["resume", "kanban", "candidate", "monitor"].includes(saved)) {
-        return saved;
+      if (saved && ["resume", "kanban", "candidate"].includes(saved)) {
+        setActiveTab(saved);
       }
     }
-    return "resume";
-  });
+  }, []);
   const [jobs, setJobs] = useState<Job[]>([]);
   const [candidate, setCandidate] = useState<CandidateProfile | null>(null);
   const [candidates, setCandidates] = useState<CandidateProfile[]>([]);
