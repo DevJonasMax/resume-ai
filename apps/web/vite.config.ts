@@ -1,6 +1,10 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import vinext from "vinext";
 import { defineConfig, type Plugin } from "vite";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function fixVinextClientImportMetaUrl(): Plugin {
   return {
@@ -20,6 +24,11 @@ function fixVinextClientImportMetaUrl(): Plugin {
 
 export default defineConfig({
   plugins: [vinext(), fixVinextClientImportMetaUrl(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./"),
+    },
+  },
   server: {
     port: 3000,
     proxy: {

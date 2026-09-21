@@ -18,7 +18,7 @@ import { CandidateProfileView } from "../components/candidate/CandidateProfileVi
 import { Kanban } from "../components/kanban/index.js";
 import { AddJobModal } from "../components/modals/AddJobModal.js";
 import { JobDetailModal } from "../components/modals/JobDetailModal.js";
-import { ResumeEditor } from "../components/resume/index.js";
+import { ResumeStudio } from "../components/resume/index.js";
 
 type MainNavTab = "kanban" | "resume" | "candidate";
 
@@ -329,7 +329,11 @@ export default function DashboardPage() {
       </header>
 
       {/* Main Surface */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main
+        className={`flex-1 w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 ${
+          activeTab === "resume" ? "max-w-[1680px]" : "max-w-7xl"
+        }`}
+      >
         {activeTab === "kanban" && (
           <Kanban.Root
             jobs={filteredJobs}
@@ -359,7 +363,7 @@ export default function DashboardPage() {
 
         {activeTab === "resume" && (
           studioJob && studioResume ? (
-            <ResumeEditor.Root
+            <ResumeStudio.Root
               job={studioJob}
               resume={studioResume}
               candidate={candidate}
@@ -367,9 +371,11 @@ export default function DashboardPage() {
               onRefineWithAgent={handleRefineResume}
               onSaveCustomLatex={handleSaveCustomLatex}
             >
-              <ResumeEditor.Toolbar />
-              <ResumeEditor.Content />
-            </ResumeEditor.Root>
+              <ResumeStudio.Header />
+              <ResumeStudio.SplitView />
+              <ResumeStudio.DiffDrawer />
+              <ResumeStudio.ChatDrawer />
+            </ResumeStudio.Root>
           ) : (
             <div className="glass-panel rounded-2xl p-12 text-center flex flex-col items-center gap-3">
               <FileText className="w-10 h-10 text-zinc-500" />

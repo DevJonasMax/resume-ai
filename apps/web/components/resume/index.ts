@@ -1,18 +1,29 @@
-import { ResumeEditorContent } from "./ResumeEditorContent.js";
-import { ResumeEditorDiffList } from "./ResumeEditorDiffList.js";
-import { ResumeEditorRoot } from "./ResumeEditorRoot.js";
-import { ResumeEditorSource } from "./ResumeEditorSource.js";
-import { ResumeEditorToolbar } from "./ResumeEditorToolbar.js";
-import { ResumeEditorViewer } from "./ResumeEditorViewer.js";
+import { ResumeStudioChatDrawer } from "./ResumeStudioChatDrawer";
+import { ResumeStudioDiffDrawer } from "./ResumeStudioDiffDrawer";
+import { ResumeStudioHeader } from "./ResumeStudioHeader";
+import { ResumeStudioLatexEditor } from "./ResumeStudioLatexEditor";
+import { ResumeStudioPdfPreview } from "./ResumeStudioPdfPreview";
+import { ResumeStudioRoot } from "./ResumeStudioRoot";
+import { ResumeStudioSplitView } from "./ResumeStudioSplitView";
 
-export const ResumeEditor = Object.assign(ResumeEditorRoot, {
-  Root: ResumeEditorRoot,
-  Toolbar: ResumeEditorToolbar,
-  Content: ResumeEditorContent,
-  Viewer: ResumeEditorViewer,
-  DiffList: ResumeEditorDiffList,
-  Source: ResumeEditorSource,
+export const ResumeStudio = Object.assign(ResumeStudioRoot, {
+  Root: ResumeStudioRoot,
+  Header: ResumeStudioHeader,
+  SplitView: ResumeStudioSplitView,
+  LatexEditor: ResumeStudioLatexEditor,
+  PdfPreview: ResumeStudioPdfPreview,
+  DiffDrawer: ResumeStudioDiffDrawer,
+  ChatDrawer: ResumeStudioChatDrawer,
 });
 
-export * from "./ResumeEditorContent.js";
-export * from "./ResumeEditorContext.js";
+// Alias for backwards-compatibility
+export const ResumeEditor = ResumeStudio;
+
+export * from "./ResumeStudioChatDrawer";
+export * from "./ResumeStudioContext";
+export * from "./ResumeStudioDiffDrawer";
+export * from "./ResumeStudioHeader";
+export * from "./ResumeStudioLatexEditor";
+export * from "./ResumeStudioPdfPreview";
+export * from "./ResumeStudioRoot";
+export * from "./ResumeStudioSplitView";

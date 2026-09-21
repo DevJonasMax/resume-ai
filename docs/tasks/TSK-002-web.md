@@ -25,3 +25,9 @@ Implement the modern AI productivity web application using Vinext (Vite + Next.j
 - [x] TSK-002.12: Implement Multi-Candidate Profile view with profile switching, deletion, and active status
 - [x] TSK-002.13: Implement Candidate Import Modal supporting PDF file upload, text paste, and manual forms
 - [x] TSK-002.14: Implement interactive Agent Refine drawer for on-demand LaTeX resume prompt optimization
+- [x] TSK-002.15: Setup shadcn/ui primitives, Tailwind CSS 4 design tokens, and custom anti-AI-slop design system
+- [x] TSK-002.16: Implement Resume Studio 50/50 split workspace (LaTeX Code Editor on Left, Rendered PDF Preview on Right)
+- [x] TSK-002.17: Implement interactive ATS Tailoring Diff Inspector and AI modification highlights
+- [x] TSK-002.18: Integrate SmoothUI AI Conversation component for interactive Agent dialogue and prompt refinement
+- [x] TSK-002.19: Refactor component hierarchy using Vercel Composition Patterns (Compound components, decoupled state, React 19)
+- [ ] TSK-002.20: Verification, code review of Dev Frontend changes, and runtime testing with Server agent
