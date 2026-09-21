@@ -39,7 +39,15 @@ const KANBAN_STATUSES: JobStatus[] = [
 ];
 
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState<NavTab>("kanban");
+  const [activeTab, setActiveTab] = useState<NavTab>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("resume_ai_active_tab") as NavTab | null;
+      if (saved && ["resume", "kanban", "candidate", "monitor"].includes(saved)) {
+        return saved;
+      }
+    }
+    return "resume";
+  });
   const [jobs, setJobs] = useState<Job[]>([]);
   const [candidate, setCandidate] = useState<CandidateProfile | null>(null);
   const [candidates, setCandidates] = useState<CandidateProfile[]>([]);
@@ -74,6 +82,19 @@ export default function DashboardPage() {
       setJobs(jobsRes.jobs || []);
       setCandidate(candidateRes.candidate || null);
       setCandidates(candidatesRes.candidates || []);
+
+      if (jobsRes.jobs && jobsRes.jobs.length > 0 && !studioJob) {
+        const firstJob = jobsRes.jobs[0];
+        setStudioJob(firstJob);
+        try {
+          const details = await apiClient.getJobDetails(firstJob.id);
+          if (details.latestResume) {
+            setStudioResume(details.latestResume);
+          }
+        } catch {
+          // Ignore prefetch error
+        }
+      }
     } catch {
       // API fallback
     } finally {
@@ -267,7 +288,13 @@ export default function DashboardPage() {
       setIsMonitorOpen(true);
       return;
     }
+    if (tab === "resume" && !studioJob && safeJobs.length > 0) {
+      handleOpenResume(safeJobs[0]);
+    }
     setActiveTab(tab);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("resume_ai_active_tab", tab);
+    }
   };
 
   return (
@@ -348,7 +375,7 @@ export default function DashboardPage() {
                   <ResumeStudio.Header />
                   <ResumeStudio.SplitView />
                   <ResumeStudio.DiffDrawer />
-                  <ResumeStudio.ChatDrawer />
+                  <ResumeStudio.ChatDock />
                 </ResumeStudio.Root>
               ) : (
                 <div className="bg-[#121417] border border-[rgba(255,255,255,0.07)] rounded-2xl p-12 text-center flex flex-col items-center justify-center gap-3 min-h-[420px]">
