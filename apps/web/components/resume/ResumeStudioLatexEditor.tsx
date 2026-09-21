@@ -1,7 +1,15 @@
 "use client";
 
-import { Check, Code2, Copy, FileText, RotateCcw, Save } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  CheckmarkCircle02Icon,
+  Copy01Icon,
+  FileCodeIcon,
+  FloppyDiskIcon,
+  NoteEditIcon,
+  ReloadIcon,
+} from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useResumeStudio } from "./ResumeStudioContext";
@@ -56,11 +64,11 @@ export function ResumeStudioLatexEditor() {
   }, [isLatexDirty, isSaving, saveLatex]);
 
   return (
-    <div className="flex flex-col h-full rounded-xl border border-zinc-800 bg-zinc-950 overflow-hidden shadow-xl">
+    <div className="flex flex-col h-full rounded-xl border border-[rgba(255,255,255,0.07)] bg-[#121417] overflow-hidden shadow-lg">
       {/* Editor Column Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-zinc-900/90 border-b border-zinc-800">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-[#181b1f] border-b border-[rgba(255,255,255,0.06)]">
         <div className="flex items-center gap-2">
-          <Code2 className="w-4 h-4 text-indigo-400" />
+          <HugeiconsIcon icon={FileCodeIcon} size={15} className="text-[#93c5fd]" />
           <span className="text-xs font-mono font-bold text-white tracking-wide">
             resume.tex
           </span>
@@ -68,7 +76,7 @@ export function ResumeStudioLatexEditor() {
             {lineCount} lines • {editedLatex.length} chars
           </span>
           {isLatexDirty ? (
-            <Badge variant="amber" className="text-[10px]">
+            <Badge variant="apricot" className="text-[10px]">
               Unsaved
             </Badge>
           ) : (
@@ -87,7 +95,7 @@ export function ResumeStudioLatexEditor() {
               title="Reset to generated source"
               className="h-7 px-2 text-[11px] text-zinc-400 hover:text-white"
             >
-              <RotateCcw className="w-3 h-3 mr-1" />
+              <HugeiconsIcon icon={ReloadIcon} size={12} className="mr-1" />
               Reset
             </Button>
           )}
@@ -100,37 +108,37 @@ export function ResumeStudioLatexEditor() {
           >
             {copied ? (
               <>
-                <Check className="w-3 h-3 text-emerald-400 mr-1" />
+                <HugeiconsIcon icon={CheckmarkCircle02Icon} size={12} className="text-[#a7f3d0] mr-1" />
                 <span>Copied</span>
               </>
             ) : (
               <>
-                <Copy className="w-3 h-3 mr-1" />
+                <HugeiconsIcon icon={Copy01Icon} size={12} className="mr-1" />
                 <span>Copy</span>
               </>
             )}
           </Button>
 
           <Button
-            variant={isLatexDirty ? "indigo" : "secondary"}
+            variant={isLatexDirty ? "apricot" : "secondary"}
             size="sm"
             onClick={saveLatex}
             disabled={isSaving || !isLatexDirty}
             className="h-7 px-3 text-[11px] font-semibold"
           >
-            <Save className="w-3 h-3 mr-1" />
+            <HugeiconsIcon icon={FloppyDiskIcon} size={12} className="mr-1" />
             <span>{isSaving ? "Saving..." : "Save"}</span>
           </Button>
         </div>
       </div>
 
       {/* Editor Body: Line numbers + Textarea */}
-      <div className="relative flex flex-1 h-[680px] overflow-hidden font-mono text-xs bg-zinc-950">
+      <div className="relative flex flex-1 h-[680px] overflow-hidden font-mono text-xs bg-[#0c0d0e]">
         {/* Line numbers gutter */}
         <div
           ref={lineNumbersRef}
           aria-hidden="true"
-          className="w-12 select-none py-3 pr-3 text-right text-zinc-600 bg-zinc-950 border-r border-zinc-800/80 overflow-hidden shrink-0 leading-relaxed"
+          className="w-12 select-none py-3 pr-3 text-right text-zinc-600 bg-[#0e1012] border-r border-[rgba(255,255,255,0.06)] overflow-hidden shrink-0 leading-relaxed"
         >
           {Array.from({ length: lineCount }, (_, i) => (
             <div key={i + 1} className="h-5 text-[11px]">
@@ -149,17 +157,17 @@ export function ResumeStudioLatexEditor() {
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
-          className="flex-1 w-full h-full p-3 bg-transparent text-zinc-200 outline-none resize-none leading-relaxed font-mono text-[12px] whitespace-pre overflow-y-auto selection:bg-indigo-600/30 selection:text-indigo-200 focus:outline-none"
+          className="flex-1 w-full h-full p-3 bg-transparent text-zinc-200 outline-none resize-none leading-relaxed font-mono text-[12px] whitespace-pre overflow-y-auto selection:bg-[#93c5fd]/20 selection:text-[#93c5fd] focus:outline-none"
         />
       </div>
 
       {/* Footer Info bar */}
-      <div className="flex items-center justify-between px-3 py-1.5 bg-zinc-900/60 border-t border-zinc-800/80 text-[11px] text-zinc-500 font-mono">
+      <div className="flex items-center justify-between px-3 py-1.5 bg-[#181b1f] border-t border-[rgba(255,255,255,0.06)] text-[11px] text-zinc-500 font-mono">
         <span className="flex items-center gap-1.5">
-          <FileText className="w-3 h-3 text-zinc-400" />
+          <HugeiconsIcon icon={NoteEditIcon} size={12} className="text-zinc-400" />
           <span>LaTeX 2e • UTF-8</span>
         </span>
-        <span>Press Ctrl+S to save</span>
+        <span>Ctrl+S to save</span>
       </div>
     </div>
   );

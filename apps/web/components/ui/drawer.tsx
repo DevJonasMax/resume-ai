@@ -2,7 +2,8 @@
 
 import type React from "react";
 import { useEffect } from "react";
-import { X } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Cancel01Icon } from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
 
 export interface DrawerProps {
@@ -57,7 +58,7 @@ export function Drawer({
     <div className="fixed inset-0 z-50 flex overflow-hidden">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-black/75 backdrop-blur-xs transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -65,7 +66,7 @@ export function Drawer({
       {/* Drawer Container */}
       <div
         className={cn(
-          "fixed z-50 flex flex-col bg-zinc-950 border-zinc-800 shadow-2xl h-full",
+          "fixed z-50 flex flex-col bg-[#121417] border-[rgba(255,255,255,0.08)] shadow-2xl h-full",
           side === "right" && "right-0 top-0 bottom-0 border-l w-full",
           side === "left" && "left-0 top-0 bottom-0 border-r w-full",
           side === "bottom" && "bottom-0 left-0 right-0 border-t max-h-[85vh]",
@@ -75,7 +76,7 @@ export function Drawer({
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between p-4 border-b border-zinc-800 bg-zinc-900/50">
+        <div className="flex items-start justify-between p-4 border-b border-[rgba(255,255,255,0.06)] bg-[#181b1f]/60">
           <div className="flex flex-col gap-0.5">
             {title && <h2 className="text-sm font-semibold text-white">{title}</h2>}
             {description && (
@@ -85,10 +86,10 @@ export function Drawer({
           <button
             type="button"
             onClick={onClose}
-            className="p-1 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+            className="p-1 rounded-md text-zinc-400 hover:text-white hover:bg-[#1e2228] transition-colors cursor-pointer"
             aria-label="Close panel"
           >
-            <X className="w-4 h-4" />
+            <HugeiconsIcon icon={Cancel01Icon} size={16} />
           </button>
         </div>
 

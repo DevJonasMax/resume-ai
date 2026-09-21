@@ -1,7 +1,14 @@
-"use client";
-
 import type { CandidateProfile } from "@resume-ai/types";
-import { Check, FileText, Loader2, Sparkles, Upload, UserPlus, X } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  Cancel01Icon,
+  CheckmarkCircle02Icon,
+  NoteEditIcon,
+  ReloadIcon,
+  SparklesIcon,
+  Upload01Icon,
+  UserAdd01Icon,
+} from "@hugeicons/core-free-icons";
 import React, { useState } from "react";
 import { apiClient } from "../../lib/apiClient.js";
 
@@ -193,7 +200,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
         <div className="p-5 border-b border-zinc-800/80 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="p-2 rounded-xl bg-indigo-950/60 border border-indigo-700/50 text-indigo-400">
-              <UserPlus className="w-5 h-5" />
+              <HugeiconsIcon icon={UserAdd01Icon} size={20} />
             </div>
             <div>
               <h2 className="text-base font-bold text-white">Import Candidate Profile</h2>
@@ -207,7 +214,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
             onClick={onClose}
             className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <HugeiconsIcon icon={Cancel01Icon} size={18} />
           </button>
         </div>
 
@@ -225,7 +232,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
                 : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60"
             }`}
           >
-            <Upload className="w-3.5 h-3.5" />
+            <HugeiconsIcon icon={Upload01Icon} size={14} />
             <span>Upload PDF or File</span>
           </button>
 
@@ -241,7 +248,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
                 : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60"
             }`}
           >
-            <FileText className="w-3.5 h-3.5" />
+            <HugeiconsIcon icon={NoteEditIcon} size={14} />
             <span>Paste Resume Text</span>
           </button>
 
@@ -257,7 +264,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
                 : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60"
             }`}
           >
-            <UserPlus className="w-3.5 h-3.5" />
+            <HugeiconsIcon icon={UserAdd01Icon} size={14} />
             <span>Manual Form</span>
           </button>
         </div>
@@ -273,7 +280,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
         {activeTab === "pdf" && (
           <div className="p-5 space-y-4">
             <div className="border-2 border-dashed border-zinc-700 hover:border-indigo-500 rounded-xl p-8 text-center flex flex-col items-center justify-center gap-3 transition-colors bg-zinc-900/30">
-              <Upload className="w-8 h-8 text-zinc-400" />
+              <HugeiconsIcon icon={Upload01Icon} size={32} className="text-zinc-500" />
               <div>
                 <p className="text-sm font-semibold text-zinc-200">
                   {selectedFile ? selectedFile.name : "Select a PDF, LaTeX (.tex), or text resume file"}
@@ -322,12 +329,12 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <HugeiconsIcon icon={ReloadIcon} size={14} className="animate-spin" />
                     <span>Parsing with AI...</span>
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-3.5 h-3.5" />
+                    <HugeiconsIcon icon={SparklesIcon} size={14} />
                     <span>Import &amp; Parse Profile</span>
                   </>
                 )}
@@ -381,12 +388,12 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <HugeiconsIcon icon={ReloadIcon} size={14} className="animate-spin" />
                     <span>Extracting Profile...</span>
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-3.5 h-3.5" />
+                    <HugeiconsIcon icon={SparklesIcon} size={14} />
                     <span>Parse with AI</span>
                   </>
                 )}
@@ -544,12 +551,12 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <HugeiconsIcon icon={ReloadIcon} size={14} className="animate-spin" />
                     <span>Saving...</span>
                   </>
                 ) : (
                   <>
-                    <Check className="w-3.5 h-3.5" />
+                    <HugeiconsIcon icon={CheckmarkCircle02Icon} size={14} />
                     <span>Save Candidate</span>
                   </>
                 )}

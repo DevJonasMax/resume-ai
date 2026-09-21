@@ -1,6 +1,7 @@
 "use client";
 
-import { CheckCircle2, Sparkles } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { CheckmarkCircle02Icon, SparklesIcon } from "@hugeicons/core-free-icons";
 import { useResumeEditor } from "./ResumeEditorContext.js";
 
 export function ResumeEditorDiffList() {
@@ -19,7 +20,7 @@ export function ResumeEditorDiffList() {
       <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
         <div>
           <h3 className="text-base font-bold text-white flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-purple-400" />
+            <HugeiconsIcon icon={SparklesIcon} size={16} className="text-purple-400" />
             <span>ATS Alignment Rationales</span>
           </h3>
           <p className="text-xs text-zinc-400 mt-0.5">
@@ -65,7 +66,7 @@ export function ResumeEditorDiffList() {
             </div>
 
             <div className="pt-2 border-t border-zinc-800 flex items-start gap-2 text-xs text-zinc-300">
-              <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5" />
+              <HugeiconsIcon icon={CheckmarkCircle02Icon} size={14} className="text-indigo-400 shrink-0 mt-0.5" />
               <div className="flex flex-col">
                 <span className="font-semibold text-zinc-200">Engineering Rationale:</span>
                 <p className="text-zinc-400">{diff.rationalization}</p>

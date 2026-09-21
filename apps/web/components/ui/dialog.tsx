@@ -2,7 +2,8 @@
 
 import type React from "react";
 import { useEffect } from "react";
-import { X } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Cancel01Icon } from "@hugeicons/core-free-icons";
 import { cn } from "@/lib/utils";
 
 export interface DialogProps {
@@ -48,7 +49,7 @@ export function Dialog({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150"
+        className="fixed inset-0 bg-black/80 backdrop-blur-xs animate-in fade-in duration-150"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -56,13 +57,13 @@ export function Dialog({
       {/* Modal Dialog */}
       <div
         className={cn(
-          "relative z-50 w-full flex flex-col max-h-[90vh] bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-150",
+          "relative z-50 w-full flex flex-col max-h-[90vh] bg-[#121417] border border-[rgba(255,255,255,0.08)] rounded-xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-150",
           maxWidthClass,
           className
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between p-5 border-b border-zinc-800/80 bg-zinc-900/40">
+        <div className="flex items-start justify-between p-5 border-b border-[rgba(255,255,255,0.06)] bg-[#181b1f]/60">
           <div>
             {title && <h2 className="text-base font-semibold text-white">{title}</h2>}
             {description && (
@@ -72,10 +73,10 @@ export function Dialog({
           <button
             type="button"
             onClick={onClose}
-            className="p-1 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+            className="p-1 rounded-lg text-zinc-400 hover:text-white hover:bg-[#1e2228] transition-colors cursor-pointer"
             aria-label="Close dialog"
           >
-            <X className="w-4 h-4" />
+            <HugeiconsIcon icon={Cancel01Icon} size={16} />
           </button>
         </div>
 

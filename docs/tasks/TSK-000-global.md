@@ -9,7 +9,7 @@ Master implementation roadmap for the **AI Job Application Agent** monorepo. Thi
 ## Task Index
 
 - [x] [TSK-001: API Application](file:///D:/projetos/resume-ai/docs/tasks/TSK-001-api.md)
-- [ ] [TSK-002: Web Application (Studio Refactor & Design System)](file:///D:/projetos/resume-ai/docs/tasks/TSK-002-web.md)
+- [x] [TSK-002: Web Application (Dashboard Shell, Prism Pastel & HugeIcons)](file:///D:/projetos/resume-ai/docs/tasks/TSK-002-web.md)
 - [x] [TSK-003: CLI Application](file:///D:/projetos/resume-ai/docs/tasks/TSK-003-cli.md)
 - [x] [TSK-004: AI Provider Abstraction](file:///D:/projetos/resume-ai/docs/tasks/TSK-004-ai.md)
 - [x] [TSK-005: Resume & LaTeX Domain](file:///D:/projetos/resume-ai/docs/tasks/TSK-005-resume.md)

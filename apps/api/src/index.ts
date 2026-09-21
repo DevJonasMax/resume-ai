@@ -86,7 +86,7 @@ server.put("/api/candidates/:id/activate", async (request, reply) => {
 /**
  * Delete a candidate profile.
  */
-server.delete("/api/candidates/:id", async (request, reply) => {
+server.delete("/api/candidates/:id", async (request) => {
   const { id } = request.params as { id: string };
   await candidateRepo.deleteProfile(id);
   return { success: true };

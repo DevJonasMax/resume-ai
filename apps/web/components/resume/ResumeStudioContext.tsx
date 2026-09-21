@@ -63,6 +63,12 @@ export interface ResumeStudioContextValue {
   isExportingPdf: boolean;
   exportPdf: () => Promise<void>;
   downloadTex: () => void;
+
+  // In-studio selectors
+  allJobs: Job[];
+  allCandidates: CandidateProfile[];
+  onSelectJob?: (job: Job) => Promise<void>;
+  onSelectCandidate?: (candidate: CandidateProfile) => void;
 }
 
 const ResumeStudioContext = createContext<ResumeStudioContextValue | null>(null);
@@ -72,6 +78,10 @@ export interface ResumeStudioProviderProps {
   job: Job;
   resume: ResumeVersion;
   candidate: CandidateProfile | null;
+  allJobs?: Job[];
+  allCandidates?: CandidateProfile[];
+  onSelectJob?: (job: Job) => Promise<void>;
+  onSelectCandidate?: (candidate: CandidateProfile) => void;
   onRegenerate: () => Promise<void>;
   onRefineWithAgent?: (instructions?: string) => Promise<void>;
   onSaveCustomLatex?: (latex: string) => Promise<void>;
@@ -82,6 +92,10 @@ export function ResumeStudioProvider({
   job,
   resume: initialResume,
   candidate,
+  allJobs = [],
+  allCandidates = [],
+  onSelectJob,
+  onSelectCandidate,
   onRegenerate,
   onRefineWithAgent,
   onSaveCustomLatex,
@@ -270,6 +284,10 @@ export function ResumeStudioProvider({
       isExportingPdf,
       exportPdf,
       downloadTex,
+      allJobs,
+      allCandidates,
+      onSelectJob,
+      onSelectCandidate,
     }),
     [
       job,
@@ -289,6 +307,10 @@ export function ResumeStudioProvider({
       isRefining,
       isRegenerating,
       isExportingPdf,
+      allJobs,
+      allCandidates,
+      onSelectJob,
+      onSelectCandidate,
     ]
   );
 

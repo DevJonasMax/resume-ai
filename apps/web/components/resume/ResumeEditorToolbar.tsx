@@ -1,6 +1,14 @@
 "use client";
 
-import { Code2, Download, Eye, FileDiff, FileDown, RefreshCw, Sparkles } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  Download01Icon,
+  EyeIcon,
+  FileCodeIcon,
+  FileDownloadIcon,
+  ReloadIcon,
+  SparklesIcon,
+} from "@hugeicons/core-free-icons";
 import { type ReactNode, useState } from "react";
 import { type ResumeEditorTab, useResumeEditor } from "./ResumeEditorContext.js";
 
@@ -29,7 +37,6 @@ export function ResumeEditorToolbar() {
         return;
       }
 
-      // Dynamically load html2pdf in client environment
       const html2pdfModule = await import("html2pdf.js");
       const html2pdf = html2pdfModule.default || html2pdfModule;
 
@@ -75,9 +82,9 @@ export function ResumeEditorToolbar() {
   };
 
   const tabs: Array<{ id: ResumeEditorTab; label: string; icon: ReactNode }> = [
-    { id: "visual", label: "Document Preview", icon: <Eye className="w-4 h-4" /> },
-    { id: "diffs", label: `Tailoring Diffs (${resume.diffItems.length})`, icon: <FileDiff className="w-4 h-4" /> },
-    { id: "latex", label: "LaTeX Source", icon: <Code2 className="w-4 h-4" /> },
+    { id: "visual", label: "Document Preview", icon: <HugeiconsIcon icon={EyeIcon} size={16} /> },
+    { id: "diffs", label: `Tailoring Diffs (${resume.diffItems.length})`, icon: <HugeiconsIcon icon={FileCodeIcon} size={16} /> },
+    { id: "latex", label: "LaTeX Source", icon: <HugeiconsIcon icon={FileCodeIcon} size={16} /> },
   ];
 
   return (
@@ -105,75 +112,74 @@ export function ResumeEditorToolbar() {
           })}
         </div>
 
-        {/* Action Controls */}
-        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+        {/* Action Buttons */}
+        <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => setShowRefinePrompt((prev) => !prev)}
-            className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-purple-950/40 hover:bg-purple-900/50 text-purple-300 text-xs font-semibold rounded-lg border border-purple-700/50 transition-all cursor-pointer"
+            onClick={() => setShowRefinePrompt((p) => !p)}
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-950/60 hover:bg-purple-900/60 text-purple-300 rounded-lg text-xs font-semibold border border-purple-800/60 transition-colors cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-            <span>Agent Refine</span>
+            <HugeiconsIcon icon={SparklesIcon} size={14} className="text-purple-400" />
+            <span>Refine Prompt</span>
           </button>
 
           <button
             type="button"
             onClick={onRegenerate}
             disabled={isRegenerating}
-            className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold rounded-lg border border-zinc-700 transition-all cursor-pointer disabled:opacity-50"
+            className="p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+            title="Regenerate from Profile Truth"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${isRegenerating ? "animate-spin" : ""}`} />
-            <span>{isRegenerating ? "Tailoring..." : "Re-tailor"}</span>
+            <HugeiconsIcon icon={ReloadIcon} size={16} className={isRegenerating ? "animate-spin" : ""} />
           </button>
 
           <button
             type="button"
             onClick={handleDownloadTex}
-            className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold rounded-lg border border-zinc-700 transition-all cursor-pointer"
-            title="Download LaTeX Source"
+            className="p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
+            title="Download .tex Source"
           >
-            <Download className="w-3.5 h-3.5" />
-            <span>.tex</span>
+            <HugeiconsIcon icon={FileDownloadIcon} size={16} />
           </button>
 
           <button
             type="button"
             onClick={handleDownloadPdf}
             disabled={isDownloadingPdf}
-            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.98] text-white text-xs font-bold rounded-lg shadow-md shadow-emerald-600/20 transition-all cursor-pointer disabled:opacity-50"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold shadow-md shadow-indigo-600/20 transition-all cursor-pointer disabled:opacity-50"
           >
-            <FileDown className={`w-4 h-4 ${isDownloadingPdf ? "animate-bounce" : ""}`} />
-            <span>{isDownloadingPdf ? "Generating PDF..." : "Download PDF"}</span>
+            <HugeiconsIcon icon={Download01Icon} size={14} />
+            <span>{isDownloadingPdf ? "Exporting PDF..." : "Export PDF"}</span>
           </button>
         </div>
       </div>
 
-      {/* Optional Agent Refinement Prompt Drawer */}
+      {/* Refinement Prompt Drawer */}
       {showRefinePrompt && (
-        <div className="p-3 bg-purple-950/30 border border-purple-800/40 rounded-xl flex flex-col sm:flex-row items-center gap-2 animate-in fade-in duration-200">
-          <input
-            type="text"
-            placeholder="e.g. Emphasize Playwright, cloud scaling metrics, and lead responsibilities..."
+        <div className="p-4 bg-zinc-900/90 rounded-xl border border-zinc-700 flex flex-col gap-3 animate-in slide-in-from-top-2 duration-150">
+          <span className="text-xs font-semibold text-zinc-300">Agent LaTeX Refinement Instructions:</span>
+          <textarea
+            rows={2}
             value={refineInstructions}
             onChange={(e) => setRefineInstructions(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleExecuteRefine()}
-            className="flex-1 w-full bg-zinc-900 border border-purple-700/40 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-purple-400"
+            placeholder="e.g. Highlight distributed systems leadership and condense summary to 3 punchy bullet points..."
+            className="w-full bg-zinc-950 p-2.5 rounded-lg border border-zinc-700 text-xs text-zinc-200 outline-none focus:border-indigo-500"
           />
-          <div className="flex items-center gap-2 w-full sm:w-auto">
+          <div className="flex justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => setShowRefinePrompt(false)}
+              className="px-3 py-1 text-xs text-zinc-400 hover:text-white cursor-pointer"
+            >
+              Cancel
+            </button>
             <button
               type="button"
               onClick={handleExecuteRefine}
               disabled={isRefining}
-              className="flex-1 sm:flex-none px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+              className="px-3.5 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-semibold cursor-pointer disabled:opacity-50"
             >
-              {isRefining ? "Refining..." : "Optimize with Agent"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowRefinePrompt(false)}
-              className="px-2.5 py-1.5 text-xs text-zinc-400 hover:text-zinc-200 cursor-pointer"
-            >
-              Cancel
+              {isRefining ? "Refining with AI..." : "Execute Refine"}
             </button>
           </div>
         </div>

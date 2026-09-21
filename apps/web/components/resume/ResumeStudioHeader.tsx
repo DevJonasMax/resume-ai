@@ -1,16 +1,18 @@
 "use client";
 
+import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  Bot,
-  Building2,
-  Columns2,
-  Download,
-  FileCode,
-  FileDiff,
-  FileDown,
-  Maximize2,
-  RefreshCw,
-} from "lucide-react";
+  AiBrain01Icon,
+  Building02Icon,
+  Download01Icon,
+  EyeIcon,
+  FileCodeIcon,
+  FileDownloadIcon,
+  FilterIcon,
+  Layout01Icon,
+  ReloadIcon,
+  UserAccountIcon,
+} from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useResumeStudio } from "./ResumeStudioContext";
@@ -19,6 +21,11 @@ export function ResumeStudioHeader() {
   const {
     job,
     resume,
+    candidate,
+    allJobs,
+    allCandidates,
+    onSelectJob,
+    onSelectCandidate,
     splitMode,
     setSplitMode,
     isRegenerating,
@@ -30,135 +37,205 @@ export function ResumeStudioHeader() {
     downloadTex,
   } = useResumeStudio();
 
+  const handleJobChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = e.target.value;
+    const found = allJobs.find((j) => j.id === selectedId);
+    if (found && onSelectJob) {
+      onSelectJob(found);
+    }
+  };
+
+  const handleCandidateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = e.target.value;
+    const found = allCandidates.find((c) => c.id === selectedId);
+    if (found && onSelectCandidate) {
+      onSelectCandidate(found);
+    }
+  };
+
   return (
-    <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-zinc-950/90 border border-zinc-800/80 rounded-xl">
-      {/* Left side: Job & Version information */}
-      <div className="flex items-center gap-3">
-        <div className="flex flex-col">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-bold text-white tracking-tight">
-              {job.title}
-            </span>
-            <span className="text-zinc-600">•</span>
-            <span className="flex items-center gap-1 text-xs text-zinc-300 font-medium">
-              <Building2 className="w-3.5 h-3.5 text-zinc-500" />
-              {job.company}
-            </span>
-            <Badge variant="indigo">v{resume.versionNumber}</Badge>
-            <Badge variant="outline" className="text-[10px] text-zinc-400 uppercase">
+    <header className="flex flex-col gap-3 p-4 bg-[#121417] border border-[rgba(255,255,255,0.07)] rounded-xl shadow-sm">
+      {/* Top row: In-studio Job & Candidate Selectors + Meta info */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3 border-b border-[rgba(255,255,255,0.06)]">
+        {/* Selectors Group */}
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Job Selector Dropdown */}
+          <div className="flex items-center gap-2 bg-[#181b1f] px-3 py-1.5 rounded-lg border border-[rgba(255,255,255,0.08)]">
+            <HugeiconsIcon icon={Building02Icon} size={15} className="text-[#93c5fd]" />
+            <div className="flex flex-col">
+              <span className="text-[9px] font-semibold text-zinc-500 uppercase tracking-wider">
+                Opportunity
+              </span>
+              <select
+                value={job.id}
+                onChange={handleJobChange}
+                className="bg-transparent text-xs font-semibold text-white outline-none cursor-pointer pr-4 appearance-none"
+              >
+                {allJobs.map((j) => (
+                  <option key={j.id} value={j.id} className="bg-[#181b1f] text-zinc-200">
+                    {j.company} — {j.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Candidate Selector Dropdown */}
+          <div className="flex items-center gap-2 bg-[#181b1f] px-3 py-1.5 rounded-lg border border-[rgba(255,255,255,0.08)]">
+            <HugeiconsIcon icon={UserAccountIcon} size={15} className="text-[#a7f3d0]" />
+            <div className="flex flex-col">
+              <span className="text-[9px] font-semibold text-zinc-500 uppercase tracking-wider">
+                Candidate Profile
+              </span>
+              <select
+                value={candidate?.id || ""}
+                onChange={handleCandidateChange}
+                className="bg-transparent text-xs font-semibold text-white outline-none cursor-pointer pr-4 appearance-none"
+              >
+                {allCandidates.map((c) => (
+                  <option key={c.id} value={c.id} className="bg-[#181b1f] text-zinc-200">
+                    {c.fullName} ({c.location})
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Version and Status badges */}
+          <div className="flex items-center gap-2">
+            <Badge variant="lavender" className="text-[10px] font-mono">
+              v{resume.versionNumber}
+            </Badge>
+            <Badge variant="sage" className="text-[10px] uppercase font-mono">
               {job.status.replace("_", " ")}
             </Badge>
+            <span className="text-[11px] font-mono text-zinc-500 hidden sm:inline">
+              {resume.diffItems?.length ?? 0} aligned modifications
+            </span>
           </div>
-          <span className="text-[11px] text-zinc-500 font-mono mt-0.5">
-            ATS LaTeX Synthesis • {resume.diffItems?.length ?? 0} aligned tailoring criteria
-          </span>
+        </div>
+
+        {/* Studio quick triggers */}
+        <div className="flex items-center gap-2">
+          {/* ATS Diffs Trigger */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={openDiffDrawer}
+            className="gap-1.5 text-xs text-zinc-300 hover:text-white"
+          >
+            <HugeiconsIcon icon={FilterIcon} size={13} className="text-[#d8b4fe]" />
+            <span>ATS Diffs</span>
+            <span className="badge-lavender px-1.5 py-0 rounded text-[10px] font-mono">
+              {resume.diffItems?.length ?? 0}
+            </span>
+          </Button>
+
+          {/* AI Dialogue Chat Trigger */}
+          <Button
+            variant="lavender"
+            size="sm"
+            onClick={openChatDrawer}
+            className="gap-1.5 text-xs font-semibold"
+          >
+            <HugeiconsIcon icon={AiBrain01Icon} size={14} />
+            <span>Agent Dialogue</span>
+          </Button>
         </div>
       </div>
 
-      {/* Middle & Right: Layout controls and Actions */}
-      <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
-        {/* 50/50 Split layout switcher */}
-        <div className="flex items-center bg-zinc-900 border border-zinc-800 rounded-lg p-0.5 text-xs">
+      {/* Bottom row: Workspace Layout switcher and Document Export Actions */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        {/* Layout switcher: 50/50 Split, Code, Preview */}
+        <div className="flex items-center bg-[#181b1f] border border-[rgba(255,255,255,0.07)] rounded-lg p-0.5 text-xs">
           <button
             type="button"
             onClick={() => setSplitMode("latex")}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all cursor-pointer ${
               splitMode === "latex"
-                ? "bg-zinc-800 text-white font-semibold shadow-sm"
+                ? "bg-[#20242a] text-white font-semibold shadow-sm"
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
             title="LaTeX Code Editor Only"
           >
-            <FileCode className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Code</span>
+            <HugeiconsIcon icon={FileCodeIcon} size={13} />
+            <span>Code Only</span>
           </button>
 
           <button
             type="button"
             onClick={() => setSplitMode("split")}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all cursor-pointer ${
               splitMode === "split"
-                ? "bg-zinc-800 text-white font-semibold shadow-sm"
+                ? "bg-[#20242a] text-[#a7f3d0] font-semibold shadow-sm"
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
             title="50/50 Split Workspace"
           >
-            <Columns2 className="w-3.5 h-3.5 text-indigo-400" />
+            <HugeiconsIcon icon={Layout01Icon} size={13} className="text-[#a7f3d0]" />
             <span>Split 50/50</span>
           </button>
 
           <button
             type="button"
             onClick={() => setSplitMode("preview")}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all cursor-pointer ${
               splitMode === "preview"
-                ? "bg-zinc-800 text-white font-semibold shadow-sm"
+                ? "bg-[#20242a] text-white font-semibold shadow-sm"
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
             title="PDF Document Preview Only"
           >
-            <Maximize2 className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Preview</span>
+            <HugeiconsIcon icon={EyeIcon} size={13} />
+            <span>Preview Only</span>
           </button>
         </div>
 
-        {/* ATS Diffs Drawer trigger */}
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={openDiffDrawer}
-          className="gap-1.5 text-xs border-zinc-800 text-zinc-300 hover:text-white"
-        >
-          <FileDiff className="w-3.5 h-3.5 text-purple-400" />
-          <span>ATS Diffs</span>
-          <span className="px-1.5 py-0.2 bg-purple-950/80 text-purple-300 rounded font-mono text-[10px] border border-purple-800/40">
-            {resume.diffItems?.length ?? 0}
-          </span>
-        </Button>
+        {/* Right Action buttons */}
+        <div className="flex items-center gap-2">
+          {/* Regenerate Button */}
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={regenerateResume}
+            disabled={isRegenerating}
+            className="gap-1.5 text-xs"
+            title="Regenerate ATS Resume"
+          >
+            <HugeiconsIcon
+              icon={ReloadIcon}
+              size={13}
+              className={isRegenerating ? "animate-spin text-zinc-400" : "text-zinc-300"}
+            />
+            <span className="hidden sm:inline">Regenerate</span>
+          </Button>
 
-        {/* AI Agent Chat trigger */}
-        <Button
-          variant="purple"
-          size="sm"
-          onClick={openChatDrawer}
-          className="gap-1.5 text-xs font-semibold"
-        >
-          <Bot className="w-3.5 h-3.5" />
-          <span>Agent Dialogue</span>
-        </Button>
+          {/* Download Tex Source */}
+          <Button
+            variant="secondary"
+            size="icon"
+            onClick={downloadTex}
+            title="Download LaTeX Source (.tex)"
+          >
+            <HugeiconsIcon icon={FileDownloadIcon} size={14} className="text-zinc-300" />
+          </Button>
 
-        {/* Regenerate Button */}
-        <Button
-          variant="secondary"
-          size="icon"
-          onClick={regenerateResume}
-          disabled={isRegenerating}
-          title="Regenerate ATS Resume"
-        >
-          <RefreshCw className={`w-3.5 h-3.5 ${isRegenerating ? "animate-spin" : ""}`} />
-        </Button>
-
-        {/* Download Tex Source */}
-        <Button
-          variant="secondary"
-          size="icon"
-          onClick={downloadTex}
-          title="Download LaTeX (.tex)"
-        >
-          <FileDown className="w-3.5 h-3.5 text-zinc-400" />
-        </Button>
-
-        {/* Download PDF via html2pdf.js */}
-        <Button
-          variant="indigo"
-          size="sm"
-          onClick={exportPdf}
-          disabled={isExportingPdf}
-          className="gap-1.5 text-xs"
-        >
-          <Download className={`w-3.5 h-3.5 ${isExportingPdf ? "animate-bounce" : ""}`} />
-          <span>{isExportingPdf ? "Exporting..." : "Download PDF"}</span>
-        </Button>
+          {/* Export PDF Button */}
+          <Button
+            variant="sage"
+            size="sm"
+            onClick={exportPdf}
+            disabled={isExportingPdf}
+            className="gap-1.5 text-xs font-semibold"
+          >
+            <HugeiconsIcon
+              icon={Download01Icon}
+              size={14}
+              className={isExportingPdf ? "animate-bounce" : ""}
+            />
+            <span>{isExportingPdf ? "Exporting..." : "Download PDF"}</span>
+          </Button>
+        </div>
       </div>
     </header>
   );

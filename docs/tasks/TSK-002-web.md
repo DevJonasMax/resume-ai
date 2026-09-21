@@ -30,4 +30,10 @@ Implement the modern AI productivity web application using Vinext (Vite + Next.j
 - [x] TSK-002.17: Implement interactive ATS Tailoring Diff Inspector and AI modification highlights
 - [x] TSK-002.18: Integrate SmoothUI AI Conversation component for interactive Agent dialogue and prompt refinement
 - [x] TSK-002.19: Refactor component hierarchy using Vercel Composition Patterns (Compound components, decoupled state, React 19)
-- [ ] TSK-002.20: Verification, code review of Dev Frontend changes, and runtime testing with Server agent
+- [x] TSK-002.20: Verification, code review of Dev Frontend changes, and runtime testing with Server agent
+- [x] TSK-002.21: Fix runtime error on undefined job status in Kanban board & add defensive data filters
+- [x] TSK-002.22: Refactor app layout to Dashboard Shell with left sidebar and right content viewport
+- [x] TSK-002.23: Implement in-studio Job and Candidate selectors in Resume Studio Header with auto-loading
+- [x] TSK-002.24: Redesign color palette to OpenAI Prism pastel aesthetic (soft sage, lavender, apricot, slate) eliminating AI slop
+- [x] TSK-002.25: Migrate all icons from Lucide to HugeIcons (@hugeicons/react and @hugeicons/core-free-icons)
+- [x] TSK-002.26: Verification, typecheck, build validation, and Server runtime test

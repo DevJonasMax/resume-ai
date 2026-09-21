@@ -1,25 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
+  --color-background: #0c0d0e;
+  --color-foreground: #ededed;
+  --color-surface: #121417;
+  --color-surface-elevated: #181b1f;
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  /* OpenAI Prism Pastel Colors */
+  --color-sage: #a7f3d0;
+  --color-lavender: #d8b4fe;
+  --color-apricot: #fdba74;
+  --color-sky: #93c5fd;
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
@@ -28,32 +20,33 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
+    --background: 240 10% 4.5%;
+    --foreground: 0 0% 95%;
+    --card: 240 10% 5.5%;
+    --card-foreground: 0 0% 95%;
+    --popover: 240 10% 5.5%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 95%;
     --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 12%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 240 3.7% 12%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 240 3.7% 14%;
+    --accent-foreground: 0 0% 95%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 240 3.7% 14%;
+    --input: 240 3.7% 14%;
+    --ring: 240 4.9% 80%;
     --radius: 0.5rem;
   }
 
   body {
-    background-color: #09090b;
-    color: #f4f4f5;
+    background-color: #0c0d0e;
+    color: #ededed;
     min-height: 100vh;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   code, pre {
@@ -63,8 +56,8 @@
 
 /* Impeccable Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -72,27 +65,69 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #23272d;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #333842;
 }
 
-/* Clean Panels and Surfaces */
+/* OpenAI Prism Matte Surfaces */
+.prism-panel {
+  background: #121417;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.prism-card {
+  background: #181b1f;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prism-card:hover {
+  background: #1e2228;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Prism Pastel Badges & Chips */
+.badge-sage {
+  background: rgba(167, 243, 208, 0.09);
+  color: #a7f3d0;
+  border: 1px solid rgba(167, 243, 208, 0.22);
+}
+
+.badge-lavender {
+  background: rgba(216, 180, 254, 0.09);
+  color: #d8b4fe;
+  border: 1px solid rgba(216, 180, 254, 0.22);
+}
+
+.badge-apricot {
+  background: rgba(253, 186, 116, 0.09);
+  color: #fdba74;
+  border: 1px solid rgba(253, 186, 116, 0.22);
+}
+
+.badge-sky {
+  background: rgba(147, 197, 253, 0.09);
+  color: #93c5fd;
+  border: 1px solid rgba(147, 197, 253, 0.22);
+}
+
+/* Compatibility utilities for glass-panel and glass-card */
 .glass-panel {
-  background: rgba(18, 18, 23, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #121417;
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .glass-card {
-  background: rgba(24, 24, 27, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.15s ease-out;
+  background: #181b1f;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  background: rgba(32, 32, 36, 0.95);
-  border-color: rgba(255, 255, 255, 0.14);
+  background: #1e2228;
+  border-color: rgba(255, 255, 255, 0.12);
 }
