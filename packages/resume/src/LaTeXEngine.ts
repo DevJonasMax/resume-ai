@@ -77,10 +77,8 @@ ${items}
 
     return `\\documentclass[letterpaper,11pt]{article}
 
-\\usepackage{latexsym}
 \\usepackage[empty]{fullpage}
 \\usepackage{titlesec}
-\\usepackage{marvosym}
 \\usepackage[usenames,dvipsnames]{color}
 \\usepackage{verbatim}
 \\usepackage{enumitem}
