@@ -14,6 +14,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import type { CandidateProfile, Job } from "@resume-ai/types";
 import { Badge } from "@/components/ui/badge";
+import { LanguageSwitcher, useI18n } from "@/lib/i18n/index.js";
 
 export type NavTab = "resume" | "kanban" | "candidate" | "monitor";
 
@@ -42,26 +43,28 @@ export function DashboardSidebar({
   isAgentRunning = false,
   onOpenMonitor,
 }: DashboardSidebarProps) {
+  const { t } = useI18n();
+
   const navItems = [
     {
       id: "resume" as const,
-      label: "Resume Studio",
-      description: "LaTeX & ATS synthesis",
+      label: t("nav.resumeStudio"),
+      description: t("nav.resumeStudioDesc"),
       icon: NoteEditIcon,
-      badge: "Workstation",
+      badge: t("nav.workstation"),
       badgeVariant: "lavender" as const,
     },
     {
       id: "kanban" as const,
-      label: "Kanban Pipeline",
-      description: `${jobsCount} active opportunities`,
+      label: t("nav.kanbanPipeline"),
+      description: t("nav.kanbanDesc", { count: jobsCount }),
       icon: DashboardSquare01Icon,
       count: jobsCount,
     },
     {
       id: "candidate" as const,
-      label: "Candidate Profiles",
-      description: `${candidatesCount} verified truth profiles`,
+      label: t("nav.candidateProfiles"),
+      description: t("nav.candidateDesc", { count: candidatesCount }),
       icon: UserAccountIcon,
       count: candidatesCount,
     },
@@ -94,7 +97,7 @@ export function DashboardSidebar({
       {/* Primary Navigation */}
       <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1.5">
         <span className="px-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider block mb-2">
-          Workspaces
+          {t("nav.workspaces")}
         </span>
 
         {navItems.map((item) => {
@@ -139,7 +142,7 @@ export function DashboardSidebar({
         {/* Agent Monitor trigger item */}
         <div className="pt-3">
           <span className="px-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider block mb-2">
-            Execution
+            {t("nav.execution")}
           </span>
           <button
             type="button"
@@ -156,15 +159,15 @@ export function DashboardSidebar({
                 size={16}
                 className={isAgentRunning ? "text-[#a7f3d0] animate-pulse" : "text-zinc-500"}
               />
-              <span className="truncate">Agent Monitor</span>
+              <span className="truncate">{t("nav.agentMonitor")}</span>
             </div>
             {isAgentRunning ? (
               <span className="flex items-center gap-1 text-[9px] font-mono font-bold text-[#a7f3d0]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#a7f3d0] animate-ping" />
-                ACTIVE
+                {t("nav.active")}
               </span>
             ) : (
-              <span className="text-[10px] font-mono text-zinc-600">Idle</span>
+              <span className="text-[10px] font-mono text-zinc-600">{t("nav.idle")}</span>
             )}
           </button>
         </div>
@@ -174,17 +177,17 @@ export function DashboardSidebar({
           <div className="p-3 bg-[#121417] rounded-xl border border-[rgba(255,255,255,0.06)] flex flex-col gap-2.5">
             <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
               <HugeiconsIcon icon={SparklesIcon} size={12} className="text-[#d8b4fe]" />
-              Active Target
+              {t("nav.activeTarget")}
             </span>
 
             {/* Candidate & Target Job Info */}
             <div className="flex flex-col gap-1.5">
               <div className="flex flex-col">
                 <span className="text-[11px] font-semibold text-zinc-200 truncate">
-                  {activeCandidate?.fullName || "No candidate selected"}
+                  {activeCandidate?.fullName || t("nav.noCandidateSelected")}
                 </span>
                 <span className="text-[10px] text-zinc-500 truncate">
-                  {activeCandidate?.location || "No profile location"}
+                  {activeCandidate?.location || t("nav.noProfileLocation")}
                 </span>
               </div>
               {activeJob && (
@@ -207,7 +210,7 @@ export function DashboardSidebar({
                 className="flex items-center justify-center gap-1 py-1 px-1.5 rounded bg-[#181b1f] hover:bg-[#20242a] text-[10px] font-medium text-zinc-300 transition-colors cursor-pointer border border-[rgba(255,255,255,0.06)]"
               >
                 <HugeiconsIcon icon={PlusSignIcon} size={11} className="text-[#93c5fd]" />
-                <span>Job</span>
+                <span>{t("nav.addJob")}</span>
               </button>
 
               <button
@@ -216,11 +219,16 @@ export function DashboardSidebar({
                 className="flex items-center justify-center gap-1 py-1 px-1.5 rounded bg-[#181b1f] hover:bg-[#20242a] text-[10px] font-medium text-zinc-300 transition-colors cursor-pointer border border-[rgba(255,255,255,0.06)]"
               >
                 <HugeiconsIcon icon={PlusSignIcon} size={11} className="text-[#d8b4fe]" />
-                <span>Profile</span>
+                <span>{t("nav.addProfile")}</span>
               </button>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Language Switcher */}
+      <div className="px-3 py-2 border-t border-[rgba(255,255,255,0.06)]">
+        <LanguageSwitcher variant="full" />
       </div>
 
       {/* System Telemetry Footer */}
@@ -228,20 +236,20 @@ export function DashboardSidebar({
         <div className="flex items-center justify-between text-[10px] text-zinc-500 font-mono">
           <span className="flex items-center gap-1.5">
             <HugeiconsIcon icon={Database01Icon} size={12} className="text-[#a7f3d0]" />
-            <span>SQLite DB</span>
+            <span>{t("nav.sqliteDb")}</span>
           </span>
           <span className="flex items-center gap-1 text-[#a7f3d0]">
             <HugeiconsIcon icon={CheckmarkCircle02Icon} size={10} />
-            <span>Synced</span>
+            <span>{t("nav.synced")}</span>
           </span>
         </div>
 
         <div className="flex items-center justify-between text-[10px] text-zinc-500 font-mono">
           <span className="flex items-center gap-1.5">
             <HugeiconsIcon icon={SparklesIcon} size={12} className="text-[#d8b4fe]" />
-            <span>Jev System One</span>
+            <span>{t("nav.jevSystemOne")}</span>
           </span>
-          <span className="text-[#d8b4fe]">Ready</span>
+          <span className="text-[#d8b4fe]">{t("nav.ready")}</span>
         </div>
       </div>
     </aside>

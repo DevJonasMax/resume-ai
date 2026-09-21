@@ -2,6 +2,7 @@
 
 import type { JobStatus } from "@resume-ai/types";
 import React, { useState } from "react";
+import { useI18n } from "@/lib/i18n/index.js";
 import { useKanban } from "./KanbanContext.js";
 
 const COLUMN_META: Record<
@@ -67,6 +68,7 @@ export interface KanbanColumnProps {
 export function KanbanColumn({ status, children, count }: KanbanColumnProps) {
   const meta = COLUMN_META[status];
   const { onMoveJob } = useKanban();
+  const { t } = useI18n();
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -87,6 +89,8 @@ export function KanbanColumn({ status, children, count }: KanbanColumnProps) {
     }
   };
 
+  const title = t(`kanban.columns.${status}`) || meta.title;
+
   return (
     <div
       onDragOver={handleDragOver}
@@ -99,7 +103,7 @@ export function KanbanColumn({ status, children, count }: KanbanColumnProps) {
       <div className="flex items-center justify-between pb-3 border-b border-zinc-800/80 mb-3 px-1">
         <div className="flex items-center gap-2">
           <span className={`text-xs font-bold uppercase tracking-wider ${meta.color}`}>
-            {meta.title}
+            {title}
           </span>
         </div>
         <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${meta.badgeColor}`}>
