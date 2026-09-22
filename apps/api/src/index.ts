@@ -11,8 +11,15 @@ import {
   seedDatabase,
 } from "@resume-ai/database";
 import { JobAnalysisService } from "@resume-ai/jobs";
-import { CandidateParserService, ResumeTailoringService } from "@resume-ai/resume";
-import type { CandidateProfile, Job, JobStatus } from "@resume-ai/types";
+import { CandidateParserService, getPDFProvider, ResumeTailoringService } from "@resume-ai/resume";
+import {
+  type CandidateProfile,
+  type Job,
+  type JobStatus,
+  ResumeDocumentSchema,
+  type ResumeDocument,
+  type ResumeVersion,
+} from "@resume-ai/types";
 import Fastify from "fastify";
 
 const server = Fastify({
@@ -313,7 +320,140 @@ server.post("/api/resumes/:id/refine", async (request, reply) => {
 });
 
 /**
- * Save manual edits to the LaTeX source code of a resume version.
+ * Helper to ensure a ResumeDocument is returned, with fallback reconstruction for legacy rows.
+ */
+async function resolveResumeDocument(resume: ResumeVersion): Promise<ResumeDocument> {
+  if (resume.resumeData) {
+    return resume.resumeData;
+  }
+  const candidate = await candidateRepo.getActiveProfile();
+  const skills = candidate
+    ? Object.entries(candidate.skills).map(([category, items]) => ({ category, items }))
+    : [];
+  return {
+    basics: {
+      fullName: candidate?.fullName || "Candidate",
+      email: candidate?.email || "candidate@example.com",
+      phone: candidate?.phone || "",
+      location: candidate?.location || "",
+    },
+    summary: resume.tailoredSummary,
+    experiences: resume.tailoredExperience,
+    skills,
+    education: candidate?.education || [],
+  };
+}
+
+/**
+ * Get active PDF provider configuration.
+ */
+server.get("/api/config/provider", async () => {
+  return { activeProvider: appConfig.pdfProvider };
+});
+
+/**
+ * Stream compiled PDF for a specific resume version using the active or requested provider.
+ */
+server.get("/api/resumes/:id/pdf", async (request, reply) => {
+  const { id } = request.params as { id: string };
+  const query = request.query as { paperSize?: "letter" | "a4"; provider?: "typst" | "react-pdf" | "latex" };
+  const resume = await resumeRepo.findById(id);
+  if (!resume) {
+    return reply.status(404).send({ error: "Resume version not found" });
+  }
+
+  try {
+    const document = await resolveResumeDocument(resume);
+    const provider = getPDFProvider(query.provider);
+    const pdfBuffer = await provider.renderPdf(document, { paperSize: query.paperSize });
+
+    reply.header("Content-Type", "application/pdf");
+    reply.header("Content-Disposition", `inline; filename="resume-${id}.pdf"`);
+    return reply.send(pdfBuffer);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    server.log.error(message);
+    return reply.status(500).send({ error: message });
+  }
+});
+
+/**
+ * Stream compiled PDF of the latest resume version for a target job.
+ */
+server.get("/api/jobs/:id/resume/latest/pdf", async (request, reply) => {
+  const { id } = request.params as { id: string };
+  const query = request.query as { paperSize?: "letter" | "a4"; provider?: "typst" | "react-pdf" | "latex" };
+  const resume = await resumeRepo.getLatestVersion(id);
+  if (!resume) {
+    return reply.status(404).send({ error: "No tailored resume found for this job" });
+  }
+
+  try {
+    const document = await resolveResumeDocument(resume);
+    const provider = getPDFProvider(query.provider);
+    const pdfBuffer = await provider.renderPdf(document, { paperSize: query.paperSize });
+
+    reply.header("Content-Type", "application/pdf");
+    reply.header("Content-Disposition", `inline; filename="resume-${resume.id}.pdf"`);
+    return reply.send(pdfBuffer);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    server.log.error(message);
+    return reply.status(500).send({ error: message });
+  }
+});
+
+/**
+ * Get rendered source markup from the active or requested provider.
+ */
+server.get("/api/resumes/:id/source", async (request, reply) => {
+  const { id } = request.params as { id: string };
+  const query = request.query as { provider?: "typst" | "react-pdf" | "latex" };
+  const resume = await resumeRepo.findById(id);
+  if (!resume) {
+    return reply.status(404).send({ error: "Resume version not found" });
+  }
+
+  try {
+    const document = await resolveResumeDocument(resume);
+    const provider = getPDFProvider(query.provider);
+    const source = provider.renderSource ? provider.renderSource(document) : resume.latexSource;
+    return {
+      provider: provider.name,
+      source,
+    };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    return reply.status(500).send({ error: message });
+  }
+});
+
+/**
+ * Save manual edits to the structured ResumeDocument of a resume version.
+ */
+server.put("/api/resumes/:id/document", async (request, reply) => {
+  const { id } = request.params as { id: string };
+  const body = request.body as { document: ResumeDocument };
+  if (!body.document) {
+    return reply.status(400).send({ error: "Missing required field: document" });
+  }
+
+  const parsed = ResumeDocumentSchema.safeParse(body.document);
+  if (!parsed.success) {
+    return reply.status(400).send({ error: "Invalid ResumeDocument schema", details: parsed.error.issues });
+  }
+
+  try {
+    const version = await tailoringService.updateResumeDocument(id, parsed.data);
+    return { version };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    return reply.status(500).send({ error: message });
+  }
+});
+
+/**
+ * @deprecated Legacy endpoint to save manual edits to LaTeX source. Use PUT /api/resumes/:id/document instead.
  */
 server.put("/api/resumes/:id/latex", async (request, reply) => {
   const { id } = request.params as { id: string };
