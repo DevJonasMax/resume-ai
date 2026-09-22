@@ -56,7 +56,7 @@ export const jobRequirementsTable = sqliteTable("job_requirements", {
 });
 
 /**
- * Tailored resume versions generated in LaTeX.
+ * Tailored resume versions generated in LaTeX or modern agnostic PDF engines.
  */
 export const resumeVersionsTable = sqliteTable("resume_versions", {
   id: text("id").primaryKey(),
@@ -64,7 +64,8 @@ export const resumeVersionsTable = sqliteTable("resume_versions", {
     .notNull()
     .references(() => jobsTable.id, { onDelete: "cascade" }),
   versionNumber: integer("version_number").notNull(),
-  latexSource: text("latex_source").notNull(),
+  latexSource: text("latex_source").notNull().default(""),
+  resumeDataJson: text("resume_data_json"),
   diffItemsJson: text("diff_items_json").notNull(),
   tailoredSummary: text("tailored_summary").notNull(),
   tailoredExperienceJson: text("tailored_experience_json").notNull(),

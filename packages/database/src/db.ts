@@ -90,7 +90,8 @@ function initializeDatabase() {
       id TEXT PRIMARY KEY,
       job_id TEXT NOT NULL REFERENCES jobs(id) ON DELETE CASCADE,
       version_number INTEGER NOT NULL,
-      latex_source TEXT NOT NULL,
+      latex_source TEXT NOT NULL DEFAULT '',
+      resume_data_json TEXT,
       diff_items_json TEXT NOT NULL,
       tailored_summary TEXT NOT NULL,
       tailored_experience_json TEXT NOT NULL,
@@ -125,6 +126,12 @@ function initializeDatabase() {
   try {
     // Safe schema migration for existing SQLite databases
     sqlite.exec("ALTER TABLE candidate_profiles ADD COLUMN is_active INTEGER NOT NULL DEFAULT 0;");
+  } catch {
+    // Column already exists or table was just created with the column
+  }
+
+  try {
+    sqlite.exec("ALTER TABLE resume_versions ADD COLUMN resume_data_json TEXT;");
   } catch {
     // Column already exists or table was just created with the column
   }
