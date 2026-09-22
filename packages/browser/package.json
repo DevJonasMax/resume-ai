@@ -23,6 +23,7 @@
     "@resume-ai/config": "workspace:*",
     "@resume-ai/database": "workspace:*",
     "@resume-ai/jev": "workspace:*",
+    "@resume-ai/resume": "workspace:*",
     "@resume-ai/types": "workspace:*",
     "zod": "^3.24.2"
   },

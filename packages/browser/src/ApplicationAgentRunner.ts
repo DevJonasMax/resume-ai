@@ -3,7 +3,8 @@ import path from "node:path";
 import { ApplicationLifecycleManager } from "@resume-ai/applications";
 import { AgentRunRepository, CandidateRepository, JobRepository, ResumeRepository } from "@resume-ai/database";
 import { BrowserDecider } from "@resume-ai/jev";
-import type { AgentRun, AgentRunEvent, HumanInterventionPrompt } from "@resume-ai/types";
+import { getPDFProvider } from "@resume-ai/resume";
+import type { AgentRun, AgentRunEvent, HumanInterventionPrompt, ResumeDocument } from "@resume-ai/types";
 import { AgentBrowserAdapter } from "./AgentBrowserAdapter.js";
 import type { BrowserAutomationService } from "./interfaces.js";
 
@@ -53,15 +54,37 @@ export class ApplicationAgentRunner {
 
     const resumeVersion = await this.resumeRepo.getLatestVersion(jobId);
 
-    // Save LaTeX resume to a temporary file for upload if present
+    // Save native compiled PDF resume to a temporary file for upload if present
     let resumeFilePath: string | undefined;
     if (resumeVersion) {
       const tempDir = path.resolve(process.cwd(), "tmp");
       if (!fs.existsSync(tempDir)) {
         fs.mkdirSync(tempDir, { recursive: true });
       }
-      resumeFilePath = path.join(tempDir, `${candidate.fullName.replace(/\s+/g, "_")}_Resume.tex`);
-      fs.writeFileSync(resumeFilePath, resumeVersion.latexSource);
+
+      const document: ResumeDocument = resumeVersion.resumeData || {
+        basics: {
+          fullName: candidate.fullName,
+          email: candidate.email,
+          phone: candidate.phone,
+          location: candidate.location,
+        },
+        summary: resumeVersion.tailoredSummary,
+        experiences: resumeVersion.tailoredExperience,
+        skills: Object.entries(candidate.skills).map(([category, items]) => ({ category, items })),
+        education: candidate.education,
+      };
+
+      try {
+        const provider = getPDFProvider();
+        const pdfBuffer = await provider.renderPdf(document);
+        resumeFilePath = path.join(tempDir, `${candidate.fullName.replace(/\s+/g, "_")}_Resume.pdf`);
+        fs.writeFileSync(resumeFilePath, pdfBuffer);
+      } catch {
+        // Fallback to legacy LaTeX file if PDF compilation fails
+        resumeFilePath = path.join(tempDir, `${candidate.fullName.replace(/\s+/g, "_")}_Resume.tex`);
+        fs.writeFileSync(resumeFilePath, resumeVersion.latexSource || "");
+      }
     }
 
     const runId = `run-${jobId}-${Date.now()}`;
