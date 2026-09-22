@@ -1,4 +1,7 @@
 import { z } from "zod";
+import { ResumeDocumentSchema } from "./resumeDocument.js";
+
+export * from "./resumeDocument.js";
 
 /**
  * Job opportunity status enum representing the full Kanban application pipeline.
@@ -149,7 +152,8 @@ export const ResumeVersionSchema = z.object({
   id: z.string(),
   jobId: z.string(),
   versionNumber: z.number().int().positive(),
-  latexSource: z.string(),
+  latexSource: z.string().optional().default(""),
+  resumeData: ResumeDocumentSchema.optional(),
   diffItems: z.array(ResumeDiffItemSchema),
   tailoredSummary: z.string(),
   tailoredExperience: z.array(ExperienceItemSchema),
