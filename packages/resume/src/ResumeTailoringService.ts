@@ -1,6 +1,13 @@
 import { type AIProvider, getAIProvider } from "@resume-ai/ai";
 import { CandidateRepository, JobRepository, ResumeRepository } from "@resume-ai/database";
-import type { ResumeDiffItem, ResumeVersion } from "@resume-ai/types";
+import type {
+  CandidateProfile,
+  ResumeDiffItem,
+  ResumeDocument,
+  ResumeEducationItem,
+  ResumeSkillGroup,
+  ResumeVersion,
+} from "@resume-ai/types";
 import { z } from "zod";
 import { LaTeXEngine } from "./LaTeXEngine.js";
 
@@ -28,7 +35,7 @@ const TailoringOutputSchema = z.object({
 });
 
 /**
- * Service managing grounded resume tailoring and LaTeX document versioning.
+ * Service managing grounded resume tailoring and multi-provider document versioning.
  */
 export class ResumeTailoringService {
   private readonly jobRepo: JobRepository;
@@ -52,7 +59,43 @@ export class ResumeTailoringService {
   }
 
   /**
-   * Generates a tailored LaTeX resume version aligned with job requirements while strictly grounded in candidate truth.
+   * Helper assembling canonical ResumeDocument from candidate ground truth and tailored sections.
+   */
+  private buildResumeDocument(
+    candidate: CandidateProfile,
+    tailoredSummary: string,
+    tailoredExperience: CandidateProfile["experiences"]
+  ): ResumeDocument {
+    const skills: ResumeSkillGroup[] = Object.entries(candidate.skills).map(([category, items]) => ({
+      category,
+      items,
+    }));
+
+    const education: ResumeEducationItem[] = candidate.education.map((edu) => ({
+      institution: edu.institution,
+      location: edu.location,
+      degree: edu.degree,
+      percentageOrGpa: edu.percentageOrGpa,
+      startDate: edu.startDate,
+      endDate: edu.endDate,
+    }));
+
+    return {
+      basics: {
+        fullName: candidate.fullName,
+        email: candidate.email,
+        phone: candidate.phone,
+        location: candidate.location,
+      },
+      summary: tailoredSummary,
+      experiences: tailoredExperience,
+      skills,
+      education,
+    };
+  }
+
+  /**
+   * Generates a tailored resume version producing a renderer-agnostic ResumeDocument.
    */
   public async generateTailoredResume(jobId: string, candidateId?: string): Promise<ResumeVersion> {
     const job = await this.jobRepo.findById(jobId);
@@ -103,6 +146,9 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems ex
         "You are an expert resume tailoring assistant. Optimize impact, vocabulary, and relevance without hallucinating unverified candidate history.",
     });
 
+    const resumeData = this.buildResumeDocument(candidate, tailored.tailoredSummary, tailored.tailoredExperience);
+
+    // Retain legacy LaTeX source generation for backward-compatibility
     const latexSource = this.latexEngine.renderDocument({
       candidate,
       summary: tailored.tailoredSummary,
@@ -115,6 +161,7 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems ex
       jobId,
       versionNumber: nextVersionNumber,
       latexSource,
+      resumeData,
       diffItems: tailored.diffItems as ResumeDiffItem[],
       tailoredSummary: tailored.tailoredSummary,
       tailoredExperience: tailored.tailoredExperience,
@@ -128,7 +175,7 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems ex
   }
 
   /**
-   * Refines an existing resume version with the AI Agent according to specific user instructions or deeper ATS optimization.
+   * Refines an existing resume version with the AI Agent according to specific user instructions.
    */
   public async refineResumeWithAgent(resumeId: string, instructions?: string): Promise<ResumeVersion> {
     const existing = await this.resumeRepo.findById(resumeId);
@@ -155,7 +202,7 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems ex
       : "Focus on maximizing ATS keyword precision and quantifiable impact metrics.";
 
     const prompt = `You are an elite AI technical recruiter and resume tailoring agent.
-Review the current resume LaTeX source and improve its alignment with the target job requirements.
+Review the current resume and improve its alignment with the target job requirements.
 
 ${userInstructionsText}
 
@@ -178,6 +225,14 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems wi
         "You are an AI resume refinement agent. Elevate terminology, emphasize required tools, and produce clear rationales without altering underlying facts.",
     });
 
+    const resumeData: ResumeDocument = existing.resumeData
+      ? {
+          ...existing.resumeData,
+          summary: tailored.tailoredSummary,
+          experiences: tailored.tailoredExperience,
+        }
+      : this.buildResumeDocument(candidate, tailored.tailoredSummary, tailored.tailoredExperience);
+
     const latexSource = this.latexEngine.renderDocument({
       candidate,
       summary: tailored.tailoredSummary,
@@ -190,6 +245,7 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems wi
       jobId: existing.jobId,
       versionNumber: nextVersionNumber,
       latexSource,
+      resumeData,
       diffItems: tailored.diffItems as ResumeDiffItem[],
       tailoredSummary: tailored.tailoredSummary,
       tailoredExperience: tailored.tailoredExperience,
@@ -201,7 +257,18 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems wi
   }
 
   /**
-   * Updates the raw LaTeX source of a resume version following manual user edits in the Resume Studio.
+   * Updates the structured ResumeDocument of a resume version following user edits in Resume Studio.
+   */
+  public async updateResumeDocument(resumeId: string, resumeData: ResumeDocument): Promise<ResumeVersion> {
+    const updated = await this.resumeRepo.updateResumeData(resumeId, resumeData);
+    if (!updated) {
+      throw new Error(`Resume version not found with id: ${resumeId}`);
+    }
+    return updated;
+  }
+
+  /**
+   * @deprecated Updates raw LaTeX source for legacy compatibility. Use updateResumeDocument instead.
    */
   public async updateCustomLatex(resumeId: string, customLatex: string): Promise<ResumeVersion> {
     const updated = await this.resumeRepo.updateLatexSource(resumeId, customLatex);

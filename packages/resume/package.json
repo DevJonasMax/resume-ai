@@ -19,15 +19,18 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.9.0",
     "@resume-ai/ai": "workspace:*",
     "@resume-ai/config": "workspace:*",
     "@resume-ai/database": "workspace:*",
     "@resume-ai/types": "workspace:*",
     "@types/pdf-parse": "^1.1.5",
     "pdf-parse": "^2.4.5",
+    "react": "^19.3.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@types/react": "^19.3.0",
     "rimraf": "^6.0.1",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2"

@@ -12,6 +12,9 @@ export function sanitizeLatex(text: string): string {
 }
 
 /**
+ * @deprecated The LaTeXEngine is deprecated and retained for backwards compatibility.
+ * Use PDFProviderResolver with TypstProvider or ReactPdfProvider instead.
+ *
  * LaTeX resume generation engine matching the clean typography and macros of resume-example-01.tex.
  */
 export class LaTeXEngine {
