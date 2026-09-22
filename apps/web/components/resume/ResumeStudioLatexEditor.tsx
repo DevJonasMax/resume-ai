@@ -12,6 +12,8 @@ import {
 } from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { apiClient } from "@/lib/apiClient";
+import type { ResumeDocument } from "@resume-ai/types";
 import { useResumeStudio } from "./ResumeStudioContext";
 
 export function ResumeStudioLatexEditor() {
@@ -21,25 +23,86 @@ export function ResumeStudioLatexEditor() {
     isLatexDirty,
     isSaving,
     saveLatex,
+    saveDocument,
     resume,
+    candidate,
+    activeProvider,
   } = useResumeStudio();
 
   const [copied, setCopied] = useState(false);
+  const [providerSource, setProviderSource] = useState<string>("");
+  const [isLoadingSource, setIsLoadingSource] = useState<boolean>(false);
   const lineNumbersRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const lines = editedLatex.split("\n");
+  // Load provider-specific source code or structured representation
+  useEffect(() => {
+    let isCancelled = false;
+
+    if (activeProvider === "typst") {
+      setIsLoadingSource(true);
+      apiClient
+        .getResumeSource(resume.id, { provider: "typst" })
+        .then((res) => {
+          if (!isCancelled && res?.source) {
+            setProviderSource(res.source);
+          }
+        })
+        .catch(() => {
+          if (!isCancelled) {
+            setProviderSource("// Failed to load Typst source from server.");
+          }
+        })
+        .finally(() => {
+          if (!isCancelled) {
+            setIsLoadingSource(false);
+          }
+        });
+    } else if (activeProvider === "react-pdf") {
+      const canonicalDoc: ResumeDocument = resume.resumeData || {
+        basics: {
+          fullName: candidate?.fullName || "Candidate",
+          email: candidate?.email || "candidate@example.com",
+          phone: candidate?.phone || "",
+          location: candidate?.location || "",
+        },
+        summary: resume.tailoredSummary,
+        experiences: resume.tailoredExperience,
+        skills: candidate?.skills
+          ? Object.entries(candidate.skills).map(([category, items]) => ({ category, items }))
+          : [],
+        education: candidate?.education || [],
+      };
+      setProviderSource(JSON.stringify(canonicalDoc, null, 2));
+      setIsLoadingSource(false);
+    } else {
+      // Legacy LaTeX provider
+      setProviderSource(editedLatex);
+      setIsLoadingSource(false);
+    }
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [activeProvider, resume.id, resume.resumeData, resume.tailoredSummary, resume.tailoredExperience, candidate, editedLatex]);
+
+  const displayedContent =
+    activeProvider === "latex" ? editedLatex : providerSource;
+
+  const lines = displayedContent.split("\n");
   const lineCount = lines.length;
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(editedLatex);
+    await navigator.clipboard.writeText(displayedContent);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleResetToSource = () => {
-    if (confirm("Reset current editor contents back to original version source?")) {
-      setEditedLatex(resume.latexSource);
+    if (activeProvider === "latex") {
+      if (confirm("Reset current editor contents back to original version source?")) {
+        setEditedLatex(resume.latexSource);
+      }
     }
   };
 
@@ -63,11 +126,26 @@ export function ResumeStudioLatexEditor() {
       const start = textarea.selectionStart;
       const end = textarea.selectionEnd;
       const newValue =
-        editedLatex.substring(0, start) + "  " + editedLatex.substring(end);
-      setEditedLatex(newValue);
+        displayedContent.substring(0, start) + "  " + displayedContent.substring(end);
+
+      if (activeProvider === "latex") {
+        setEditedLatex(newValue);
+      } else {
+        setProviderSource(newValue);
+      }
+
       requestAnimationFrame(() => {
         textarea.selectionStart = textarea.selectionEnd = start + 2;
       });
+    }
+  };
+
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const val = e.target.value;
+    if (activeProvider === "latex") {
+      setEditedLatex(val);
+    } else {
+      setProviderSource(val);
     }
   };
 
@@ -76,14 +154,29 @@ export function ResumeStudioLatexEditor() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "s") {
         e.preventDefault();
-        if (isLatexDirty && !isSaving) {
+        if (activeProvider === "latex" && isLatexDirty && !isSaving) {
           saveLatex();
+        } else if (activeProvider === "react-pdf" && !isSaving) {
+          try {
+            const parsed = JSON.parse(providerSource) as ResumeDocument;
+            saveDocument(parsed);
+          } catch {
+            // Invalid JSON
+          }
         }
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isLatexDirty, isSaving, saveLatex]);
+  }, [activeProvider, isLatexDirty, isSaving, saveLatex, saveDocument, providerSource]);
+
+  // Provider-specific file label & description
+  const fileInfo =
+    activeProvider === "typst"
+      ? { name: "resume.typ", label: "Typst Source", lang: "Typst 0.15" }
+      : activeProvider === "react-pdf"
+      ? { name: "resume.json", label: "ResumeDocument", lang: "Canonical JSON" }
+      : { name: "resume.tex", label: "LaTeX 2e", lang: "LaTeX (Deprecated Legacy)" };
 
   return (
     <div className="flex flex-col h-full rounded-xl border border-[rgba(255,255,255,0.07)] bg-[#121417] overflow-hidden shadow-lg">
@@ -92,12 +185,15 @@ export function ResumeStudioLatexEditor() {
         <div className="flex items-center gap-2">
           <HugeiconsIcon icon={FileCodeIcon} size={15} className="text-[#93c5fd]" />
           <span className="text-xs font-mono font-bold text-white tracking-wide">
-            resume.tex
+            {fileInfo.name}
           </span>
-          <span className="text-[11px] font-mono text-zinc-500">
-            {lineCount} lines • {editedLatex.length} chars
+          <Badge variant="outline" className="text-[10px] uppercase font-mono text-[#a7f3d0] border-[#a7f3d0]/30">
+            {fileInfo.label}
+          </Badge>
+          <span className="text-[11px] font-mono text-zinc-500 hidden sm:inline">
+            {lineCount} lines • {displayedContent.length} chars
           </span>
-          {isLatexDirty ? (
+          {activeProvider === "latex" && isLatexDirty ? (
             <Badge variant="apricot" className="text-[10px]">
               Unsaved
             </Badge>
@@ -109,7 +205,7 @@ export function ResumeStudioLatexEditor() {
         </div>
 
         <div className="flex items-center gap-1.5">
-          {isLatexDirty && (
+          {activeProvider === "latex" && isLatexDirty && (
             <Button
               variant="ghost"
               size="sm"
@@ -141,21 +237,49 @@ export function ResumeStudioLatexEditor() {
             )}
           </Button>
 
-          <Button
-            variant={isLatexDirty ? "apricot" : "secondary"}
-            size="sm"
-            onClick={saveLatex}
-            disabled={isSaving || !isLatexDirty}
-            className="h-7 px-3 text-[11px] font-semibold"
-          >
-            <HugeiconsIcon icon={FloppyDiskIcon} size={12} className="mr-1" />
-            <span>{isSaving ? "Saving..." : "Save"}</span>
-          </Button>
+          {activeProvider === "latex" && (
+            <Button
+              variant={isLatexDirty ? "apricot" : "secondary"}
+              size="sm"
+              onClick={saveLatex}
+              disabled={isSaving || !isLatexDirty}
+              className="h-7 px-3 text-[11px] font-semibold"
+            >
+              <HugeiconsIcon icon={FloppyDiskIcon} size={12} className="mr-1" />
+              <span>{isSaving ? "Saving..." : "Save"}</span>
+            </Button>
+          )}
+
+          {activeProvider === "react-pdf" && (
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => {
+                try {
+                  const parsed = JSON.parse(providerSource) as ResumeDocument;
+                  saveDocument(parsed);
+                } catch {
+                  alert("Invalid JSON format. Please correct before saving.");
+                }
+              }}
+              disabled={isSaving}
+              className="h-7 px-3 text-[11px] font-semibold text-[#a7f3d0]"
+            >
+              <HugeiconsIcon icon={FloppyDiskIcon} size={12} className="mr-1" />
+              <span>{isSaving ? "Saving..." : "Save Document"}</span>
+            </Button>
+          )}
         </div>
       </div>
 
       {/* Editor Body: Line numbers + Textarea */}
       <div className="relative flex flex-1 min-h-0 h-full w-full overflow-hidden font-mono text-xs bg-[#0c0d0e]">
+        {isLoadingSource && (
+          <div className="absolute inset-0 bg-[#0c0d0e]/80 flex items-center justify-center z-10 text-xs text-zinc-400 font-mono">
+            Loading {activeProvider} source...
+          </div>
+        )}
+
         {/* Line numbers gutter */}
         <div
           ref={lineNumbersRef}
@@ -177,10 +301,11 @@ export function ResumeStudioLatexEditor() {
         {/* Textarea code surface */}
         <textarea
           ref={textareaRef}
-          value={editedLatex}
-          onChange={(e) => setEditedLatex(e.target.value)}
+          value={displayedContent}
+          onChange={handleContentChange}
           onScroll={handleScroll}
           onKeyDown={handleTextareaKeyDown}
+          readOnly={activeProvider === "typst"}
           spellCheck={false}
           autoCapitalize="off"
           autoComplete="off"
@@ -194,9 +319,13 @@ export function ResumeStudioLatexEditor() {
       <div className="flex items-center justify-between px-3 py-1.5 bg-[#181b1f] border-t border-[rgba(255,255,255,0.06)] text-[11px] text-zinc-500 font-mono shrink-0">
         <span className="flex items-center gap-1.5">
           <HugeiconsIcon icon={NoteEditIcon} size={12} className="text-zinc-400" />
-          <span>LaTeX 2e • UTF-8</span>
+          <span>{fileInfo.lang} • UTF-8</span>
         </span>
-        <span>Ctrl+S to save</span>
+        <span>
+          {activeProvider === "typst"
+            ? "Generated from canonical ResumeDocument"
+            : "Ctrl+S to save"}
+        </span>
       </div>
     </div>
   );

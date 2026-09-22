@@ -1,4 +1,12 @@
-import type { AgentRun, CandidateProfile, Job, JobRequirements, JobStatus, ResumeVersion } from "@resume-ai/types";
+import type {
+  AgentRun,
+  CandidateProfile,
+  Job,
+  JobRequirements,
+  JobStatus,
+  ResumeDocument,
+  ResumeVersion,
+} from "@resume-ai/types";
 
 const API_BASE = "/api";
 
@@ -135,5 +143,35 @@ export const apiClient = {
       body: JSON.stringify({ latex }),
     });
     return res.json() as Promise<{ version: ResumeVersion }>;
+  },
+
+  getResumePdfUrl(resumeId: string, options?: { provider?: string; paperSize?: string }) {
+    const params = new URLSearchParams();
+    if (options?.provider) params.set("provider", options.provider);
+    if (options?.paperSize) params.set("paperSize", options.paperSize);
+    const queryString = params.toString();
+    return `${API_BASE}/resumes/${resumeId}/pdf${queryString ? `?${queryString}` : ""}`;
+  },
+
+  async getResumeSource(resumeId: string, options?: { provider?: string }) {
+    const params = new URLSearchParams();
+    if (options?.provider) params.set("provider", options.provider);
+    const queryString = params.toString();
+    const res = await fetch(`${API_BASE}/resumes/${resumeId}/source${queryString ? `?${queryString}` : ""}`);
+    return res.json() as Promise<{ provider: string; source: string }>;
+  },
+
+  async saveResumeDocument(resumeId: string, document: ResumeDocument) {
+    const res = await fetch(`${API_BASE}/resumes/${resumeId}/document`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ document }),
+    });
+    return res.json() as Promise<{ version: ResumeVersion }>;
+  },
+
+  async getProviderConfig() {
+    const res = await fetch(`${API_BASE}/config/provider`);
+    return res.json() as Promise<{ activeProvider: "typst" | "react-pdf" | "latex" }>;
   },
 };

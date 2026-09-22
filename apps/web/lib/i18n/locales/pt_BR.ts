@@ -73,7 +73,7 @@ export const pt_BR: LocaleTranslations = {
     codeOnly: "Apenas Código",
     splitView: "Dividido 50/50",
     previewOnly: "Apenas Prévia",
-    codeOnlyTitle: "Apenas Editor de Código LaTeX",
+    codeOnlyTitle: "Apenas Editor de Código-Fonte",
     splitViewTitle: "Espaço de Trabalho Dividido 50/50",
     previewOnlyTitle: "Apenas Pré-visualização do Documento PDF",
     regenerate: "Regenerar",

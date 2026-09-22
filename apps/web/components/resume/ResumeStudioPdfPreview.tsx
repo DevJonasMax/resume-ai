@@ -13,16 +13,18 @@ import {
   PrinterIcon,
   RefreshIcon,
 } from "@hugeicons/core-free-icons";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useResumeStudio } from "./ResumeStudioContext";
 
 export function ResumeStudioPdfPreview() {
   const {
     candidate,
+    activeProvider,
     pdfBlobUrl,
     isCompilingPdf,
     compileError,
-    compileLatex,
+    compilePdf,
     exportPdf,
     isExportingPdf,
   } = useResumeStudio();
@@ -59,6 +61,9 @@ export function ResumeStudioPdfPreview() {
           <span className="text-xs font-mono font-bold text-white tracking-wide">
             PDF Document Preview
           </span>
+          <Badge variant="lavender" className="text-[10px] font-mono uppercase">
+            {activeProvider}
+          </Badge>
 
           {isCompilingPdf ? (
             <span className="flex items-center gap-1.5 text-[11px] text-amber-300 font-mono">
@@ -88,9 +93,9 @@ export function ResumeStudioPdfPreview() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => compileLatex()}
+            onClick={() => compilePdf()}
             disabled={isCompilingPdf}
-            title="Recompile LaTeX"
+            title="Recompile PDF"
             className="h-7 px-2 text-[11px] text-zinc-400 hover:text-white"
           >
             <HugeiconsIcon
@@ -178,12 +183,12 @@ export function ResumeStudioPdfPreview() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-red-400 text-xs font-semibold">
                 <HugeiconsIcon icon={AlertCircleIcon} size={15} className="text-red-400" />
-                <span>LaTeX Compilation Failed</span>
+                <span>PDF Compilation Failed</span>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => compileLatex()}
+                  onClick={() => compilePdf()}
                   className="text-[11px] font-mono text-zinc-300 hover:text-white underline cursor-pointer"
                 >
                   Retry
@@ -219,7 +224,7 @@ export function ResumeStudioPdfPreview() {
             >
               <iframe
                 src={pdfBlobUrl}
-                title="LaTeX PDF Preview"
+                title="Resume PDF Preview"
                 className="w-full h-full"
               />
             </object>
@@ -229,16 +234,16 @@ export function ResumeStudioPdfPreview() {
             <HugeiconsIcon icon={EyeIcon} size={32} className="text-zinc-600 mb-3" />
             <p className="text-xs text-zinc-300 font-medium mb-1">No PDF compiled yet</p>
             <p className="text-xs text-zinc-500 mb-4 max-w-xs">
-              Click compile or edit the LaTeX source code to generate your native PDF.
+              Click compile to generate your native PDF with {activeProvider.toUpperCase()}.
             </p>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => compileLatex()}
+              onClick={() => compilePdf()}
               className="gap-1.5 text-xs text-zinc-200"
             >
               <HugeiconsIcon icon={RefreshIcon} size={13} />
-              <span>Compile LaTeX to PDF</span>
+              <span>Compile PDF</span>
             </Button>
           </div>
         ) : null}

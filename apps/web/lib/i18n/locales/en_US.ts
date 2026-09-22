@@ -71,7 +71,7 @@ export const en_US = {
     codeOnly: "Code Only",
     splitView: "Split 50/50",
     previewOnly: "Preview Only",
-    codeOnlyTitle: "LaTeX Code Editor Only",
+    codeOnlyTitle: "Source Editor Only",
     splitViewTitle: "50/50 Split Workspace",
     previewOnlyTitle: "PDF Document Preview Only",
     regenerate: "Regenerate",

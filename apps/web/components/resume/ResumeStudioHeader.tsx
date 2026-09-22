@@ -24,6 +24,8 @@ export function ResumeStudioHeader() {
     job,
     resume,
     candidate,
+    activeProvider,
+    setActiveProvider,
     allJobs,
     allCandidates,
     onSelectJob,
@@ -103,11 +105,23 @@ export function ResumeStudioHeader() {
             </div>
           </div>
 
-          {/* Version and Status badges */}
+          {/* Version, Provider and Status badges */}
           <div className="flex items-center gap-2">
             <Badge variant="lavender" className="text-[10px] font-mono">
               v{resume.versionNumber}
             </Badge>
+            <div className="flex items-center gap-1.5 bg-[#181b1f] px-2 py-0.5 rounded border border-[rgba(255,255,255,0.08)]">
+              <span className="text-[9px] font-semibold text-zinc-500 uppercase tracking-wider">Engine:</span>
+              <select
+                value={activeProvider}
+                onChange={(e) => setActiveProvider(e.target.value as "typst" | "react-pdf" | "latex")}
+                className="bg-transparent text-[10px] font-mono font-bold text-[#a7f3d0] outline-none cursor-pointer pr-1 appearance-none uppercase"
+              >
+                <option value="typst" className="bg-[#181b1f] text-zinc-200">Typst (Default)</option>
+                <option value="react-pdf" className="bg-[#181b1f] text-zinc-200">React-PDF</option>
+                <option value="latex" className="bg-[#181b1f] text-zinc-200">LaTeX (Legacy)</option>
+              </select>
+            </div>
             <Badge variant="sage" className="text-[10px] uppercase font-mono">
               {job.status.replace("_", " ")}
             </Badge>

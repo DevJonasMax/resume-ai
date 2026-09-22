@@ -1,12 +1,13 @@
 "use client";
 
-import type { CandidateProfile, Job, ResumeVersion } from "@resume-ai/types";
+import type { CandidateProfile, Job, ResumeDocument, ResumeVersion } from "@resume-ai/types";
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { apiClient } from "@/lib/apiClient";
 import { compileLatexToPdf } from "@/lib/latexCompiler";
 
 export type SplitMode = "split" | "latex" | "preview";
 export type ZoomMode = "fit-width" | "fit-page" | "custom";
+export type PDFProviderName = "typst" | "react-pdf" | "latex";
 
 export interface ChatMessage {
   id: string;
@@ -20,6 +21,10 @@ export interface ResumeStudioContextValue {
   resume: ResumeVersion;
   candidate: CandidateProfile | null;
 
+  // Provider state
+  activeProvider: PDFProviderName;
+  setActiveProvider: (provider: PDFProviderName) => void;
+
   // Split View state
   splitMode: SplitMode;
   setSplitMode: (mode: SplitMode) => void;
@@ -30,12 +35,13 @@ export interface ResumeStudioContextValue {
   setZoomLevel: (zoom: number | ((prev: number) => number)) => void;
   setZoomMode: (mode: ZoomMode) => void;
 
-  // LaTeX editor state
+  // LaTeX / Structured editor state
   editedLatex: string;
   isLatexDirty: boolean;
   isSaving: boolean;
   setEditedLatex: (latex: string) => void;
   saveLatex: () => Promise<void>;
+  saveDocument: (document: ResumeDocument) => Promise<void>;
 
   // Real PDF Compilation state
   pdfBlobUrl: string | null;
@@ -43,6 +49,7 @@ export interface ResumeStudioContextValue {
   isCompilingPdf: boolean;
   compileError: string | null;
   compileLatex: (source?: string) => Promise<void>;
+  compilePdf: (provider?: PDFProviderName) => Promise<void>;
 
   // Diff Inspector state
   isDiffDrawerOpen: boolean;
@@ -123,6 +130,9 @@ export function ResumeStudioProvider({
   const [isRefining, setIsRefining] = useState<boolean>(false);
   const [isExportingPdf, setIsExportingPdf] = useState<boolean>(false);
 
+  // Provider state
+  const [activeProvider, setActiveProvider] = useState<PDFProviderName>("typst");
+
   // PDF compilation state
   const [pdfBlobUrl, setPdfBlobUrl] = useState<string | null>(null);
   const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
@@ -148,6 +158,18 @@ export function ResumeStudioProvider({
     },
   ]);
 
+  // Load configured default provider from backend
+  useEffect(() => {
+    apiClient
+      .getProviderConfig()
+      .then((cfg) => {
+        if (cfg?.activeProvider) {
+          setActiveProvider(cfg.activeProvider);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   useEffect(() => {
     setCurrentResume(initialResume);
     setEditedLatex(initialResume.latexSource);
@@ -155,51 +177,86 @@ export function ResumeStudioProvider({
 
   const isLatexDirty = editedLatex !== currentResume.latexSource;
 
-  const compileLatex = useCallback(async (source?: string) => {
-    const latexToCompile = source ?? editedLatex;
-    if (!latexToCompile || !latexToCompile.trim()) return;
-
-    const compileId = ++compileIdRef.current;
-    setIsCompilingPdf(true);
-    setCompileError(null);
-
-    try {
-      const result = await compileLatexToPdf(latexToCompile);
-
-      if (compileId !== compileIdRef.current) {
-        URL.revokeObjectURL(result.pdfUrl);
-        return;
-      }
-
-      if (prevBlobUrlRef.current) {
-        URL.revokeObjectURL(prevBlobUrlRef.current);
-      }
-      prevBlobUrlRef.current = result.pdfUrl;
-
-      setPdfBlobUrl(result.pdfUrl);
-      setPdfBlob(result.pdfBlob);
+  const compilePdf = useCallback(
+    async (providerToUse?: PDFProviderName) => {
+      const compileId = ++compileIdRef.current;
+      setIsCompilingPdf(true);
       setCompileError(null);
-    } catch (err: unknown) {
-      if (compileId !== compileIdRef.current) {
-        return;
-      }
-      const message = err instanceof Error ? err.message : String(err);
-      setCompileError(message);
-    } finally {
-      if (compileId === compileIdRef.current) {
-        setIsCompilingPdf(false);
-      }
-    }
-  }, [editedLatex]);
 
-  // Debounced compilation when editedLatex changes
+      const targetProvider = providerToUse ?? activeProvider;
+
+      try {
+        const pdfUrl = apiClient.getResumePdfUrl(currentResume.id, { provider: targetProvider });
+        const res = await fetch(pdfUrl);
+        if (!res.ok) {
+          throw new Error(`Server returned HTTP ${res.status} compiling PDF`);
+        }
+        const blob = await res.blob();
+        const objectUrl = URL.createObjectURL(blob);
+
+        if (compileId !== compileIdRef.current) {
+          URL.revokeObjectURL(objectUrl);
+          return;
+        }
+
+        if (prevBlobUrlRef.current) {
+          URL.revokeObjectURL(prevBlobUrlRef.current);
+        }
+        prevBlobUrlRef.current = objectUrl;
+
+        setPdfBlobUrl(objectUrl);
+        setPdfBlob(blob);
+        setCompileError(null);
+      } catch (err: unknown) {
+        if (compileId !== compileIdRef.current) return;
+
+        // Fallback to local in-browser WASM compiler if available
+        try {
+          if (editedLatex && editedLatex.trim()) {
+            const fallbackResult = await compileLatexToPdf(editedLatex);
+            setPdfBlobUrl(fallbackResult.pdfUrl);
+            setPdfBlob(fallbackResult.pdfBlob);
+            setCompileError(null);
+            return;
+          }
+        } catch {
+          // Keep primary error
+        }
+
+        const message = err instanceof Error ? err.message : String(err);
+        setCompileError(message);
+      } finally {
+        if (compileId === compileIdRef.current) {
+          setIsCompilingPdf(false);
+        }
+      }
+    },
+    [activeProvider, currentResume.id, editedLatex]
+  );
+
+  const compileLatex = useCallback(
+    async (source?: string) => {
+      if (source && source !== currentResume.latexSource) {
+        try {
+          const result = await compileLatexToPdf(source);
+          setPdfBlobUrl(result.pdfUrl);
+          setPdfBlob(result.pdfBlob);
+          setCompileError(null);
+        } catch (err: unknown) {
+          const message = err instanceof Error ? err.message : String(err);
+          setCompileError(message);
+        }
+      } else {
+        await compilePdf();
+      }
+    },
+    [compilePdf, currentResume.latexSource]
+  );
+
+  // Initial and reactive PDF compilation
   useEffect(() => {
-    const timer = setTimeout(() => {
-      compileLatex(editedLatex);
-    }, 600);
-
-    return () => clearTimeout(timer);
-  }, [editedLatex, compileLatex]);
+    compilePdf();
+  }, [currentResume.id, activeProvider, compilePdf]);
 
   // Revoke object URL on unmount to prevent memory leaks
   useEffect(() => {
@@ -221,6 +278,17 @@ export function ResumeStudioProvider({
         setCurrentResume(res.version);
       }
       await compileLatex(editedLatex);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const saveDocument = async (document: ResumeDocument) => {
+    setIsSaving(true);
+    try {
+      const res = await apiClient.saveResumeDocument(currentResume.id, document);
+      setCurrentResume(res.version);
+      await compilePdf();
     } finally {
       setIsSaving(false);
     }
@@ -328,6 +396,8 @@ export function ResumeStudioProvider({
       job,
       resume: currentResume,
       candidate,
+      activeProvider,
+      setActiveProvider,
       splitMode,
       setSplitMode,
       zoomLevel,
@@ -339,11 +409,13 @@ export function ResumeStudioProvider({
       isSaving,
       setEditedLatex,
       saveLatex,
+      saveDocument,
       pdfBlobUrl,
       pdfBlob,
       isCompilingPdf,
       compileError,
       compileLatex,
+      compilePdf,
       isDiffDrawerOpen,
       openDiffDrawer: () => setIsDiffDrawerOpen(true),
       closeDiffDrawer: () => setIsDiffDrawerOpen(false),
@@ -373,6 +445,7 @@ export function ResumeStudioProvider({
       job,
       currentResume,
       candidate,
+      activeProvider,
       splitMode,
       zoomLevel,
       zoomMode,
@@ -384,6 +457,7 @@ export function ResumeStudioProvider({
       isCompilingPdf,
       compileError,
       compileLatex,
+      compilePdf,
       isDiffDrawerOpen,
       activeDiffKey,
       filterSection,
