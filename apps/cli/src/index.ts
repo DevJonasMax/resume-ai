@@ -1,4 +1,5 @@
-#!/usr/bin/env node
+import fs from "node:fs";
+import path from "node:path";
 import { input, select } from "@inquirer/prompts";
 import { ApplicationAgentRunner } from "@resume-ai/browser";
 import { appConfig } from "@resume-ai/config";
@@ -11,7 +12,7 @@ import {
   seedDatabase,
 } from "@resume-ai/database";
 import { JobAnalysisService } from "@resume-ai/jobs";
-import { ResumeTailoringService } from "@resume-ai/resume";
+import { getPDFProvider, ResumeTailoringService } from "@resume-ai/resume";
 import type { Job } from "@resume-ai/types";
 import { Command } from "commander";
 import pc from "picocolors";
@@ -135,9 +136,10 @@ program
  */
 program
   .command("resume")
-  .description("Generate tailored LaTeX resume grounded in candidate profile")
+  .description("Generate tailored resume grounded in candidate profile with compiled PDF")
   .requiredOption("-j, --job <id>", "Job ID to tailor resume for")
-  .action(async (options: { job: string }) => {
+  .option("-o, --output <dir>", "Directory to save generated PDF", "./output")
+  .action(async (options: { job: string; output?: string }) => {
     console.log(pc.cyan(`Tailoring resume for job ${options.job}...`));
     const version = await tailoringService.generateTailoredResume(options.job);
 
@@ -148,6 +150,21 @@ program
     console.log(pc.bold("\nKey Improvements Made:"));
     for (const diff of version.diffItems) {
       console.log(`  [${pc.cyan(diff.section)}] ${diff.rationalization}`);
+    }
+
+    if (version.resumeData) {
+      const provider = getPDFProvider();
+      const outputDir = path.resolve(process.cwd(), options.output || "./output");
+      if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+      }
+      const pdfPath = path.join(outputDir, `resume-${options.job}-v${version.versionNumber}.pdf`);
+      const pdfBuffer = await provider.renderPdf(version.resumeData);
+      fs.writeFileSync(pdfPath, pdfBuffer);
+
+      console.log(pc.bold("\nCompiled PDF Output:"));
+      console.log(`  Provider: ${pc.cyan(provider.name)}`);
+      console.log(`  PDF Path: ${pc.green(pdfPath)}`);
     }
     console.log();
   });
