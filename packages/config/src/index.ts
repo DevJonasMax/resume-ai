@@ -14,6 +14,8 @@ const EnvironmentSchema = z.object({
     .default("false")
     .transform((val) => val === "true"),
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+  PDF_PROVIDER: z.enum(["typst", "react-pdf", "latex"]).default("typst"),
+  TYPST_PATH: z.string().optional(),
 });
 
 const parsedEnv = EnvironmentSchema.parse(process.env);
@@ -30,6 +32,8 @@ export interface AppConfig {
   browserHeadless: boolean;
   isProduction: boolean;
   nodeEnv: "development" | "test" | "production";
+  pdfProvider: "typst" | "react-pdf" | "latex";
+  typstPath: string | undefined;
 }
 
 /**
@@ -44,4 +48,6 @@ export const appConfig: AppConfig = {
   browserHeadless: parsedEnv.BROWSER_HEADLESS,
   isProduction: parsedEnv.NODE_ENV === "production",
   nodeEnv: parsedEnv.NODE_ENV,
+  pdfProvider: parsedEnv.PDF_PROVIDER,
+  typstPath: parsedEnv.TYPST_PATH,
 };
