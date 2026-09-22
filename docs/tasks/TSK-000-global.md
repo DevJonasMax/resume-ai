@@ -18,6 +18,7 @@ Master implementation roadmap for the **AI Job Application Agent** monorepo. Thi
 - [x] [TSK-008: Database & Persistence](file:///D:/projetos/resume-ai/docs/tasks/TSK-008-database.md)
 - [ ] [TSK-009: Testing Infrastructure](file:///D:/projetos/resume-ai/docs/tasks/TSK-009-testing.md)
 - [x] [TSK-010: Documentation & Guides](file:///D:/projetos/resume-ai/docs/tasks/TSK-010-documentation.md)
+- [x] [TSK-011: Multi-Provider PDF Engine (Typst & React-PDF)](file:///C:/Users/Wesley%20Maik/Documents/Projects/resume-ai/docs/tasks/TSK-011-pdf-providers.md)
 
 ---
 

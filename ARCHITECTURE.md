@@ -63,7 +63,7 @@ graph TD
 | `packages/jev` | TypeSafe AI System One decision engine, Choice/Score/Noul questions | `packages/types`, `packages/config` |
 | `packages/browser` | Browser automation interface, `agent-browser` adapter, element parser | `packages/types`, `packages/config`, `packages/jev` |
 | `packages/jobs` | Job ingestion, requirements extraction, gap analysis | `packages/types`, `packages/ai`, `packages/jev` |
-| `packages/resume` | Resume tailoring, LaTeX generation, version diffing | `packages/types`, `packages/ai` |
+| `packages/resume` | Resume tailoring, multi-provider PDF engine (Typst, React-PDF, deprecated LaTeX), version diffing | `packages/types`, `packages/ai` |
 | `packages/applications`| Application lifecycle state machine, human-in-the-loop coordinator | `packages/types`, `packages/browser`, `packages/jev`, `packages/database` |
 
 ---
@@ -92,25 +92,29 @@ sequenceDiagram
     JobService-->>CLI_Web: Structured Job Analysis Result
 ```
 
-### 3.2 Tailored LaTeX Resume Generation
+### 3.2 Agnostic Resume Tailoring and Multi-Provider PDF Generation
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant ResumeService as Resume Service
+    participant ResumeService as Resume Tailoring Service
     participant AI as Gemini Provider
-    participant LaTeXEngine as LaTeX Engine
+    participant Resolver as PDF Provider Resolver
+    participant Provider as Typst / React-PDF Provider
     participant DB as SQLite DB
 
     User->>ResumeService: generateTailoredResume(jobId)
     ResumeService->>DB: Fetch JobRequirements & Candidate Profile
     DB-->>ResumeService: Candidate Data & Match Matrix
     ResumeService->>AI: Tailor summary & bullet points (grounded in candidate truth)
-    AI-->>ResumeService: Tailored structured resume data
-    ResumeService->>LaTeXEngine: Render LaTeX template (resumeItem, resumeSubheading)
-    LaTeXEngine-->>ResumeService: Sanitized LaTeX source
-    ResumeService->>DB: Save new ResumeVersion (source + structured diff)
-    ResumeService-->>User: Resume Version Ready
+    AI-->>ResumeService: Tailored structured resume data (no markup)
+    ResumeService->>ResumeService: Assemble canonical ResumeDocument JSON
+    ResumeService->>Resolver: getPDFProvider()
+    Resolver-->>ResumeService: Active PDF Provider (Typst / React-PDF)
+    ResumeService->>Provider: renderPdf(resumeDocument)
+    Provider-->>ResumeService: Compiled native PDF binary buffer
+    ResumeService->>DB: Save new ResumeVersion (resumeDataJson + diff)
+    ResumeService-->>User: Resume Version Ready with Compiled PDF
 ```
 
 ### 3.3 Safe Browser Application with Human-in-the-Loop
@@ -147,3 +151,4 @@ stateDiagram-v2
 1. **Truth Grounding**: The résumé generator strictly optimizes presentation, vocabulary alignment, and impact framing based on existing candidate experience. It never fabricates companies, degrees, or years of tenure.
 2. **Deterministic Fallbacks**: Every external AI or browser provider implements a deterministic mock adapter, guaranteeing end-to-end execution during automated testing and offline development.
 3. **Verified Submission**: A transition to the `Applied` status strictly requires DOM proof of submission (such as confirmation page text, confirmation number, or application receipt URL).
+4. **Renderer-Agnostic AI Output**: The AI Agent strictly produces validated JSON conforming to `ResumeDocumentSchema`. It never generates LaTeX, Typst, JSX, or HTML markup. Each rendering engine possesses its own isolated template adapter.

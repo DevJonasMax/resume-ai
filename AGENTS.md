@@ -17,7 +17,7 @@ Welcome to the **AI Job Application Agent** repository. This document establishe
    - `packages/jev`: TypeSafe AI Jev System One decision engine.
    - `packages/browser`: Browser automation service abstraction and agent-browser adapter.
    - `packages/jobs`: Job domain, extraction pipeline, and gap analysis.
-   - `packages/resume`: Resume domain, tailoring pipeline, and LaTeX generator.
+   - `packages/resume`: Resume domain, tailoring pipeline, multi-provider PDF engine (Typst, React-PDF, deprecated LaTeX).
    - `packages/applications`: Application domain, lifecycle state machine, and human-in-the-loop coordinator.
 
 2. **Domain Isolation & Dependency Inversion**:
@@ -94,3 +94,11 @@ Do not create vague or uninformative commit messages.
 1. **Safety First**: Never submit an application automatically if there is ambiguity in required form fields or candidate confirmation.
 2. **State Veracity**: Never mark an application as `applied` unless cryptographic or verified submission evidence is returned by the browser session.
 3. **Human Intervention**: The browser automation engine must yield control to the human user when encountering CAPTCHAs, multi-factor authentication, or unrecognized interactive widgets.
+
+---
+
+## 6. PDF Generation Architecture and Invariants
+
+1. **Agnostic Document Contract**: The AI Agent must produce strictly structured, typed JSON conforming to `ResumeDocumentSchema` (`packages/types`). The AI Agent must NEVER output LaTeX, Typst, JSX, HTML, or renderer-specific markup.
+2. **Isolated Renderer Adapters**: Each renderer (`TypstProvider`, `ReactPdfProvider`, `LegacyLaTeXProvider`) translates the canonical `ResumeDocument` into its own template layout.
+3. **Environment Selection**: The default provider is controlled via `PDF_PROVIDER` (`typst` by default). The legacy LaTeX compiler remains exclusively as a `@deprecated` fallback.

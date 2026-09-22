@@ -4,6 +4,10 @@
 
 Implement the résumé domain, candidate profile models, grounded tailoring pipeline, and LaTeX generator modeled after `resume-example-01.tex`. Ensure generated content is strictly grounded in candidate truth while optimizing vocabulary for target jobs.
 
+> [!WARNING]
+> LaTeX generation is now **DEPRECATED** and decoupled from the primary application flow. See [TSK-011: Multi-Provider PDF Generation Architecture](file:///C:/Users/Wesley%20Maik/Documents/Projects/resume-ai/docs/tasks/TSK-011-pdf-providers.md) for the active multi-provider engine (Typst default, React-PDF alternative). LaTeX code is retained for legacy compatibility only.
+
+
 ## Depends
 
 - TSK-004
