@@ -2,6 +2,7 @@ import cors from "@fastify/cors";
 import { ApplicationLifecycleManager } from "@resume-ai/applications";
 import { ApplicationAgentRunner } from "@resume-ai/browser";
 import { appConfig } from "@resume-ai/config";
+import { getAssistantEngine, NON_DEPRECATED_GEMINI_MODELS, type AssistantContext } from "@resume-ai/ai";
 import {
   AgentRunRepository,
   ApplicationRepository,
@@ -10,7 +11,7 @@ import {
   ResumeRepository,
   seedDatabase,
 } from "@resume-ai/database";
-import { JobAnalysisService } from "@resume-ai/jobs";
+import { JobAnalysisService, JobExtractionService, getSupportedPlatformsList } from "@resume-ai/jobs";
 import { CandidateParserService, getPDFProvider, ResumeTailoringService } from "@resume-ai/resume";
 import {
   type CandidateProfile,
@@ -41,6 +42,7 @@ const candidateRepo = new CandidateRepository();
 const analysisService = new JobAnalysisService(jobRepo, candidateRepo);
 const tailoringService = new ResumeTailoringService(jobRepo, candidateRepo, resumeRepo);
 const candidateParser = new CandidateParserService();
+const jobExtractionService = new JobExtractionService();
 const agentRunner = new ApplicationAgentRunner(undefined, undefined, jobRepo, candidateRepo, resumeRepo, runRepo);
 const lifecycle = new ApplicationLifecycleManager(jobRepo, appRepo);
 
@@ -218,6 +220,32 @@ server.post("/api/jobs", async (request, reply) => {
 });
 
 /**
+ * List supported job recruitment platforms.
+ */
+server.get("/api/jobs/supported-platforms", async () => {
+  return { platforms: getSupportedPlatformsList() };
+});
+
+/**
+ * Extract job details from a live URL across supported platforms.
+ */
+server.post("/api/jobs/extract", async (request, reply) => {
+  const body = request.body as { url?: string };
+  if (!body.url || !body.url.trim()) {
+    return reply.status(400).send({ error: "Missing required parameter: url" });
+  }
+
+  try {
+    const extracted = await jobExtractionService.extractFromUrl(body.url.trim());
+    return { success: true, extracted };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    server.log.error(`Job extraction failed for ${body.url}: ${message}`);
+    return reply.status(400).send({ error: message });
+  }
+});
+
+/**
  * Get job details with requirements, latest resume, and application state.
  */
 server.get("/api/jobs/:id", async (request, reply) => {
@@ -309,15 +337,89 @@ server.get("/api/jobs/:id/resume/latest", async (request, reply) => {
  */
 server.post("/api/resumes/:id/refine", async (request, reply) => {
   const { id } = request.params as { id: string };
-  const body = (request.body as { instructions?: string }) || {};
+  const body = (request.body as { instructions?: string; model?: string }) || {};
   try {
-    const version = await tailoringService.refineResumeWithAgent(id, body.instructions);
+    const version = await tailoringService.refineResumeWithAgent(id, body.instructions, body.model);
     return { version };
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
+    server.log.error(`Resume refinement error for resume ${id}: ${message}`);
     return reply.status(500).send({ error: message });
   }
 });
+
+/**
+ * List available non-deprecated Gemini models and current default.
+ */
+server.get("/api/ai/models", async () => {
+  return {
+    defaultModel: appConfig.geminiModel,
+    models: NON_DEPRECATED_GEMINI_MODELS,
+  };
+});
+
+/**
+ * Real-time AI chat text streaming endpoint for assistant dialogue.
+ * Strictly bounded to candidate profile enhancement, resume ATS tailoring, and browser application readiness.
+ */
+server.post("/api/ai/chat/stream", async (request, reply) => {
+  const body = (request.body as {
+    prompt?: string;
+    systemPrompt?: string;
+    model?: string;
+    context?: AssistantContext;
+  }) || {};
+
+  if (!body.prompt || !body.prompt.trim()) {
+    return reply.status(400).send({ error: "Missing required parameter: prompt" });
+  }
+
+  try {
+    const assistantEngine = getAssistantEngine();
+
+    // Augment context if jobId is present
+    let context = body.context;
+    if (body.context?.jobId && !body.context.jobTitle) {
+      const job = await jobRepo.findById(body.context.jobId);
+      const candidate = await candidateRepo.getActiveProfile();
+      const latestResume = await resumeRepo.getLatestVersion(body.context.jobId);
+      if (job) {
+        context = {
+          ...context,
+          jobTitle: job.title,
+          company: job.company,
+          jobDescription: job.description,
+          ...(candidate?.fullName ? { candidateName: candidate.fullName } : {}),
+          ...(candidate?.summary ? { candidateSummary: candidate.summary } : {}),
+          ...(latestResume?.tailoredSummary ? { currentResumeSummary: latestResume.tailoredSummary } : {}),
+        };
+      }
+    }
+
+    const textStream = await assistantEngine.stream({
+      prompt: body.prompt.trim(),
+      ...(body.systemPrompt ? { systemPrompt: body.systemPrompt } : {}),
+      ...(body.model ? { model: body.model } : {}),
+      context,
+    });
+
+    reply.raw.setHeader("Content-Type", "text/plain; charset=utf-8");
+    reply.raw.setHeader("Transfer-Encoding", "chunked");
+    reply.raw.setHeader("Access-Control-Allow-Origin", "*");
+
+    for await (const chunk of textStream) {
+      reply.raw.write(chunk);
+    }
+    reply.raw.end();
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    server.log.error(`AI Streaming failure: ${message}`);
+    reply.raw.statusCode = 500;
+    reply.raw.write(message);
+    reply.raw.end();
+  }
+});
+
 
 /**
  * Helper to ensure a ResumeDocument is returned, with fallback reconstruction for legacy rows.

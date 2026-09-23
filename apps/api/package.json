@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fastify/cors": "^10.0.2",
+    "@resume-ai/ai": "workspace:*",
     "@resume-ai/applications": "workspace:*",
     "@resume-ai/browser": "workspace:*",
     "@resume-ai/config": "workspace:*",
