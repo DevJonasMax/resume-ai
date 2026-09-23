@@ -12,6 +12,8 @@ import { z } from "zod";
 import { LaTeXEngine } from "./LaTeXEngine.js";
 
 const TailoringOutputSchema = z.object({
+  thoughtProcess: z.string().optional(),
+  strategicDecisions: z.array(z.string()).optional(),
   tailoredSummary: z.string(),
   tailoredExperience: z.array(
     z.object({
@@ -177,7 +179,15 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems ex
   /**
    * Refines an existing resume version with the AI Agent according to specific user instructions.
    */
-  public async refineResumeWithAgent(resumeId: string, instructions?: string, model?: string): Promise<ResumeVersion> {
+  public async refineResumeWithAgent(
+    resumeId: string,
+    instructions?: string,
+    model?: string
+  ): Promise<{
+    version: ResumeVersion;
+    thoughtProcess?: string | undefined;
+    strategicDecisions?: string[] | undefined;
+  }> {
     const existing = await this.resumeRepo.findById(resumeId);
     if (!existing) {
       throw new Error(`Resume version not found with id: ${resumeId}`);
@@ -216,7 +226,12 @@ EXISTING TAILORED CONTENT:
 Summary: ${existing.tailoredSummary}
 Experiences: ${JSON.stringify(existing.tailoredExperience, null, 2)}
 
-Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems with clear rationalizations for each improvement.`;
+Provide:
+1. thoughtProcess: Step-by-step reasoning analyzing candidate background, keyword gap analysis, and ATS positioning trade-offs.
+2. strategicDecisions: List of 2-4 key editorial choices made (e.g. metrics added, technologies emphasized).
+3. tailoredSummary: Enhanced summary.
+4. tailoredExperience: Polished experiences with high-impact bullets.
+5. diffItems: Detailed list of diffItems with clear rationalizations for each improvement.`;
 
     const tailored = await this.ai.generateStructured({
       schema: TailoringOutputSchema,
@@ -254,7 +269,11 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems wi
     };
 
     await this.resumeRepo.saveVersion(refinedVersion);
-    return refinedVersion;
+    return {
+      version: refinedVersion,
+      thoughtProcess: tailored.thoughtProcess,
+      strategicDecisions: tailored.strategicDecisions,
+    };
   }
 
   /**

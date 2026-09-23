@@ -22,7 +22,48 @@ const ACTION_COLORS: Record<string, string> = {
 export function AgentMonitorTerminal() {
   const { run } = useAgentMonitor();
 
-  if (!run) return null;
+  if (!run) {
+    return (
+      <div className="flex flex-col gap-4 font-mono text-xs">
+        {/* Status Bar */}
+        <div className="flex items-center justify-between p-3 bg-[#181b1f] rounded-xl border border-[rgba(255,255,255,0.07)]">
+          <div className="flex items-center gap-2">
+            <span className="text-zinc-400">Status:</span>
+            <span className="font-semibold px-2 py-0.5 rounded bg-[#142820] text-[#a7f3d0] border border-[#a7f3d0]/30">
+              Idle / Standby
+            </span>
+          </div>
+          <span className="text-zinc-500 text-[11px]">Browser Headless Engine Ready</span>
+        </div>
+
+        {/* Terminal Standby View */}
+        <div className="bg-[#0c0d0e] rounded-xl border border-[rgba(255,255,255,0.07)] p-5 flex flex-col gap-3 min-h-[260px] text-zinc-400 leading-relaxed">
+          <div className="flex items-center gap-2 text-zinc-500 border-b border-zinc-800/80 pb-2">
+            <HugeiconsIcon icon={TerminalIcon} size={14} className="text-[#a7f3d0]" />
+            <span>agent-browser session terminal</span>
+          </div>
+
+          <div className="space-y-1 text-zinc-300">
+            <p className="text-[#a7f3d0]">$ agent-browser --status</p>
+            <p className="text-zinc-400">&gt; Browser automation daemon: active (Playwright / Chromium)</p>
+            <p className="text-zinc-400">&gt; Human-in-the-loop coordinator: ready</p>
+            <p className="text-zinc-500">&gt; No active job application execution currently running.</p>
+          </div>
+
+          <div className="mt-4 p-4 bg-[#14171d] rounded-xl border border-[rgba(255,255,255,0.06)] font-sans text-xs space-y-2">
+            <span className="font-bold text-white block">
+              How to launch automated browser application:
+            </span>
+            <ol className="list-decimal list-inside text-zinc-400 space-y-1 text-xs">
+              <li>Open the <strong className="text-zinc-200">Kanban Pipeline</strong> tab</li>
+              <li>Select any job opportunity with status <strong className="text-[#93c5fd]">Ready to Apply</strong></li>
+              <li>Click <strong className="text-[#a7f3d0]">Launch Agent</strong> to begin automated submission with real-time DOM logs</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -70,7 +111,9 @@ export function AgentMonitorTerminal() {
         ) : (
           <div className="flex flex-col gap-2">
             {run.events.map((evt) => {
-              const badgeClass = ACTION_COLORS[evt.actionType] || "text-zinc-300 bg-[#181b1f] border-[rgba(255,255,255,0.06)]";
+              const badgeClass =
+                ACTION_COLORS[evt.actionType] ||
+                "text-zinc-300 bg-[#181b1f] border-[rgba(255,255,255,0.06)]";
               return (
                 <div
                   key={evt.id}
@@ -79,7 +122,9 @@ export function AgentMonitorTerminal() {
                   <span className="text-zinc-500 shrink-0 font-bold">
                     #{evt.stepIndex}
                   </span>
-                  <span className={`text-[10px] uppercase font-bold px-1.5 py-0.5 rounded border ${badgeClass} shrink-0`}>
+                  <span
+                    className={`text-[10px] uppercase font-bold px-1.5 py-0.5 rounded border ${badgeClass} shrink-0`}
+                  >
                     {evt.actionType}
                   </span>
                   <p className="text-zinc-300 flex-1 leading-relaxed font-sans text-xs">

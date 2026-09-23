@@ -102,7 +102,14 @@ export interface ResumeStudioProviderProps {
   onSelectJob?: (job: Job) => Promise<void>;
   onSelectCandidate?: (candidate: CandidateProfile) => void;
   onRegenerate: () => Promise<void>;
-  onRefineWithAgent?: (instructions?: string) => Promise<void>;
+  onRefineWithAgent?: (
+    instructions?: string,
+    model?: string
+  ) => Promise<{
+    version: ResumeVersion;
+    thoughtProcess?: string | undefined;
+    strategicDecisions?: string[] | undefined;
+  } | void>;
   onSaveCustomLatex?: (latex: string) => Promise<void>;
 }
 
@@ -318,18 +325,63 @@ export function ResumeStudioProvider({
     setIsRefining(true);
 
     try {
+      let thoughtProcess: string | undefined;
+      let strategicDecisions: string[] | undefined;
+      let newVersion: ResumeVersion = currentResume;
+
       if (onRefineWithAgent) {
-        await onRefineWithAgent(trimmed);
+        const refineRes = await onRefineWithAgent(trimmed, modelOverride);
+        if (refineRes && "version" in refineRes) {
+          newVersion = refineRes.version;
+          thoughtProcess = refineRes.thoughtProcess;
+          strategicDecisions = refineRes.strategicDecisions;
+          setCurrentResume(refineRes.version);
+          setEditedLatex(refineRes.version.latexSource);
+        }
       } else {
         const res = await apiClient.refineResume(currentResume.id, trimmed, modelOverride);
+        newVersion = res.version;
+        thoughtProcess = res.thoughtProcess;
+        strategicDecisions = res.strategicDecisions;
         setCurrentResume(res.version);
         setEditedLatex(res.version.latexSource);
       }
 
+      const contentParts: string[] = [];
+
+      if (thoughtProcess) {
+        contentParts.push(`<thought>\n${thoughtProcess}\n</thought>`);
+      }
+
+      if (strategicDecisions && strategicDecisions.length > 0) {
+        contentParts.push(
+          `### 🎯 Strategic Decisions\n${strategicDecisions.map((d) => `• ${d}`).join("\n")}`
+        );
+      }
+
+      if (newVersion.diffItems && newVersion.diffItems.length > 0) {
+        contentParts.push(`### 🔄 ATS Tailoring & Content Changes`);
+        for (const diff of newVersion.diffItems) {
+          if (diff.originalText) {
+            contentParts.push(`- ${diff.originalText}`);
+          }
+          if (diff.tailoredText) {
+            contentParts.push(`+ ${diff.tailoredText}`);
+          }
+          if (diff.rationalization) {
+            contentParts.push(`• *Reason*: ${diff.rationalization}`);
+          }
+        }
+      }
+
+      contentParts.push(
+        `### 📊 ATS Impact & Readiness\nResume tailored for **${job.title}** at **${job.company}**. Document preview and code updated.`
+      );
+
       const assistantMessage: ChatMessage = {
         id: `assistant-${Date.now()}`,
         role: "assistant",
-        content: `I've updated the LaTeX code and document preview according to your instructions: "${trimmed}". ATS tailoring alignments and diffs have been refreshed.`,
+        content: contentParts.join("\n\n"),
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
 

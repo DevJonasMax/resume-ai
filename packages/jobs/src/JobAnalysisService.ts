@@ -120,10 +120,10 @@ Extract:
    * Evaluates candidate competence against extracted skills to compute match percentages and gap recommendations.
    */
   private computeGapAnalysis(skills: JobRequirements["skills"], candidate: CandidateProfile): GapAnalysis {
-    const candidateSkillsList = Object.values(candidate.skills).flat();
+    const candidateSkillsList = candidate.skills ? Object.values(candidate.skills).flat() : [];
     const candidateTextCorpus = [
-      candidate.summary,
-      ...candidate.experiences.flatMap((e) => e.bulletPoints),
+      candidate.summary || "",
+      ...(candidate.experiences || []).flatMap((e) => e.bulletPoints || []),
       ...candidateSkillsList,
     ]
       .join(" ")
@@ -133,12 +133,18 @@ Extract:
     const missingSkills: string[] = [];
 
     for (const skill of skills) {
-      const lowerName = skill.name.toLowerCase();
-      const isMatched =
-        candidateSkillsList.some((s) => s.toLowerCase().includes(lowerName) || lowerName.includes(s.toLowerCase())) ||
-        candidateTextCorpus.includes(lowerName);
+      const lowerName = skill.name.trim().toLowerCase();
+      if (!lowerName) continue;
 
-      if (isMatched) {
+      const isDirectMatch = candidateSkillsList.some((s) => {
+        const sLower = s.trim().toLowerCase();
+        return sLower === lowerName || sLower.includes(lowerName) || (lowerName.length > 3 && lowerName.includes(sLower));
+      });
+
+      const escaped = lowerName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const isCorpusMatch = new RegExp(`\\b${escaped}\\b`, "i").test(candidateTextCorpus);
+
+      if (isDirectMatch || isCorpusMatch) {
         matchingSkills.push(skill.name);
       } else {
         missingSkills.push(skill.name);
@@ -151,8 +157,13 @@ Extract:
 
     const strengths: string[] = [
       `Solid foundation matching ${matchingSkills.length} of ${totalSkills} identified skills.`,
-      `Verified real-world experience in ${matchingSkills.slice(0, 3).join(", ")}.`,
     ];
+
+    if (matchingSkills.length > 0) {
+      strengths.push(`Verified real-world experience in ${matchingSkills.slice(0, 3).join(", ")}.`);
+    } else {
+      strengths.push("Candidate profile requires targeted skill alignment or transferable project evidence.");
+    }
 
     const recommendations: string[] = [];
     if (missingSkills.length > 0) {

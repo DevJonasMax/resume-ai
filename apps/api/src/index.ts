@@ -339,8 +339,8 @@ server.post("/api/resumes/:id/refine", async (request, reply) => {
   const { id } = request.params as { id: string };
   const body = (request.body as { instructions?: string; model?: string }) || {};
   try {
-    const version = await tailoringService.refineResumeWithAgent(id, body.instructions, body.model);
-    return { version };
+    const result = await tailoringService.refineResumeWithAgent(id, body.instructions, body.model);
+    return result;
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
     server.log.error(`Resume refinement error for resume ${id}: ${message}`);

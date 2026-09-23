@@ -8,7 +8,7 @@ loadDotenv();
 
 const EnvironmentSchema = z.object({
   GEMINI_API_KEY: z.string().optional(),
-  GEMINI_MODEL: z.enum(NON_DEPRECATED_GEMINI_MODELS).default("gemini-2.0-flash"),
+  GEMINI_MODEL: z.enum(NON_DEPRECATED_GEMINI_MODELS).default("gemini-3.8-flash"),
   TYPESAFE_API_KEY: z.string().optional(),
   DATABASE_URL: z.string().default("./data/resume-ai.sqlite"),
   SERVER_PORT: z.coerce.number().default(3001),

@@ -15,41 +15,52 @@ export interface ModelOption {
   badgeVariant: "sky" | "lavender" | "sage" | "apricot";
 }
 
-export const GEMINI_MODELS_METADATA: ModelOption[] = [
+/**
+ * Active non-deprecated Gemini models adhering to official documentation:
+ * https://ai.google.dev/gemini-api/docs/models
+ * Note: Gemini 1.5 family is deprecated.
+ */
+export const GEMINI_ACTIVE_MODELS: ModelOption[] = [
   {
-    id: "gemini-2.0-flash",
-    name: "Gemini 2.0 Flash",
+    id: "gemini-3.8-flash",
+    name: "Gemini 3.8 Flash",
     tag: "Recommended",
     badgeVariant: "sky",
   },
   {
-    id: "gemini-2.0-flash-lite",
-    name: "Gemini 2.0 Flash Lite",
-    tag: "Ultra Fast",
-    badgeVariant: "sage",
-  },
-  {
-    id: "gemini-2.5-pro",
-    name: "Gemini 2.5 Pro",
-    tag: "Deep Reasoning",
+    id: "gemini-3.7-flash",
+    name: "Gemini 3.7 Flash",
+    tag: "Reasoning",
     badgeVariant: "lavender",
   },
   {
-    id: "gemini-2.5-flash",
-    name: "Gemini 2.5 Flash",
+    id: "gemini-3.5-flash",
+    name: "Gemini 3.5 Flash",
     tag: "Next-Gen Fast",
     badgeVariant: "sky",
   },
   {
-    id: "gemini-1.5-pro",
-    name: "Gemini 1.5 Pro",
-    tag: "Large Context",
+    id: "gemini-3.5-flash-lite",
+    name: "Gemini 3.5 Flash Lite",
+    tag: "Ultra Fast",
+    badgeVariant: "sage",
+  },
+  {
+    id: "gemini-2.5-flash",
+    name: "Gemini 2.5 Flash",
+    tag: "High Throughput",
+    badgeVariant: "sky",
+  },
+  {
+    id: "gemini-2.5-pro",
+    name: "Gemini 2.5 Pro",
+    tag: "Deep ATS Pro",
     badgeVariant: "lavender",
   },
   {
-    id: "gemini-1.5-flash",
-    name: "Gemini 1.5 Flash",
-    tag: "Balanced",
+    id: "gemini-2.0-flash",
+    name: "Gemini 2.0 Flash",
+    tag: "Fast Multimodal",
     badgeVariant: "apricot",
   },
 ];
@@ -66,30 +77,42 @@ export function ModelSelector({
   className = "",
 }: ModelSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [availableModels, setAvailableModels] = useState<ModelOption[]>(GEMINI_MODELS_METADATA);
+  const [availableModels, setAvailableModels] = useState<ModelOption[]>(GEMINI_ACTIVE_MODELS);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Fetch registered models from backend if available
+  // Fetch registered models from backend if available, filtering out deprecated 1.5 models
   useEffect(() => {
     let mounted = true;
     apiClient
       .getAiModels()
       .then((data) => {
         if (!mounted || !data?.models || data.models.length === 0) return;
-        const merged = data.models.map((mId) => {
-          const existing = GEMINI_MODELS_METADATA.find((m) => m.id === mId);
-          if (existing) return existing;
-          return {
-            id: mId,
-            name: mId.replace("gemini-", "Gemini ").replace("-", " "),
-            tag: "Gemini",
-            badgeVariant: "sky" as const,
-          };
-        });
-        setAvailableModels(merged);
+        const filtered = data.models
+          .filter((mId) => !mId.includes("1.5"))
+          .map((mId) => {
+            const existing = GEMINI_ACTIVE_MODELS.find((m) => m.id === mId);
+            if (existing) return existing;
+            return {
+              id: mId,
+              name: mId.replace("gemini-", "Gemini ").replace("-", " "),
+              tag: "Active",
+              badgeVariant: "sky" as const,
+            };
+          });
+
+        if (filtered.length > 0) {
+          // Merge with predefined active models so new 3.x models are always present
+          const merged = [...GEMINI_ACTIVE_MODELS];
+          for (const item of filtered) {
+            if (!merged.some((m) => m.id === item.id)) {
+              merged.push(item);
+            }
+          }
+          setAvailableModels(merged);
+        }
       })
       .catch(() => {
-        // Fallback silently to GEMINI_MODELS_METADATA
+        // Fallback silently to GEMINI_ACTIVE_MODELS
       });
 
     return () => {
@@ -115,7 +138,7 @@ export function ModelSelector({
   const activeOption =
     availableModels.find((m) => m.id === selectedModel) ||
     availableModels[0] ||
-    GEMINI_MODELS_METADATA[0];
+    GEMINI_ACTIVE_MODELS[0];
 
   return (
     <div ref={dropdownRef} className={`relative inline-block ${className}`}>
@@ -127,7 +150,7 @@ export function ModelSelector({
         title="Select Active AI Model"
       >
         <HugeiconsIcon icon={CpuIcon} size={13} className="text-[#d8b4fe]" />
-        <span className="font-medium text-[11px] max-w-[120px] truncate">
+        <span className="font-medium text-[11px] max-w-[130px] truncate">
           {activeOption.name}
         </span>
         <HugeiconsIcon
@@ -141,7 +164,7 @@ export function ModelSelector({
       {isOpen && (
         <div className="absolute right-0 top-full mt-1.5 z-50 w-64 rounded-xl bg-[#121417] border border-[rgba(255,255,255,0.1)] shadow-[0_12px_32px_rgba(0,0,0,0.6)] p-1.5 animate-in fade-in zoom-in-95 duration-150">
           <div className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500 border-b border-[rgba(255,255,255,0.06)] mb-1 flex items-center justify-between">
-            <span>Gemini Non-Deprecated</span>
+            <span>Gemini Active Models</span>
             <HugeiconsIcon icon={SparklesIcon} size={11} className="text-[#d8b4fe]" />
           </div>
 

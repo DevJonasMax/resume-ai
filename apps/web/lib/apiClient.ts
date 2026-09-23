@@ -142,7 +142,11 @@ export const apiClient = {
       const err = await res.json().catch(() => ({}));
       throw new Error(err.error || `Resume refinement failed with HTTP ${res.status}`);
     }
-    return res.json() as Promise<{ version: ResumeVersion }>;
+    return res.json() as Promise<{
+      version: ResumeVersion;
+      thoughtProcess?: string;
+      strategicDecisions?: string[];
+    }>;
   },
 
   async extractJobFromUrl(url: string) {

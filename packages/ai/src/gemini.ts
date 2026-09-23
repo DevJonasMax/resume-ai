@@ -49,10 +49,10 @@ export class GeminiProvider implements AIProvider {
       throw new Error("GEMINI_API_KEY is required to instantiate GeminiProvider");
     }
 
-    const requestedModel = (modelName || appConfig.geminiModel || "gemini-2.0-flash").trim();
+    const requestedModel = (modelName || appConfig.geminiModel || "gemini-3.8-flash").trim();
     this.defaultModel = NON_DEPRECATED_GEMINI_MODELS.includes(requestedModel as GeminiModelName)
       ? (requestedModel as GeminiModelName)
-      : "gemini-2.0-flash";
+      : "gemini-3.8-flash";
 
     this.googleClient = createGoogleGenerativeAI({
       apiKey: key,

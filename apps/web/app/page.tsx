@@ -234,10 +234,11 @@ export default function DashboardPage() {
     setJobs((prev) => prev.map((j) => (j && j.id === studioJob.id ? generated.job : j)));
   };
 
-  const handleRefineResume = async (instructions?: string) => {
+  const handleRefineResume = async (instructions?: string, model?: string) => {
     if (!studioResume) return;
-    const res = await apiClient.refineResume(studioResume.id, instructions);
+    const res = await apiClient.refineResume(studioResume.id, instructions, model);
     setStudioResume(res.version);
+    return res;
   };
 
   const handleSaveCustomLatex = async (latex: string) => {

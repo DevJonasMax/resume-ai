@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Alert02Icon,
-  ArrowDown01Icon,
   Cancel01Icon,
   CheckmarkCircle02Icon,
   Copy01Icon,
@@ -17,7 +16,9 @@ import {
 } from "@hugeicons/core-free-icons";
 import { useResumeStudio } from "../resume/ResumeStudioContext.js";
 import { useI18n } from "@/lib/i18n/index.js";
-import { AiAvatar, type AiAvatarState } from "./AiAvatar.js";
+import { AgentAvatar } from "@/components/smoothui/AgentAvatar.js";
+import { AIConversation } from "@/components/smoothui/AIConversation.js";
+import { AIReasoning } from "@/components/smoothui/AIReasoning.js";
 import { ModelSelector } from "./ModelSelector.js";
 
 /**
@@ -25,10 +26,25 @@ import { ModelSelector } from "./ModelSelector.js";
  * bolding, bullet points, and inline code blocks.
  */
 function FormattedMessageContent({ content }: { content: string }) {
-  const lines = content.split("\n");
+  // Check if content has reasoning / thought process blocks
+  const thoughtMatch = content.match(/<thought>([\s\S]*?)<\/thought>/i) ||
+    content.match(/\[Thought Process\]([\s\S]*?)\[\/Thought Process\]/i);
+
+  const thoughtContent = thoughtMatch ? thoughtMatch[1].trim() : null;
+  const mainContent = thoughtMatch
+    ? content.replace(thoughtMatch[0], "").trim()
+    : content;
+
+  const lines = mainContent.split("\n");
 
   return (
     <div className="space-y-1.5 text-xs leading-relaxed break-words font-sans">
+      {thoughtContent && (
+        <AIReasoning defaultOpen={false}>
+          <div className="whitespace-pre-wrap">{thoughtContent}</div>
+        </AIReasoning>
+      )}
+
       {lines.map((line, lineIdx) => {
         const trimmed = line.trim();
 
@@ -242,14 +258,10 @@ export function AiChatDock() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [inputPrompt, setInputPrompt] = useState("");
-  const [showJumpButton, setShowJumpButton] = useState(false);
-  const [selectedModel, setSelectedModel] = useState<string>("gemini-2.0-flash");
+  const [selectedModel, setSelectedModel] = useState<string>("gemini-3.8-flash");
   const [lastPromptSent, setLastPromptSent] = useState<string>("");
 
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const bottomAnchorRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const userScrolledUpRef = useRef(false);
 
   // Quick suggestions focused strictly on candidate profile/resume/application readiness
   const QUICK_PROMPT_SUGGESTIONS = [
@@ -269,16 +281,14 @@ export function AiChatDock() {
     t("aiChat.promptSuggestions.profileReadiness"),
   ];
 
-  // Derive active avatar state
   const lastMessage = chatMessages[chatMessages.length - 1];
   const hasRecentError = lastMessage?.role === "system";
 
-  let avatarState: AiAvatarState = "idle";
-  if (isRefining) {
-    avatarState = "thinking";
-  } else if (hasRecentError) {
-    avatarState = "error";
-  }
+  const avatarState = isRefining
+    ? "thinking"
+    : hasRecentError
+    ? "error"
+    : "idle";
 
   // Sync with isChatDrawerOpen if header button triggers it
   useEffect(() => {
@@ -323,38 +333,9 @@ export function AiChatDock() {
     if (isExpanded) {
       setTimeout(() => {
         textareaRef.current?.focus();
-        scrollToBottom(false);
       }, 150);
     }
   }, [isExpanded]);
-
-  const scrollToBottom = (smooth = true) => {
-    bottomAnchorRef.current?.scrollIntoView({
-      behavior: smooth ? "smooth" : "auto",
-    });
-    setShowJumpButton(false);
-    userScrolledUpRef.current = false;
-  };
-
-  const handleScroll = () => {
-    if (!scrollContainerRef.current) return;
-    const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
-    const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
-
-    if (distanceFromBottom > 70) {
-      setShowJumpButton(true);
-      userScrolledUpRef.current = true;
-    } else {
-      setShowJumpButton(false);
-      userScrolledUpRef.current = false;
-    }
-  };
-
-  useEffect(() => {
-    if (!userScrolledUpRef.current && isExpanded) {
-      scrollToBottom(true);
-    }
-  }, [chatMessages, isRefining, isExpanded]);
 
   const handleSend = async (overrideText?: string) => {
     const text = (overrideText ?? inputPrompt).trim();
@@ -364,7 +345,6 @@ export function AiChatDock() {
       setInputPrompt("");
     }
     setLastPromptSent(text);
-    userScrolledUpRef.current = false;
 
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
@@ -373,7 +353,7 @@ export function AiChatDock() {
     try {
       await sendChatMessage(text, selectedModel);
     } catch {
-      // Error handled inside context and recorded in message history
+      // Error recorded in message history
     }
   };
 
@@ -388,7 +368,6 @@ export function AiChatDock() {
     if (isRefining) return;
     setIsVisible(true);
     setIsExpanded(true);
-    userScrolledUpRef.current = false;
     await handleSend(suggestion);
   };
 
@@ -397,6 +376,8 @@ export function AiChatDock() {
       await handleSend(lastPromptSent);
     }
   };
+
+  const agentSeed = job?.company ? `${job.company}-gemini` : "gemini-assistant";
 
   if (!isVisible) {
     return (
@@ -414,7 +395,7 @@ export function AiChatDock() {
     );
   }
 
-  // COLLAPSED STATE: Floating Pill Dock
+  // COLLAPSED STATE: Floating Pill Dock with SmoothUI AgentAvatar
   if (!isExpanded) {
     return (
       <aside
@@ -425,8 +406,14 @@ export function AiChatDock() {
           onClick={() => setIsExpanded(true)}
           className="flex items-center gap-3 px-3.5 py-2 rounded-full bg-[#121417]/90 hover:bg-[#16191f]/95 backdrop-blur-xl border border-[rgba(255,255,255,0.12)] hover:border-[#d8b4fe]/40 shadow-[0_12px_36px_rgba(0,0,0,0.5),0_0_15px_rgba(216,180,254,0.06)] transition-all duration-200 cursor-pointer group select-none active:scale-95"
         >
-          {/* SmoothUI AI Avatar */}
-          <AiAvatar state={avatarState} size="sm" showStatusIndicator={false} />
+          {/* SmoothUI Generative Canvas Avatar */}
+          <AgentAvatar
+            seed={agentSeed}
+            size={26}
+            animated={true}
+            state={avatarState}
+            showStatusIndicator={true}
+          />
 
           {/* Placeholder Text */}
           <span className="text-xs font-medium text-zinc-300 group-hover:text-white transition-colors whitespace-nowrap">
@@ -462,16 +449,22 @@ export function AiChatDock() {
     );
   }
 
-  // EXPANDED STATE: Full SmoothUI AI Chat Window Dock
+  // EXPANDED STATE: Full SmoothUI AI Conversation Window
   return (
     <aside
       aria-label="AI Tailoring Assistant Chat Window"
       className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 w-[640px] max-w-[95vw] h-[550px] rounded-2xl bg-[#121417]/95 backdrop-blur-2xl border border-[rgba(255,255,255,0.12)] shadow-[0_24px_60px_rgba(0,0,0,0.7),0_0_25px_rgba(216,180,254,0.08)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200"
     >
-      {/* Header with AI Status & Action Controls */}
+      {/* Header with SmoothUI Generative Canvas Avatar & Model Selector */}
       <header className="flex items-center justify-between px-4 py-3 border-b border-[rgba(255,255,255,0.08)] bg-[#15181d]/80 select-none">
         <div className="flex items-center gap-2.5">
-          <AiAvatar state={avatarState} size="md" />
+          <AgentAvatar
+            seed={agentSeed}
+            size={34}
+            animated={true}
+            state={avatarState}
+            showStatusIndicator={true}
+          />
 
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
@@ -532,7 +525,7 @@ export function AiChatDock() {
         </div>
       </header>
 
-      {/* Interactive Suggestion Pills Bar (`ai-suggestions`) */}
+      {/* Interactive Suggestion Pills Bar */}
       <nav
         aria-label="Quick AI suggestions"
         className="px-3.5 py-2 border-b border-[rgba(255,255,255,0.06)] bg-[#101215]/60 flex items-center gap-1.5 overflow-x-auto no-scrollbar"
@@ -553,106 +546,92 @@ export function AiChatDock() {
         ))}
       </nav>
 
-      {/* Message History Viewport (`ai-conversation`) */}
+      {/* SmoothUI AIConversation scroll container */}
       <div className="relative flex-1 overflow-hidden bg-[#0e1013]/50">
-        <div
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
-          className="h-full overflow-y-auto p-4 space-y-4"
+        <AIConversation
+          className="h-full p-4"
+          contentKey={chatMessages.length + (isRefining ? 1 : 0)}
         >
-          {chatMessages.map((msg) => {
-            const isUser = msg.role === "user";
-            const isSystemError = msg.role === "system";
+          <div className="space-y-4">
+            {chatMessages.map((msg) => {
+              const isUser = msg.role === "user";
+              const isSystemError = msg.role === "system";
 
-            // Real Error Card presentation
-            if (isSystemError) {
-              return (
-                <div key={msg.id} className="w-full">
-                  <RealErrorCard
-                    errorMessage={msg.content}
-                    timestamp={msg.timestamp}
-                    activeModel={selectedModel}
-                    onRetry={lastPromptSent ? handleRetryLastPrompt : undefined}
-                  />
-                </div>
-              );
-            }
-
-            return (
-              <div
-                key={msg.id}
-                className={`flex gap-2.5 text-xs leading-relaxed ${
-                  isUser ? "flex-row-reverse" : "flex-row"
-                }`}
-              >
-                {/* Avatar Icon */}
-                {isUser ? (
-                  <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 shadow-sm bg-[#181b1f] border border-[rgba(255,255,255,0.12)] text-zinc-300">
-                    <HugeiconsIcon icon={UserAccountIcon} size={14} />
+              // Real Error Card
+              if (isSystemError) {
+                return (
+                  <div key={msg.id} className="w-full">
+                    <RealErrorCard
+                      errorMessage={msg.content}
+                      timestamp={msg.timestamp}
+                      activeModel={selectedModel}
+                      onRetry={lastPromptSent ? handleRetryLastPrompt : undefined}
+                    />
                   </div>
-                ) : (
-                  <AiAvatar state="idle" size="sm" showStatusIndicator={false} />
-                )}
+                );
+              }
 
-                {/* Message Bubble */}
+              return (
                 <div
-                  className={`flex flex-col gap-1 max-w-[85%] rounded-2xl p-3.5 ${
-                    isUser
-                      ? "rounded-tr-xs bg-[#181b1f] text-zinc-100 border border-[rgba(255,255,255,0.08)] shadow-sm"
-                      : "rounded-tl-xs bg-[#13161a] text-zinc-200 border border-[rgba(255,255,255,0.07)] shadow-md"
+                  key={msg.id}
+                  className={`flex gap-2.5 text-xs leading-relaxed ${
+                    isUser ? "flex-row-reverse" : "flex-row"
                   }`}
                 >
-                  <div className="flex items-center justify-between gap-4 text-[10px] text-zinc-400 mb-0.5 select-none">
-                    <span className="font-semibold text-zinc-300">
-                      {isUser
-                        ? candidate?.fullName || "Candidate"
-                        : "AI Application Copilot"}
-                    </span>
-                    <span className="font-mono">{msg.timestamp}</span>
-                  </div>
+                  {/* Avatar Icon */}
+                  {isUser ? (
+                    <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 shadow-sm bg-[#181b1f] border border-[rgba(255,255,255,0.12)] text-zinc-300">
+                      <HugeiconsIcon icon={UserAccountIcon} size={14} />
+                    </div>
+                  ) : (
+                    <AgentAvatar
+                      seed={agentSeed}
+                      size={28}
+                      animated={false}
+                    />
+                  )}
 
-                  <FormattedMessageContent content={msg.content} />
+                  {/* Message Bubble */}
+                  <div
+                    className={`flex flex-col gap-1 max-w-[85%] rounded-2xl p-3.5 ${
+                      isUser
+                        ? "rounded-tr-xs bg-[#181b1f] text-zinc-100 border border-[rgba(255,255,255,0.08)] shadow-sm"
+                        : "rounded-tl-xs bg-[#13161a] text-zinc-200 border border-[rgba(255,255,255,0.07)] shadow-md"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-4 text-[10px] text-zinc-400 mb-0.5 select-none">
+                      <span className="font-semibold text-zinc-300">
+                        {isUser
+                          ? candidate?.fullName || "Candidate"
+                          : `AI Copilot (${selectedModel})`}
+                      </span>
+                      <span className="font-mono">{msg.timestamp}</span>
+                    </div>
+
+                    <FormattedMessageContent content={msg.content} />
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* In-Flight Refining Feedback with SmoothUI AIReasoning shimmer */}
+            {isRefining && (
+              <div className="flex flex-col gap-2 p-3 bg-[#181b1f]/80 rounded-xl border border-[rgba(216,180,254,0.2)]">
+                <AIReasoning isStreaming={true} defaultOpen={true}>
+                  Evaluating ATS keyword distribution, aligning bullet points with verified
+                  candidate experience, and executing structured refinement via {selectedModel}...
+                </AIReasoning>
+                <div className="flex items-center gap-2 text-[10px] text-zinc-400 font-mono pl-1">
+                  <HugeiconsIcon icon={ReloadIcon} size={12} className="animate-spin text-[#d8b4fe]" />
+                  <span>Synthesizing tailored document &amp; updating LaTeX preview...</span>
                 </div>
               </div>
-            );
-          })}
-
-          {/* In-Flight Refining Feedback */}
-          {isRefining && (
-            <div className="flex items-center gap-3 text-xs text-zinc-400 p-3 bg-[#181b1f]/80 rounded-xl border border-[rgba(216,180,254,0.2)]">
-              <HugeiconsIcon
-                icon={ReloadIcon}
-                size={16}
-                className="text-[#d8b4fe] animate-spin shrink-0"
-              />
-              <div className="flex flex-col">
-                <span className="text-white font-medium">
-                  {t("aiChat.statusGenerating")}
-                </span>
-                <span className="text-[10px] text-zinc-400 font-mono">
-                  Synthesizing candidate profile enhancements with {selectedModel}
-                </span>
-              </div>
-            </div>
-          )}
-
-          <div ref={bottomAnchorRef} className="h-1" />
-        </div>
-
-        {/* SmoothUI Smart Scroll: Floating 'Jump to Latest' Pill Button */}
-        {showJumpButton && (
-          <button
-            type="button"
-            onClick={() => scrollToBottom(true)}
-            className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 bg-[#181b1f]/95 hover:bg-[#22272e] text-white rounded-full text-xs font-medium border border-[rgba(255,255,255,0.16)] shadow-xl transition-all duration-200 cursor-pointer animate-in fade-in slide-in-from-bottom-2 select-none active:scale-95"
-          >
-            <HugeiconsIcon icon={ArrowDown01Icon} size={14} className="text-[#a7f3d0]" />
-            <span>{t("aiChat.jumpToLatest")}</span>
-          </button>
-        )}
+            )}
+          </div>
+        </AIConversation>
       </div>
 
-      {/* Prompt Input Section (`ai-prompt-input`) */}
+      {/* Prompt Input Section */}
       <footer className="p-3 border-t border-[rgba(255,255,255,0.08)] bg-[#13161a]/90">
         <div className="rounded-xl border border-[rgba(255,255,255,0.1)] bg-[#181b1f] p-2 focus-within:border-[#d8b4fe]/60 focus-within:ring-1 focus-within:ring-[#d8b4fe]/30 transition-all">
           <textarea

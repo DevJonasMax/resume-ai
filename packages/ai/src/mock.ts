@@ -70,6 +70,13 @@ export class MockAIProvider implements AIProvider {
 
     // Default mock response for tailored resume content
     const mockTailoredResume = {
+      thoughtProcess:
+        "1. Analyzed candidate's 6+ years of verified software QA and automation experience.\n2. Identified target requirements: Selenium WebDriver, C#/Java, and scalable API validation.\n3. Formulated strategic enhancement: Elevated quantitative metrics and test suite architecture in recent roles.\n4. Assessed ATS alignment: Projected compatibility score improved from 74% to 92%.",
+      strategicDecisions: [
+        "Elevated core language proficiencies (Java, C#) into prominent summary positioning",
+        "Quantified high-throughput ERP and e-commerce automated testing outcomes",
+        "Aligned testing frameworks explicitly with job posting requirements",
+      ],
       tailoredSummary:
         "Results-driven Senior QA Automation Engineer with 6+ years of specialized experience in architecting scalable automation frameworks using Selenium, Java, and C#. Proven expertise in REST and SOAP API validation, ERP payment flows, and continuous integration pipelines.",
       tailoredExperience: [
