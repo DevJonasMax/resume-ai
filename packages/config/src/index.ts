@@ -1,10 +1,14 @@
 import { config as loadDotenv } from "dotenv";
 import { z } from "zod";
+import { NON_DEPRECATED_GEMINI_MODELS, type GeminiModelName } from "@resume-ai/types";
+
+export { NON_DEPRECATED_GEMINI_MODELS, type GeminiModelName };
 
 loadDotenv();
 
 const EnvironmentSchema = z.object({
   GEMINI_API_KEY: z.string().optional(),
+  GEMINI_MODEL: z.enum(NON_DEPRECATED_GEMINI_MODELS).default("gemini-2.0-flash"),
   TYPESAFE_API_KEY: z.string().optional(),
   DATABASE_URL: z.string().default("./data/resume-ai.sqlite"),
   SERVER_PORT: z.coerce.number().default(3001),
@@ -25,6 +29,7 @@ const parsedEnv = EnvironmentSchema.parse(process.env);
  */
 export interface AppConfig {
   geminiApiKey: string | undefined;
+  geminiModel: GeminiModelName;
   typesafeApiKey: string | undefined;
   databaseUrl: string;
   serverPort: number;
@@ -41,6 +46,7 @@ export interface AppConfig {
  */
 export const appConfig: AppConfig = {
   geminiApiKey: parsedEnv.GEMINI_API_KEY,
+  geminiModel: parsedEnv.GEMINI_MODEL,
   typesafeApiKey: parsedEnv.TYPESAFE_API_KEY,
   databaseUrl: parsedEnv.DATABASE_URL,
   serverPort: parsedEnv.SERVER_PORT,

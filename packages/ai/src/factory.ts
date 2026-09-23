@@ -14,7 +14,7 @@ export function getAIProvider(): AIProvider {
   }
 
   if (appConfig.geminiApiKey) {
-    aiProviderInstance = new GeminiProvider(appConfig.geminiApiKey);
+    aiProviderInstance = new GeminiProvider(appConfig.geminiApiKey, appConfig.geminiModel);
   } else {
     aiProviderInstance = new MockAIProvider();
   }

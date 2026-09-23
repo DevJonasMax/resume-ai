@@ -9,6 +9,7 @@ export class MockAIProvider implements AIProvider {
     schema: z.ZodType<T>;
     prompt: string;
     systemPrompt?: string;
+    model?: string;
   }): Promise<T> {
     const isResumeTailoring =
       options.prompt.toLowerCase().includes("tailor") ||
@@ -122,7 +123,25 @@ export class MockAIProvider implements AIProvider {
   public async generateText(options: {
     prompt: string;
     systemPrompt?: string;
+    model?: string;
   }): Promise<string> {
     return `Mock AI response generated for prompt: "${options.prompt.slice(0, 80)}..."`;
+  }
+
+  public async streamText(options: {
+    prompt: string;
+    systemPrompt?: string;
+    model?: string;
+  }): Promise<AsyncIterable<string>> {
+    const fullText = await this.generateText(options);
+    const words = fullText.split(" ");
+    return {
+      async *[Symbol.asyncIterator]() {
+        for (const word of words) {
+          yield `${word} `;
+          await new Promise((resolve) => setTimeout(resolve, 30));
+        }
+      },
+    };
   }
 }

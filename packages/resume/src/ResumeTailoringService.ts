@@ -177,7 +177,7 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems ex
   /**
    * Refines an existing resume version with the AI Agent according to specific user instructions.
    */
-  public async refineResumeWithAgent(resumeId: string, instructions?: string): Promise<ResumeVersion> {
+  public async refineResumeWithAgent(resumeId: string, instructions?: string, model?: string): Promise<ResumeVersion> {
     const existing = await this.resumeRepo.findById(resumeId);
     if (!existing) {
       throw new Error(`Resume version not found with id: ${resumeId}`);
@@ -223,6 +223,7 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems wi
       prompt,
       systemPrompt:
         "You are an AI resume refinement agent. Elevate terminology, emphasize required tools, and produce clear rationales without altering underlying facts.",
+      ...(model ? { model } : {}),
     });
 
     const resumeData: ResumeDocument = existing.resumeData
