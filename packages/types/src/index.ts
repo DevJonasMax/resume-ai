@@ -4,6 +4,20 @@ import { ResumeDocumentSchema } from "./resumeDocument.js";
 export * from "./resumeDocument.js";
 
 /**
+ * Supported non-deprecated Google Gemini models.
+ */
+export const NON_DEPRECATED_GEMINI_MODELS = [
+  "gemini-2.0-flash",
+  "gemini-2.0-flash-lite",
+  "gemini-2.5-pro",
+  "gemini-2.5-flash",
+  "gemini-1.5-pro",
+  "gemini-1.5-flash",
+] as const;
+
+export type GeminiModelName = (typeof NON_DEPRECATED_GEMINI_MODELS)[number];
+
+/**
  * Job opportunity status enum representing the full Kanban application pipeline.
  */
 export const JobStatusSchema = z.enum([
@@ -286,3 +300,45 @@ export const ApplicationSchema = z.object({
 });
 
 export type Application = z.infer<typeof ApplicationSchema>;
+
+/**
+ * Supported Job Platform identification.
+ */
+export const JobPlatformIdSchema = z.enum([
+  "linkedin",
+  "gupy",
+  "nerdin",
+  "programathor",
+  "micro1",
+  "glassdoor",
+  "geekhunter",
+  "revelo",
+  "catho",
+  "indeed",
+  "generic",
+]);
+
+export type JobPlatformId = z.infer<typeof JobPlatformIdSchema>;
+
+export const JobPlatformInfoSchema = z.object({
+  id: JobPlatformIdSchema,
+  name: z.string(),
+  domain: z.string(),
+  iconKey: z.string(),
+  badgeColor: z.string(),
+  sampleUrlPattern: z.string(),
+});
+
+export type JobPlatformInfo = z.infer<typeof JobPlatformInfoSchema>;
+
+export const ExtractedJobDataSchema = z.object({
+  url: z.string(),
+  platform: JobPlatformInfoSchema,
+  title: z.string(),
+  company: z.string(),
+  location: z.string(),
+  description: z.string(),
+  rawHtmlSnippet: z.string().optional(),
+});
+
+export type ExtractedJobData = z.infer<typeof ExtractedJobDataSchema>;
