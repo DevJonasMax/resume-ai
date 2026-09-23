@@ -68,7 +68,7 @@ export interface ResumeStudioContextValue {
   toggleChatDrawer: () => void;
   chatMessages: ChatMessage[];
   isRefining: boolean;
-  sendChatMessage: (prompt: string) => Promise<void>;
+  sendChatMessage: (prompt: string, modelOverride?: string) => Promise<void>;
 
   // Regeneration
   isRegenerating: boolean;
@@ -303,7 +303,7 @@ export function ResumeStudioProvider({
     }
   };
 
-  const sendChatMessage = async (prompt: string) => {
+  const sendChatMessage = async (prompt: string, modelOverride?: string) => {
     const trimmed = prompt.trim();
     if (!trimmed) return;
 
@@ -321,7 +321,7 @@ export function ResumeStudioProvider({
       if (onRefineWithAgent) {
         await onRefineWithAgent(trimmed);
       } else {
-        const res = await apiClient.refineResume(currentResume.id, trimmed);
+        const res = await apiClient.refineResume(currentResume.id, trimmed, modelOverride);
         setCurrentResume(res.version);
         setEditedLatex(res.version.latexSource);
       }
@@ -334,14 +334,16 @@ export function ResumeStudioProvider({
       };
 
       setChatMessages((prev) => [...prev, assistantMessage]);
-    } catch {
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
       const errorMessage: ChatMessage = {
         id: `error-${Date.now()}`,
         role: "system",
-        content: "An error occurred while refining the resume. Please check your connection and try again.",
+        content: message || "An unexpected error occurred while refining the resume.",
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
       setChatMessages((prev) => [...prev, errorMessage]);
+      throw err;
     } finally {
       setIsRefining(false);
     }

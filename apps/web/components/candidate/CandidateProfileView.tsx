@@ -18,6 +18,7 @@ import type { CandidateProfile } from "@resume-ai/types";
 import { Button } from "@/components/ui/button";
 import { apiClient } from "../../lib/apiClient.js";
 import { ImportCandidateModal } from "../modals/ImportCandidateModal.js";
+import { useI18n } from "../../lib/i18n/index.js";
 
 export interface CandidateProfileViewProps {
   candidate: CandidateProfile | null;
@@ -32,6 +33,7 @@ export function CandidateProfileView({
   onSelectCandidate,
   onRefresh,
 }: CandidateProfileViewProps) {
+  const { t } = useI18n();
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isActivating, setIsActivating] = useState(false);
 
@@ -51,7 +53,7 @@ export function CandidateProfileView({
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to remove this candidate profile?")) return;
+    if (!confirm(t("candidateProfileView.deleteConfirm"))) return;
     try {
       await apiClient.deleteCandidate(id);
       if (onRefresh) {
@@ -72,10 +74,10 @@ export function CandidateProfileView({
           </div>
           <div>
             <span className="text-xs font-bold text-white uppercase tracking-wider block">
-              Active Candidate Profiles ({candidates.length})
+              {t("candidateProfileView.activeProfiles", { count: candidates.length })}
             </span>
             <span className="text-[11px] text-zinc-400">
-              Select or import candidate profiles used to tailor ATS resumes
+              {t("candidateProfileView.activeProfilesDesc")}
             </span>
           </div>
         </div>
@@ -90,7 +92,7 @@ export function CandidateProfileView({
             >
               {candidates.map((c) => (
                 <option key={c.id} value={c.id} className="bg-[#181b1f]">
-                  {c.fullName} {c.isActive ? "(Active)" : ""}
+                  {c.fullName} {c.isActive ? `(${t("candidateProfileView.activeBadge")})` : ""}
                 </option>
               ))}
             </select>
@@ -100,10 +102,10 @@ export function CandidateProfileView({
             variant="sky"
             size="sm"
             onClick={() => setIsImportModalOpen(true)}
-            className="gap-1.5 text-xs font-semibold"
+            className="gap-1.5 text-xs font-semibold active:scale-95"
           >
             <HugeiconsIcon icon={PlusSignIcon} size={14} />
-            <span>Import / Add Profile</span>
+            <span>{t("candidateProfileView.importProfile")}</span>
           </Button>
         </div>
       </div>
@@ -111,17 +113,16 @@ export function CandidateProfileView({
       {!candidate ? (
         <div className="p-12 text-center text-zinc-500 prism-panel rounded-2xl flex flex-col items-center gap-3">
           <HugeiconsIcon icon={UserMultiple02Icon} size={32} className="text-zinc-600" />
-          <p className="text-sm font-semibold text-zinc-300">No Candidate Profiles Found</p>
-          <p className="text-xs text-zinc-500 max-w-sm">
-            Import a candidate resume from PDF, text, or enter details manually to get started.
+          <p className="text-sm font-semibold text-zinc-300">
+            {t("candidateProfileView.noProfiles")}
           </p>
           <Button
             variant="sky"
             size="sm"
             onClick={() => setIsImportModalOpen(true)}
-            className="mt-2"
+            className="mt-2 active:scale-95"
           >
-            Import First Profile
+            {t("candidateProfileView.importProfile")}
           </Button>
         </div>
       ) : (
@@ -159,7 +160,7 @@ export function CandidateProfileView({
                 <button
                   type="button"
                   onClick={() => handleDelete(candidate.id)}
-                  className="p-1.5 text-zinc-500 hover:text-red-400 rounded-lg hover:bg-[#181b1f] transition-colors cursor-pointer"
+                  className="p-1.5 text-zinc-500 hover:text-red-400 rounded-lg hover:bg-[#181b1f] transition-colors cursor-pointer active:scale-95"
                   title="Delete Candidate Profile"
                 >
                   <HugeiconsIcon icon={Delete02Icon} size={16} />
@@ -177,7 +178,7 @@ export function CandidateProfileView({
             <div className="flex items-center gap-2">
               <HugeiconsIcon icon={Wrench01Icon} size={15} className="text-[#93c5fd]" />
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">
-                Skills &amp; Tooling Inventory
+                {t("candidateProfileView.skills")}
               </h3>
             </div>
 
@@ -207,7 +208,7 @@ export function CandidateProfileView({
             <div className="flex items-center gap-2">
               <HugeiconsIcon icon={Briefcase01Icon} size={15} className="text-[#93c5fd]" />
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">
-                Career Experience
+                {t("candidateProfileView.experience")}
               </h3>
             </div>
 
@@ -241,7 +242,7 @@ export function CandidateProfileView({
             <div className="flex items-center gap-2">
               <HugeiconsIcon icon={Mortarboard01Icon} size={15} className="text-[#d8b4fe]" />
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">
-                Education &amp; Qualifications
+                {t("candidateProfileView.education")}
               </h3>
             </div>
 

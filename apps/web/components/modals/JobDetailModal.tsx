@@ -14,6 +14,7 @@ import {
 import type { Job, JobRequirements } from "@resume-ai/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n/index.js";
 
 export interface JobDetailModalProps {
   job: Job | null;
@@ -34,6 +35,7 @@ export function JobDetailModal({
   onTailorResume,
   onApply,
 }: JobDetailModalProps) {
+  const { t } = useI18n();
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   if (!isOpen || !job) return null;
@@ -49,7 +51,7 @@ export function JobDetailModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="prism-panel rounded-2xl w-full max-w-3xl flex flex-col max-h-[90vh] shadow-2xl overflow-hidden">
+      <div className="prism-panel rounded-2xl w-full max-w-3xl flex flex-col max-h-[90vh] shadow-2xl overflow-hidden border border-[rgba(255,255,255,0.08)]">
         {/* Header */}
         <div className="flex items-start justify-between p-5 border-b border-[rgba(255,255,255,0.06)] bg-[#181b1f]/60">
           <div>
@@ -76,7 +78,7 @@ export function JobDetailModal({
                     rel="noreferrer"
                     className="flex items-center gap-1 text-[#93c5fd] hover:underline"
                   >
-                    <span>Posting</span>
+                    <span>{t("jobDetailModal.postingLink")}</span>
                     <HugeiconsIcon icon={LinkSquare01Icon} size={11} />
                   </a>
                 </>
@@ -87,7 +89,7 @@ export function JobDetailModal({
           <button
             type="button"
             onClick={onClose}
-            className="p-1 rounded-lg text-zinc-400 hover:text-white hover:bg-[#1e2228] transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-[#1e2228] transition-colors cursor-pointer active:scale-95"
           >
             <HugeiconsIcon icon={Cancel01Icon} size={16} />
           </button>
@@ -100,21 +102,25 @@ export function JobDetailModal({
             <div className="flex flex-col gap-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-[#181b1f] rounded-xl border border-[rgba(255,255,255,0.07)]">
                 <div>
-                  <span className="text-xs font-semibold text-zinc-400">ATS Match Assessment</span>
+                  <span className="text-xs font-semibold text-zinc-400">
+                    {t("jobDetailModal.atsMatchAssessment")}
+                  </span>
                   <div className="flex items-baseline gap-2 mt-0.5">
                     <span className="text-2xl font-black text-[#a7f3d0] font-mono">
                       {requirements.gapAnalysis?.matchPercentage ?? 80}%
                     </span>
-                    <span className="text-xs text-zinc-400">compatibility with candidate base truth</span>
+                    <span className="text-xs text-zinc-400">
+                      {t("jobDetailModal.matchCompatibility")}
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 font-mono">
                   <span className="text-xs px-2.5 py-1 bg-[#121417] rounded-lg text-zinc-300 border border-[rgba(255,255,255,0.06)]">
-                    Seniority: <strong className="text-white">{requirements.seniorityLevel}</strong>
+                    {t("jobDetailModal.seniority")}: <strong className="text-white">{requirements.seniorityLevel}</strong>
                   </span>
                   <span className="text-xs px-2.5 py-1 bg-[#121417] rounded-lg text-zinc-300 border border-[rgba(255,255,255,0.06)]">
-                    Model: <strong className="text-white">{requirements.workModel}</strong>
+                    {t("jobDetailModal.workModel")}: <strong className="text-white">{requirements.workModel}</strong>
                   </span>
                 </div>
               </div>
@@ -123,7 +129,7 @@ export function JobDetailModal({
               <div className="flex flex-col gap-2">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
                   <HugeiconsIcon icon={SparklesIcon} size={13} className="text-[#d8b4fe]" />
-                  <span>Key Technical Competencies &amp; Jev Criticality</span>
+                  <span>{t("jobDetailModal.keyCompetencies")}</span>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {requirements.skills.map((skill, idx) => (
@@ -135,7 +141,7 @@ export function JobDetailModal({
                         <span className="font-semibold text-zinc-200">{skill.name}</span>
                         {skill.required && (
                           <Badge variant="apricot" className="text-[9px]">
-                            Required
+                            {t("jobDetailModal.requiredBadge")}
                           </Badge>
                         )}
                       </div>
@@ -154,7 +160,7 @@ export function JobDetailModal({
                   <div className="p-3 badge-sage rounded-lg text-xs space-y-1">
                     <span className="font-bold text-[#a7f3d0] flex items-center gap-1">
                       <HugeiconsIcon icon={CheckmarkCircle02Icon} size={14} />
-                      Matching Strengths
+                      {t("jobDetailModal.matchingStrengths")}
                     </span>
                     <ul className="list-disc list-inside text-zinc-200 space-y-0.5">
                       {requirements.gapAnalysis.matchingSkills.map((s, i) => (
@@ -166,13 +172,13 @@ export function JobDetailModal({
                   <div className="p-3 badge-apricot rounded-lg text-xs space-y-1">
                     <span className="font-bold text-[#fdba74] flex items-center gap-1">
                       <HugeiconsIcon icon={HelpCircleIcon} size={14} />
-                      Identified Growth Areas
+                      {t("jobDetailModal.identifiedGrowthAreas")}
                     </span>
                     <ul className="list-disc list-inside text-zinc-200 space-y-0.5">
                       {requirements.gapAnalysis.missingSkills.length > 0 ? (
                         requirements.gapAnalysis.missingSkills.map((s, i) => <li key={i}>{s}</li>)
                       ) : (
-                        <li>No significant technical skill gaps detected.</li>
+                        <li>{t("jobDetailModal.noGapsDetected")}</li>
                       )}
                     </ul>
                   </div>
@@ -183,9 +189,9 @@ export function JobDetailModal({
             <div className="p-6 bg-[#181b1f] rounded-xl border border-[rgba(255,255,255,0.06)] text-center flex flex-col items-center gap-3">
               <HugeiconsIcon icon={SparklesIcon} size={28} className="text-[#93c5fd] animate-pulse" />
               <div>
-                <h4 className="text-sm font-bold text-white">Job Posting Not Analyzed Yet</h4>
+                <h4 className="text-sm font-bold text-white">{t("jobDetailModal.notAnalyzedTitle")}</h4>
                 <p className="text-xs text-zinc-400 mt-1">
-                  Extract requirements and evaluate candidate match percentage using Gemini and Jev.
+                  {t("jobDetailModal.notAnalyzedDesc")}
                 </p>
               </div>
               <Button
@@ -193,15 +199,20 @@ export function JobDetailModal({
                 size="sm"
                 onClick={handleAnalyze}
                 disabled={isAnalyzing}
+                className="active:scale-95"
               >
-                <span>{isAnalyzing ? "Extracting Requirements..." : "Analyze with AI"}</span>
+                <span>
+                  {isAnalyzing ? t("jobDetailModal.extractingRequirements") : t("jobDetailModal.analyzeWithAi")}
+                </span>
               </Button>
             </div>
           )}
 
           {/* Description */}
           <div className="flex flex-col gap-1.5 pt-2 border-t border-[rgba(255,255,255,0.06)]">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400">Raw Description</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+              {t("jobDetailModal.rawDescription")}
+            </h4>
             <div className="p-4 bg-[#0c0d0e] rounded-xl border border-[rgba(255,255,255,0.06)] text-xs text-zinc-300 leading-relaxed max-h-60 overflow-y-auto whitespace-pre-wrap font-sans">
               {job.description}
             </div>
@@ -214,8 +225,9 @@ export function JobDetailModal({
             variant="ghost"
             size="sm"
             onClick={onClose}
+            className="active:scale-95"
           >
-            Close
+            {t("jobDetailModal.close")}
           </Button>
 
           <Button
@@ -225,10 +237,10 @@ export function JobDetailModal({
               onClose();
               onTailorResume(job);
             }}
-            className="gap-1.5"
+            className="gap-1.5 active:scale-95"
           >
             <HugeiconsIcon icon={NoteEditIcon} size={13} />
-            <span>Open Resume Studio</span>
+            <span>{t("jobDetailModal.openResumeStudio")}</span>
           </Button>
 
           <Button
@@ -238,10 +250,10 @@ export function JobDetailModal({
               onClose();
               onApply(job);
             }}
-            className="gap-1.5"
+            className="gap-1.5 active:scale-95"
           >
             <HugeiconsIcon icon={AiBrain01Icon} size={13} />
-            <span>Launch Agent</span>
+            <span>{t("jobDetailModal.launchAgent")}</span>
           </Button>
         </div>
       </div>

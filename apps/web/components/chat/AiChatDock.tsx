@@ -3,31 +3,22 @@
 import { useEffect, useRef, useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  AiBrain01Icon,
+  Alert02Icon,
   ArrowDown01Icon,
   Cancel01Icon,
+  CheckmarkCircle02Icon,
+  Copy01Icon,
   MinusSignIcon,
+  Refresh01Icon,
   ReloadIcon,
   SentIcon,
   SparklesIcon,
   UserAccountIcon,
 } from "@hugeicons/core-free-icons";
-import { useResumeStudio } from "../resume/ResumeStudioContext";
-
-const QUICK_PROMPT_SUGGESTIONS = [
-  "Quantify metrics",
-  "Emphasize TypeScript",
-  "Tighten summary",
-  "Add Cloud KPIs",
-  "Strengthen action verbs",
-  "ATS keyword distribution",
-];
-
-const PILL_BADGES = [
-  "Quantify metrics",
-  "Emphasize TypeScript",
-  "Tighten summary",
-];
+import { useResumeStudio } from "../resume/ResumeStudioContext.js";
+import { useI18n } from "@/lib/i18n/index.js";
+import { AiAvatar, type AiAvatarState } from "./AiAvatar.js";
+import { ModelSelector } from "./ModelSelector.js";
 
 /**
  * Lightweight helper to format assistant response text with diff highlighting,
@@ -37,7 +28,7 @@ function FormattedMessageContent({ content }: { content: string }) {
   const lines = content.split("\n");
 
   return (
-    <div className="space-y-1.5 text-xs leading-relaxed break-words">
+    <div className="space-y-1.5 text-xs leading-relaxed break-words font-sans">
       {lines.map((line, lineIdx) => {
         const trimmed = line.trim();
 
@@ -131,7 +122,113 @@ function parseInlineMarkdown(text: string) {
   return parts.length > 0 ? parts : text;
 }
 
+/**
+ * Real Error Card component displaying actionable error details,
+ * retry action, and copyable debugging metadata.
+ */
+function RealErrorCard({
+  errorMessage,
+  timestamp,
+  activeModel,
+  onRetry,
+}: {
+  errorMessage: string;
+  timestamp: string;
+  activeModel: string;
+  onRetry?: () => void;
+}) {
+  const { t } = useI18n();
+  const [copied, setCopied] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+
+  const handleCopyDetails = async () => {
+    const details = `[Error Details]\nMessage: ${errorMessage}\nTimestamp: ${timestamp}\nModel: ${activeModel}`;
+    try {
+      await navigator.clipboard.writeText(details);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback
+    }
+  };
+
+  return (
+    <div className="w-full rounded-2xl bg-rose-950/25 border border-rose-500/35 p-4 shadow-lg shadow-rose-950/20 text-xs space-y-3 animate-in fade-in duration-200">
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex items-center gap-2 text-rose-300">
+          <div className="p-1.5 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300 shrink-0">
+            <HugeiconsIcon icon={Alert02Icon} size={15} />
+          </div>
+          <div>
+            <h4 className="font-bold text-rose-200 tracking-tight">
+              {t("aiChat.errorCardTitle")}
+            </h4>
+            <p className="text-[10px] text-rose-400/80">
+              {t("aiChat.errorCardSubtitle")}
+            </p>
+          </div>
+        </div>
+        <span className="text-[10px] font-mono text-zinc-500">{timestamp}</span>
+      </div>
+
+      <div className="p-2.5 rounded-xl bg-[#140b0e] border border-rose-500/20 text-rose-200/90 text-xs font-mono break-words leading-relaxed">
+        {errorMessage}
+      </div>
+
+      {showDetails && (
+        <div className="p-2.5 rounded-lg bg-black/40 border border-zinc-800 text-[10px] text-zinc-400 font-mono space-y-1">
+          <div>Model: <span className="text-zinc-200">{activeModel}</span></div>
+          <div>Timestamp: <span className="text-zinc-200">{timestamp}</span></div>
+          <div>Scope: Candidate profile & ATS tailoring pipeline</div>
+        </div>
+      )}
+
+      <div className="flex items-center justify-between pt-1 border-t border-rose-500/15">
+        <button
+          type="button"
+          onClick={() => setShowDetails((prev) => !prev)}
+          className="text-[10px] text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+        >
+          {showDetails ? t("aiChat.hideDetails") : t("aiChat.showDetails")}
+        </button>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={handleCopyDetails}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white border border-white/10 text-[11px] font-medium transition-all active:scale-95 cursor-pointer"
+          >
+            {copied ? (
+              <>
+                <HugeiconsIcon icon={CheckmarkCircle02Icon} size={12} className="text-[#a7f3d0]" />
+                <span className="text-[#a7f3d0]">{t("aiChat.copied")}</span>
+              </>
+            ) : (
+              <>
+                <HugeiconsIcon icon={Copy01Icon} size={12} />
+                <span>{t("aiChat.copyDetails")}</span>
+              </>
+            )}
+          </button>
+
+          {onRetry && (
+            <button
+              type="button"
+              onClick={onRetry}
+              className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-rose-600/80 hover:bg-rose-600 text-white text-[11px] font-semibold shadow-xs transition-all active:scale-95 cursor-pointer"
+            >
+              <HugeiconsIcon icon={Refresh01Icon} size={12} />
+              <span>{t("aiChat.retry")}</span>
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function AiChatDock() {
+  const { t } = useI18n();
   const {
     job,
     chatMessages,
@@ -146,18 +243,48 @@ export function AiChatDock() {
   const [isVisible, setIsVisible] = useState(true);
   const [inputPrompt, setInputPrompt] = useState("");
   const [showJumpButton, setShowJumpButton] = useState(false);
+  const [selectedModel, setSelectedModel] = useState<string>("gemini-2.0-flash");
+  const [lastPromptSent, setLastPromptSent] = useState<string>("");
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const bottomAnchorRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const userScrolledUpRef = useRef(false);
 
+  // Quick suggestions focused strictly on candidate profile/resume/application readiness
+  const QUICK_PROMPT_SUGGESTIONS = [
+    t("aiChat.promptSuggestions.quantifyMetrics"),
+    t("aiChat.promptSuggestions.emphasizeTypeScript"),
+    t("aiChat.promptSuggestions.tightenSummary"),
+    t("aiChat.promptSuggestions.cloudKpis"),
+    t("aiChat.promptSuggestions.actionVerbs"),
+    t("aiChat.promptSuggestions.atsKeywords"),
+    t("aiChat.promptSuggestions.profileReadiness"),
+    t("aiChat.promptSuggestions.gapAlignment"),
+  ];
+
+  const PILL_BADGES = [
+    t("aiChat.promptSuggestions.quantifyMetrics"),
+    t("aiChat.promptSuggestions.atsKeywords"),
+    t("aiChat.promptSuggestions.profileReadiness"),
+  ];
+
+  // Derive active avatar state
+  const lastMessage = chatMessages[chatMessages.length - 1];
+  const hasRecentError = lastMessage?.role === "system";
+
+  let avatarState: AiAvatarState = "idle";
+  if (isRefining) {
+    avatarState = "thinking";
+  } else if (hasRecentError) {
+    avatarState = "error";
+  }
+
   // Sync with isChatDrawerOpen if header button triggers it
   useEffect(() => {
     if (isChatDrawerOpen) {
       setIsVisible(true);
       setIsExpanded(true);
-      // Close standard drawer so they don't overlap
       closeChatDrawer();
     }
   }, [isChatDrawerOpen, closeChatDrawer]);
@@ -229,15 +356,25 @@ export function AiChatDock() {
     }
   }, [chatMessages, isRefining, isExpanded]);
 
-  const handleSend = async () => {
-    const text = inputPrompt.trim();
+  const handleSend = async (overrideText?: string) => {
+    const text = (overrideText ?? inputPrompt).trim();
     if (!text || isRefining) return;
-    setInputPrompt("");
+
+    if (!overrideText) {
+      setInputPrompt("");
+    }
+    setLastPromptSent(text);
     userScrolledUpRef.current = false;
+
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
     }
-    await sendChatMessage(text);
+
+    try {
+      await sendChatMessage(text, selectedModel);
+    } catch {
+      // Error handled inside context and recorded in message history
+    }
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -252,7 +389,13 @@ export function AiChatDock() {
     setIsVisible(true);
     setIsExpanded(true);
     userScrolledUpRef.current = false;
-    await sendChatMessage(suggestion);
+    await handleSend(suggestion);
+  };
+
+  const handleRetryLastPrompt = async () => {
+    if (lastPromptSent && !isRefining) {
+      await handleSend(lastPromptSent);
+    }
   };
 
   if (!isVisible) {
@@ -263,7 +406,7 @@ export function AiChatDock() {
           setIsVisible(true);
           setIsExpanded(true);
         }}
-        className="fixed bottom-5 right-6 z-40 p-3 rounded-full bg-[#121417]/90 hover:bg-[#181b1f] border border-[rgba(216,180,254,0.3)] text-[#d8b4fe] shadow-2xl backdrop-blur-xl transition-all hover:scale-105 cursor-pointer"
+        className="fixed bottom-5 right-6 z-40 p-3 rounded-full bg-[#121417]/90 hover:bg-[#181b1f] border border-[rgba(216,180,254,0.3)] text-[#d8b4fe] shadow-2xl backdrop-blur-xl transition-all hover:scale-105 active:scale-95 cursor-pointer"
         title="Open AI Chat Dock (⌘K)"
       >
         <HugeiconsIcon icon={SparklesIcon} size={18} />
@@ -280,16 +423,14 @@ export function AiChatDock() {
       >
         <div
           onClick={() => setIsExpanded(true)}
-          className="flex items-center gap-3 px-3.5 py-2 rounded-full bg-[#121417]/90 hover:bg-[#16191f]/95 backdrop-blur-xl border border-[rgba(255,255,255,0.12)] hover:border-[#d8b4fe]/40 shadow-[0_12px_36px_rgba(0,0,0,0.5),0_0_15px_rgba(216,180,254,0.06)] transition-all duration-200 cursor-pointer group select-none"
+          className="flex items-center gap-3 px-3.5 py-2 rounded-full bg-[#121417]/90 hover:bg-[#16191f]/95 backdrop-blur-xl border border-[rgba(255,255,255,0.12)] hover:border-[#d8b4fe]/40 shadow-[0_12px_36px_rgba(0,0,0,0.5),0_0_15px_rgba(216,180,254,0.06)] transition-all duration-200 cursor-pointer group select-none active:scale-95"
         >
-          {/* AI Icon Pill Indicator */}
-          <div className="w-7 h-7 rounded-full bg-[#1e192a] border border-[#d8b4fe]/40 flex items-center justify-center text-[#d8b4fe] group-hover:border-[#d8b4fe]/70 shadow-sm transition-colors shrink-0">
-            <HugeiconsIcon icon={SparklesIcon} size={14} className="group-hover:rotate-12 transition-transform duration-300" />
-          </div>
+          {/* SmoothUI AI Avatar */}
+          <AiAvatar state={avatarState} size="sm" showStatusIndicator={false} />
 
           {/* Placeholder Text */}
           <span className="text-xs font-medium text-zinc-300 group-hover:text-white transition-colors whitespace-nowrap">
-            Refine resume with AI...
+            {t("aiChat.floatingPillPlaceholder")}
           </span>
 
           {/* Quick Suggestion Badges */}
@@ -303,7 +444,7 @@ export function AiChatDock() {
                   handleSelectSuggestion(badge);
                 }}
                 disabled={isRefining}
-                className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[rgba(216,180,254,0.08)] hover:bg-[rgba(216,180,254,0.18)] text-[#d8b4fe] border border-[rgba(216,180,254,0.22)] hover:border-[rgba(216,180,254,0.4)] transition-all cursor-pointer whitespace-nowrap"
+                className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[rgba(216,180,254,0.08)] hover:bg-[rgba(216,180,254,0.18)] text-[#d8b4fe] border border-[rgba(216,180,254,0.22)] hover:border-[rgba(216,180,254,0.4)] transition-all cursor-pointer whitespace-nowrap active:scale-95"
               >
                 {badge}
               </button>
@@ -321,65 +462,83 @@ export function AiChatDock() {
     );
   }
 
-  // EXPANDED STATE: Full AI Chat Window Dock
+  // EXPANDED STATE: Full SmoothUI AI Chat Window Dock
   return (
     <aside
       aria-label="AI Tailoring Assistant Chat Window"
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 w-[600px] max-w-[95vw] h-[520px] rounded-2xl bg-[#121417]/95 backdrop-blur-2xl border border-[rgba(255,255,255,0.12)] shadow-[0_24px_60px_rgba(0,0,0,0.7),0_0_25px_rgba(216,180,254,0.08)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+      className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 w-[640px] max-w-[95vw] h-[550px] rounded-2xl bg-[#121417]/95 backdrop-blur-2xl border border-[rgba(255,255,255,0.12)] shadow-[0_24px_60px_rgba(0,0,0,0.7),0_0_25px_rgba(216,180,254,0.08)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200"
     >
       {/* Header with AI Status & Action Controls */}
       <header className="flex items-center justify-between px-4 py-3 border-b border-[rgba(255,255,255,0.08)] bg-[#15181d]/80 select-none">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-[#1e192a] border border-[#d8b4fe]/35 flex items-center justify-center text-[#d8b4fe] shadow-sm">
-            <HugeiconsIcon icon={AiBrain01Icon} size={15} />
-          </div>
+          <AiAvatar state={avatarState} size="md" />
+
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold text-white tracking-tight">
-                AI Resume Tailoring Copilot
+                {t("aiChat.copilotTitle")}
               </span>
-              <span className="flex items-center gap-1 px-1.5 py-0.2 rounded-full text-[9px] font-mono font-semibold bg-[#a7f3d0]/10 text-[#a7f3d0] border border-[#a7f3d0]/20">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a7f3d0] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#a7f3d0]"></span>
-                </span>
-                Online
+              <span
+                className={`flex items-center gap-1 px-1.5 py-0.2 rounded-full text-[9px] font-mono font-semibold ${
+                  avatarState === "error"
+                    ? "bg-rose-500/10 text-rose-300 border border-rose-500/20"
+                    : isRefining
+                    ? "bg-[#93c5fd]/10 text-[#93c5fd] border border-[#93c5fd]/20"
+                    : "bg-[#a7f3d0]/10 text-[#a7f3d0] border border-[#a7f3d0]/20"
+                }`}
+              >
+                {avatarState === "error"
+                  ? t("aiChat.statusError")
+                  : isRefining
+                  ? t("aiChat.statusGenerating")
+                  : t("aiChat.statusOnline")}
               </span>
             </div>
             <span className="text-[10px] text-zinc-400 font-mono">
-              Jev System One / Claude • {job.company}
+              {job?.company ? `${job.company} • ` : ""}
+              {t("aiChat.subHeader")}
             </span>
           </div>
         </div>
 
-        {/* Window controls: Minimize to Pill and Close */}
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            onClick={() => setIsExpanded(false)}
-            title="Minimize to Pill (Esc)"
-            className="p-1.5 text-zinc-400 hover:text-zinc-100 hover:bg-white/5 rounded-lg transition-colors cursor-pointer"
-          >
-            <HugeiconsIcon icon={MinusSignIcon} size={15} />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setIsExpanded(false);
-              setIsVisible(false);
-            }}
-            title="Close Chat Dock"
-            className="p-1.5 text-zinc-400 hover:text-rose-300 hover:bg-white/5 rounded-lg transition-colors cursor-pointer"
-          >
-            <HugeiconsIcon icon={Cancel01Icon} size={15} />
-          </button>
+        {/* Model Selector & Window Controls */}
+        <div className="flex items-center gap-2">
+          <ModelSelector
+            selectedModel={selectedModel}
+            onSelectModel={(m) => setSelectedModel(m)}
+          />
+
+          <div className="flex items-center gap-1 border-l border-[rgba(255,255,255,0.08)] pl-2">
+            <button
+              type="button"
+              onClick={() => setIsExpanded(false)}
+              title="Minimize to Pill (Esc)"
+              className="p-1.5 text-zinc-400 hover:text-zinc-100 hover:bg-white/5 rounded-lg transition-colors cursor-pointer active:scale-95"
+            >
+              <HugeiconsIcon icon={MinusSignIcon} size={15} />
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setIsExpanded(false);
+                setIsVisible(false);
+              }}
+              title="Close Chat Dock"
+              className="p-1.5 text-zinc-400 hover:text-rose-300 hover:bg-white/5 rounded-lg transition-colors cursor-pointer active:scale-95"
+            >
+              <HugeiconsIcon icon={Cancel01Icon} size={15} />
+            </button>
+          </div>
         </div>
       </header>
 
       {/* Interactive Suggestion Pills Bar (`ai-suggestions`) */}
-      <nav aria-label="Quick AI suggestions" className="px-3.5 py-2 border-b border-[rgba(255,255,255,0.06)] bg-[#101215]/60 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+      <nav
+        aria-label="Quick AI suggestions"
+        className="px-3.5 py-2 border-b border-[rgba(255,255,255,0.06)] bg-[#101215]/60 flex items-center gap-1.5 overflow-x-auto no-scrollbar"
+      >
         <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 shrink-0 select-none">
-          Quick suggestions:
+          {t("aiChat.quickSuggestionsLabel")}
         </span>
         {QUICK_PROMPT_SUGGESTIONS.map((suggestion, idx) => (
           <button
@@ -387,7 +546,7 @@ export function AiChatDock() {
             type="button"
             onClick={() => handleSelectSuggestion(suggestion)}
             disabled={isRefining}
-            className="whitespace-nowrap px-2.5 py-1 bg-[#181b1f] hover:bg-[#22272e] border border-[rgba(255,255,255,0.08)] hover:border-[#d8b4fe]/40 rounded-full text-[11px] text-zinc-300 hover:text-white transition-all cursor-pointer disabled:opacity-50 shrink-0"
+            className="whitespace-nowrap px-2.5 py-1 bg-[#181b1f] hover:bg-[#22272e] border border-[rgba(255,255,255,0.08)] hover:border-[#d8b4fe]/40 rounded-full text-[11px] text-zinc-300 hover:text-white transition-all cursor-pointer disabled:opacity-50 shrink-0 active:scale-95"
           >
             {suggestion}
           </button>
@@ -403,6 +562,21 @@ export function AiChatDock() {
         >
           {chatMessages.map((msg) => {
             const isUser = msg.role === "user";
+            const isSystemError = msg.role === "system";
+
+            // Real Error Card presentation
+            if (isSystemError) {
+              return (
+                <div key={msg.id} className="w-full">
+                  <RealErrorCard
+                    errorMessage={msg.content}
+                    timestamp={msg.timestamp}
+                    activeModel={selectedModel}
+                    onRetry={lastPromptSent ? handleRetryLastPrompt : undefined}
+                  />
+                </div>
+              );
+            }
 
             return (
               <div
@@ -412,19 +586,13 @@ export function AiChatDock() {
                 }`}
               >
                 {/* Avatar Icon */}
-                <div
-                  className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
-                    isUser
-                      ? "bg-[#181b1f] border border-[rgba(255,255,255,0.12)] text-zinc-300"
-                      : "bg-[#251e33] border border-[#d8b4fe]/40 text-[#d8b4fe]"
-                  }`}
-                >
-                  {isUser ? (
+                {isUser ? (
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 shadow-sm bg-[#181b1f] border border-[rgba(255,255,255,0.12)] text-zinc-300">
                     <HugeiconsIcon icon={UserAccountIcon} size={14} />
-                  ) : (
-                    <HugeiconsIcon icon={SparklesIcon} size={14} />
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  <AiAvatar state="idle" size="sm" showStatusIndicator={false} />
+                )}
 
                 {/* Message Bubble */}
                 <div
@@ -438,7 +606,7 @@ export function AiChatDock() {
                     <span className="font-semibold text-zinc-300">
                       {isUser
                         ? candidate?.fullName || "Candidate"
-                        : "Jev Tailoring Agent"}
+                        : "AI Application Copilot"}
                     </span>
                     <span className="font-mono">{msg.timestamp}</span>
                   </div>
@@ -459,10 +627,10 @@ export function AiChatDock() {
               />
               <div className="flex flex-col">
                 <span className="text-white font-medium">
-                  Synthesizing LaTeX & ATS alignments...
+                  {t("aiChat.statusGenerating")}
                 </span>
                 <span className="text-[10px] text-zinc-400 font-mono">
-                  Applying targeted enhancements and compiling preview
+                  Synthesizing candidate profile enhancements with {selectedModel}
                 </span>
               </div>
             </div>
@@ -476,10 +644,10 @@ export function AiChatDock() {
           <button
             type="button"
             onClick={() => scrollToBottom(true)}
-            className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 bg-[#181b1f]/95 hover:bg-[#22272e] text-white rounded-full text-xs font-medium border border-[rgba(255,255,255,0.16)] shadow-xl transition-all duration-200 cursor-pointer animate-in fade-in slide-in-from-bottom-2 select-none"
+            className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 bg-[#181b1f]/95 hover:bg-[#22272e] text-white rounded-full text-xs font-medium border border-[rgba(255,255,255,0.16)] shadow-xl transition-all duration-200 cursor-pointer animate-in fade-in slide-in-from-bottom-2 select-none active:scale-95"
           >
             <HugeiconsIcon icon={ArrowDown01Icon} size={14} className="text-[#a7f3d0]" />
-            <span>Jump to latest</span>
+            <span>{t("aiChat.jumpToLatest")}</span>
           </button>
         )}
       </div>
@@ -494,31 +662,31 @@ export function AiChatDock() {
             onKeyDown={handleInputKeyDown}
             disabled={isRefining}
             rows={1}
-            placeholder='Ask AI to adjust bullet points, quantify results (e.g. "Add metrics to AWS projects")...'
+            placeholder={t("aiChat.inputPlaceholder")}
             className="w-full bg-transparent text-xs text-zinc-100 placeholder:text-zinc-500 outline-none resize-none leading-relaxed min-h-[36px] max-h-[110px]"
           />
 
           <div className="flex items-center justify-between pt-1.5 border-t border-[rgba(255,255,255,0.05)] select-none">
             <span className="text-[10px] text-zinc-500 flex items-center gap-1">
-              <span>Enter to send</span>
+              <span>{t("aiChat.enterToSend")}</span>
               <span>•</span>
-              <span>Shift+Enter for newline</span>
+              <span>{t("aiChat.shiftEnterNewline")}</span>
             </span>
 
             <button
               type="button"
-              onClick={handleSend}
+              onClick={() => handleSend()}
               disabled={!inputPrompt.trim() || isRefining}
-              className="h-7 px-3 rounded-lg text-xs font-semibold flex items-center gap-1.5 bg-[#d8b4fe] hover:bg-[#c084fc] text-zinc-950 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer shadow-sm"
+              className="h-7 px-3 rounded-lg text-xs font-semibold flex items-center gap-1.5 bg-[#d8b4fe] hover:bg-[#c084fc] text-zinc-950 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer shadow-sm active:scale-95"
             >
               {isRefining ? (
                 <>
                   <HugeiconsIcon icon={ReloadIcon} size={12} className="animate-spin" />
-                  <span>Refining...</span>
+                  <span>{t("aiChat.refining")}</span>
                 </>
               ) : (
                 <>
-                  <span>Send</span>
+                  <span>{t("aiChat.send")}</span>
                   <HugeiconsIcon icon={SentIcon} size={12} />
                 </>
               )}

@@ -11,6 +11,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import React, { useState } from "react";
 import { apiClient } from "../../lib/apiClient.js";
+import { useI18n } from "../../lib/i18n/index.js";
 
 export interface ImportCandidateModalProps {
   isOpen: boolean;
@@ -21,6 +22,8 @@ export interface ImportCandidateModalProps {
 type ImportTab = "pdf" | "text" | "manual";
 
 export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandidateModalProps) {
+  const { t } = useI18n();
+
   const [activeTab, setActiveTab] = useState<ImportTab>("pdf");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -55,7 +58,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
 
   const handleImportPdf = async () => {
     if (!selectedFile) {
-      setError("Please select a file to import.");
+      setError(t("importCandidateModal.selectFileError"));
       return;
     }
 
@@ -76,14 +79,14 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
             onSuccess(res.candidate);
             onClose();
           } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : "Failed to parse PDF resume";
+            const message = err instanceof Error ? err.message : t("importCandidateModal.parsePdfError");
             setError(message);
           } finally {
             setIsLoading(false);
           }
         };
         reader.onerror = () => {
-          setError("Failed to read file.");
+          setError(t("importCandidateModal.readFileError"));
           setIsLoading(false);
         };
       } else {
@@ -98,7 +101,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
         setIsLoading(false);
       }
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to import resume file";
+      const message = err instanceof Error ? err.message : t("importCandidateModal.importFileError");
       setError(message);
       setIsLoading(false);
     }
@@ -106,7 +109,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
 
   const handleImportText = async () => {
     if (!pastedText.trim()) {
-      setError("Please paste resume text to continue.");
+      setError(t("importCandidateModal.pasteTextError"));
       return;
     }
 
@@ -121,7 +124,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
       onSuccess(res.candidate);
       onClose();
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to parse resume text";
+      const message = err instanceof Error ? err.message : t("importCandidateModal.parseTextError");
       setError(message);
     } finally {
       setIsLoading(false);
@@ -131,7 +134,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
   const handleCreateManual = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim() || !email.trim()) {
-      setError("Full Name and Email are required.");
+      setError(t("importCandidateModal.nameEmailError"));
       return;
     }
 
@@ -186,7 +189,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
       onSuccess(res.candidate);
       onClose();
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to create candidate profile";
+      const message = err instanceof Error ? err.message : t("importCandidateModal.createProfileError");
       setError(message);
     } finally {
       setIsLoading(false);
@@ -203,16 +206,18 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               <HugeiconsIcon icon={UserAdd01Icon} size={20} />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white">Import Candidate Profile</h2>
+              <h2 className="text-base font-bold text-white tracking-tight">
+                {t("importCandidateModal.title")}
+              </h2>
               <p className="text-xs text-zinc-400">
-                Register a candidate career profile via PDF resume, plain text, or manual entry.
+                {t("importCandidateModal.subtitle")}
               </p>
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+            className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer active:scale-95"
           >
             <HugeiconsIcon icon={Cancel01Icon} size={18} />
           </button>
@@ -226,14 +231,14 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               setActiveTab("pdf");
               setError(null);
             }}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer active:scale-95 ${
               activeTab === "pdf"
                 ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
                 : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60"
             }`}
           >
             <HugeiconsIcon icon={Upload01Icon} size={14} />
-            <span>Upload PDF or File</span>
+            <span>{t("importCandidateModal.tabPdf")}</span>
           </button>
 
           <button
@@ -242,14 +247,14 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               setActiveTab("text");
               setError(null);
             }}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer active:scale-95 ${
               activeTab === "text"
                 ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
                 : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60"
             }`}
           >
             <HugeiconsIcon icon={NoteEditIcon} size={14} />
-            <span>Paste Resume Text</span>
+            <span>{t("importCandidateModal.tabText")}</span>
           </button>
 
           <button
@@ -258,14 +263,14 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               setActiveTab("manual");
               setError(null);
             }}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer active:scale-95 ${
               activeTab === "manual"
                 ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
                 : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60"
             }`}
           >
             <HugeiconsIcon icon={UserAdd01Icon} size={14} />
-            <span>Manual Form</span>
+            <span>{t("importCandidateModal.tabManual")}</span>
           </button>
         </div>
 
@@ -283,14 +288,14 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               <HugeiconsIcon icon={Upload01Icon} size={32} className="text-zinc-500" />
               <div>
                 <p className="text-sm font-semibold text-zinc-200">
-                  {selectedFile ? selectedFile.name : "Select a PDF, LaTeX (.tex), or text resume file"}
+                  {selectedFile ? selectedFile.name : t("importCandidateModal.dropzoneTitle")}
                 </p>
                 <p className="text-xs text-zinc-500 mt-1">
-                  Supported formats: .pdf, .tex, .txt, .md (up to 10MB)
+                  {t("importCandidateModal.dropzoneFormats")}
                 </p>
               </div>
-              <label className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg shadow-md transition-colors cursor-pointer">
-                Browse Files
+              <label className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg shadow-md transition-all active:scale-95 cursor-pointer">
+                {t("importCandidateModal.browseFiles")}
                 <input
                   type="file"
                   accept=".pdf,.tex,.txt,.md"
@@ -309,7 +314,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
                 className="rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-0 cursor-pointer"
               />
               <label htmlFor="makeActivePdf" className="text-xs text-zinc-300 cursor-pointer">
-                Set this candidate profile as active immediately
+                {t("importCandidateModal.setActiveLabel")}
               </label>
             </div>
 
@@ -317,25 +322,25 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                className="px-4 py-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors cursor-pointer active:scale-95"
               >
-                Cancel
+                {t("importCandidateModal.cancel")}
               </button>
               <button
                 type="button"
                 onClick={handleImportPdf}
                 disabled={!selectedFile || isLoading}
-                className="flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white text-xs font-bold rounded-lg shadow-lg shadow-indigo-600/30 transition-all cursor-pointer disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white text-xs font-bold rounded-lg shadow-lg shadow-indigo-600/30 transition-all cursor-pointer disabled:opacity-50"
               >
                 {isLoading ? (
                   <>
                     <HugeiconsIcon icon={ReloadIcon} size={14} className="animate-spin" />
-                    <span>Parsing with AI...</span>
+                    <span>{t("importCandidateModal.parsingWithAi")}</span>
                   </>
                 ) : (
                   <>
                     <HugeiconsIcon icon={SparklesIcon} size={14} />
-                    <span>Import &amp; Parse Profile</span>
+                    <span>{t("importCandidateModal.importAndParse")}</span>
                   </>
                 )}
               </button>
@@ -348,14 +353,14 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
           <div className="p-5 space-y-4">
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-zinc-300">
-                Paste Resume Text, Markdown, or LaTeX
+                {t("importCandidateModal.pasteTextLabel")}
               </label>
               <textarea
                 value={pastedText}
                 onChange={(e) => setPastedText(e.target.value)}
-                placeholder="Paste the full text of candidate resume here..."
+                placeholder={t("importCandidateModal.pasteTextPlaceholder")}
                 rows={10}
-                className="w-full bg-zinc-900 border border-zinc-700/80 rounded-xl p-3 text-xs text-zinc-200 placeholder-zinc-500 font-mono leading-relaxed focus:outline-none focus:border-indigo-500"
+                className="w-full bg-zinc-900 border border-zinc-700/80 rounded-xl p-3 text-xs text-zinc-200 placeholder-zinc-500 font-mono leading-relaxed focus:outline-none focus:border-indigo-500 transition-colors"
               />
             </div>
 
@@ -368,7 +373,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
                 className="rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-0 cursor-pointer"
               />
               <label htmlFor="makeActiveText" className="text-xs text-zinc-300 cursor-pointer">
-                Set this candidate profile as active immediately
+                {t("importCandidateModal.setActiveLabel")}
               </label>
             </div>
 
@@ -376,25 +381,25 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                className="px-4 py-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors cursor-pointer active:scale-95"
               >
-                Cancel
+                {t("importCandidateModal.cancel")}
               </button>
               <button
                 type="button"
                 onClick={handleImportText}
                 disabled={!pastedText.trim() || isLoading}
-                className="flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white text-xs font-bold rounded-lg shadow-lg shadow-indigo-600/30 transition-all cursor-pointer disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white text-xs font-bold rounded-lg shadow-lg shadow-indigo-600/30 transition-all cursor-pointer disabled:opacity-50"
               >
                 {isLoading ? (
                   <>
                     <HugeiconsIcon icon={ReloadIcon} size={14} className="animate-spin" />
-                    <span>Extracting Profile...</span>
+                    <span>{t("importCandidateModal.extractingProfile")}</span>
                   </>
                 ) : (
                   <>
                     <HugeiconsIcon icon={SparklesIcon} size={14} />
-                    <span>Parse with AI</span>
+                    <span>{t("importCandidateModal.parseWithAi")}</span>
                   </>
                 )}
               </button>
@@ -407,118 +412,136 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
           <form onSubmit={handleCreateManual} className="p-5 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-zinc-300">Full Name *</label>
+                <label className="text-xs font-semibold text-zinc-300">
+                  {t("importCandidateModal.fullName")}
+                </label>
                 <input
                   type="text"
                   required
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  placeholder="e.g. John Doe"
-                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  placeholder={t("importCandidateModal.fullNamePlaceholder")}
+                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-zinc-300">Email Address *</label>
+                <label className="text-xs font-semibold text-zinc-300">
+                  {t("importCandidateModal.email")}
+                </label>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="e.g. john@example.com"
-                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  placeholder={t("importCandidateModal.emailPlaceholder")}
+                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-zinc-300">Phone</label>
+                <label className="text-xs font-semibold text-zinc-300">
+                  {t("importCandidateModal.phone")}
+                </label>
                 <input
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="e.g. +1-555-0123"
-                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  placeholder={t("importCandidateModal.phonePlaceholder")}
+                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-zinc-300">Location</label>
+                <label className="text-xs font-semibold text-zinc-300">
+                  {t("importCandidateModal.location")}
+                </label>
                 <input
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  placeholder="e.g. San Francisco, CA / Remote"
-                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  placeholder={t("importCandidateModal.locationPlaceholder")}
+                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-zinc-300">Professional Summary</label>
+              <label className="text-xs font-semibold text-zinc-300">
+                {t("importCandidateModal.summary")}
+              </label>
               <textarea
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
-                placeholder="High-level career overview and expertise..."
+                placeholder={t("importCandidateModal.summaryPlaceholder")}
                 rows={3}
-                className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg p-3 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg p-3 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
               />
             </div>
 
             <div className="space-y-1">
               <label className="text-xs font-semibold text-zinc-300">
-                Skills &amp; Technologies (comma separated)
+                {t("importCandidateModal.skills")}
               </label>
               <input
                 type="text"
                 value={skillsInput}
                 onChange={(e) => setSkillsInput(e.target.value)}
-                placeholder="e.g. TypeScript, React, Python, Docker, Playwright, PostgreSQL"
-                className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                placeholder={t("importCandidateModal.skillsPlaceholder")}
+                className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 border-t border-zinc-800">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-zinc-300">Most Recent Company</label>
+                <label className="text-xs font-semibold text-zinc-300">
+                  {t("importCandidateModal.recentCompany")}
+                </label>
                 <input
                   type="text"
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  placeholder="e.g. Acme Tech Solutions"
-                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  placeholder={t("importCandidateModal.recentCompanyPlaceholder")}
+                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-zinc-300">Role / Title</label>
+                <label className="text-xs font-semibold text-zinc-300">
+                  {t("importCandidateModal.recentRole")}
+                </label>
                 <input
                   type="text"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  placeholder="e.g. Senior Software Engineer"
-                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  placeholder={t("importCandidateModal.recentRolePlaceholder")}
+                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-zinc-300">Degree</label>
+                <label className="text-xs font-semibold text-zinc-300">
+                  {t("importCandidateModal.degree")}
+                </label>
                 <input
                   type="text"
                   value={degree}
                   onChange={(e) => setDegree(e.target.value)}
-                  placeholder="e.g. B.S. in Computer Science"
-                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  placeholder={t("importCandidateModal.degreePlaceholder")}
+                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-zinc-300">Institution</label>
+                <label className="text-xs font-semibold text-zinc-300">
+                  {t("importCandidateModal.institution")}
+                </label>
                 <input
                   type="text"
                   value={institution}
                   onChange={(e) => setInstitution(e.target.value)}
-                  placeholder="e.g. University of California"
-                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  placeholder={t("importCandidateModal.institutionPlaceholder")}
+                  className="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
                 />
               </div>
             </div>
@@ -532,7 +555,7 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
                 className="rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-0 cursor-pointer"
               />
               <label htmlFor="makeActiveManual" className="text-xs text-zinc-300 cursor-pointer">
-                Set this candidate profile as active immediately
+                {t("importCandidateModal.setActiveLabel")}
               </label>
             </div>
 
@@ -540,24 +563,24 @@ export function ImportCandidateModal({ isOpen, onClose, onSuccess }: ImportCandi
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                className="px-4 py-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors cursor-pointer active:scale-95"
               >
-                Cancel
+                {t("importCandidateModal.cancel")}
               </button>
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white text-xs font-bold rounded-lg shadow-lg shadow-indigo-600/30 transition-all cursor-pointer disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white text-xs font-bold rounded-lg shadow-lg shadow-indigo-600/30 transition-all cursor-pointer disabled:opacity-50"
               >
                 {isLoading ? (
                   <>
                     <HugeiconsIcon icon={ReloadIcon} size={14} className="animate-spin" />
-                    <span>Saving...</span>
+                    <span>{t("importCandidateModal.saving")}</span>
                   </>
                 ) : (
                   <>
                     <HugeiconsIcon icon={CheckmarkCircle02Icon} size={14} />
-                    <span>Save Candidate</span>
+                    <span>{t("importCandidateModal.saveCandidate")}</span>
                   </>
                 )}
               </button>

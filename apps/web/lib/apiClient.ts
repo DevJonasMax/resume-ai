@@ -1,7 +1,9 @@
 import type {
   AgentRun,
   CandidateProfile,
+  ExtractedJobData,
   Job,
+  JobPlatformInfo,
   JobRequirements,
   JobStatus,
   ResumeDocument,
@@ -127,13 +129,91 @@ export const apiClient = {
     return res.json() as Promise<{ candidate: CandidateProfile }>;
   },
 
-  async refineResume(resumeId: string, instructions?: string) {
+  async refineResume(resumeId: string, instructions?: string, model?: string) {
     const res = await fetch(`${API_BASE}/resumes/${resumeId}/refine`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ instructions }),
+      body: JSON.stringify({
+        ...(instructions ? { instructions } : {}),
+        ...(model ? { model } : {}),
+      }),
     });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `Resume refinement failed with HTTP ${res.status}`);
+    }
     return res.json() as Promise<{ version: ResumeVersion }>;
+  },
+
+  async extractJobFromUrl(url: string) {
+    const res = await fetch(`${API_BASE}/jobs/extract`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `Failed to extract job details from URL (HTTP ${res.status})`);
+    }
+    return res.json() as Promise<{ success: boolean; extracted: ExtractedJobData }>;
+  },
+
+  async getSupportedPlatforms() {
+    const res = await fetch(`${API_BASE}/jobs/supported-platforms`);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || "Failed to fetch supported platforms");
+    }
+    return res.json() as Promise<{ platforms: JobPlatformInfo[] }>;
+  },
+
+  async getAiModels() {
+    const res = await fetch(`${API_BASE}/ai/models`);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || "Failed to fetch AI models");
+    }
+    return res.json() as Promise<{ defaultModel: string; models: string[] }>;
+  },
+
+  async streamAiChat(
+    prompt: string,
+    options?: { systemPrompt?: string; model?: string; onChunk?: (chunk: string) => void }
+  ): Promise<string> {
+    const res = await fetch(`${API_BASE}/ai/chat/stream`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prompt,
+        ...(options?.systemPrompt ? { systemPrompt: options.systemPrompt } : {}),
+        ...(options?.model ? { model: options.model } : {}),
+      }),
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text().catch(() => "Stream failed");
+      throw new Error(errorText || `AI streaming failed with HTTP ${res.status}`);
+    }
+
+    if (!res.body) {
+      throw new Error("ReadableStream is not supported in this environment");
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let accumulatedText = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value, { stream: true });
+      accumulatedText += chunk;
+      if (options?.onChunk) {
+        options.onChunk(chunk);
+      }
+    }
+
+    return accumulatedText;
   },
 
   async saveResumeLatex(resumeId: string, latex: string) {

@@ -19,6 +19,9 @@ Master implementation roadmap for the **AI Job Application Agent** monorepo. Thi
 - [ ] [TSK-009: Testing Infrastructure](file:///D:/projetos/resume-ai/docs/tasks/TSK-009-testing.md)
 - [x] [TSK-010: Documentation & Guides](file:///D:/projetos/resume-ai/docs/tasks/TSK-010-documentation.md)
 - [x] [TSK-011: Multi-Provider PDF Engine (Typst & React-PDF)](file:///C:/Users/Wesley%20Maik/Documents/Projects/resume-ai/docs/tasks/TSK-011-pdf-providers.md)
+- [x] [TSK-012: Platform Job Integrations (LinkedIn, Gupy, Nerdin, Programathor, micro1, Glassdoor, GeekHunter, Revelo, Catho, Indeed)](file:///C:/Users/Wesley%20Maik/Documents/Projects/resume-ai/docs/tasks/TSK-012-job-integrations.md)
+- [x] [TSK-013: Vercel AI SDK Integration & Real Assistant Engine](file:///C:/Users/Wesley%20Maik/Documents/Projects/resume-ai/docs/tasks/TSK-013-ai-sdk-streaming.md)
+- [x] [TSK-014: UI/UX Modernization, Micro-Interactions & SmoothUI AI Chat](file:///C:/Users/Wesley%20Maik/Documents/Projects/resume-ai/docs/tasks/TSK-014-ui-ux-microinteractions.md)
 
 ---
 
