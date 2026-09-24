@@ -22,16 +22,10 @@ export interface ModelOption {
  */
 export const GEMINI_ACTIVE_MODELS: ModelOption[] = [
   {
-    id: "gemini-3.8-flash",
-    name: "Gemini 3.8 Flash",
+    id: "gemini-3.6-flash",
+    name: "Gemini 3.6 Flash",
     tag: "Recommended",
     badgeVariant: "sky",
-  },
-  {
-    id: "gemini-3.7-flash",
-    name: "Gemini 3.7 Flash",
-    tag: "Reasoning",
-    badgeVariant: "lavender",
   },
   {
     id: "gemini-3.5-flash",
@@ -46,22 +40,28 @@ export const GEMINI_ACTIVE_MODELS: ModelOption[] = [
     badgeVariant: "sage",
   },
   {
-    id: "gemini-2.5-flash",
-    name: "Gemini 2.5 Flash",
-    tag: "High Throughput",
-    badgeVariant: "sky",
+    id: "gemini-3.1-flash-lite",
+    name: "Gemini 3.1 Flash Lite",
+    tag: "Low Latency",
+    badgeVariant: "sage",
   },
   {
-    id: "gemini-2.5-pro",
-    name: "Gemini 2.5 Pro",
-    tag: "Deep ATS Pro",
+    id: "gemini-3.7-flash",
+    name: "Gemini 3.7 Flash",
+    tag: "Reasoning",
     badgeVariant: "lavender",
   },
   {
-    id: "gemini-2.0-flash",
-    name: "Gemini 2.0 Flash",
-    tag: "Fast Multimodal",
-    badgeVariant: "apricot",
+    id: "gemini-3.8-flash",
+    name: "Gemini 3.8 Flash",
+    tag: "Experimental",
+    badgeVariant: "sky",
+  },
+  {
+    id: "gemini-3.1-pro-preview",
+    name: "Gemini 3.1 Pro",
+    tag: "Deep ATS Pro",
+    badgeVariant: "lavender",
   },
 ];
 
@@ -69,15 +69,18 @@ export interface ModelSelectorProps {
   selectedModel: string;
   onSelectModel: (modelId: string) => void;
   className?: string;
+  isMock?: boolean;
 }
 
 export function ModelSelector({
   selectedModel,
   onSelectModel,
   className = "",
+  isMock,
 }: ModelSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [availableModels, setAvailableModels] = useState<ModelOption[]>(GEMINI_ACTIVE_MODELS);
+  const [isMockProvider, setIsMockProvider] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Fetch registered models from backend if available, filtering out deprecated 1.5 models
@@ -86,7 +89,11 @@ export function ModelSelector({
     apiClient
       .getAiModels()
       .then((data) => {
-        if (!mounted || !data?.models || data.models.length === 0) return;
+        if (!mounted || !data) return;
+        if (typeof data.isMock === "boolean") {
+          setIsMockProvider(data.isMock);
+        }
+        if (!data.models || data.models.length === 0) return;
         const filtered = data.models
           .filter((mId) => !mId.includes("1.5"))
           .map((mId) => {
@@ -140,6 +147,8 @@ export function ModelSelector({
     availableModels[0] ||
     GEMINI_ACTIVE_MODELS[0];
 
+  const usingMock = isMock ?? isMockProvider;
+
   return (
     <div ref={dropdownRef} className={`relative inline-block ${className}`}>
       {/* Trigger Button */}
@@ -153,6 +162,11 @@ export function ModelSelector({
         <span className="font-medium text-[11px] max-w-[130px] truncate">
           {activeOption.name}
         </span>
+        {usingMock && (
+          <span className="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/35">
+            Mock
+          </span>
+        )}
         <HugeiconsIcon
           icon={ArrowDown01Icon}
           size={12}
@@ -163,6 +177,11 @@ export function ModelSelector({
       {/* Dropdown Menu */}
       {isOpen && (
         <div className="absolute right-0 top-full mt-1.5 z-50 w-64 rounded-xl bg-[#121417] border border-[rgba(255,255,255,0.1)] shadow-[0_12px_32px_rgba(0,0,0,0.6)] p-1.5 animate-in fade-in zoom-in-95 duration-150">
+          {usingMock && (
+            <div className="p-2 mb-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-[10px] text-amber-200 leading-tight">
+              ⚠️ <strong>Mock Mode Active:</strong> No active GEMINI_API_KEY detected in backend. Responses are simulated offline templates.
+            </div>
+          )}
           <div className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500 border-b border-[rgba(255,255,255,0.06)] mb-1 flex items-center justify-between">
             <span>Gemini Active Models</span>
             <HugeiconsIcon icon={SparklesIcon} size={11} className="text-[#d8b4fe]" />

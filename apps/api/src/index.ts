@@ -2,7 +2,7 @@ import cors from "@fastify/cors";
 import { ApplicationLifecycleManager } from "@resume-ai/applications";
 import { ApplicationAgentRunner } from "@resume-ai/browser";
 import { appConfig } from "@resume-ai/config";
-import { getAssistantEngine, NON_DEPRECATED_GEMINI_MODELS, type AssistantContext } from "@resume-ai/ai";
+import { getAIProvider, getAssistantEngine, NON_DEPRECATED_GEMINI_MODELS, type AssistantContext } from "@resume-ai/ai";
 import {
   AgentRunRepository,
   ApplicationRepository,
@@ -352,9 +352,11 @@ server.post("/api/resumes/:id/refine", async (request, reply) => {
  * List available non-deprecated Gemini models and current default.
  */
 server.get("/api/ai/models", async () => {
+  const provider = getAIProvider();
   return {
     defaultModel: appConfig.geminiModel,
     models: NON_DEPRECATED_GEMINI_MODELS,
+    isMock: provider.isMock ?? false,
   };
 });
 

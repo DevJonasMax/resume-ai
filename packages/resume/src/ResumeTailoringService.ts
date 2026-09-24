@@ -187,6 +187,7 @@ Provide tailoredSummary, tailoredExperience, and a detailed list of diffItems ex
     version: ResumeVersion;
     thoughtProcess?: string | undefined;
     strategicDecisions?: string[] | undefined;
+    isMock?: boolean | undefined;
   }> {
     const existing = await this.resumeRepo.findById(resumeId);
     if (!existing) {
@@ -237,7 +238,7 @@ Provide:
       schema: TailoringOutputSchema,
       prompt,
       systemPrompt:
-        "You are an AI resume refinement agent. Elevate terminology, emphasize required tools, and produce clear rationales without altering underlying facts.",
+        "You are an AI resume refinement agent. Elevate terminology, emphasize required tools, and produce clear rationales without altering underlying facts. If the user directives request translation or transcription (e.g., to PT-BR, Portuguese, or another target language), rigorously follow the requested language across tailoredSummary and tailoredExperience bullet points while maintaining ground truth facts.",
       ...(model ? { model } : {}),
     });
 
@@ -273,6 +274,7 @@ Provide:
       version: refinedVersion,
       thoughtProcess: tailored.thoughtProcess,
       strategicDecisions: tailored.strategicDecisions,
+      isMock: this.ai.isMock ?? false,
     };
   }
 

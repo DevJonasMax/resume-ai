@@ -146,6 +146,7 @@ export const apiClient = {
       version: ResumeVersion;
       thoughtProcess?: string;
       strategicDecisions?: string[];
+      isMock?: boolean;
     }>;
   },
 
@@ -177,7 +178,7 @@ export const apiClient = {
       const err = await res.json().catch(() => ({}));
       throw new Error(err.error || "Failed to fetch AI models");
     }
-    return res.json() as Promise<{ defaultModel: string; models: string[] }>;
+    return res.json() as Promise<{ defaultModel: string; models: string[]; isMock?: boolean }>;
   },
 
   async streamAiChat(

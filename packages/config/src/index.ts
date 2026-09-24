@@ -1,14 +1,27 @@
 import { config as loadDotenv } from "dotenv";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { z } from "zod";
 import { NON_DEPRECATED_GEMINI_MODELS, type GeminiModelName } from "@resume-ai/types";
 
 export { NON_DEPRECATED_GEMINI_MODELS, type GeminiModelName };
 
-loadDotenv();
+// Reliably locate and load .env by climbing upwards from current working directory
+let searchDir = process.cwd();
+for (let i = 0; i < 5; i++) {
+  const candidate = resolve(searchDir, ".env");
+  if (existsSync(candidate)) {
+    loadDotenv({ path: candidate });
+    break;
+  }
+  const parent = resolve(searchDir, "..");
+  if (parent === searchDir) break;
+  searchDir = parent;
+}
 
 const EnvironmentSchema = z.object({
   GEMINI_API_KEY: z.string().optional(),
-  GEMINI_MODEL: z.enum(NON_DEPRECATED_GEMINI_MODELS).default("gemini-3.8-flash"),
+  GEMINI_MODEL: z.enum(NON_DEPRECATED_GEMINI_MODELS).default("gemini-3.6-flash"),
   TYPESAFE_API_KEY: z.string().optional(),
   DATABASE_URL: z.string().default("./data/resume-ai.sqlite"),
   SERVER_PORT: z.coerce.number().default(3001),

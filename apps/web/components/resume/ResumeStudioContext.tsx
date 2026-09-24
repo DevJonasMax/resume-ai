@@ -68,6 +68,7 @@ export interface ResumeStudioContextValue {
   toggleChatDrawer: () => void;
   chatMessages: ChatMessage[];
   isRefining: boolean;
+  isMockActive: boolean;
   sendChatMessage: (prompt: string, modelOverride?: string) => Promise<void>;
 
   // Regeneration
@@ -109,6 +110,7 @@ export interface ResumeStudioProviderProps {
     version: ResumeVersion;
     thoughtProcess?: string | undefined;
     strategicDecisions?: string[] | undefined;
+    isMock?: boolean | undefined;
   } | void>;
   onSaveCustomLatex?: (latex: string) => Promise<void>;
 }
@@ -139,6 +141,7 @@ export function ResumeStudioProvider({
 
   // Provider state
   const [activeProvider, setActiveProvider] = useState<PDFProviderName>("typst");
+  const [isMockActive, setIsMockActive] = useState<boolean>(false);
 
   // PDF compilation state
   const [pdfBlobUrl, setPdfBlobUrl] = useState<string | null>(null);
@@ -165,13 +168,22 @@ export function ResumeStudioProvider({
     },
   ]);
 
-  // Load configured default provider from backend
+  // Load configured default provider and check AI engine status from backend
   useEffect(() => {
     apiClient
       .getProviderConfig()
       .then((cfg) => {
         if (cfg?.activeProvider) {
           setActiveProvider(cfg.activeProvider);
+        }
+      })
+      .catch(() => {});
+
+    apiClient
+      .getAiModels()
+      .then((modelsRes) => {
+        if (typeof modelsRes?.isMock === "boolean") {
+          setIsMockActive(modelsRes.isMock);
         }
       })
       .catch(() => {});
@@ -328,6 +340,7 @@ export function ResumeStudioProvider({
       let thoughtProcess: string | undefined;
       let strategicDecisions: string[] | undefined;
       let newVersion: ResumeVersion = currentResume;
+      let isMockRefine = false;
 
       if (onRefineWithAgent) {
         const refineRes = await onRefineWithAgent(trimmed, modelOverride);
@@ -335,6 +348,10 @@ export function ResumeStudioProvider({
           newVersion = refineRes.version;
           thoughtProcess = refineRes.thoughtProcess;
           strategicDecisions = refineRes.strategicDecisions;
+          if (typeof refineRes.isMock === "boolean") {
+            isMockRefine = refineRes.isMock;
+            setIsMockActive(refineRes.isMock);
+          }
           setCurrentResume(refineRes.version);
           setEditedLatex(refineRes.version.latexSource);
         }
@@ -343,11 +360,21 @@ export function ResumeStudioProvider({
         newVersion = res.version;
         thoughtProcess = res.thoughtProcess;
         strategicDecisions = res.strategicDecisions;
+        if (typeof res.isMock === "boolean") {
+          isMockRefine = res.isMock;
+          setIsMockActive(res.isMock);
+        }
         setCurrentResume(res.version);
         setEditedLatex(res.version.latexSource);
       }
 
       const contentParts: string[] = [];
+
+      if (isMockRefine) {
+        contentParts.push(
+          "⚠️ **[Mock Mode Notice]**: This response was generated using the offline simulated mock engine because no active Gemini API key is configured or live. Real AI processing will occur automatically once a valid `GEMINI_API_KEY` is present."
+        );
+      }
 
       if (thoughtProcess) {
         contentParts.push(`<thought>\n${thoughtProcess}\n</thought>`);
@@ -484,6 +511,7 @@ export function ResumeStudioProvider({
       toggleChatDrawer: () => setIsChatDrawerOpen((prev) => !prev),
       chatMessages,
       isRefining,
+      isMockActive,
       sendChatMessage,
       isRegenerating,
       regenerateResume,
@@ -518,6 +546,7 @@ export function ResumeStudioProvider({
       isChatDrawerOpen,
       chatMessages,
       isRefining,
+      isMockActive,
       isRegenerating,
       isExportingPdf,
       allJobs,

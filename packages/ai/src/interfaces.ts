@@ -8,6 +8,16 @@ export { NON_DEPRECATED_GEMINI_MODELS, type GeminiModelName };
  */
 export interface AIProvider {
   /**
+   * Indicates whether this is a mock implementation or live AI engine.
+   */
+  readonly isMock: boolean;
+
+  /**
+   * Identifying name of the AI provider ("gemini" | "mock").
+   */
+  readonly providerName: string;
+
+  /**
    * Generates a strongly-typed structured object adhering to a Zod schema.
    */
   generateStructured<T>(options: {
